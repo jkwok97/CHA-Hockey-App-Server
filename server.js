@@ -30,7 +30,8 @@ app.use(cors());
 app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
-    res.send("it is working", knex.owners);
+    res.send("it is working");
+    // res.send("it is working", knex.owners);
 });
 
 app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, knex)});

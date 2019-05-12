@@ -1,0 +1,19 @@
+-- DROP TABLE champions;
+
+CREATE TABLE champions (
+    id serial PRIMARY KEY,
+    year_won text NOT NULL,
+    team_name text NOT NULL,
+    owner_name text NOT NULL
+);
+
+-- \copy champions (year_won, team_name, owner_name) FROM 'Champions.tsv' WITH NULL ''
+
+-- do $$
+-- declare maxid int;
+-- begin
+--     select max(id)+1 from champions into maxid;
+--     execute 'alter SEQUENCE champions_id_seq RESTART with '|| maxid;
+-- end;
+
+-- $$ language plpgsql

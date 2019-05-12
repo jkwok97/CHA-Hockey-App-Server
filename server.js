@@ -3,14 +3,10 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
+const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
-    connection: {
-      host : '127.0.0.1',
-      user : 'jeffkwok',
-      password : '',
-      database : 'CHA'
-    }
+    connection: process.env.POSTGRES_URI
 });
 
 // console.log(knex.select('*').from('champions')
@@ -22,6 +18,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morgan('combined'));
 
 app.get('/', (req, res) => {
     res.send(knex.owners);

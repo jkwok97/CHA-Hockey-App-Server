@@ -1,0 +1,27 @@
+version: '3.7'
+
+services: 
+
+  # Backend API
+  cha-hockey-app-server: 
+    container_name: cha-hockey-app-server
+    build: ./
+    command: npm start
+    working_dir: /usr/src/cha-hockey-app-server
+    environment:
+      POSTGRES_URI: ${DB_HOST}://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:5432/${DB_DB}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/cha-hockey-app-server
+
+  # Postgres
+  postgres:
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DB}
+      POSTGRES_HOST: ${DB_HOST}
+    build: ./postgres
+    ports:
+      - "5432:5432"

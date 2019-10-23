@@ -32,9 +32,24 @@ app.get('/', (req, res) => {
     // res.send("it is working", knex.owners);
 });
 
+app.get('/db', async (req, res) => {
+    try {
+        const client = await knex.connect()
+        const result = await client.query('SELECT * FROM drafts');
+        const results = {'results': (result ? result.rows : null)};
+        res.render('pages/db', results);
+        client.release();
+    } catch (err) {
+        console.log(err);
+        res.send("Error " + err);
+    }
+})
+
 app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, knex)});
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
+
+app.get('/playersStats/', (req, res) => {playersStats.handlePlayersStats2020Get(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

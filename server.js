@@ -27,6 +27,8 @@ app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
 app.get('/players-stats/', (req, res) => {player_stats.handlePlayersStatsGet(req, res, knex)});
 
+app.get('/players-stats', (req, res) => {player_stats.teamPlayersStats(req, res, knex)});
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);
 });

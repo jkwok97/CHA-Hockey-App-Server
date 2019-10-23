@@ -10,6 +10,19 @@ const handlePlayersStatsGet = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const teamPlayersStats = (req, res, knex) => {
+    console.log(req);
+    knex.select('*').from('players_stats').where({ team_name: req.params})
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
-    handlePlayersStatsGet
+    handlePlayersStatsGet, teamPlayersStats
 };

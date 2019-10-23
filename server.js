@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
+const player_stats = require('/controllers/playersStats.js');
 const morgan = require('morgan');
 // const knex = require('knex')({
 //     client: 'pg',
@@ -49,7 +50,7 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
-app.get('/playersStats/', (req, res) => {playersStats.handlePlayersStatsGet(req, res, knex)});
+app.get('/players-stats/', (req, res) => {playersStats.handlePlayersStatsGet(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

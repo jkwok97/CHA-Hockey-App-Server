@@ -7,13 +7,13 @@ CREATE TABLE champions (
     owner_name text NOT NULL
 );
 
--- \copy champions (year_won, team_name, owner_name) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/Champions.tsv' WITH NULL ''
+\copy champions (year_won, team_name, owner_name) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/Champions.tsv' WITH NULL ''
 
--- do $$
--- declare maxid int;
--- begin
---     select max(id)+1 from champions into maxid;
---     execute 'alter SEQUENCE champions_id_seq RESTART with '|| maxid;
--- end;
+do $$
+declare maxid int;
+begin
+    select max(id)+1 from champions into maxid;
+    execute 'alter SEQUENCE champions_id_seq RESTART with '|| maxid;
+end;
 
--- $$ language plpgsql
+$$ language plpgsql

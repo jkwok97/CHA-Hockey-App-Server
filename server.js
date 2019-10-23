@@ -49,7 +49,7 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
-app.get('/playersStats/', (req, res) => {playersStats.handlePlayersStats2020Get(req, res, knex)});
+app.get('/playersStats/', (req, res) => {playersStats.handlePlayersStatsGet(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

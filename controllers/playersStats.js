@@ -1,5 +1,5 @@
-const handlePlayersStats2020Get = (req, res, knex) => {
-    knex.select('*').from('players2020')
+const handlePlayersStatsGet = (req, res, knex) => {
+    knex.select('*').from('players_stats')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -11,5 +11,5 @@ const handlePlayersStats2020Get = (req, res, knex) => {
 }
 
 module.exports = {
-    handlePlayersStats2020Get
+    handlePlayersStatsGet
 };

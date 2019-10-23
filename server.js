@@ -5,10 +5,6 @@ const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
 const player_stats = require('/controllers/players-stats.js');
 const morgan = require('morgan');
-// const knex = require('knex')({
-//     client: 'pg',
-//     connection: process.env.POSTGRES_URI
-// });
 const knex = require('knex')({
     client: 'pg',
     connection: {
@@ -17,21 +13,13 @@ const knex = require('knex')({
     }
 })
 
-// console.log(knex.select('*').from('champions')
-// .then(data => {
-//     console.log(data);
-// }));
-
 const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan('combined'));
 
-app.get('/', (req, res) => {
-    res.send("it is working");
-    // res.send("it is working", knex.owners);
-});
+app.get('/', (req, res) => { res.send("it is working"); });
 
 app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, knex)});
 

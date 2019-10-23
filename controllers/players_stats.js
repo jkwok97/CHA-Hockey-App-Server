@@ -11,7 +11,7 @@ const handlePlayersStatsGet = (req, res, knex) => {
 }
 
 const teamPlayersStats = (req, res, knex) => {
-    knex.select('*').from('players_stats').where('team_name', req.params)
+    knex.select('*').from('players_stats').where('team_name', req.params.teamName)
         .then(data => {
             if (data.length) {
                 res.json(data);

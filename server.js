@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
-const player_stats = require('/controllers/playersStats.js');
+const player_stats = require('/controllers/players-stats.js');
 const morgan = require('morgan');
 // const knex = require('knex')({
 //     client: 'pg',

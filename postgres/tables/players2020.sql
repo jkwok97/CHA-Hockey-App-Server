@@ -49,11 +49,11 @@ CREATE TABLE players_stats (
     penalty_match text NOT NULL,
     penalty_misconduct text NOT NULL,
     penalty_game_misconduct text NOT NULL,
-    penalty_gross_misconduct text NOT NULL
-
+    penalty_gross_misconduct text NOT NULL,
+    playing_year text NOT NULL
 );
 
-\copy players_stats (player_name, team_name, position, games_played, goals, assists, points, plus_minus, penalty_minutes, pp_goals, sh_goals, gw_goals, gt_goals, shots, shooting_pct, minutes_played, minutes_per_game, fo_won, fo_lost, fo_tied, fo_pct, pass_complete, pass_incomplete, pass_attempts, pass_pct, corner_won, corner_lost, corner_total, corner_pct, fights_won, fights_lost, fights_tied, fights_total, fights_pct, hits, hit_per_game, blocked_shots, blocked_shot_per_game, current_points_streak, longest_points_streak, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/playerStats.tsv'
+\copy players_stats (player_name, team_name, position, games_played, goals, assists, points, plus_minus, penalty_minutes, pp_goals, sh_goals, gw_goals, gt_goals, shots, shooting_pct, minutes_played, minutes_per_game, fo_won, fo_lost, fo_tied, fo_pct, pass_complete, pass_incomplete, pass_attempts, pass_pct, corner_won, corner_lost, corner_total, corner_pct, fights_won, fights_lost, fights_tied, fights_total, fights_pct, hits, hit_per_game, blocked_shots, blocked_shot_per_game, current_points_streak, longest_points_streak, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct, playing_year) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/playerStats.tsv'
 
 do $$
 declare maxid int;

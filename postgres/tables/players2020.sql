@@ -62,4 +62,4 @@ begin
     execute 'alter SEQUENCE players_stats_id_seq RESTART with '|| maxid;
 end;
 
-$$ language plpgsql
+$$ language plpgsql;

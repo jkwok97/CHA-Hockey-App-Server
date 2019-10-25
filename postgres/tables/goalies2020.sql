@@ -43,4 +43,4 @@ begin
     execute 'alter SEQUENCE goalie_stats_id_seq RESTART with '|| maxid;
 end;
 
-$$ language plpgsql
+$$ language plpgsql;

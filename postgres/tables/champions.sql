@@ -16,4 +16,4 @@ begin
     execute 'alter SEQUENCE champions_id_seq RESTART with '|| maxid;
 end;
 
-$$ language plpgsql
+$$ language plpgsql;

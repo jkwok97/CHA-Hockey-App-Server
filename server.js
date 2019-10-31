@@ -6,6 +6,7 @@ const drafts = require('./controllers/drafts');
 const player_stats = require('./controllers/players_stats');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
+const user = require('./controllers/users');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -38,6 +39,8 @@ app.get('/goalies-stats/:teamName', (req, res) => {goalie_stats.teamGoaliesStats
 app.get('/team-stats/', (req, res) => {teams.handleTeamsStatsGet(req, res, knex)});
 
 app.get('/team-stats/:teamName', (req, res) => {teams.teamStats(req, res, knex)});
+
+app.get('/user/:email', (req, res) => {user.getUser(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

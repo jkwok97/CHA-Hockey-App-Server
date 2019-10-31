@@ -40,7 +40,9 @@ app.get('/team-stats/', (req, res) => {teams.handleTeamsStatsGet(req, res, knex)
 
 app.get('/team-stats/:teamName', (req, res) => {teams.teamStats(req, res, knex)});
 
-app.get('/user/:email', (req, res) => {user.getUser(req, res, knex)});
+app.get('/users/', (req, res) => {user.getUsers(req, res, knex)});
+
+app.get('/users/:email', (req, res) => {user.getUser(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

@@ -4,7 +4,7 @@ const getUser = (req, res, knex) => {
             if (data.length) {
                 res.json(data);
             } else {
-                res.status(400).json('error getting user')
+                res.status(400).json('No Profile Associated With That Email')
             }
     })
     .catch(err => res.status(400).json('user not found'))
@@ -25,5 +25,3 @@ const getUsers = (req, res, knex) => {
 module.exports = {
     getUser, getUsers
 };
-
-

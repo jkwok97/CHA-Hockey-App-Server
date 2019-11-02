@@ -19,7 +19,7 @@ const getAllPlayerInfo = (req, res) => {
             throw err;
         }
         console.log(json);
-        res.json(data);
+        // res.json(data);
     });
 }
 

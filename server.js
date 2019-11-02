@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const request = require('request');
 const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
 const player_stats = require('./controllers/players_stats');

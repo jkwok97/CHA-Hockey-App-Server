@@ -11,10 +11,10 @@ const getAllPlayerInfo = (req, res) => {
             let result = [];
             info.forEach(player => {
                 result.push({
-                    name: player.FirstName + player.LastName,
+                    name: `${player.FirstName} ${player.LastName}`,
                     playerId: player.PlayerID,
                     birthdate: player.BirthDate,
-                    image: player.PhotoURL,
+                    image: player.PhotoUrl,
                     position: player.Position
                 })
             });

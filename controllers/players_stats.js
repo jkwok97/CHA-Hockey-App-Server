@@ -8,7 +8,17 @@ const getAllPlayerInfo = (req, res) => {
             console.log(body);
              var info = JSON.parse(body)
             // do more stuff
-            res.send(info);
+            let result = [];
+            info.forEach(player => {
+                result.push({
+                    name: player.FirstName + player.LastName,
+                    playerId: player.PlayerID,
+                    birthdate: player.BirthDate,
+                    image: player.PhotoURL,
+                    position: player.Position
+                })
+            });
+            res.send(result);
         } else {
             console.log(error);
             error => res.send(error)

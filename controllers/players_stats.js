@@ -1,6 +1,6 @@
 const request = require('request');
 const sportsDataURL = 'https://api.sportsdata.io/v3/nhl/scores/json/Players';
-const key = '4064a3b66cc64f28a8d52cc3be024ffb';
+const key = 'b3d19d2576cc46b68af33b26616de34b';
 
 const getAllPlayerInfo = (req, res) => {
     request(`${sportsDataURL}?key=${key}`, (error, response, body) => {

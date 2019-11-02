@@ -46,17 +46,6 @@ app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)});
 
-
-// app.get('/player-info/', function(req, res){
-//     request(`${sportsDataURL}key=${key}`, function (error, response, body) {
-//       if (!error && response.statusCode == 200) {
-//         var info = JSON.parse(body)
-//         // do more stuff
-//         res.send(info);
-//       }
-//     })
-//   });
-
 // app.get('/player-info/:playerId', (req, res) => {player_stats.getRealPlayerInfo(req, res, knex)});
 
 app.listen(process.env.PORT || 3000, () => {

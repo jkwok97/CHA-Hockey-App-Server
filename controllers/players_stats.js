@@ -19,7 +19,6 @@ const getAllPlayerInfo = (req, res) => {
                     position: player.Position
                 })
             });
-            
             res.send(result);
         } else {
             console.log(error);

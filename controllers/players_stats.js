@@ -1,3 +1,4 @@
+
 const handlePlayersStatsGet = (req, res, knex) => {
     knex.select('*').from('players_stats')
         .then(data => {

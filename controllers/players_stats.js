@@ -11,8 +11,7 @@ const getAllPlayerInfo = (req, res) => {
             let result = [];
             info.forEach(player => {
                 result.push({
-                    firstName: player.FirstName,
-                    lastName: player.LastName,
+                    playerName: `${player.FirstName} ${player.LastName}`,
                     playerId: player.PlayerID,
                     birthdate: player.BirthDate,
                     image: player.PhotoUrl,

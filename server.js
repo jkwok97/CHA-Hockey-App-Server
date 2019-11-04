@@ -36,9 +36,23 @@ app.get('/goalies-stats/', (req, res) => {goalie_stats.handleGoaliesStatsGet(req
 
 app.get('/goalies-stats/:teamName', (req, res) => {goalie_stats.teamGoaliesStats(req, res, knex)});
 
-app.get('/team-stats/', (req, res) => {teams.handleTeamsStatsGet(req, res, knex)});
+app.get('/team-stats/', (req, res) => {
+    if (req.query) {
+        teams.allTeamsStatsByYear(req, res, knex);
+    } else {
+        teams.allTeamsStatsAllTime(req, res, knex);
+    }
+});
 
-app.get('/team-stats/:teamName', (req, res) => {teams.teamStats(req, res, knex)});
+// app.get('/team-stats/', (req, res) => {teams.allTeamsStatsAllTime(req, res, knex)});
+
+app.get('/team-stats/:teamName', (req, res) => {
+    if (req.query) {
+        teams.teamStatsByYear(req, res, knex);
+    } else {
+        teams.teamStatsAllTime(req, res, knex);
+    }
+});
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 

@@ -31,10 +31,12 @@ CREATE TABLE goalie_stats (
     penalty_match text NOT NULL,
     penalty_misconduct text NOT NULL,
     penalty_game_misconduct text NOT NULL,
-    penalty_gross_misconduct text NOT NULL
+    penalty_gross_misconduct text NOT NULL,
+    playing_year text NOT NULL,
+    season_type text NOT NULL
 );
 
-\copy goalie_stats (player_name, team_name, games_played, minutes_played, goals_against_avg, wins, loss, ties, en_goals, shutouts, goals_against, saves, shots_for, save_pct, goals, assists, points, penalty_minutes, pass_complete, pass_incomplete, pass_attempts, pass_pct, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/goalieStats.tsv'
+\copy goalie_stats (player_name, team_name, games_played, minutes_played, goals_against_avg, wins, loss, ties, en_goals, shutouts, goals_against, saves, shots_for, save_pct, goals, assists, points, penalty_minutes, pass_complete, pass_incomplete, pass_attempts, pass_pct, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct, playing_year, season_type) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/goalieStats.tsv'
 
 do $$
 declare maxid int;

@@ -37,6 +37,7 @@ app.get('/goalies-stats/', (req, res) => {goalie_stats.handleGoaliesStatsGet(req
 app.get('/goalies-stats/:teamName', (req, res) => {goalie_stats.teamGoaliesStats(req, res, knex)});
 
 app.get('/team-stats/', (req, res) => {
+    console.log(req.query);
     if (req.query) {
         teams.allTeamsStatsByYear(req, res, knex);
     } else {

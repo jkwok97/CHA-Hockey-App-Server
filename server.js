@@ -32,7 +32,7 @@ app.get('/players-stats/', (req, res) => {
     if (req.query.year) {
         player_stats.playerStatsByYear(req, res, knex);
     } else {
-        player_stats.allTimePlayerStats(req.res.knex);
+        player_stats.allTimePlayerStats(req.res, knex);
     }
 });
 
@@ -44,29 +44,34 @@ app.get('/players-stats/:teamName', (req, res) => {
     }
 });
 
-app.get('/goalies-stats/', (req, res) => {goalie_stats.handleGoaliesStatsGet(req, res, knex)});
+app.get('/goalies-stats/', (req, res) => {
+    if (req.query.year) {
+        goalie_stats.goalieStatsByYear(req, res, knex);
+    } else {
+        goalie_stats.alltimeGoalieStats(req, res, knex);
+    }
+});
 
-app.get('/goalies-stats/:teamName', (req, res) => {goalie_stats.teamGoaliesStats(req, res, knex)});
+app.get('/goalies-stats/:teamName', (req, res) => {
+    if (req.query.year) {
+        goalie_stats.goalieStatsByTeamByYear(req, res, knex);
+    } else {
+        goalie_stats.alltimeGoalieStatsByTeam(req, res, knex);
+    }
+});
 
 app.get('/team-stats/', (req, res) => {
-    console.log(req.query);
     if (req.query.year) {
-        console.log("in by year");
         teams.allTeamsStatsByYear(req, res, knex);
     } else {
-        console.log("in all time");
         teams.allTeamsStatsAllTime(req, res, knex);
     }
 });
 
-// app.get('/team-stats/', (req, res) => {teams.allTeamsStatsAllTime(req, res, knex)});
-
 app.get('/team-stats/:teamName', (req, res) => {
     if (req.query.year) {
-        console.log("in by year");
         teams.teamStatsByYear(req, res, knex);
     } else {
-        console.log("in all time");
         teams.teamStatsAllTime(req, res, knex);
     }
 });

@@ -39,6 +39,7 @@ app.get('/goalies-stats/:teamName', (req, res) => {goalie_stats.teamGoaliesStats
 app.get('/team-stats/', (req, res) => {
     console.log(req.query);
     if (req.query) {
+        console.log("in by year");
         teams.allTeamsStatsByYear(req, res, knex);
     } else if (req.query === {}) {
         console.log("in all time");
@@ -50,6 +51,7 @@ app.get('/team-stats/', (req, res) => {
 
 app.get('/team-stats/:teamName', (req, res) => {
     if (req.query) {
+        console.log("in by year");
         teams.teamStatsByYear(req, res, knex);
     } else if (req.query === {}) {
         console.log("in all time");

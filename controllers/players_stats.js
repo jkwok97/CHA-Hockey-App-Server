@@ -26,7 +26,7 @@ const getAllPlayerInfo = (req, res) => {
       })
 }
 
-const handlePlayersStatsGet = (req, res, knex) => {
+const allTimePlayerStats = (req, res, knex) => {
     knex.select('*').from('players_stats')
         .then(data => {
             if (data.length) {
@@ -38,7 +38,19 @@ const handlePlayersStatsGet = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
-const teamPlayersStats = (req, res, knex) => {
+const playerStatsByYear = (req, res, knex) => {
+    knex.select('*').from('players_stats').where('playing_year', req.query.year)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
+const allTimePlayerStatsByTeam = (req, res, knex) => {
     knex.select('*').from('players_stats').where('team_name', req.params.teamName)
         .then(data => {
             if (data.length) {
@@ -50,6 +62,18 @@ const teamPlayersStats = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const playerStatsByTeamByYear = (req, res, knex) => {
+    knex.select('*').from('players_stats').where('team_name', req.params.teamName).where('playing_year', req.query.year)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
-    handlePlayersStatsGet, teamPlayersStats, getAllPlayerInfo
+    allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, playerStatsByYear, playerStatsByTeamByYear
 };

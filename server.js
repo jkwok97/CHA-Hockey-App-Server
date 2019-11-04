@@ -32,7 +32,7 @@ app.get('/players-stats/', (req, res) => {
     if (req.query.year) {
         player_stats.playerStatsByYear(req, res, knex);
     } else {
-        player_stats.allTimePlayerStats(req.res, knex);
+        player_stats.allTimePlayerStats(req, res, knex);
     }
 });
 

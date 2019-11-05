@@ -1,2 +1,7 @@
 1: heroku pg:psql -a cha-hockey-app-server
 2: copy all from /tables directory and the file.sql and paste into terminal
+
+
+
+
+select id, team_id, team_name, playing_year, games_played, season_type from teams;

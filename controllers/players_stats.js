@@ -74,6 +74,31 @@ const playerStatsByTeamByYear = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const playerStatsByTeamByType = (req, res, knex) => {
+    knex.select('*').from('players_stats').where('team_name', req.params.teamName).where('season_type', req.query.type)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
+const playerStatsByTeamByYearByType = (req, res, knex) => {
+    knex.select('*').from('players_stats').where('team_name', req.params.teamName).where('season_type', req.query.type).where('playing_year', req.query.year)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
-    allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, playerStatsByYear, playerStatsByTeamByYear
+    allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, playerStatsByYear, playerStatsByTeamByYear,
+    playerStatsByTeamByType, playerStatsByTeamByYearByType
 };

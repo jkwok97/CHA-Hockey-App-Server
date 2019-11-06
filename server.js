@@ -69,7 +69,7 @@ app.get('/goalies-stats/:teamName', (req, res) => {
         goalie_stats.goalieStatsByTeamByYearByType(req, res, knex);
     } else if (req.query.year) {
         goalie_stats.goalieStatsByTeamByYear(req, res, knex);
-    } else if (req.query.typ) {
+    } else if (req.query.type) {
         goalie_stats.goalieStatsByTeamByType(req, res, knex);
     } else {
         goalie_stats.alltimeGoalieStatsByTeam(req, res, knex);

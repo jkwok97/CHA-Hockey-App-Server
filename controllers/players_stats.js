@@ -71,7 +71,6 @@ const alltimePlayerStatsGrouped = (req, res, knex) => {
         .sum('games_played').sum('goals').sum('assists').sum('points')
         .where('season_type', req.query.type)
         .groupBy('player_name')
-        .orderBy('points', 'desc')
             .then(data => {
                 if (data.length) {
                     res.json(data);

@@ -67,13 +67,13 @@ const alltimePlayerStatsByType = (req, res, knex) => {
 //             'corner_total', 'fights_won', 'fights_lost', 'fights_tied', 'fights_total', 'hits', 'blocked_shots')
 
 const alltimePlayerStatsGrouped = (req, res, knex) => {
-    knex('players_stats')
+    knex.select('*').from('players_stats')
         .sum('games_played as games_played')
         .sum('goals as goals')
         .sum('assists as assists')
         .sum('points as points')
         .where('season_type', req.query.type)
-        .groupBy('player_name as player_name')
+        .groupBy('player_name')
             .then(data => {
                 console.log(data);
                 if (data.length) {

@@ -67,18 +67,20 @@ const alltimePlayerStatsByType = (req, res, knex) => {
 //             'corner_total', 'fights_won', 'fights_lost', 'fights_tied', 'fights_total', 'hits', 'blocked_shots')
 
 const alltimePlayerStatsGrouped = (req, res, knex) => {
-    knex('players_stats')
-        .sum('games_played').sum('goals').sum('assists').sum('points')
-        .where('season_type', req.query.type)
-        .groupBy('player_name')
-            .then(data => {
-                if (data.length) {
-                    res.json(data);
-                } else {
-                    res.status(400).json('error getting stats')
-                }
-            })
-            .catch(err => res.status(400).json('not found'))
+    knex('players_stats').groupBy('player_name').then(data => { res.json(data)});
+    // knex('players_stats')
+    //     .sum('games_played').sum('goals').sum('assists').sum('points')
+    //     .where('season_type', req.query.type)
+    //     .groupBy('player_name')
+    //         .then(data => {
+    //             console.log(data);
+    //             if (data.length) {
+    //                 res.json(data);
+    //             } else {
+    //                 res.status(400).json('error getting stats')
+    //             }
+    //         })
+    //         .catch(err => res.status(400).json('not found'))
 }
 
 const alltimePlayerStatsByYearBySeason = (req, res, knex) => {

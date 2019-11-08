@@ -5,3 +5,7 @@
 
 
 select id, team_id, team_name, playing_year, games_played, season_type from teams;
+
+
+
+select sum(goals, assists, points), player_name from players_stats group by player_name;

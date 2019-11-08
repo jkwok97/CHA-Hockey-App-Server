@@ -35,6 +35,7 @@ app.get('/players-stats/', (req, res) => {
         if (req.query.group === "Season") {
             player_stats.alltimePlayerStatsByType(req, res, knex);
         } else if (req.query.group === "Alltime") {
+            console.log("IN ALLLLLLLLL TIME");
             player_stats.alltimePlayerStatsGrouped(req, res, knex);
         }
     } else if (req.query.year) {

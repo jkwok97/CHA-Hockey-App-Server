@@ -39,7 +39,7 @@ const allTimePlayerStats = (req, res, knex) => {
 }
 
 const alltimePlayerStatsByYear = (req, res, knex) => {
-    knex.select('*').from('players_stats').where('playing_year', req.query.year)
+    knex.select('*').from('players_stats').where('playing_year', req.query.year).where('points', '>', 0)
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -51,15 +51,27 @@ const alltimePlayerStatsByYear = (req, res, knex) => {
 }
 
 const alltimePlayerStatsByType = (req, res, knex) => {
-    knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 0)
+    if (req.query.type === "Playoffs") {
+        knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 5)
         .then(data => {
             if (data.length) {
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')
             }
-    })
-    .catch(err => res.status(400).json('not found'))
+        })
+        .catch(err => res.status(400).json('not found'))
+    } else {
+        knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 9)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => res.status(400).json('not found'))
+    }
 }
 
 const alltimePlayerStatsByYearByType = (req, res, knex) => {

@@ -51,7 +51,7 @@ const alltimePlayerStatsByYear = (req, res, knex) => {
 }
 
 const alltimePlayerStatsByType = (req, res, knex) => {
-    knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 2)
+    knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 0)
         .then(data => {
             if (data.length) {
                 res.json(data);

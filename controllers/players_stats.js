@@ -62,32 +62,12 @@ const alltimePlayerStatsByType = (req, res, knex) => {
         .catch(err => res.status(400).json('not found'))
 }
 
-// , 'plus_minus', 'penalty_minutes', 'pp_goals', 'sh_goals', 'gw_goals', 'gt_goals', 'shots',
-//             'minutes_played', 'fo_won', 'fo_lost', 'fo_tied', 'pass_complete', 'pass_incomplete', 'pass_attempts', 'corner_won', 'corner_lost',
-//             'corner_total', 'fights_won', 'fights_lost', 'fights_tied', 'fights_total', 'hits', 'blocked_shots')
-
 const alltimePlayerStatsGrouped = (req, res, knex) => {
-    knex.raw('select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, player_name from players_stats group by player_name;')
+    knex.raw('select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, player_name, season_type, position from players_stats group by player_name;')
         .then(data => {
             res.json(data);
         })
         .catch(err => res.status(400).json('not found'))
-    // knex('players_stats')
-    //     .sum('games_played as games_played')
-    //     .sum('goals as goals')
-    //     .sum('assists as assists')
-    //     .sum('points as points')
-    //     .where('season_type', req.query.type)
-    //     .groupByRaw('player_name')
-    //         .then(data => {
-    //             console.log(data);
-    //             if (data.length) {
-    //                 res.json(data);
-    //             } else {
-    //                 res.status(400).json('error getting stats')
-    //             }
-    //         })
-    //         .catch(err => res.status(400).json('not found'))
 }
 
 const alltimePlayerStatsByYearBySeason = (req, res, knex) => {

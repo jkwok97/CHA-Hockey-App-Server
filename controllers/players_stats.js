@@ -51,8 +51,7 @@ const alltimePlayerStatsByYear = (req, res, knex) => {
 }
 
 const alltimePlayerStatsByType = (req, res, knex) => {
-    if (req.query.type === "Playoffs") {
-        knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 5)
+    knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 5)
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -61,17 +60,6 @@ const alltimePlayerStatsByType = (req, res, knex) => {
             }
         })
         .catch(err => res.status(400).json('not found'))
-    } else {
-        knex.select('*').from('players_stats').where('season_type', req.query.type).where('points', '>', 9)
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => res.status(400).json('not found'))
-    }
 }
 
 const alltimePlayerStatsByYearByType = (req, res, knex) => {

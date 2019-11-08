@@ -63,7 +63,7 @@ const alltimePlayerStatsByType = (req, res, knex) => {
 }
 
 const alltimePlayerStatsGrouped = (req, res, knex) => {
-    knex.select('*').from('players_stats').where('season_type', req.query.season).groupBy('player_name')
+    knex('players_stats').where('season_type', req.query.season).groupBy('player_name')
         .then(data => {
             if (data.length) {
                 res.json(data);

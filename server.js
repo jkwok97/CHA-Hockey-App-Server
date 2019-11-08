@@ -29,11 +29,17 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
 app.get('/players-stats/', (req, res) => {
-    if (req.query.year && req.query.type) {
-        player_stats.alltimePlayerStatsByYearByType(req, res, knex);
+    if (req.query.year && req.query.season) {
+        player_stats.alltimePlayerStatsByYearBySeason(req, res, knex);
+    } else if (req.query.season && req.query.type) {
+        if (req.query.type === "Season") {
+            player_stats.alltimePlayerStatsByType(req, res, knex);
+        } else if (req.query.type === "Alltime") {
+            player_stats.alltimePlayerStatsGrouped(req, res, knex);
+        }
     } else if (req.query.year) {
         player_stats.alltimePlayerStatsByYear(req, res, knex);
-    } else if (req.query.type) {
+    } else if (req.query.season) {
         player_stats.alltimePlayerStatsByType(req, res, knex);
     } else {
         player_stats.allTimePlayerStats(req, res, knex);

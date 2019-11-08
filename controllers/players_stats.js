@@ -68,13 +68,12 @@ const alltimePlayerStatsByType = (req, res, knex) => {
 
 const alltimePlayerStatsGrouped = (req, res, knex) => {
     knex('players_stats')
-        .sum({ player_name: ['games_played', 'goals', 'assists', 'points']})
-        // .sum('games_played as games_played')
-        // .sum('goals as goals')
-        // .sum('assists as assists')
-        // .sum('points as points')
+        .sum('games_played as games_played')
+        .sum('goals as goals')
+        .sum('assists as assists')
+        .sum('points as points')
         .where('season_type', req.query.type)
-        .groupBy('player_name')
+        .groupByRaw('player_name')
             .then(data => {
                 console.log(data);
                 if (data.length) {

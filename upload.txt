@@ -13,6 +13,7 @@ select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as a
 
 select 
 team_name as team_name,
+season_type as season_type,
 sum(games_played) as games_played, 
 sum(goals) as goals, sum(assists) as assists, 
 sum(points) as points, sum(plus_minus) as plus_minus, 
@@ -28,14 +29,15 @@ sum(blocked_shots) as blocked_shots,
 team_name,
 player_name 
 from players_stats 
-where team_name = 'STA'
-group by player_name, team_name;
+where team_name = 'STA' AND season_type = 'Regular'
+group by player_name, team_name, season_type;
 
 
 
 
 
 select 
+season_type as season_type,
 sum(games_played) as games_played, 
 sum(goals) as goals, 
 sum(assists) as assists, 
@@ -52,5 +54,5 @@ sum(hits) as hits,
 sum(blocked_shots) as blocked_shots, 
 player_name 
 from players_stats 
-where season_type = '${req.query.type}' 
+where season_type = 'Playoffs' 
 group by player_name, season_type;

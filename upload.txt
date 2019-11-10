@@ -59,47 +59,24 @@ group by player_name, season_type;
 
 
 
-select
-team_name as team_name,
-season_type as season_type,
-sum(games_played) as games_played,
-sum(wins) as wins,
-sum(loss) as loss,
-sum(ties) as ties,
-sum(minutes_played) as minutes_played,
-sum(en_goals) as en_goals,
-sum(shutouts) as shutouts,
-sum(goals_against) as goals_against,
-sum(saves) as saves,
-sum(shots_for) as shots_for,
-sum(goals) as goals,
-sum(assists) as assists,
-sum(points) as points,
-sum(penalty_minutes) as penalty_minutes,
-team_name,
+select 
+season_type as season_type, 
+team_name as team_name, 
+sum(games_played) as games_played, 
+sum(wins) as wins, 
+sum(loss) as loss, 
+sum(ties) as ties, 
+sum(minutes_played) as minutes_played, 
+sum(en_goals) as en_goals, 
+sum(shutouts) as shutouts, 
+sum(goals_against) as goals_against, 
+sum(saves) as saves, 
+sum(shots_for) as shots_for, 
+sum(goals) as goals, 
+sum(assists) as assists, 
+sum(points) as points, 
+sum(penalty_minutes) as penalty_minutes, 
 player_name 
-from goalies_stats 
-where team_name = 'STA' AND season_type = 'Playoffs'
+from goalie_stats 
+where team_name = 'STA' and season_type = 'Regular' 
 group by player_name, team_name, season_type;
-
-
-select
-season_type as season_type,
-sum(games_played) as games_played,
-sum(wins) as wins,
-sum(loss) as loss,
-sum(ties) as ties,
-sum(minutes_played) as minutes_played,
-sum(en_goals) as en_goals,
-sum(shutouts) as shutouts,
-sum(goals_against) as goals_against,
-sum(saves) as saves,
-sum(shots_for) as shots_for,
-sum(goals) as goals,
-sum(assists) as assists,
-sum(points) as points,
-sum(penalty_minutes) as penalty_minutes,
-player_name 
-from goalies_stats 
-where season_type = 'Playoffs'
-group by player_name, season_type;

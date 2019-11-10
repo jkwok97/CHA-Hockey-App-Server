@@ -70,6 +70,14 @@ const alltimePlayerStatsGrouped = (req, res, knex) => {
         .catch(err => res.status(400).json('not found'))
 }
 
+const allTimeTeamPlayersStatsGrouped = (req, res, knex) => {
+    knex.raw(`select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, player_name from players_stats where team_name = ${req.params.teamName} group by player_name;`)
+        .then(data => {
+            res.json(data);
+        })
+        .catch(err => res.status(400).json('not found'))
+}
+
 const alltimePlayerStatsByYearBySeason = (req, res, knex) => {
     knex.select('*').from('players_stats').where('playing_year', req.query.year).where('season_type', req.query.type)
         .then(data => {
@@ -133,5 +141,5 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
 module.exports = {
     allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, alltimePlayerStatsByYear, playerStatsByTeamByYear,
     playerStatsByTeamByType, playerStatsByTeamByYearByType, alltimePlayerStatsByYearBySeason, alltimePlayerStatsByType,
-    alltimePlayerStatsGrouped
+    alltimePlayerStatsGrouped, allTimeTeamPlayersStatsGrouped
 };

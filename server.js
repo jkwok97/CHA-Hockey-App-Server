@@ -40,7 +40,7 @@ app.get('/players-stats/', (req, res) => {
         }
     } else if (req.query.year) {
         player_stats.alltimePlayerStatsByYear(req, res, knex);
-    } else if (req.query.season) {
+    } else if (req.query.type) {
         player_stats.alltimePlayerStatsByType(req, res, knex);
     } else {
         player_stats.allTimePlayerStats(req, res, knex);
@@ -50,6 +50,12 @@ app.get('/players-stats/', (req, res) => {
 app.get('/players-stats/:teamName', (req, res) => {
     if (req.query.year && req.query.type) {
         player_stats.playerStatsByTeamByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            player_stats.playerStatsByTeamByType(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            player_stats.allTimeTeamPlayersStatsGrouped(req, res, knex);
+        }
     } else if (req.query.type) {
         player_stats.playerStatsByTeamByType(req, res, knex);
     } else if (req.query.year) {

@@ -63,7 +63,7 @@ const alltimePlayerStatsByType = (req, res, knex) => {
 }
 
 const alltimePlayerStatsGrouped = (req, res, knex) => {
-    knex.raw("select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, player_name from players_stats group by player_name;")
+    knex.raw(`select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, player_name from players_stats where season_type = '${req.query.type}' group by player_name;`)
         .then(data => {
             res.json(data);
         })
@@ -71,7 +71,7 @@ const alltimePlayerStatsGrouped = (req, res, knex) => {
 }
 
 const allTimeTeamPlayersStatsGrouped = (req, res, knex) => {
-    knex.raw(`select team_name as team_name, sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, player_name from players_stats where team_name = '${req.params.teamName}' group by player_name, team_name;`)
+    knex.raw(`select team_name as team_name, sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, player_name from players_stats where team_name = '${req.params.teamName}' and season_type = '${req.query.type} group by player_name, team_name;`)
         .then(data => {
             res.json(data);
         })

@@ -35,7 +35,6 @@ app.get('/players-stats/', (req, res) => {
         if (req.query.group === "Season") {
             player_stats.alltimePlayerStatsByType(req, res, knex);
         } else if (req.query.group === "Alltime") {
-            console.log("IN ALLLLLLLLL TIME");
             player_stats.alltimePlayerStatsGrouped(req, res, knex);
         }
     } else if (req.query.year) {
@@ -44,6 +43,24 @@ app.get('/players-stats/', (req, res) => {
         player_stats.alltimePlayerStatsByType(req, res, knex);
     } else {
         player_stats.allTimePlayerStats(req, res, knex);
+    }
+});
+
+app.get('/goalies-stats/', (req, res) => {
+    if (req.query.year && req.query.type) {
+        goalie_stats.alltimeGoalieStatsByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            goalie_stats.alltimeGoalieStatsByType(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            goalie_stats.alltimeGoalieStatsGrouped(req, res, knex);
+        }
+    } else if (req.query.year) {
+        goalie_stats.alltimeGoalieStatsByYear(req, res, knex);
+    } else if (req.query.type) {
+        goalie_stats.alltimeGoalieStatsByType(req, res, knex);
+    } else {
+        goalie_stats.alltimeGoalieStats(req, res, knex);
     }
 });
 
@@ -65,21 +82,15 @@ app.get('/players-stats/:teamName', (req, res) => {
     }
 });
 
-app.get('/goalies-stats/', (req, res) => {
-    if (req.query.year && req.query.type) {
-        goalie_stats.alltimeGoalieStatsByYearByType(req, res, knex);
-    } else if (req.query.year) {
-        goalie_stats.alltimeGoalieStatsByYear(req, res, knex);
-    } else if (req.query.type) {
-        goalie_stats.alltimeGoalieStatsByType(req, res, knex);
-    } else {
-        goalie_stats.alltimeGoalieStats(req, res, knex);
-    }
-});
-
 app.get('/goalies-stats/:teamName', (req, res) => {
     if (req.query.year && req.query.type) {
         goalie_stats.goalieStatsByTeamByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            goalie_stats.goalieStatsByTeamByType(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            goalie_stats.allTimeTeamGoaliesStatsGrouped(req, res, knex);
+        }
     } else if (req.query.year) {
         goalie_stats.goalieStatsByTeamByYear(req, res, knex);
     } else if (req.query.type) {

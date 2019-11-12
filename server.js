@@ -105,6 +105,12 @@ app.get('/goalies-stats/:teamName', (req, res) => {
 app.get('/team-stats/', (req, res) => {
     if (req.query.year && req.query.type) {
         teams.allTeamsStatsByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            teams.allTeamsStatsByYear(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            teams.allTeamsStatsGrouped(req, res, knex);
+        }
     } else if (req.query.year) {
         teams.allTeamsStatsByYear(req, res, knex);
     } else if (req.query.type) {

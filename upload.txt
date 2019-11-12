@@ -80,3 +80,27 @@ player_name
 from goalie_stats 
 where team_name = 'STA' and season_type = 'Regular' 
 group by player_name, team_name, season_type;
+
+
+select 
+season_type as season_type,
+sum(games_played) as games_played, 
+sum(wins) as wins, 
+sum(loss) as loss, 
+sum(ties) as ties, 
+sum(points) as points, 
+sum(goals_for) as goals_for, 
+sum(goals_against) as goals_against,
+sum(pp_attempts) as pp_attempts, 
+sum(pp_goals) as pp_goals, 
+sum(pk_attempts) as pk_attempts,
+sum(pk_goals) as pk_goals,
+sum(sh_goals) as sh_goals,
+sum(penalty_minutes) as penalty_minutes,
+sum(shots_for) as shots_for,
+sum(shots_against) as shots_against,
+sum(shut_outs) as shut_outs, 
+team_name 
+from teams 
+where season_type = 'Playoffs' 
+group by team_name, season_type;

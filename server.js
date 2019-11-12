@@ -125,8 +125,12 @@ app.get('/team-stats/:teamName', (req, res) => {
     }
 });
 
-app.get('/players/:name', (req, res) => {
-    player.getPlayerStats(req, res, knex);
+app.get('/players/:name', (req, res) => { 
+    if (req.query.type) {
+        player.getPlayerStatsByType(req, res, knex);
+    } else {
+        player.getPlayerStats(req, res, knex);
+    }
 })
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});

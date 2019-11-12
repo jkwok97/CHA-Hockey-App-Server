@@ -71,8 +71,10 @@ app.get('/team-stats/', (req, res) => {
         teams.allTeamsStatsByYearByType(req, res, knex);
     } else if (req.query.type && req.query.group) {
         if (req.query.group === "Season") {
+            console.log("by season");
             teams.allTeamsStatsByYear(req, res, knex);
         } else if (req.query.group === "Alltime") {
+            console.log("by alltime");
             teams.allTeamsStatsGrouped(req, res, knex);
         }
     } else if (req.query.year) {

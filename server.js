@@ -4,6 +4,7 @@ const cors = require('cors');
 const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
 const player_stats = require('./controllers/players_stats');
+const player = require('./controllers/players');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
 const users = require('./controllers/users');
@@ -123,6 +124,10 @@ app.get('/team-stats/:teamName', (req, res) => {
         teams.teamStatsAllTime(req, res, knex);
     }
 });
+
+app.get('/players/:name', (req, res) => {
+    player.getPlayerStats(req, res, knex);
+})
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 

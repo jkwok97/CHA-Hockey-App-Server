@@ -103,7 +103,9 @@ const allTeamsStatsGrouped = (req, res, knex) => {
 }
 
 const oneTeamStatsGrouped = (req, res, knex) => {
-    knex.raw(`select season_type as season_type, sum(games_played) as games_played, sum(wins) as wins, sum(loss) as loss, sum(ties) as ties, sum(points) as points, sum(goals_for) as goals_for, sum(goals_against) as goals_against, sum(pp_attempts) as pp_attempts, sum(pp_goals) as pp_goals, sum(pk_attempts) as pk_attempts, sum(pk_goals) as pk_goals, sum(sh_goals) as sh_goals, sum(penalty_minutes) as penalty_minutes, sum(shots_for) as shots_for, sum(shots_against) as shots_against, sum(shut_outs) as shut_outs, team_name from teams where season_type = '${req.query.type}' and team_name = '${req.params.teamName} group by team_name, season_type;`)
+    console.log(req.params.teamName)
+    console.log(req.query.type)
+    knex.raw(`select season_type as season_type, sum(games_played) as games_played, sum(wins) as wins, sum(loss) as loss, sum(ties) as ties, sum(points) as points, sum(goals_for) as goals_for, sum(goals_against) as goals_against, sum(pp_attempts) as pp_attempts, sum(pp_goals) as pp_goals, sum(pk_attempts) as pk_attempts, sum(pk_goals) as pk_goals, sum(sh_goals) as sh_goals, sum(penalty_minutes) as penalty_minutes, sum(shots_for) as shots_for, sum(shots_against) as shots_against, sum(shut_outs) as shut_outs, team_name from teams where season_type = '${req.query.type}' and team_name = '${req.params.teamName}' group by team_name, season_type;`)
         .then(data => {
             res.json(data);
         })

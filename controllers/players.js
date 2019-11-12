@@ -1,6 +1,6 @@
 const getPlayerStats = (req, res, knex) => {
     console.log(req.params.name);
-    knex.select('*').from('players_stats').where('player_name', req.params.name)
+    knex.select('*').from('players_stats').where('player_name', req.params.name).orderBy('playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -13,7 +13,7 @@ const getPlayerStats = (req, res, knex) => {
 
 const getPlayerStatsByType = (req, res, knex) => {
     console.log(req.params.name);
-    knex.select('*').from('players_stats').where('player_name', req.params.name).where('season_type', req.query.type)
+    knex.select('*').from('players_stats').where('player_name', req.params.name).where('season_type', req.query.type).orderBy('playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);

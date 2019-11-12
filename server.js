@@ -5,6 +5,7 @@ const champions = require('./controllers/champions');
 const drafts = require('./controllers/drafts');
 const player_stats = require('./controllers/players_stats');
 const player = require('./controllers/players');
+const goalie = require('./controllers/goalies');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
 const users = require('./controllers/users');
@@ -130,6 +131,14 @@ app.get('/players/:name', (req, res) => {
         player.getPlayerStatsByType(req, res, knex);
     } else {
         player.getPlayerStats(req, res, knex);
+    }
+})
+
+app.get('/goalies/:name', (req, res) => { 
+    if (req.query.type) {
+        goalie.getPlayerStatsByType(req, res, knex);
+    } else {
+        goalie.getPlayerStats(req, res, knex);
     }
 })
 

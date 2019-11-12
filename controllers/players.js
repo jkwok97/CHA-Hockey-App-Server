@@ -1,4 +1,5 @@
 const getPlayerStats = (req, res, knex) => {
+    console.log(req.query.name);
     knex.select('*').from('players_stats').where('player_name', req.query.name)
         .then(data => {
             if (data.length) {

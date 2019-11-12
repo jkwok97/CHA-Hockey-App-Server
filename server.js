@@ -66,6 +66,24 @@ app.get('/goalies-stats/', (req, res) => {
     }
 });
 
+app.get('/team-stats/', (req, res) => {
+    if (req.query.year && req.query.type) {
+        teams.allTeamsStatsByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            teams.allTeamsStatsByYear(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            teams.allTeamsStatsGrouped(req, res, knex);
+        }
+    } else if (req.query.year) {
+        teams.allTeamsStatsByYear(req, res, knex);
+    } else if (req.query.type) {
+        teams.allTeamsStatsByType(req, res, knex);
+    } else {
+        teams.allTeamsStatsAllTime(req, res, knex);
+    }
+});
+
 app.get('/players-stats/:teamName', (req, res) => {
     if (req.query.year && req.query.type) {
         player_stats.playerStatsByTeamByYearByType(req, res, knex);
@@ -102,27 +120,15 @@ app.get('/goalies-stats/:teamName', (req, res) => {
     }
 });
 
-app.get('/team-stats/', (req, res) => {
-    if (req.query.year && req.query.type) {
-        teams.allTeamsStatsByYearByType(req, res, knex);
-    } else if (req.query.type && req.query.group) {
-        if (req.query.group === "Season") {
-            teams.allTeamsStatsByYear(req, res, knex);
-        } else if (req.query.group === "Alltime") {
-            teams.allTeamsStatsGrouped(req, res, knex);
-        }
-    } else if (req.query.year) {
-        teams.allTeamsStatsByYear(req, res, knex);
-    } else if (req.query.type) {
-        teams.allTeamsStatsByType(req, res, knex);
-    } else {
-        teams.allTeamsStatsAllTime(req, res, knex);
-    }
-});
-
 app.get('/team-stats/:teamName', (req, res) => {
     if (req.query.year && req.query.type) {
         teams.teamStatsByYearByType(req, res, knex);
+    } else if (req.query.type && req.query.group) {
+        if (req.query.group === "Season") {
+            teams.teamStatsByType(req, res, knex);
+        } else if (req.query.group === "Alltime") {
+            teams.oneTeamStatsGrouped(req, res, knex);
+        }
     } else if (req.query.year) {
         teams.teamStatsByYear(req, res, knex);
     } else if (req.query.type) {

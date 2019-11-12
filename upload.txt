@@ -102,5 +102,6 @@ sum(shots_against) as shots_against,
 sum(shut_outs) as shut_outs, 
 team_name 
 from teams 
-where season_type = 'Playoffs' 
+where season_type = 'Regular' and team_name = 'STA'
 group by team_name, season_type;
+

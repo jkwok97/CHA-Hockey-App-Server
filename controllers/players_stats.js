@@ -21,7 +21,7 @@ const getAllPlayerInfo = (req, res) => {
             });
             res.send(result);
         } else {
-            console.log("================> in playerstats.js line 24" + errorerror);
+            console.log("================> in playerstats.js line 24" + error);
             error => res.send(error);
         }
     });

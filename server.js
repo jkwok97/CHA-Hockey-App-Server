@@ -164,11 +164,11 @@ app.get('/player-info/', (req, res) => {
     try {
         player_stats.getAllPlayerInfo(req, res)
     } catch (error) {
-        console.log(error);
+        console.log("================> in server.js line 167" + error);
         try {
             player_stats.getAllPlayerInfo2(req, res)
         } catch (error) {
-            console.log(error);
+            console.log("================> in server.js line 171" + error);
         }
     }
 });

@@ -21,15 +21,10 @@ const getAllPlayerInfo = (req, res) => {
             });
             res.send(result);
         } else {
-            console.log(error);
+            console.log("================> in playerstats.js line 24" + errorerror);
             error => res.send(error);
-            try {
-                this.getAllPlayerInfo2();
-            } catch (error) {
-                
-            }
         }
-      });
+    });
 }
 
 const getAllPlayerInfo2 = (req, res) => {
@@ -50,7 +45,7 @@ const getAllPlayerInfo2 = (req, res) => {
             });
             res.send(result);
         } else {
-            console.log(error);
+            console.log("================> in playerstats.js line 167" + error);
             error => res.send(error)
         }
     });    

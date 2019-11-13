@@ -4,7 +4,7 @@ const key = 'b3d19d2576cc46b68af33b26616de34b';
 const key1 = '4064a3b66cc64f28a8d52cc3be024ffb';
 
 const getAllPlayerInfo = (req, res) => {
-    request(`${sportsDataURL}?key=${key}`, (error, response, body) => {
+    request(`${sportsDataURL}?key=${key1}`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             console.log(body);
              var info = JSON.parse(body)

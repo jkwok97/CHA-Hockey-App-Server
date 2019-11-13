@@ -160,7 +160,9 @@ app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 
 app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
-app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)});
+app.get('/player-info/', (req, res) => {
+    player_stats.getAllPlayerInfo(req, res)
+});
 
 // app.get('/player-info/:playerId', (req, res) => {player_stats.getRealPlayerInfo(req, res, knex)});
 

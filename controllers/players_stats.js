@@ -4,10 +4,10 @@ const key = 'b3d19d2576cc46b68af33b26616de34b';
 const key1 = '4064a3b66cc64f28a8d52cc3be024ffb';
 
 const getAllPlayerInfo = (req, res) => {
-    request(`${sportsDataURL}?key=${key1}`, (error, response, body) => {
+    console.log("in first key");
+    request(`${sportsDataURL}?key=${key}`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
-            console.log(body);
-             var info = JSON.parse(body)
+            var info = JSON.parse(body)
             // do more stuff
             let result = [];
             info.forEach(player => {
@@ -22,29 +22,37 @@ const getAllPlayerInfo = (req, res) => {
             res.send(result);
         } else {
             console.log(error);
-            request(`${sportsDataURL}?key=${key1}`, (error, response, body) => {
-                if (!error && response.statusCode == 200) {
-                    console.log(body);
-                     var info = JSON.parse(body)
-                    // do more stuff
-                    let result = [];
-                    info.forEach(player => {
-                        result.push({
-                            playerName: `${player.FirstName} ${player.LastName}`,
-                            playerId: player.PlayerID,
-                            birthdate: player.BirthDate,
-                            image: player.PhotoUrl,
-                            position: player.Position
-                        })
-                    });
-                    res.send(result);
-                } else {
-                    console.log(error);
-                    error => res.send(error)
-                }
-            }); 
+            try {
+                this.getAllPlayerInfo2();
+            } catch (error) {
+                error => res.send(error);
+            }
         }
-      })
+      });
+}
+
+const getAllPlayerInfo2 = (req, res) => {
+    console.log("in second key");
+    request(`${sportsDataURL}?key=${key1}`, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            var info = JSON.parse(body)
+            // do more stuff
+            let result = [];
+            info.forEach(player => {
+                result.push({
+                    playerName: `${player.FirstName} ${player.LastName}`,
+                    playerId: player.PlayerID,
+                    birthdate: player.BirthDate,
+                    image: player.PhotoUrl,
+                    position: player.Position
+                })
+            });
+            res.send(result);
+        } else {
+            console.log(error);
+            error => res.send(error)
+        }
+    });    
 }
 
 const allTimePlayerStats = (req, res, knex) => {
@@ -162,5 +170,5 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
 module.exports = {
     allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, alltimePlayerStatsByYear, playerStatsByTeamByYear,
     playerStatsByTeamByType, playerStatsByTeamByYearByType, alltimePlayerStatsByYearBySeason, alltimePlayerStatsByType,
-    alltimePlayerStatsGrouped, allTimeTeamPlayersStatsGrouped
+    alltimePlayerStatsGrouped, allTimeTeamPlayersStatsGrouped, getAllPlayerInfo2
 };

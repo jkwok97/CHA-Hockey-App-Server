@@ -4,7 +4,7 @@ const key = 'b3d19d2576cc46b68af33b26616de34b';
 const key1 = '4064a3b66cc64f28a8d52cc3be024ffb';
 
 const getAllPlayerInfo = (req, res) => {
-    console.log("in first key");
+    console.log("======================> in first key");
     request(`${sportsDataURL}?key=${key}`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body)
@@ -22,17 +22,18 @@ const getAllPlayerInfo = (req, res) => {
             res.send(result);
         } else {
             console.log(error);
+            error => res.send(error);
             try {
                 this.getAllPlayerInfo2();
             } catch (error) {
-                error => res.send(error);
+                
             }
         }
       });
 }
 
 const getAllPlayerInfo2 = (req, res) => {
-    console.log("in second key");
+    console.log("======================> in second key");
     request(`${sportsDataURL}?key=${key1}`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body)

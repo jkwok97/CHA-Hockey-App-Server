@@ -161,7 +161,16 @@ app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 app.get('/player-info/', (req, res) => {
-    player_stats.getAllPlayerInfo(req, res)
+    try {
+        player_stats.getAllPlayerInfo(req, res)
+    } catch (error) {
+        console.log(error);
+        try {
+            player_stats.getAllPlayerInfo2(req, res)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 });
 
 // app.get('/player-info/:playerId', (req, res) => {player_stats.getRealPlayerInfo(req, res, knex)});

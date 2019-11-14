@@ -34,6 +34,7 @@ const getPlayerStatsByType = (req, res, knex) => {
 
 const getPlayerStatsWithJoin = (req, res, knex) => {
     console.log(req.params.name);
+    console.log(req.query.league);
     knex.select('*').from('players_stats as a')
         .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
         .where('a.player_name', req.params.name).orderBy('a.playing_year', 'desc')
@@ -52,6 +53,7 @@ const getPlayerStatsWithJoin = (req, res, knex) => {
 
 const getPlayerStatsByTypeWithJoin = (req, res, knex) => {
     console.log(req.params.name);
+    console.log(req.query.league);
     knex.select('*').from('players_stats as a')
         .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
         .where('a.player_name', req.params.name).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')

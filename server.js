@@ -141,16 +141,24 @@ app.get('/team-stats/:teamName', (req, res) => {
 });
 
 app.get('/players/:name', (req, res) => { 
-    if (req.query.type) {
+    if (req.query.type && req.query.league) {
+        player.getPlayerStatsByTypeWithJoin(req, res, knex);
+    } else if (req.query.type) {
         player.getPlayerStatsByType(req, res, knex);
+    } else if (req.query.league) {
+        player.getPlayerStatsWithJoin(req, res, knex);
     } else {
         player.getPlayerStats(req, res, knex);
     }
 })
 
 app.get('/goalies/:name', (req, res) => { 
-    if (req.query.type) {
+    if (req.query.type && req.query.league) {
+        goalie.getPlayerStatsByTypeWithJoin(req, res, knex);
+    } else if (req.query.type) {
         goalie.getPlayerStatsByType(req, res, knex);
+    } else if (req.query.league) {
+        goalie.getPlayerStatsWithJoin(req, res, knex);
     } else {
         goalie.getPlayerStats(req, res, knex);
     }

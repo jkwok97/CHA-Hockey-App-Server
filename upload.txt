@@ -106,3 +106,10 @@ from teams
 where season_type = 'Regular' and team_name = 'STA'
 group by team_name, season_type;
 
+
+
+select * 
+from players_stats a
+full outer join nhlPlayers b
+on a.player_name = b.player_name
+where a.player_name = 'Hall, Taylor'

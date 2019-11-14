@@ -13,7 +13,7 @@ const getPlayerStats = (req, res, knex) => {
     //     console.log(err);
     //     res.status(400).json('not found');
     // })
-    knex.select('*').from('nhlPlayers').then(data => {
+    knex.select('*').from('nhl_players').then(data => {
         res.json(data);
     })
 }

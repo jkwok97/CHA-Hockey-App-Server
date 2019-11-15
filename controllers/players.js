@@ -82,7 +82,10 @@ const getNhlPlayerStats = (req, res) => {
             var info = JSON.parse(body)
             res.send(info);
         } else {
-            error => res.send(error)
+            error => {
+                console.log(error);
+                res.send(error)
+            }
         }
     });    
 }

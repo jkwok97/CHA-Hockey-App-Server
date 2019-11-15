@@ -30,7 +30,13 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
-app.get('/real-stats/', (req, res) => {player.getNhlPlayerStats(req, res)});
+app.get('/real-stats/', (req, res) => {
+    if (req.query.pace) {
+        player.getOnPaceNhlPlayerStats(req, res);
+    } else {
+        player.getNhlPlayerStats(req, res);
+    }
+});
 
 app.get('/players-stats/', (req, res) => {
     if (req.query.year && req.query.type) {

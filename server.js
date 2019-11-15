@@ -38,9 +38,9 @@ app.get('/real-stats/', (req, res) => {
     }
 });
 
-app.get('/player-ratings/', (req, res) => {player.getPlayerRatings(req, res, knex)});
+app.get('/player-ratings/:name', (req, res) => {player.getPlayerRatings(req, res, knex)});
 
-app.get('/goalie-ratings/', (req, res) => {goalie.getPlayerRatings(req, res, knex)});
+app.get('/goalie-ratings/:name', (req, res) => {goalie.getPlayerRatings(req, res, knex)});
 
 app.get('/players-stats/', (req, res) => {
     if (req.query.year && req.query.type) {

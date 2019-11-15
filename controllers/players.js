@@ -108,7 +108,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 
 const getPlayerRatings = (req, res, knex) => {
     console.log(req.params.name);
-    knex.select('*').from('player_ratings').where('player_name', req.params.name)
+    knex.select('*').from('players_ratings').where('player_name', req.params.name)
         .then(data => {
             if (data.length) {
                 res.json(data);

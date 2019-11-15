@@ -54,8 +54,22 @@ const getPlayerStatsByTypeWithJoin = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
-
+const getPlayerRatings = (req, res, knex) => {
+    console.log(req.params.name);
+    knex.select('*').from('goalie_ratings').where('player_name', req.params.name)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json('not found');
+    })
+}
 
 module.exports = {
-    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin
+    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getPlayerRatings
 };

@@ -30,6 +30,8 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
+app.get('/real-stats/', (req, res) => {players.getNhlPlayerStats(req, res)});
+
 app.get('/players-stats/', (req, res) => {
     if (req.query.year && req.query.type) {
         player_stats.alltimePlayerStatsByYearBySeason(req, res, knex);

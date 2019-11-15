@@ -1,3 +1,7 @@
+nhlAPI = 'https://statsapi.web.nhl.com/api.v1/people/';
+statsType = 'statsSingleSeason';
+currentNHLSeason = '20192020';
+
 const getPlayerStats = (req, res, knex) => {
     console.log(req.params.name);
     knex.select('*').from('players_stats as a')
@@ -70,6 +74,17 @@ const getPlayerStatsByTypeWithJoin = (req, res, knex) => {
     })
 }
 
+const getNhlPlayerStats = (req, res) => {
+    request(`${this.nhlAPI}/${req.query.id}/stats?stats=${this.statsType}&season=${this.currentNHLSeason}`, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            var info = JSON.parse(body)
+            res.send(info);
+        } else {
+            error => res.send(error)
+        }
+    });    
+}
+
 module.exports = {
-    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin
+    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats
 };

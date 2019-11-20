@@ -1,24 +1,60 @@
-2019	Staten Island Killer Bees	Jeff Kwok	STA
-2018	Staten Island Killer Bees	Jeff Kwok	STA
-2017	Indianapolis Goats	Scott Snowden	IND
-2016	Las Vegas Desperado	Ferrel Hedberg	LVD
-2015	Oakland Assassins	Joseph Sutherland	OAK
-2014	Toledo Honey Badgers	Jordan Schartner	TOL
-2013	Green Bay Glory	Brian Dillon	GRE
-2012	Louisiana Voodoo	Ryan Pollock	LOU
-2011	Mississippi Mudbugs	Jeff Kwok	MIS
-2010	Milwaukee Ice Dragons	Lee Snowden	MIL
-2009	Quebec City Thundercats	Jordan Schartner	QUE
-2008	Oakland Oceanus	Joseph Sutherland	OAO
-2007	Cleveland Barons	Kevin Schmitz	CLE
-2006	Oakland Oceanus	Joseph Sutherland	OAO
-2005	Oakland Oceanus	Joseph Sutherland	OAO
-2004	Cleveland Barons	Kevin Schmitz	CLE
-2003	Houston Comets	Al Godfrey	HOU
-2002	San Antonio Outlaws	Kelly Gardner	SAO
-2001	Washington Whiskeyjacks	Randy Lazzarotto	WAS
-2000	Hamilton Predators	Matt Beatty	HAM
-1999	Cleveland Barons	Kevin Schmitz	CLE
-1998	Hamilton Predators	Matt Beatty	HAM
-1997	Hamilton Predators	Matt Beatty	HAM
-1996	Portland Beavers	Jeff Muggleston	POR
+2018-19	Staten Island Killer Bees	Jeff Kwok		STA	champ
+2017-18	Staten Island Killer Bees	Jeff Kwok		STA	champ
+2016-17	Indianapolis Goats	Scott Snowden		IND	champ
+2015-16	Las Vegas Desperado	Ferrel Hedberg		LVD	champ
+2014-15	Oakland Assassins	Joseph Sutherland		OAK	champ
+2013-14	Toledo Honey Badgers	Jordan Schartner		TOL	champ
+2012-13	Green Bay Glory	Brian Dillon		GRE	champ
+2011-12	Louisiana Voodoo	Ryan Pollock		LOU	champ
+2010-11	Mississippi Mudbugs	Jeff Kwok		MIS	champ
+2009-10	Milwaukee Ice Dragons	Lee Snowden		MIL	champ
+2008-09	Quebec City Thundercats	Jordan Schartner		QUE	champ
+2007-08	Oakland Oceanus	Joseph Sutherland		OAO	champ
+2006-07	Cleveland Barons	Kevin Schmitz		CLE	champ
+2005-06	Oakland Oceanus	Joseph Sutherland		OAO	champ
+2004-05	Oakland Oceanus	Joseph Sutherland		OAO	champ
+2003-04	Cleveland Barons	Kevin Schmitz		CLE	champ
+2002-03	Houston Comets	Al Godfrey		HOU	champ
+2001-02	San Antonio Outlaws	Kelly Gardner		SAO	champ
+2000-01	Washington Whiskeyjacks	Randy Lazzarotto		WAS	champ
+1999-00	Hamilton Predators	Matt Beatty		HAM	champ
+1998-99	Cleveland Barons	Kevin Schmitz		CLE	champ
+1997-98	Hamilton Predators	Matt Beatty		HAM	champ
+1996-97	Hamilton Predators	Matt Beatty		HAM	champ
+1995-96	Portland Beavers	Jeff Muggleston		POR	champ
+2011-12	South Carolina Stingrays		"Visnovsky, Lubomir"	SCS	defense
+2011-12	Las Vegas Desperado		"Rinne, Pekka"	LVD	goalie
+2011-12	Indianapolis Goats		"Skinner, Jeff"	IND	rookie
+2011-12	Louisiana Voodoo	Ryan Pollock		LOU	gm
+2010-11	Wichita Wolfpack		"Pronger, Chris"	WIT	defense
+2010-11	Victoria Vipers		"Kiprusoff, Miikka"	VIC	goalie
+2010-11	Toledo Honey Badgers		"Myers, Tyler"	TOL	rookie
+2010-11	Toledo Honey Badgers	Jordan Schartner		TOL	gm
+2012-13	Mississippi Mudbugs		"Hagelin, Carl"	MIS	rookie
+2012-13	Mississippi Mudbugs		"Pietrangelo, Alex"	MIS	defense
+2012-13	Green Bay Glory		"Lundqvist, Henrik"	GRE	goalie
+2012-13	Green Bay Glory	Brian Dillon		GRE	gm
+2013-14	Indianapolis Goats		"Yakupov, Nail"	IND	rookie
+2013-14	Memphis Hound Dogs		"Anderson, Craig"	MEM	goalie
+2013-14	Toledo Honey Badgers		"Subban, P.K."	TOL	defense
+2013-14	Toledo Honey Badgers	Jordan Schartner		TOL	gm
+2015-16	Milwaukee Ice Dragons		"Hoffman, Mike"	MIL	rookie
+2015-16	Las Vegas Desperado		"Price, Carey"	LVD	goalie
+2015-16	Oakland Assassins		"Karlsson, Erik"	OAK	defense
+2015-16	Mississauga Indians	Tim Ross		MGA	gm
+2014-15	Abbotsford Loggerheads		"Keith, Duncan"	ABB	defense
+2014-15	Milwaukee Ice Dragons		"Varlamov, Semyon"	MIL	goalie
+2014-15	Indianapolis Goats		"MacKinnon, Nathan"	IND	rookie
+2014-15	Milwaukee Ice Dragons	Lee Snowden		MIL	gm
+2016-17	Staten Island Killer Bees		"Gostisbehere, Shayne"	STA	rookie
+2016-17	Wichita Wolfpack		"Elliot, Brian"	WIT	goalie
+2016-17	Oakland Assassins		"Karlsson, Erik"	OAK	defense
+2016-17	Indianapolis Goats	Scott Snowden		IND	gm
+2017-18	South Carolina Stingrays		"Matthews, Auston"	SCS	rookie
+2017-18	Oakland Assassins		"Karlsson, Erik"	OAK	defense
+2017-18	Lone Star Brahmas		"Holtby, Braden"	LSB	goalie
+2017-18	Victoria Vipers	Ryan Bender		VIC	gm
+2018-19	Milwaukee Ice Dragons		"Pietrangelo, Alex"	MIL	defense
+2018-19	Milwaukee Ice Dragons		"Raanta, Antti"	MIL	goalie
+2018-19	Peoria Prowlers		"Boeser, Brock"	PEO	rookie
+2018-19	Milwaukee Ice Dragons	Lee Snowden		MIL	gm

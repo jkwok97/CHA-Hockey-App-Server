@@ -1,5 +1,6 @@
 const handleChampionsGet = (req, res, knex) => {
-    knex.select('*').from('champions')
+    console.log(req.query.type);
+    knex.select('*').from('champions').where('player_name', req.query.type)
         .then(champions => {
             if (champions.length) {
                 res.json(champions);

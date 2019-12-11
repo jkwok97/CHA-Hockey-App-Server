@@ -109,6 +109,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 const getAllNHLPlayerStats = (req, res, knex) => {
     knex.select('*').from('nhl_players')
         .then( data => {
+            let playersArray = [];
             if (data.length) {
                 data.forEach(player => {
                     // console.log(player);
@@ -119,6 +120,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                             // resp['stats'][0]['splits'][0]['stat']
                             player.stats = info.stats[0]['splits'][0];
                             console.log(player);
+                            playersArray.push(player);
                         } else {
                             error => {
                                 console.log(error);
@@ -128,7 +130,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                     });
                 // console.log(data);
                 });
-                res.json(data);
+                res.json(playersArray);
             } else {
                 res.status(400).json('error getting stats');
             }

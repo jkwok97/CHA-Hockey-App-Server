@@ -113,7 +113,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                 let playerArray = data;
                 playerArray.forEach(player => {
                     request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
-                        let playerStatsArray;    
+                        let playerStatsArray = [];    
                         if (!error && response.statusCode == 200) {
                                 var info = JSON.parse(body);
                                 player.stats = info.stats[0]['splits'][0];

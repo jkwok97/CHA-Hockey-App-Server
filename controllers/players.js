@@ -116,7 +116,6 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                         if (!error && response.statusCode == 200) {
                             var info = JSON.parse(body);
                             player.stats = info.stats[0]['splits'][0];
-                            playersArray.push(player);
                         } else {
                             error => {
                                 console.log(error);
@@ -124,9 +123,9 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                             }
                         }
                     });
-                console.log(playersArray);
+                    playersArray.push(player);
                 });
-
+                console.log(playersArray);
                 res.json(playersArray);
             } else {
                 res.status(400).json('error getting stats');

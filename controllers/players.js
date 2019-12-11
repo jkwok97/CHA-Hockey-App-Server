@@ -111,19 +111,20 @@ const getAllNHLPlayerStats = (req, res, knex) => {
         .then( data => {
             if (data.length) {
                 data.forEach(player => {
-                    console.log(player);
-                    // request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
-                    //     if (!error && response.statusCode == 200) {
-                    //         var info = JSON.parse(body);
-                    //         player.stats = info;
-                    //         console.log(player);
-                    //     } else {
-                    //         error => {
-                    //             console.log(error);
-                    //             res.send(error);
-                    //         }
-                    //     }
-                    // });
+                    // console.log(player);
+                    request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+                        if (!error && response.statusCode == 200) {
+                            console.log("success");
+                            var info = JSON.parse(body);
+                            player.stats = info;
+                            console.log(player);
+                        } else {
+                            error => {
+                                console.log(error);
+                                res.send(error);
+                            }
+                        }
+                    });
                 // console.log(data);
                 });
                 res.json(data);

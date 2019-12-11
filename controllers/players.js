@@ -106,7 +106,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
     });    
 }
 
-const getAllNHLPlayerStats = (req, res) => {
+const getAllNHLPlayerStats = (req, res, knex) => {
     knex.select('*').from('nhl_players')
         .then( data => {
             if (data.length) {

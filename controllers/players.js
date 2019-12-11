@@ -110,7 +110,8 @@ const getAllNHLPlayerStats = (req, res, knex) => {
     knex.select('*').from('nhl_players')
         .then( data => {
             if (data.length) {
-                data.forEach(player => {
+                data[0].forEach(player => {
+                    console.log(player);
                     request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
                         if (!error && response.statusCode == 200) {
                             var info = JSON.parse(body);

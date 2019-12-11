@@ -112,31 +112,29 @@ const getAllNHLPlayerStats = (req, res, knex) => {
             if (data.length) {
                 let playerArray = data;
                 playerArray.forEach(player => {
-                    let playerStatsArray = [];
-                    request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
-                            
-                        if (!error && response.statusCode == 200) {
-                                var info = JSON.parse(body);
-                                player.stats = info.stats[0]['splits'][0];
-                                playerStatsArray.push(player);
-                            } else {
-                                error => {
-                                    console.log(error);
-                                    res.send(error);
-                                }
-                            }
-                        // console.log(playerStatsArray);
-                        // res.json(playerStatsArray);
-                        })
-                    console.log(playerStatsArray);
-                    res.json(playerStatsArray);
+                    player.stats = getStats(player.player_nhl_id);
+                    console.log(player);
                 })
-                // console.log(playerArray)
-                // res.json(playerArray);
+                console.log(playerArray)
+                res.json(playerArray);
             } else {
                 res.status(400).json('error getting stats');
             }
     })
+}
+
+getStats = (id) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+                var info = JSON.parse(body);
+                return info
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+        });
 }
 
 const getPlayerRatings = (req, res, knex) => {

@@ -136,7 +136,7 @@ getStats = (id) => {
             }
         }
     });
-    console.log(request.body);
+    console.log(response.body);
 }
 
 const getPlayerRatings = (req, res, knex) => {

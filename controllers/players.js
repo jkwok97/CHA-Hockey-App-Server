@@ -114,7 +114,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                     stats = request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
                         if (!error && response.statusCode == 200) {
                             var info = JSON.parse(body);
-                            return info
+                            res.send(info);
                         } else {
                             error => {
                                 console.log(error);
@@ -123,6 +123,8 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                         }
                     });
                     console.log(stats);
+                    console.log(info);
+                    
                     // player.stats = stats.stats[0]['splits'][0];
                 })
                 // console.log(data);

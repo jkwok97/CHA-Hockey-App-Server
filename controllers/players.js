@@ -128,7 +128,7 @@ getPlayers = (array) => {
 }
 
 getStats = (id) => {
-    stats = request(`https://statsapi.web.nhl.com/api/v1/people/${id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let info = JSON.parse(body);
             return info;
@@ -138,7 +138,7 @@ getStats = (id) => {
             }
         }
     });
-    return stats;
+    console.log(request.body);
 }
 
 const getPlayerRatings = (req, res, knex) => {

@@ -125,12 +125,11 @@ getPlayers = (array) => {
     return array;
 }
 
-getStats = (req, res, id) => {
-    console.log(req, res, id);
+getStats = (id) => {
     request(`https://statsapi.web.nhl.com/api/v1/people/${id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let info = JSON.parse(body);
-            return res.send(info);
+            return response.send(info);
         } else {
             error => {
                 console.log(error);

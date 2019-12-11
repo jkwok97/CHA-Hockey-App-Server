@@ -107,13 +107,14 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 }
 
 const getAllNHLPlayerStats = (req, res) => {
-    knex.select('*').from('nhl_players').then( data => {
-        if (data.length) {
-            console.log(data);
-            res.json(data);
-        } else {
-            res.status(400).json('error getting stats');
-        }
+    knex.select('*').from('nhl_players')
+        .then( data => {
+            if (data.length) {
+                console.log(data);
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats');
+            }
     })
 }
 

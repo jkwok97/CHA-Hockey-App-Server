@@ -116,7 +116,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                         if (!error && response.statusCode == 200) {
                             console.log("success");
                             var info = JSON.parse(body);
-                            player.stats = info;
+                            player.stats = info.stats;
                             console.log(player);
                         } else {
                             error => {

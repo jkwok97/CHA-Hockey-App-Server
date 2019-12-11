@@ -110,17 +110,21 @@ const getAllNHLPlayerStats = (req, res, knex) => {
     knex.select('*').from('nhl_players')
         .then( data => {
             if (data.length) {
-                let playerArray = data;
-                playerArray.forEach(player => {
-                    player.stats = getStats(player.player_nhl_id);
-                    console.log(player);
-                })
-                console.log(playerArray)
-                res.json(playerArray);
+                let newPlayerArray = getPlayers(data);
+                console.log(newPlayerArray)
+                res.json(newPlayerArray);
             } else {
                 res.status(400).json('error getting stats');
             }
     })
+}
+
+getPlayers = (array) => {
+    array.forEach(player => {
+        player.stats = getStats(player.player_nhl_id);
+        console.log(player);
+    });
+    return array;
 }
 
 getStats = (req, res, id) => {

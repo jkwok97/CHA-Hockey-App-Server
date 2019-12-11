@@ -110,11 +110,12 @@ const getAllNHLPlayerStats = (req, res, knex) => {
     knex.select('*').from('nhl_players')
         .then( data => {
             if (data.length) {
+                let playerArray = [];
                 data.forEach(player => {
-                    stats = request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+                    request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
                         if (!error && response.statusCode == 200) {
                             var info = JSON.parse(body);
-                            res.send(info);
+                            player.stats = info.stats[0]['splits'][0];
                         } else {
                             error => {
                                 console.log(error);
@@ -122,13 +123,14 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                             }
                         }
                     });
-                    console.log(stats);
-                    console.log(info);
+                    // console.log(player);
                     
-                    // player.stats = stats.stats[0]['splits'][0];
+                    playerArray.push(player);
+
+                    
                 })
-                // console.log(data);
-                res.json(data);
+                console.log(playerArray)
+                res.json(playerArray);
             } else {
                 res.status(400).json('error getting stats');
             }

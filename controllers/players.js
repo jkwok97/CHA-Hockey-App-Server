@@ -129,7 +129,7 @@ getStats = (id) => {
     request(`https://statsapi.web.nhl.com/api/v1/people/${id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let info = JSON.parse(body);
-            return info;
+            // return info;
         } else {
             error => {
                 console.log(error);

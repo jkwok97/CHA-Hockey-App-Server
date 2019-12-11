@@ -111,7 +111,6 @@ const getAllNHLPlayerStats = (req, res, knex) => {
         .then( data => {
             if (data.length) {
                 let newPlayerArray = getPlayers(data);
-                console.log(newPlayerArray)
                 res.json(newPlayerArray);
             } else {
                 res.status(400).json('error getting stats');
@@ -122,7 +121,6 @@ const getAllNHLPlayerStats = (req, res, knex) => {
 getPlayers = (array) => {
     array.forEach(player => {
         player.stats = getStats(player.player_nhl_id);
-        console.log(player.stats);
     });
     return array;
 }

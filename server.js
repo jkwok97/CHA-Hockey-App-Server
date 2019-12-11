@@ -176,6 +176,8 @@ app.get('/goalies/:name', (req, res) => {
     }
 })
 
+app.get('/nhl-leaders/', (req, res) => {players.getAllNHLPlayerStats(req, res, knex)})
+
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 
 app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});

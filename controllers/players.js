@@ -121,7 +121,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
 getPlayers = (array) => {
     array.forEach(player => {
         getStats(player.player_nhl_id, function(data) {
-            this.player.stats = data['stats'][0]['splits'][0];
+            player.stats = data['stats'][0]['splits'][0];
         });
         console.log(player);
     });

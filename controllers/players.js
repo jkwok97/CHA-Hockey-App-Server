@@ -117,7 +117,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                             console.log("success");
                             var info = JSON.parse(body);
                             // resp['stats'][0]['splits'][0]['stat']
-                            player.stats = info.stats[0]['splits'][0]['stat'];
+                            player.stats = info.stats[0]['splits'][0];
                             console.log(player);
                         } else {
                             error => {

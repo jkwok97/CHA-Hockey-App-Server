@@ -112,10 +112,10 @@ const getAllNHLPlayerStats = (req, res, knex) => {
             let playersArray = [];
             if (data.length) {
                 data.forEach(player => {
-                    request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+                    info = request(`https://statsapi.web.nhl.com/api/v1/people/${player.player_nhl_id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
                         if (!error && response.statusCode == 200) {
-                            var info = JSON.parse(body);
-                            player.stats = info.stats[0]['splits'][0];
+                            info = JSON.parse(body);
+                            return info
                         } else {
                             error => {
                                 console.log(error);
@@ -123,9 +123,11 @@ const getAllNHLPlayerStats = (req, res, knex) => {
                             }
                         }
                     });
-                    playersArray.push(player);
+                    if (info.stats) {
+                        player.stats = info.stats[0]['splits'][0];
+                        playersArray.push(player);
+                    }
                 });
-                console.log(playersArray);
                 res.json(playersArray);
             } else {
                 res.status(400).json('error getting stats');

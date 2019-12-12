@@ -157,5 +157,5 @@ const getPlayerRatings = (req, res, knex) => {
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
-    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeams
+    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam
 };

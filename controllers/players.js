@@ -119,10 +119,10 @@ const getAllNHLPlayerStats = (req, res) => {
                 } else if (req.query.sort == "reverse" && req.query.qty == "all") {
                     let info = leadersArray.reverse();
                     res.send(info);
-                } else if (req.query.qty == "trim" && req.query.sory == "no") {
+                } else if (req.query.qty == "trim" && req.query.sort == "no") {
                     let info = leadersArray.splice(0,10);
                     res.send(info);
-                } else if (req.query.qty == "all" && req.query.sory == "no") {
+                } else if (req.query.qty == "all" && req.query.sort == "no") {
                     let info = leadersArray;
                     res.send(info);
                 }

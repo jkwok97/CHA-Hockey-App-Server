@@ -140,17 +140,6 @@ const getChaTeam = (req, res, knex) => {
         })
 }
 
-const getGoalieChaTeam = (req, res, knex) => {
-    knex.select('team_name').from('goalies_stats').where('player_name', req.query.player)
-        .then(data => {
-            if (data.length) {
-                res.json(data[0]['team_name']);
-            } else {
-                res.status(400).json('error getting player');
-            }
-        })
-}
-
 const getPlayerRatings = (req, res, knex) => {
     knex.select('*').from('players_ratings').where('player_name', req.params.name)
         .then(data => {
@@ -168,5 +157,5 @@ const getPlayerRatings = (req, res, knex) => {
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
-    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getGoalieChaTeam
+    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam
 };

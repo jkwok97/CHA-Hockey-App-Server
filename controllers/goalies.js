@@ -70,6 +70,18 @@ const getPlayerRatings = (req, res, knex) => {
     })
 }
 
+const getGoalieChaTeam = (req, res, knex) => {
+    knex.select('team_name').from('goalies_stats').where('player_name', req.query.player)
+        .then(data => {
+            if (data.length) {
+                res.json(data[0]['team_name']);
+            } else {
+                res.status(400).json('error getting player');
+            }
+        })
+}
+
 module.exports = {
-    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getPlayerRatings
+    getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getPlayerRatings,
+    getGoalieChaTeam
 };

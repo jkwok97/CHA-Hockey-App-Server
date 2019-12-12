@@ -182,7 +182,7 @@ app.get('/nhl-leaders/', (req, res) => {
     } else if (req.query.player && req.query.playerType == "player") {
         player.getChaTeam(req, res, knex);
     } else if (req.query.player && req.query.playerType == "goalie") {
-        player.getGoalieChaTeam(req, res, knex);
+        goalie.getGoalieChaTeam(req, res, knex);
     }
 });
 

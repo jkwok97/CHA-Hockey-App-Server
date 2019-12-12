@@ -130,9 +130,11 @@ const getAllNHLPlayerStats = (req, res) => {
 }
 
 const getChaTeam = (req, res, knex) => {
+    console.log(req.query.player);
     knex.select('team_name').from('players_stats').where('player_name', req.query.player)
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data);
             } else {
                 res.status(400).json('error getting player');

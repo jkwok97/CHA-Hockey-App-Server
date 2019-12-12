@@ -113,11 +113,17 @@ const getAllNHLPlayerStats = (req, res) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);
                 let leadersArray = leaders.data;
-                if (req.query.sort == "reverse") {
+                if (req.query.sort == "reverse" && req.query.qty == "trim") {
                     let info = leadersArray.reverse().splice(0,10);
                     res.send(info);
-                } else {
+                } else if (req.query.sort == "reverse" && req.query.qty == "all") {
+                    let info = leadersArray.reverse();
+                    res.send(info);
+                } else if (req.query.qty == "trim" && req.query.sory == "no") {
                     let info = leadersArray.splice(0,10);
+                    res.send(info);
+                } else if (req.query.qty == "all" && req.query.sory == "no") {
+                    let info = leadersArray;
                     res.send(info);
                 }
             } else {

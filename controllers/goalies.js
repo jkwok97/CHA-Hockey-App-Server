@@ -71,7 +71,7 @@ const getPlayerRatings = (req, res, knex) => {
 }
 
 const getGoalieChaTeam = (req, res, knex) => {
-    knex.select('team_name').from('goalies_stats').where('player_name', req.query.player)
+    knex.select('team_name').from('goalie_stats').where('player_name', req.query.player)
         .then(data => {
             if (data.length) {
                 res.json(data[0]['team_name']);

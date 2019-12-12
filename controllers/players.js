@@ -1,6 +1,7 @@
 const request = require('request');
 
 nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
+nhlCOM = 'http://www.nhl.com/stats/rest/'
 statsType = 'statsSingleSeason';
 currentNHLSeason = '20192020';
 
@@ -107,15 +108,27 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 }
 
 const getAllNHLPlayerStats = (req, res, knex) => {
-    knex.select('*').from('nhl_players')
-        .then( data => {
-            if (data.length) {
-                res.json(data);
+    // knex.select('*').from('nhl_players')
+    //     .then( data => {
+    //         if (data.length) {
+    //             res.json(data);
+    //         } else {
+    //             res.status(400).json('error getting stats');
+    //         }
+    // })
+    request(`${nhlCOM}/${req.query.playerType}?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season} and gameTypeId=2&sort=${req.query.statType}`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let leaders = body.data;
+                let info = JSON.parse(leaders.reverse().splice(0,10))
+                res.send(info);
             } else {
-                res.status(400).json('error getting stats');
+                error => {
+                    res.send(error);
+                }
             }
-    })
-}
+        }
+    )}
 
 const getPlayerRatings = (req, res, knex) => {
     console.log(req.params.name);

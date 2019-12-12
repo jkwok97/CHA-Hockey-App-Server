@@ -120,15 +120,17 @@ const getAllNHLPlayerStats = (req, res, knex) => {
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let leaders = body.data;
-                let info = JSON.parse(leaders.reverse().splice(0,10))
+                console.log(leaders);
+                let info = JSON.parse(leaders.reverse().splice(0,10));
                 res.send(info);
             } else {
                 error => {
+                    console.log(error);
                     res.send(error);
                 }
             }
-        }
-    )}
+    });
+}
 
 const getPlayerRatings = (req, res, knex) => {
     console.log(req.params.name);

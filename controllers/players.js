@@ -120,20 +120,21 @@ const getAllNHLPlayerStats = (req, res, knex) => {
     console.log(req.query.playerType);
     console.log(req.query.season)
     console.log(req.query.statType)
-    // request(`${nhlCOM}/${req.query.playerType}?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season} and gameTypeId=2&sort=${req.query.statType}`,
-    //     (error, response, body) => {
-    //         if (!error && response.statusCode == 200) {
-    //             let leaders = body.data;
-    //             console.log(leaders);
-    //             let info = JSON.parse(leaders.reverse().splice(0,10));
-    //             res.send(info);
-    //         } else {
-    //             error => {
-    //                 console.log(error);
-    //                 res.send(error);
-    //             }
-    //         }
-    // });
+    console.log(`${nhlCOM}/${req.query.playerType}?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season} and gameTypeId=2&sort=${req.query.statType}`)
+    request(`${nhlCOM}/${req.query.playerType}?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season} and gameTypeId=2&sort=${req.query.statType}`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let leaders = body.data;
+                console.log(leaders);
+                let info = JSON.parse(leaders.reverse().splice(0,10));
+                res.send(info);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
 }
 
 const getPlayerRatings = (req, res, knex) => {

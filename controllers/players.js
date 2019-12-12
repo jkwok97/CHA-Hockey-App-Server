@@ -1,7 +1,7 @@
 const request = require('request');
 
 nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
-nhlCOM = 'http://www.nhl.com/stats/rest/'
+nhlCOM = 'http://www.nhl.com/stats/rest'
 statsType = 'statsSingleSeason';
 currentNHLSeason = '20192020';
 

@@ -107,26 +107,12 @@ const getOnPaceNhlPlayerStats = (req, res) => {
     });    
 }
 
-const getAllNHLPlayerStats = (req, res, knex) => {
-    // knex.select('*').from('nhl_players')
-    //     .then( data => {
-    //         if (data.length) {
-    //             res.json(data);
-    //         } else {
-    //             res.status(400).json('error getting stats');
-    //         }
-    // })
-    console.log("in function");
-    console.log(req.query.playerType);
-    console.log(req.query.season)
-    console.log(req.query.statType)
-    console.log(`${nhlCOM}/${req.query.playerType}s?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&sort=${req.query.statType}`)
+const getAllNHLPlayerStats = (req, res) => {
     request(`${nhlCOM}/${req.query.playerType}s?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&sort=${req.query.statType}`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);
                 let leadersArray = leaders.data;
-                console.log(leadersArray);
                 let info = leadersArray.reverse().splice(0,10);
                 res.send(info);
             } else {
@@ -139,7 +125,6 @@ const getAllNHLPlayerStats = (req, res, knex) => {
 }
 
 const getPlayerRatings = (req, res, knex) => {
-    console.log(req.params.name);
     knex.select('*').from('players_ratings').where('player_name', req.params.name)
         .then(data => {
             if (data.length) {

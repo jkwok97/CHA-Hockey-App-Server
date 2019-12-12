@@ -129,6 +129,17 @@ const getAllNHLPlayerStats = (req, res) => {
     });
 }
 
+const getChaTeam = (req, res, knex) => {
+    knex.select('team_name').from('players_stats').where('player_name', req.query.player)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting player');
+            }
+        })
+}
+
 const getPlayerRatings = (req, res, knex) => {
     knex.select('*').from('players_ratings').where('player_name', req.params.name)
         .then(data => {
@@ -146,5 +157,5 @@ const getPlayerRatings = (req, res, knex) => {
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
-    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats
+    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeams
 };

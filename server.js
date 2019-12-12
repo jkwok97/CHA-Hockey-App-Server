@@ -176,7 +176,13 @@ app.get('/goalies/:name', (req, res) => {
     }
 })
 
-app.get('/nhl-leaders/', (req, res) => {player.getAllNHLPlayerStats(req, res)});
+app.get('/nhl-leaders/', (req, res) => {
+    if (req.query.sort) {
+        player.getAllNHLPlayerStats(req, res);
+    } else {
+        player.getChaTeam(req, res, knex);
+    }
+});
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 

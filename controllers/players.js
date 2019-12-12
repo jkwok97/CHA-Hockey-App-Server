@@ -113,7 +113,7 @@ const getAllNHLPlayerStats = (req, res) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);
                 let leadersArray = leaders.data;
-                if (req.query.sort === "reverse") {
+                if (req.query.sort == "reverse") {
                     let info = leadersArray.reverse().splice(0,10);
                     res.send(info);
                 } else {

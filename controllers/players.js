@@ -124,7 +124,7 @@ const getAllNHLPlayerStats = (req, res, knex) => {
     request(`${nhlCOM}/${req.query.playerType}s?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&sort=${req.query.statType}`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
-                let leaders = body;
+                let leaders = body['data'];
                 console.log(leaders);
                 // let info = JSON.parse(leaders.reverse().splice(0,10));
                 res.send(leaders);

@@ -6,10 +6,11 @@ CREATE TABLE users (
     short_name text NOT NULL,
     f_name text NOT NULL,
     l_name text NOT NULL,
-    email text NOT NULL
+    email text NOT NULL,
+    is_admin boolean NOT NULL
 );
 
-\copy users (team_name, short_name, f_name, l_name, email) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/Users.tsv' WITH NULL ''
+\copy users (team_name, short_name, f_name, l_name, email, is_admin) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/Users.tsv' WITH NULL ''
 
 do $$
 declare maxid int;

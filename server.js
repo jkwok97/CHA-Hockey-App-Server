@@ -192,7 +192,16 @@ app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)});
 
-// app.get('/player-info/:playerId', (req, res) => {player_stats.getRealPlayerInfo(req, res, knex)});
+app.get('/salaries/', (req, res) => {
+    if (req.query.type == "forward") {
+        player.getForwardSalaries(req, res, knex);
+    } else if (req.query.type == "defense") {
+        player.getDefenseSalaries(req, res, knex);
+    } else if (req.query.type == "goalie") {
+        player.getGoalieSalaries(req, res, knex);
+    }
+});
+
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

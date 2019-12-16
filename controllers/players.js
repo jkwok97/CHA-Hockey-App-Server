@@ -161,7 +161,41 @@ const getPlayerRatings = (req, res, knex) => {
     })
 }
 
+const getForwardSalaries = (req, res, knex) => {
+    knex.select('*').from('forward_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+}
+
+const getDefenseSalaries = (req, res, knex) => {
+    knex.select('*').from('defense_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+}
+
+const getGoalieSalaries = (req, res, knex) => {
+    knex.select('*').from('goalie_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+}
+
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
-    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam
+    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
+    getDefenseSalaries, getGoalieSalaries
 };

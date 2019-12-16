@@ -168,7 +168,7 @@ const getForwardSalaries = (req, res, knex) => {
         .fullOuterJoin('players_stats as b', 'a.player_name', 'b.player_name')
         .where('b.season_type', req.query.type)
         .where('b.playing_year', req.query.year)
-        .where('b.position', "RW").where('b.position', "C").where('b.position', "LW")
+        .where('b.position', 'RW').where('b.position', 'C').where('b.position', 'LW')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -186,7 +186,7 @@ const getDefenseSalaries = (req, res, knex) => {
     knex.select('*').from('defense_salaries as a')
         .fullOuterJoin('players_stats as b', 'a.player_name', 'b.player_name')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .where('b.position', "LD").where('b.position', "RD")
+        .where('b.position', 'LD').where('b.position', 'RD')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -204,7 +204,7 @@ const getGoalieSalaries = (req, res, knex) => {
     knex.select('*').from('goalie_salaries as a')
         .fullOuterJoin('players_stats as b', 'a.player_name', 'b.player_name')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .where('b.position', "G")
+        .where('b.position', 'G')
         .then(data => {
             if (data.length) {
                 res.json(data);

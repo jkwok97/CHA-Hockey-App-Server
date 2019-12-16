@@ -193,11 +193,11 @@ app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)});
 
 app.get('/salaries/', (req, res) => {
-    if (req.query.type == "forward") {
+    if (req.query.position == "forward") {
         player.getForwardSalaries(req, res, knex);
-    } else if (req.query.type == "defense") {
+    } else if (req.query.position == "defense") {
         player.getDefenseSalaries(req, res, knex);
-    } else if (req.query.type == "goalie") {
+    } else if (req.query.position == "goalie") {
         player.getGoalieSalaries(req, res, knex);
     }
 });

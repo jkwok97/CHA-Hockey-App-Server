@@ -107,6 +107,8 @@ const getOnPaceNhlPlayerStats = (req, res) => {
     });    
 }
 
+// http://www.nhl.com/stats/rest/skaters?reportType=20192020&reportName=skatersummary&cayenneExp=seasonId=20192020%20and%20gameTypeId=2&sort=goals
+
 const getAllNHLPlayerStats = (req, res) => {
     request(`${nhlCOM}/${req.query.playerType}s?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&sort=${req.query.statType}`,
         (error, response, body) => {
@@ -162,18 +164,24 @@ const getPlayerRatings = (req, res, knex) => {
 }
 
 const getForwardSalaries = (req, res, knex) => {
-    knex.select('*').from('forward_salaries')
+    knex.select('*').from('forward_salaries as a')
+        .fullOuterJoin('players_stats as b', 'a.player_name', '=', 'b.player_name')
         .then(data => {
             if (data.length) {
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')
             }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
     })
 }
 
 const getDefenseSalaries = (req, res, knex) => {
-    knex.select('*').from('defense_salaries')
+    knex.select('*').from('defense_salaries as a')
+        .fullOuterJoin('players_stats as b', 'a.player_name', '=', 'b.player_name')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -181,16 +189,25 @@ const getDefenseSalaries = (req, res, knex) => {
                 res.status(400).json('error getting stats')
             }
     })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })
 }
 
 const getGoalieSalaries = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries')
+    knex.select('*').from('goalie_salaries as a')
+        .fullOuterJoin('players_stats as b', 'a.player_name', '=', 'b.player_name')
         .then(data => {
             if (data.length) {
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')
             }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
     })
 }
 

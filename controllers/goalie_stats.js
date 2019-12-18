@@ -113,7 +113,7 @@ const allTimeTeamGoaliesStatsGrouped = (req, res, knex) => {
 }
 
 const tradeGoalie = (req, res, knex) => {
-    console.log(req);
+    console.log(req.body.params);
     console.log(req.query.id);
     console.log(req.query.team);
     const { id } = req.query.id;

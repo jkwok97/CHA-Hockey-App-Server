@@ -168,7 +168,7 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
 }
 
 const tradePlayer = (req, res, knex) => {
-    console.log(req.body);
+    console.log(req);
     console.log(req.query.id);
     console.log(req.query.team);
     const { id } = req.query.id;

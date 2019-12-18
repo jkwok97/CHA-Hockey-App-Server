@@ -208,9 +208,9 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
-app.put('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex) });
+app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex) });
 
-app.put('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex) });
+app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex) });
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

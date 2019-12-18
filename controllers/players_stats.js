@@ -172,7 +172,7 @@ const tradePlayer = (req, res, knex) => {
     console.log(req.params.id);
     const { id } = req.params.id;
     const { team_name } = req.body.team_name;
-    knex('player_stats').where({ id }).update({ team_name } )
+    knex('player_stats').where({ id }).update({team_name: { team_name }})
         .then(resp => {
             if (resp) {
                 res.json("Success!")

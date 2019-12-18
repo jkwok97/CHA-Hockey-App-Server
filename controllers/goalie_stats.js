@@ -113,11 +113,7 @@ const allTimeTeamGoaliesStatsGrouped = (req, res, knex) => {
 }
 
 const tradeGoalie = (req, res, knex) => {
-    console.log(req.body);
-    console.log(req.params.id);
-    const { id } = req.params.id;
-    const { team_name } = req.body;
-    knex('goalies_stats').where({ id }).update({ team_name } )
+    knex('goalie_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {
                 res.json("Success!")
@@ -125,7 +121,10 @@ const tradeGoalie = (req, res, knex) => {
                 res.status(400).json("Error Updating Player");
             }
         })
-        .catch(err => res.status(400).json("Server Error"));
+        .catch(err => {
+            console.log(err);
+            res.status(400).json("Server Error!")
+        });
 }
 
 module.exports = {

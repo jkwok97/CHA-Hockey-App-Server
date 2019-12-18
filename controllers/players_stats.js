@@ -168,8 +168,6 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
 }
 
 const tradePlayer = (req, res, knex) => {
-    console.log(req.body.team_name);
-    console.log(req.params.id);
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {

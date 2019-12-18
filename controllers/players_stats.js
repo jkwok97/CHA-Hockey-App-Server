@@ -167,8 +167,24 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const tradePlayer = (req, res, knex) => {
+    console.log(req.query.id);
+    console.log(req.query.team);
+    const { id } = req.query.id;
+    const { team_name } = req.query.team;
+    knex('player_stats').where({ id }).update({ team_name } )
+        .then(resp => {
+            if (resp) {
+                res.json("Success!")
+            } else {
+                res.status(400).json("Error Updating Player");
+            }
+        })
+        .catch(err => res.status(400).json("Server Error"));
+}
+
 module.exports = {
     allTimePlayerStats, allTimePlayerStatsByTeam, getAllPlayerInfo, alltimePlayerStatsByYear, playerStatsByTeamByYear,
     playerStatsByTeamByType, playerStatsByTeamByYearByType, alltimePlayerStatsByYearBySeason, alltimePlayerStatsByType,
-    alltimePlayerStatsGrouped, allTimeTeamPlayersStatsGrouped, getAllPlayerInfo2
+    alltimePlayerStatsGrouped, allTimeTeamPlayersStatsGrouped, getAllPlayerInfo2, tradePlayer
 };

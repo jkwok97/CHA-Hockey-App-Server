@@ -208,6 +208,9 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
+app.put('/player-stats', (req, res) => { player_stats.tradePlayer(req, res, knex) });
+
+app.put('/goalies-stats', (req, res) => { player_stats.tradeGoalie(req, res, knex) });
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

@@ -178,7 +178,10 @@ const tradePlayer = (req, res, knex) => {
                 res.status(400).json("Error Updating Player");
             }
         })
-        .catch(err => res.status(400).json("Server Error"));
+        .catch(err => {
+            console.log(err);
+            res.status(400).json("Server Error!")
+        });
 }
 
 module.exports = {

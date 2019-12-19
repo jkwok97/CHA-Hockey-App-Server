@@ -111,8 +111,38 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 
 // https://api.nhle.com/stats/rest/en/leaders/skaters/points?cayenneExp=season=20192020%20and%20gameType=2
 
+// https://api.nhle.com/stats/rest/en/leaders/goalies/gaa?cayenneExp=season=20192020%20and%20gameType=2%20and%20gamesPlayed%20%3E=%2011
+
 const getAllNHLPlayerStats = (req, res) => {
     request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let leaders = JSON.parse(body);
+                let leadersArray = leaders.data;
+                if (req.query.sort == "reverse" && req.query.qty == "trim") {
+                    let info = leadersArray.reverse().splice(0,10);
+                    res.send(info);
+                } else if (req.query.sort == "reverse" && req.query.qty == "all") {
+                    let info = leadersArray.reverse();
+                    res.send(info);
+                } else if (req.query.qty == "trim" && req.query.sort == "no") {
+                    let info = leadersArray.splice(0,10);
+                    res.send(info);
+                } else if (req.query.qty == "all" && req.query.sort == "no") {
+                    let info = leadersArray;
+                    res.send(info);
+                }
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
+}
+
+const getAllNHLGoalieStats = (req, res) => {
+    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%2011`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);
@@ -281,5 +311,6 @@ const getTeamGoalieSalaries = (req, res, knex) => {
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
-    getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries
+    getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
+    getAllNHLGoalieStats
 };

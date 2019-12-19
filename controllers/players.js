@@ -179,7 +179,7 @@ const getNHLPlayerSummary = (req, res) => {
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let summary = JSON.parse(body);
-                let summaryArray = summary.data;
+                let summaryArray = summary;
                 res.send(summaryArray);
             } else {
                 error => {

@@ -1,7 +1,7 @@
 const request = require('request');
 
 nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
-nhlCOM = 'http://www.nhl.com/stats/rest'
+nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders'
 statsType = 'statsSingleSeason';
 currentNHLSeason = '20192020';
 
@@ -109,8 +109,10 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 
 // http://www.nhl.com/stats/rest/skaters?reportType=20192020&reportName=skatersummary&cayenneExp=seasonId=20192020%20and%20gameTypeId=2&sort=goals
 
+// https://api.nhle.com/stats/rest/en/leaders/skaters/points?cayenneExp=season=20192020%20and%20gameType=2
+
 const getAllNHLPlayerStats = (req, res) => {
-    request(`${nhlCOM}/${req.query.playerType}s?reportType=${req.query.season}&reportName=${req.query.playerType}summary&cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&sort=${req.query.statType}`,
+    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);

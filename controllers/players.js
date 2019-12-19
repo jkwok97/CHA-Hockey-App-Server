@@ -1,7 +1,8 @@
 const request = require('request');
 
 nhlAPI = 'https://statsapi.web.nhl.com/api/v1/people';
-nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders'
+nhlCOM = 'https://api.nhle.com/stats/rest/en/leaders';
+nhlComSummary = 'https://api.nhle.com/stats/rest/en';
 statsType = 'statsSingleSeason';
 currentNHLSeason = '20192020';
 
@@ -169,6 +170,24 @@ const getAllNHLGoalieStats = (req, res) => {
     });
 }
 
+// https://api.nhle.com/stats/rest/en/goalie/summary?cayenneExp=seasonId=20192020%20and%20gameTypeId=2
+
+const getNHLPlayerSummary = (req, res) => {
+    request(`${nhlComSummary}/${req.query.playerType}/summary?cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let summary = JSON.parse(body);
+                let summaryArray = summary.data;
+                res.send(summaryArray);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
+}
+
 const getChaTeam = (req, res, knex) => {
     knex.select('team_name').from('players_stats').where('player_name', req.query.player)
         .then(data => {
@@ -312,5 +331,5 @@ module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
     getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
-    getAllNHLGoalieStats
+    getAllNHLGoalieStats, getNHLPlayerSummary
 };

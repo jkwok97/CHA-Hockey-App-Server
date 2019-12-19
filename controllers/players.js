@@ -173,7 +173,7 @@ const getAllNHLGoalieStats = (req, res) => {
 // https://api.nhle.com/stats/rest/en/goalie/summary?cayenneExp=seasonId=20192020%20and%20gameTypeId=2
 
 const getNHLPlayerSummary = (req, res) => {
-    request(`${nhlComSummary}/${req.query.playerType}/summary?cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2`,
+    request(`${nhlComSummary}/${req.query.playerType}/summary?cayenneExp=seasonId=${req.query.season}%20and%20gameTypeId=2&start=0&limit=800`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let summary = JSON.parse(body);

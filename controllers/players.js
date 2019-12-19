@@ -175,7 +175,7 @@ const getAllNHLGoalieStats = (req, res) => {
 // ${nhlComSummary}/$req.query.playerType/summary?sort=%5B%7B%22property%22:%22${req.query.statsType}%22,%22direction%22:%22${req.quert.sort}%22%7D%5D&start=${req.query.start}&limit=${req.query.pageSize}&cayenneExp=gameTypeId=2%20and%20seasonId%3C=${req.query.season}
 
 const getNHLPlayerSummary = (req, res) => {
-    request(`${nhlComSummary}/${req.query.playerType}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${req.query.statsType}%22,%22direction%22:%22${req.query.sort}%22%7D%5D&start=${req.query.start}&limit=${req.query.pageSize}&cayenneExp=gameTypeId=2%20and%20seasonId%3C=${req.query.season}`,
+    request(`${nhlComSummary}/${req.query.playerType}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${req.query.statsType}%22,%22direction%22:%22${req.query.sort}%22%7D%5D&start=${req.query.start}&limit=${req.query.pageSize}&cayenneExp=gameTypeId=2%20and%20seasonId%3C=${req.query.season}%20and%20seasonId%3E=${req.query.season}`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let summary = JSON.parse(body);

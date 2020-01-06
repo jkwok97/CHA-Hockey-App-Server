@@ -206,6 +206,22 @@ const getNHLPlayerSummary = (req, res) => {
     });
 }
 
+const getAllNHLRookieSummary = (req, res) => {
+    request(`${nhlComSummary}/${req.query.playerType}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${req.query.statsType}%22,%22direction%22:%22${req.query.sort}%22%7D%5D&start=${req.query.start}&limit=${req.query.pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${req.query.season}%20and%20seasonId%3E=${req.query.season}`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let summary = JSON.parse(body);
+                let summaryArray = summary;
+                res.send(summaryArray);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
+}
+
 const getChaTeam = (req, res, knex) => {
     knex.select('team_name').from('players_stats').where('player_name', req.query.player)
         .then(data => {

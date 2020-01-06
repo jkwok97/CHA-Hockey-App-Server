@@ -190,7 +190,9 @@ app.get('/nhl-leaders/', (req, res) => {
 
 app.get('/nhl-leaders/summary', (req, res) => { player.getNHLPlayerSummary(req, res) });
 
-app.get('/nhl-rookie-leaders/summary', (req, res) => { player.getAllNHLRookieStats(req, res) });
+app.get('/nhl-rookie-leaders/', (req, res) => { player.getAllNHLRookieStats(req, res) });
+
+app.get('/nhl-rookie-leaders/summary', (req, res) => { player.getAllNHLRookieSummary(req, res) });
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 

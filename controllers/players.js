@@ -142,6 +142,22 @@ const getAllNHLPlayerStats = (req, res) => {
     });
 }
 
+const getAllNHLRookieStats = (req, res) => {
+    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20isRookie%20=%20%27Y%27`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let leaders = JSON.parse(body);
+                let leadersArray = leaders.data;
+                res.send(leadersArray);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
+}
+
 const getAllNHLGoalieStats = (req, res) => {
     request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%2011`,
         (error, response, body) => {
@@ -333,5 +349,5 @@ module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
     getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
-    getAllNHLGoalieStats, getNHLPlayerSummary
+    getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats
 };

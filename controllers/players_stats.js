@@ -171,9 +171,9 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
 const tradePlayer = (req, res, knex, Slack) => {
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
-            console.log(resp);
             const slack = new Slack(hookUrl);
             if (resp) {
+                console.log("RESPONSE +++++++++++++++++++" + resp);
                 slack.send({
                     text: "Test",
                     channel: '#trades',

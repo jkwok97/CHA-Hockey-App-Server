@@ -173,17 +173,19 @@ const tradePlayer = (req, res, knex, hookUrl) => {
             if (resp) {
                 console.log("Testing Sending Message inside controller");
                 request.post(hookUrl, {
-                    json: {
-                        "text": "Hello, world."
+                    text: 'Test',
+                    channel: '#trades',
+                    username: 'League Office',
+                    icon_emoji: ':office:'
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        res.json("Success!")
+                        console.log(body);
                     }
                 })
-                // slack.send({
-                //     text: 'Test',
-                //     channel: '#trades',
-                //     username: 'League Office',
-                //     icon_emoji: ':office:'
-                // });
-                res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
             }

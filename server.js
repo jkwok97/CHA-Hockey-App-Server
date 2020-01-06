@@ -18,8 +18,6 @@ const knex = require('knex')({
     }
 });
 const hookUrl = process.env.SLACK_WEBHOOK;
-const Slack = require('node-slack');
-const slack = new Slack(hookUrl);
 
 const app = express();
 
@@ -219,16 +217,7 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
-app.patch('/players-stats/:id', (req, res) => { 
-    console.log("Testing Sending Message inside server");
-    slack.send({
-        text: 'Test',
-        channel: '#trades',
-        username: 'League Office',
-        icon_emoji: ':office:'
-    });
-    player_stats.tradePlayer(req, res, knex, slack) 
-});
+app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 
 app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex, slack) });
 

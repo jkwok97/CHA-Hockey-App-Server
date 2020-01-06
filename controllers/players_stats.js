@@ -167,17 +167,22 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
-const tradePlayer = (req, res, knex, slack) => {
+const tradePlayer = (req, res, knex, hookUrl) => {
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {
                 console.log("Testing Sending Message inside controller");
-                slack.send({
-                    text: 'Test',
-                    channel: '#trades',
-                    username: 'League Office',
-                    icon_emoji: ':office:'
-                });
+                request.post(hookUrl, {
+                    json: {
+                        "text": "Hello, world."
+                    }
+                })
+                // slack.send({
+                //     text: 'Test',
+                //     channel: '#trades',
+                //     username: 'League Office',
+                //     icon_emoji: ':office:'
+                // });
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");

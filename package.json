@@ -15,7 +15,6 @@
     "express": "^4.17.1",
     "knex": "^0.16.5",
     "morgan": "^1.9.1",
-    "node-slack": "git://github.com/Dahlgren/node-slack.git#hook-url",
     "nodemon": "^1.19.4",
     "pg": "^7.12.1",
     "request": "^2.88.0"

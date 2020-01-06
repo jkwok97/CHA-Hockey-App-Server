@@ -171,6 +171,7 @@ const tradePlayer = (req, res, knex, slack) => {
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {
+                console.log("Testing Sending Message inside controller");
                 slack.send({
                     text: 'Test',
                     channel: '#trades',

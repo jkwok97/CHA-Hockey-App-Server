@@ -16,7 +16,8 @@ const knex = require('knex')({
         connectionString: process.env.DATABASE_URL,
         ssl: true
     }
-})
+});
+const Slack = require('node-slack');
 
 const app = express();
 
@@ -216,9 +217,9 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
-app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex) });
+app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, Slack) });
 
-app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex) });
+app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex, Slack) });
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

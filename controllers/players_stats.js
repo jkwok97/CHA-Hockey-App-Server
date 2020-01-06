@@ -2,6 +2,8 @@ const request = require('request');
 const sportsDataURL = 'https://api.sportsdata.io/v3/nhl/scores/json/Players';
 const key = 'b3d19d2576cc46b68af33b26616de34b';
 const key1 = '4064a3b66cc64f28a8d52cc3be024ffb';
+const hookUrl = 'https://hooks.slack.com/services/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';
+const slack = new Slack(hookUrl);
 
 const getAllPlayerInfo = (req, res) => {
     console.log("======================> in first key");
@@ -167,10 +169,17 @@ const playerStatsByTeamByYearByType = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
-const tradePlayer = (req, res, knex) => {
+const tradePlayer = (req, res, knex, Slack) => {
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
+            console.log(resp);
             if (resp) {
+                slack.send({
+                    text: "Test",
+                    channel: '#trades',
+                    username: "League Office",
+                    icon_emoji: ":office:"
+                });
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");

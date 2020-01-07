@@ -223,6 +223,20 @@ app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, re
 
 app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex, hookUrl) });
 
+app.patch('/draft-table/:id', (req, res) => { 
+    if (req.body.round === "one") {
+        drafts.tradeRoundOnePick(req, res, knex, hookUrl); 
+    } else if (req.body.round === "two") {
+        drafts.tradeRoundTwoPick(req, res, knex, hookUrl); 
+    } else if (req.body.round === "three") {
+        drafts.tradeRoundThreePick(req, res, knex, hookUrl); 
+    } else if (req.body.round === "four") {
+        drafts.tradeRoundFourPick(req, res, knex, hookUrl); 
+    } else if (req.body.round === "five") {
+        drafts.tradeRoundFivePick(req, res, knex, hookUrl); 
+    }
+});
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);
 });

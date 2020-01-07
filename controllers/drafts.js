@@ -31,7 +31,7 @@ const tradeRoundOnePick = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} pick has been traded to ${req.body.team}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'
@@ -62,7 +62,7 @@ const tradeRoundTwoPick = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} pick has been traded to ${req.body.team}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'
@@ -93,7 +93,7 @@ const tradeRoundThreePick = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} pick has been traded to ${req.body.team}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'
@@ -124,7 +124,7 @@ const tradeRoundFourPick = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} pick has been traded to ${req.body.team}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'
@@ -155,7 +155,7 @@ const tradeRoundFivePick = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} pick has been traded to ${req.body.team}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'

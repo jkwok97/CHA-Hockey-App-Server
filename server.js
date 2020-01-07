@@ -17,7 +17,7 @@ const knex = require('knex')({
         ssl: true
     }
 });
-const hookUrl = process.env.SLACK_WEBHOOK;
+const hookUrl = 'https://hooks.slack.com/services/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';
 
 const app = express();
 

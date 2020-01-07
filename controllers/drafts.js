@@ -27,21 +27,21 @@ const tradeRoundOnePick = (req, res, knex, hookUrl) => {
     knex('draft_table').where({id: req.params.id}).update({round_one: req.body.team})
         .then(resp => {
             if (resp) {
-                // request.post(hookUrl, {
-                //     json: {
-                //         'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
-                //         'channel': '#trades',
-                //         'username': 'League Office',
-                //         'icon_emoji': ':office:'
-                //     }
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                request.post(hookUrl, {
+                    json: {
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
@@ -58,21 +58,21 @@ const tradeRoundTwoPick = (req, res, knex, hookUrl) => {
     knex('draft_table').where({id: req.params.id}).update({round_two: req.body.team})
         .then(resp => {
             if (resp) {
-                // request.post(hookUrl, {
-                //     json: {
-                //         'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
-                //         'channel': '#trades',
-                //         'username': 'League Office',
-                //         'icon_emoji': ':office:'
-                //     }
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                request.post(hookUrl, {
+                    json: {
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
@@ -89,21 +89,21 @@ const tradeRoundThreePick = (req, res, knex, hookUrl) => {
     knex('draft_table').where({id: req.params.id}).update({round_three: req.body.team})
         .then(resp => {
             if (resp) {
-                // request.post(hookUrl, {
-                //     json: {
-                //         'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
-                //         'channel': '#trades',
-                //         'username': 'League Office',
-                //         'icon_emoji': ':office:'
-                //     }
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                request.post(hookUrl, {
+                    json: {
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
@@ -120,21 +120,21 @@ const tradeRoundFourPick = (req, res, knex, hookUrl) => {
     knex('draft_table').where({id: req.params.id}).update({round_four: req.body.team})
         .then(resp => {
             if (resp) {
-                // request.post(hookUrl, {
-                //     json: {
-                //         'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
-                //         'channel': '#trades',
-                //         'username': 'League Office',
-                //         'icon_emoji': ':office:'
-                //     }
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                request.post(hookUrl, {
+                    json: {
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
@@ -151,21 +151,21 @@ const tradeRoundFivePick = (req, res, knex, hookUrl) => {
     knex('draft_table').where({id: req.params.id}).update({round_five: req.body.team})
         .then(resp => {
             if (resp) {
-                // request.post(hookUrl, {
-                //     json: {
-                //         'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
-                //         'channel': '#trades',
-                //         'username': 'League Office',
-                //         'icon_emoji': ':office:'
-                //     }
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                request.post(hookUrl, {
+                    json: {
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.prevTeam}'s round ${req.body.round} has been traded to ${req.body.team}`,
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");

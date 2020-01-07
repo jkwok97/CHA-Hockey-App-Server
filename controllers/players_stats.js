@@ -174,10 +174,10 @@ const tradePlayer = (req, res, knex, hookUrl) => {
             if (resp) {
                 console.log("Testing Sending Message inside controller");
                 request.post(hookUrl, {
-                    text: 'Test',
-                    channel: '#trades',
-                    username: 'League Office',
-                    icon_emoji: ':office:'
+                    'text': 'Test',
+                    'channel': '#trades',
+                    'username': 'League Office',
+                    'icon_emoji': ':office:'
                 }, (error, res, body) => {
                     if (error) {
                         console.log(error);

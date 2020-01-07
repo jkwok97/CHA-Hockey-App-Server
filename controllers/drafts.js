@@ -1,3 +1,5 @@
+const request = require('request');
+
 const handleDraftsGet = (req, res, knex) => {
     knex.select('*').from('drafts')
         .then(data => {

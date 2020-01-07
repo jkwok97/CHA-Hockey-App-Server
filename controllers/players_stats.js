@@ -174,7 +174,7 @@ const tradePlayer = (req, res, knex, hookUrl) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'

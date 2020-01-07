@@ -114,14 +114,13 @@ const allTimeTeamGoaliesStatsGrouped = (req, res, knex) => {
         .catch(err => res.status(400).json('not found'))
 }
 
-const tradeGoalie = (req, res, knex) => {
+const tradeGoalie = (req, res, knex, hookUrl) => {
     knex('goalie_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: 
-                        ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: \n \n ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'

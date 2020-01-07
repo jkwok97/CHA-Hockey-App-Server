@@ -172,20 +172,22 @@ const tradePlayer = (req, res, knex, hookUrl) => {
     knex('players_stats').where({id: req.params.id}).update({team_name: req.body.team_name})
         .then(resp => {
             if (resp) {
-                // console.log("Testing Sending Message inside controller");
-                // request.post(hookUrl, {
-                //     'text': 'Test',
-                //     'channel': '#trades',
-                //     'username': 'League Office',
-                //     'icon_emoji': ':office:'
-                // }, (error, res, body) => {
-                //     if (error) {
-                //         console.log(error);
-                //         return
-                //     } else {
-                //         console.log(body);
-                //     }
-                // })
+                console.log("Testing Sending Message inside controller");
+                request.post(hookUrl, {
+                    json: {
+                        'text': 'Test',
+                        'channel': '#trades',
+                        'username': 'League Office',
+                        'icon_emoji': ':office:'
+                    }
+                }, (error, res, body) => {
+                    if (error) {
+                        console.log(error);
+                        return
+                    } else {
+                        console.log(body);
+                    }
+                })
                 res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");

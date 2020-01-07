@@ -118,7 +118,8 @@ const tradeGoalie = (req, res, knex) => {
             if (resp) {
                 request.post(hookUrl, {
                     json: {
-                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
+                        'text': `:rotating_light: ${req.body.type} ALERT :rotating_light: 
+                        ${req.body.player.player_name} has been moved from ${req.body.prevTeam} to ${req.body.player.team_name}`,
                         'channel': '#trades',
                         'username': 'League Office',
                         'icon_emoji': ':office:'

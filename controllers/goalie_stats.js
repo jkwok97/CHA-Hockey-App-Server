@@ -1,3 +1,5 @@
+const request = require('request');
+
 const alltimeGoalieStats = (req, res, knex) => {
     knex.select('*').from('goalie_stats')
         .then(data => {

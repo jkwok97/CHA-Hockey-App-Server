@@ -183,10 +183,10 @@ const tradePlayer = (req, res, knex, hookUrl) => {
                         console.log(error);
                         return
                     } else {
-                        res.json("Success!")
                         console.log(body);
                     }
                 })
+                res.json("Success!")
             } else {
                 res.status(400).json("Error Updating Player");
             }

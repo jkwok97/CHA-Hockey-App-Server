@@ -31,6 +31,8 @@ app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, kne
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 
+app.get('/draft-table/', (req, res) => {drafts.getDraftTable(req, res, knex)});
+
 app.get('/real-stats/', (req, res) => {
     if (req.query.pace) {
         player.getOnPaceNhlPlayerStats(req, res);

@@ -354,16 +354,62 @@ const getTeamGoalieSalaries = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting stats')
             }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const getGoalieIndividualSalary = (req, res, knex) => {
+    knex.select('*').from('goalie_salaries').where('id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const getDefenseIndividualSalary = (req, res, knex) => {
+    knex.select('*').from('defense_salaries').where('id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const getForwardIndividualSalary = (req, res, knex) => {
+    knex.select('*').from('forward_salaries').where('id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
 }
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
     getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
-    getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary
+    getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary, getGoalieIndividualSalary,
+    getDefenseIndividualSalary, getForwardIndividualSalary
 };

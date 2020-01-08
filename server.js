@@ -219,6 +219,16 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
+app.get('salaries/:id', (req, res) => {
+    if (req.query.position == "forward") {
+        player.getForwardIndividualSalary(req, res, knex);
+    } else if (req.query.position == "defense") {
+        player.getDefenseIndividualSalary(req, res, knex);
+    } else if (req.query.position == "goalie") {
+        player.getGoalieIndividualSalary(req, res, knex);
+    }
+})
+
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 
 app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex, hookUrl) });

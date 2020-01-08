@@ -452,12 +452,6 @@ const getAllGoalieSalaries = (req, res, knex) => {
 }
 
 const updateForwardSalary = (req, res, knex) => {
-    console.log(req.params.id)
-    console.log(req.body.current)
-    console.log(req.body.two)
-    console.log(req.body.three)
-    console.log(req.body.four)
-    console.log(req.body.five)
     knex('forward_salaries').where('id', req.params.id)
         .update({
             current_season_salary: req.body.current,
@@ -466,11 +460,12 @@ const updateForwardSalary = (req, res, knex) => {
             year_four: req.body.four,
             year_five: req.body.five
         })
-        .then(data => {
-            if (data.length) {
-                res.json(data);
+        .then(resp => {
+            if (resp) {
+                console.log("success")
+                res.json("Success!")
             } else {
-                res.status(400).json('error getting stats')
+                res.status(400).json('Error!'); 
             }
         })
         .catch(err => {
@@ -488,11 +483,11 @@ const updateDefenseSalary = (req, res, knex) => {
             year_four: req.body.four,
             year_five: req.body.five
         })
-        .then(data => {
-            if (data.length) {
-                res.json(data);
+        .then(resp => {
+            if (resp) {
+                res.json("Success!")
             } else {
-                res.status(400).json('error getting stats')
+                res.status(400).json('Error!'); 
             }
         })
         .catch(err => {
@@ -510,11 +505,11 @@ const updateGoalieSalary = (req, res, knex) => {
             year_four: req.body.four,
             year_five: req.body.five
         })
-        .then(data => {
-            if (data.length) {
-                res.json(data);
+        .then(resp => {
+            if (resp) {
+                res.json("Success!")
             } else {
-                res.status(400).json('error getting stats')
+                res.status(400).json('Error!'); 
             }
         })
         .catch(err => {

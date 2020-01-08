@@ -240,19 +240,13 @@ app.get('/salaries/:id', (req, res) => {
 })
 
 app.put('/salaries/:id', (req, res) => { 
-    console.log("in salary put")
-    console.log(req)
-    console.log(req.type);
-    console.log(req.params.type)
-    console.log(req.query.type)
-    console.log(req.body.type)
-    if (req.query.type == "forward") {
+    if (req.body.type == "forward") {
         console.log("in salary forward put")
         player.updateForwardSalary(req, res, knex);
-    } else if (req.query.type == "defense") {
+    } else if (req.body.type == "defense") {
         console.log("in salary defense put")
         player.updateDefenseSalary(req, res, knex);
-    } else if (req.query.type == "goalie") {
+    } else if (req.body.type == "goalie") {
         console.log("in salary goalie put")
         player.updateGoalieSalary(req, res, knex);
     }

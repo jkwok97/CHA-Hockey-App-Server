@@ -452,19 +452,13 @@ const getAllGoalieSalaries = (req, res, knex) => {
 }
 
 const updateForwardSalary = (req, res, knex) => {
-    console.log(req.params.id);
-    console.log(req.query.current);
-    console.log(req.query.two)
-    console.log(req.query.three)
-    console.log(req.query.four)
-    console.log(req.query.five)
     knex('forward_salaries').where('id', req.params.id)
         .update({
-            current_season_salary: req.query.current,
-            year_two: req.query.two,
-            year_three: req.query.three,
-            year_four: req.query.four,
-            year_five: req.query.five
+            current_season_salary: req.body.current,
+            year_two: req.body.two,
+            year_three: req.body.three,
+            year_four: req.body.four,
+            year_five: req.body.five
         })
         .then(data => {
             if (data.length) {
@@ -482,11 +476,11 @@ const updateForwardSalary = (req, res, knex) => {
 const updateDefenseSalary = (req, res, knex) => {
     knex('defense_salaries').where('id', req.params.id)
         .update({
-            current_season_salary: req.query.current,
-            year_two: req.query.two,
-            year_three: req.query.three,
-            year_four: req.query.four,
-            year_five: req.query.five
+            current_season_salary: req.body.current,
+            year_two: req.body.two,
+            year_three: req.body.three,
+            year_four: req.body.four,
+            year_five: req.body.five
         })
         .then(data => {
             if (data.length) {
@@ -504,11 +498,11 @@ const updateDefenseSalary = (req, res, knex) => {
 const updateGoalieSalary = (req, res, knex) => {
     knex('goalie_salaries').where('id', req.params.id)
         .update({
-            current_season_salary: req.query.current,
-            year_two: req.query.two,
-            year_three: req.query.three,
-            year_four: req.query.four,
-            year_five: req.query.five
+            current_season_salary: req.body.current,
+            year_two: req.body.two,
+            year_three: req.body.three,
+            year_four: req.body.four,
+            year_five: req.body.five
         })
         .then(data => {
             if (data.length) {

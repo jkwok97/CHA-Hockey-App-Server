@@ -452,6 +452,12 @@ const getAllGoalieSalaries = (req, res, knex) => {
 }
 
 const updateForwardSalary = (req, res, knex) => {
+    console.log(req.params.id);
+    console.log(req.query.current);
+    console.log(req.query.two)
+    console.log(req.query.three)
+    console.log(req.query.four)
+    console.log(req.query.five)
     knex('forward_salaries').where('id', req.params.id)
         .update({
             current_season_salary: req.query.current,

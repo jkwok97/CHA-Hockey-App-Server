@@ -585,8 +585,51 @@ const addForwardSalary = (req, res, knex) => {
     .catch(err => {
         console.log(err); 
         res.status(400).json('not found');
+    })     
+}
+
+const addDefenseSalary = (req, res, knex) => {
+    knex('defense_salaries').insert({
+        player_name: req.body.name,
+        current_season_salary: req.body.current,
+        year_two: req.body.two,
+        year_three: req.body.three,
+        year_four: req.body.four,
+        year_five: req.body.five
+    }).then(resp => {
+        if (resp) {
+            console.log("success")
+            res.json("Success!")
+        } else {
+            res.status(400).json('Error!'); 
+        }
     })
-        
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })     
+}
+
+const addGoalieSalary = (req, res, knex) => {
+    knex('goalie_salaries').insert({
+        player_name: req.body.name,
+        current_season_salary: req.body.current,
+        year_two: req.body.two,
+        year_three: req.body.three,
+        year_four: req.body.four,
+        year_five: req.body.five
+    }).then(resp => {
+        if (resp) {
+            console.log("success")
+            res.json("Success!")
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })     
 }
 
 
@@ -597,5 +640,5 @@ module.exports = {
     getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary, getGoalieIndividualSalary,
     getDefenseIndividualSalary, getForwardIndividualSalary, getAllForwardSalaries, getAllDefenseSalaries,
     getAllGoalieSalaries, updateForwardSalary, updateDefenseSalary, updateGoalieSalary, deleteForwardSalary,
-    deleteDefenseSalary, deleteGoalieSalary, addForwardSalary
+    deleteDefenseSalary, deleteGoalieSalary, addForwardSalary, addDefenseSalary, addGoalieSalary
 };

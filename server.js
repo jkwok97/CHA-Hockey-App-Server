@@ -270,6 +270,14 @@ app.patch('/draft-table/:id', (req, res) => {
     }
 });
 
+app.delete('/salaries/:id/forward', (req, res) => { player.deleteForwardSalary(req, res, knex) });
+app.delete('/salaries/:id/defense', (req, res) => { player.deleteDefenseSalary(req, res, knex) });
+app.delete('/salaries/:id/goalie', (req, res) => { player.deleteGoalieSalary(req, res, knex) });
+
+app.post('/salaries/forward', (req, res) => { player.addForwardSalary(req, res, knex) })
+app.post('/salaries/defense', (req, res) => { player.addDefenseSalary(req, res, knex) })
+app.post('/salaries/goalie', (req, res) => { player.addGoalieSalary(req, res, knex) })
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);
 });

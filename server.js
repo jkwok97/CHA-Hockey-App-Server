@@ -241,6 +241,7 @@ app.get('/salaries/:id', (req, res) => {
 
 app.put('/salaries/:id', (req, res) => { 
     console.log("in salary put")
+    console.log(req)
     console.log(req.type);
     console.log(req.params.type)
     console.log(req.query.type)

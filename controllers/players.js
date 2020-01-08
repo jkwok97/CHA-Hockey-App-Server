@@ -451,11 +451,78 @@ const getAllGoalieSalaries = (req, res, knex) => {
         })
 }
 
+const updateForwardSalary = (req, res, knex) => {
+    knex('forward_salaries').where('id', req.params.id)
+        .update({
+            current_season_salary: req.query.current,
+            year_two: req.query.two,
+            year_three: req.query.three,
+            year_four: req.query.four,
+            year_five: req.query.five
+        })
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const updateDefenseSalary = (req, res, knex) => {
+    knex('defense_salaries').where('id', req.params.id)
+        .update({
+            current_season_salary: req.query.current,
+            year_two: req.query.two,
+            year_three: req.query.three,
+            year_four: req.query.four,
+            year_five: req.query.five
+        })
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const updateGoalieSalary = (req, res, knex) => {
+    knex('goalie_salaries').where('id', req.params.id)
+        .update({
+            current_season_salary: req.query.current,
+            year_two: req.query.two,
+            year_three: req.query.three,
+            year_four: req.query.four,
+            year_five: req.query.five
+        })
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
     getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
     getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary, getGoalieIndividualSalary,
     getDefenseIndividualSalary, getForwardIndividualSalary, getAllForwardSalaries, getAllDefenseSalaries,
-    getAllGoalieSalaries
+    getAllGoalieSalaries, updateForwardSalary, updateDefenseSalary, updateGoalieSalary
 };

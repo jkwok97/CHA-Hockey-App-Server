@@ -230,23 +230,22 @@ app.get('/salaries/all', (req, res) => {
 })
 
 app.get('/salaries/:id', (req, res) => {
-    console.log(req.query.position);
-    console.log(req.params.id);
     if (req.query.position == "forward") {
-        console.log("in forward salary");
-        console.log(req.query.position);
-        console.log(req.params.id);
         player.getForwardIndividualSalary(req, res, knex);
     } else if (req.query.position == "defense") {
-        console.log("in defense salary")
-        console.log(req.query.position);
-        console.log(req.params.id);
         player.getDefenseIndividualSalary(req, res, knex);
     } else if (req.query.position == "goalie") {
-        console.log("in goalie salary")
-        console.log(req.query.position);
-        console.log(req.params.id);
         player.getGoalieIndividualSalary(req, res, knex);
+    }
+})
+
+app.put('/salaries/:id', (req, res) => { 
+    if (req.query.type == "forward") {
+        player.updateForwardSalary(req, res, knex);
+    } else if (req.query.type == "defense") {
+        player.updateDefenseSalary(req, res, knex);
+    } else if (req.query.type == "goalie") {
+        player.updateGoalieSalary(req, res, knex);
     }
 })
 

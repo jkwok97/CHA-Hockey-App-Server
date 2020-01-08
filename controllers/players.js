@@ -406,10 +406,56 @@ const getForwardIndividualSalary = (req, res, knex) => {
         })
 }
 
+const getAllForwardSalaries = (req, res, knex) => {
+    knex.select('*').from('forward_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const getAllDefenseSalaries = (req, res, knex) => {
+    knex.select('*').from('defense_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const getAllGoalieSalaries = (req, res, knex) => {
+    knex.select('*').from('goalie_salaries')
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
     getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
     getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
     getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary, getGoalieIndividualSalary,
-    getDefenseIndividualSalary, getForwardIndividualSalary
+    getDefenseIndividualSalary, getForwardIndividualSalary, getAllForwardSalaries, getAllDefenseSalaries,
+    getAllGoalieSalaries
 };

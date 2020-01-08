@@ -219,6 +219,16 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
+app.get('/salaries/all', (req, res) => {
+    if (req.query.position == "forward") {
+        player.getAllForwardSalaries(req, res, knex);
+    } else if (req.query.position == "defense") {
+        player.getAllDefenseSalaries(req, res, knex);
+    } else if (req.query.position == "goalie") {
+        player.getAllGoalieSalaries(req, res, knex);
+    }
+})
+
 app.get('/salaries/:id', (req, res) => {
     console.log(req.query.position);
     console.log(req.params.id);

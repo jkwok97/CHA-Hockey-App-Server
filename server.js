@@ -219,7 +219,7 @@ app.get('/salaries/', (req, res) => {
     }
 });
 
-app.get('salaries/:id', (req, res) => {
+app.get('/salaries/:id', (req, res) => {
     console.log(req.query.position);
     console.log(req.params.id);
     if (req.query.position == "forward") {

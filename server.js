@@ -241,7 +241,9 @@ app.get('/salaries/:id', (req, res) => {
 
 app.put('/salaries/:id', (req, res) => { 
     console.log("in salary put")
+    console.log(req.params.type)
     console.log(req.query.type)
+    console.log(req.body.type)
     if (req.query.type == "forward") {
         console.log("in salary forward put")
         player.updateForwardSalary(req, res, knex);

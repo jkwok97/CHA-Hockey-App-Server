@@ -567,6 +567,9 @@ const deleteGoalieSalary = (req, res, knex) => {
 }
 
 const addForwardSalary = (req, res, knex) => {
+    console.log(req.params.name);
+    console.log(req.body.name);
+    console.log(req.query.name);
     knex('forward_salaries').insert({
         player_name: req.query.name,
         current_season_salary: req.query.current,

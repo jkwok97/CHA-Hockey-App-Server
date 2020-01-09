@@ -9,6 +9,7 @@ const goalie = require('./controllers/goalies');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
 const users = require('./controllers/users');
+const waivers = require('./controllers/waivers');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -86,10 +87,8 @@ app.get('/team-stats/', (req, res) => {
         teams.allTeamsStatsByYearByType(req, res, knex);
     } else if (req.query.type && req.query.group) {
         if (req.query.group === "Season") {
-            console.log("by season");
             teams.allTeamsStatsByType(req, res, knex);
         } else if (req.query.group === "Alltime") {
-            console.log("by alltime");
             teams.allTeamsStatsGrouped(req, res, knex);
         }
     } else if (req.query.year) {
@@ -239,15 +238,16 @@ app.get('/salaries/:id', (req, res) => {
     }
 })
 
+app.get('/waivers/', (req, res) => {
+    waivers.getAllTeams(req, res, knex);
+})
+
 app.put('/salaries/:id', (req, res) => { 
     if (req.body.type == "forward") {
-        console.log("in salary forward put")
         player.updateForwardSalary(req, res, knex);
     } else if (req.body.type == "defense") {
-        console.log("in salary defense put")
         player.updateDefenseSalary(req, res, knex);
     } else if (req.body.type == "goalie") {
-        console.log("in salary goalie put")
         player.updateGoalieSalary(req, res, knex);
     }
 })
@@ -271,6 +271,8 @@ app.patch('/draft-table/:id', (req, res) => {
         drafts.tradeRoundFivePick(req, res, knex, hookUrl); 
     }
 });
+
+app.patch('/waivers/:id', (req, res) => { waivers.updateAllTeams(req, res, knex) });
 
 app.delete('/salaries/:id/forward', (req, res) => { player.deleteForwardSalary(req, res, knex) });
 app.delete('/salaries/:id/defense', (req, res) => { player.deleteDefenseSalary(req, res, knex) });

@@ -11,8 +11,8 @@ CREATE TABLE waivers (
 do $$
 declare maxid int;
 begin
-    select max(id)+1 from users into maxid;
-    execute 'alter SEQUENCE users_id_seq RESTART with '|| maxid;
+    select max(id)+1 from waivers into maxid;
+    execute 'alter SEQUENCE waivers_id_seq RESTART with '|| maxid;
 end;
 
 $$ language plpgsql;

@@ -10,6 +10,7 @@ const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
 const users = require('./controllers/users');
 const waivers = require('./controllers/waivers');
+const schedule = require('./controllers/schedule');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -240,6 +241,14 @@ app.get('/salaries/:id', (req, res) => {
 
 app.get('/waivers/', (req, res) => {
     waivers.getAllTeams(req, res, knex);
+})
+
+app.get('/schedule/', (req, res) => {
+    if (req.query.day) {
+        schedule.getNextDays(req, res, knex);
+    } else {
+        schedule.getWholeSchedule(req, res, knex);
+    }
 })
 
 app.put('/salaries/:id', (req, res) => { 

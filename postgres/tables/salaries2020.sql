@@ -15,8 +15,8 @@ CREATE TABLE defense_salaries (
 do $$
 declare maxid int;
 begin
-    select max(id)+1 from users into maxid;
-    execute 'alter SEQUENCE users_id_seq RESTART with '|| maxid;
+    select max(id)+1 from defense_salaries into maxid;
+    execute 'alter SEQUENCE defense_salaries_id_seq RESTART with '|| maxid;
 end;
 
 $$ language plpgsql;
@@ -38,8 +38,8 @@ CREATE TABLE forward_salaries (
 do $$
 declare maxid int;
 begin
-    select max(id)+1 from users into maxid;
-    execute 'alter SEQUENCE users_id_seq RESTART with '|| maxid;
+    select max(id)+1 from forward_salaries into maxid;
+    execute 'alter SEQUENCE forward_salaries_id_seq RESTART with '|| maxid;
 end;
 
 $$ language plpgsql;
@@ -61,8 +61,8 @@ CREATE TABLE goalie_salaries (
 do $$
 declare maxid int;
 begin
-    select max(id)+1 from users into maxid;
-    execute 'alter SEQUENCE users_id_seq RESTART with '|| maxid;
+    select max(id)+1 from goalie_salaries into maxid;
+    execute 'alter SEQUENCE goalie_salaries_id_seq RESTART with '|| maxid;
 end;
 
 $$ language plpgsql;

@@ -253,8 +253,10 @@ app.put('/salaries/:id', (req, res) => {
 })
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
+app.patch('/players-stats/name/:id', (req, res) => { player_stats.updateName(req, res, knex, hookUrl) });
 
 app.patch('/goalies-stats/:id', (req, res) => { goalie_stats.tradeGoalie(req, res, knex, hookUrl) });
+app.patch('/goalies-stats/name/:id', (req, res) => { goalie_stats.updateName(req, res, knex, hookUrl) });
 
 app.patch('/draft-table/:id', (req, res) => { 
     if (req.body.round === "one") {

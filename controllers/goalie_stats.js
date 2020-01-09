@@ -140,8 +140,23 @@ const tradeGoalie = (req, res, knex, hookUrl) => {
         })
 }
 
+const updateName = (req, res, knex) => {
+    knex('goalie_stats').where({id: req.params.id}).update({player_name: req.body.player_name})
+        .then(resp => {
+            if (resp) {
+                res.json("Success!")
+            } else {
+                res.status(400).json("Error Updating Name")
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).json("Server Error!");
+        });
+}
+
 module.exports = {
     alltimeGoalieStats, alltimeGoalieStatsByYear, alltimeGoalieStatsByTeam, goalieStatsByTeamByYear,
     goalieStatsByTeamByYearByType, goalieStatsByTeamByType, alltimeGoalieStatsByYearByType, alltimeGoalieStatsByType,
-    alltimeGoalieStatsGrouped, allTimeTeamGoaliesStatsGrouped, tradeGoalie
+    alltimeGoalieStatsGrouped, allTimeTeamGoaliesStatsGrouped, tradeGoalie, updateName
 };

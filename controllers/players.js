@@ -454,6 +454,7 @@ const getAllGoalieSalaries = (req, res, knex) => {
 const updateForwardSalary = (req, res, knex) => {
     knex('forward_salaries').where('id', req.params.id)
         .update({
+            player_name: req.body.name,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,
@@ -477,6 +478,7 @@ const updateForwardSalary = (req, res, knex) => {
 const updateDefenseSalary = (req, res, knex) => {
     knex('defense_salaries').where('id', req.params.id)
         .update({
+            player_name: req.body.name,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,
@@ -499,6 +501,7 @@ const updateDefenseSalary = (req, res, knex) => {
 const updateGoalieSalary = (req, res, knex) => {
     knex('goalie_salaries').where('id', req.params.id)
         .update({
+            player_name: req.body.name,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,

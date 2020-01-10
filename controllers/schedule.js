@@ -23,34 +23,18 @@ const getWholeSchedule = (req, res, knex) => {
 }
 
 const updateVisTeamScore = (req, res, knex) => {
-    if (req.body.vis_team_score == null) {
-        console.log("in null");
-        knex('schedule').where({id: req.params.id}).update({vis_team_score: knex.raw('DEFAULT')})
-        .then(resp => {
-            if (resp) {
-                res.json("Success!")
-            } else {
-                res.status(400).json("Error Updating Score")
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json("Server Error!");
-        });
-    } else {
-        knex('schedule').where({id: req.params.id}).update({vis_team_score: req.body.vis_team_score})
-        .then(resp => {
-            if (resp) {
-                res.json("Success!")
-            } else {
-                res.status(400).json("Error Updating Score")
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json("Server Error!");
-        });
-    }
+    knex('schedule').where({id: req.params.id}).update({vis_team_score: req.body.vis_team_score})
+    .then(resp => {
+        if (resp) {
+            res.json("Success!")
+        } else {
+            res.status(400).json("Error Updating Score")
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json("Server Error!");
+    });
 }
 
 const updateHomeTeamScore = (req, res, knex) => {

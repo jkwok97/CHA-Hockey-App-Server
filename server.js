@@ -17,7 +17,8 @@ const knex = require('knex')({
     connection: {
         connectionString: process.env.DATABASE_URL,
         ssl: true
-    }
+    },
+    useNullAsDefault: true
 });
 const hookUrl = process.env.SLACK_WEBHOOK;
 

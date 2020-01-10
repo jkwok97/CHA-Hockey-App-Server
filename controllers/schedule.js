@@ -24,6 +24,7 @@ const getWholeSchedule = (req, res, knex) => {
 
 const updateVisTeamScore = (req, res, knex) => {
     if (req.body.vis_team_score == null) {
+        console.log("in null");
         knex('schedule').where({id: req.params.id}).update({vis_team_score: knex.raw('DEFAULT')})
         .then(resp => {
             if (resp) {

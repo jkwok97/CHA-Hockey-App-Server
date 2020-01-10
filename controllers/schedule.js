@@ -28,7 +28,7 @@ const updateVisTeamScore = (req, res, knex) => {
         if (resp) {
             res.json("Success!")
         } else {
-            res.status(400).json("Error Updating Name")
+            res.status(400).json("Error Updating Score")
         }
     })
     .catch(err => {
@@ -43,7 +43,7 @@ const updateHomeTeamScore = (req, res, knex) => {
         if (resp) {
             res.json("Success!")
         } else {
-            res.status(400).json("Error Updating Name")
+            res.status(400).json("Error Updating Score")
         }
     })
     .catch(err => {

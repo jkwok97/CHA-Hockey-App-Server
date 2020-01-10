@@ -17,8 +17,7 @@ const knex = require('knex')({
     connection: {
         connectionString: process.env.DATABASE_URL,
         ssl: true
-    },
-    useNullAsDefault: true
+    }
 });
 const hookUrl = process.env.SLACK_WEBHOOK;
 
@@ -283,7 +282,8 @@ app.patch('/draft-table/:id', (req, res) => {
 });
 
 app.patch('/waivers/:id', (req, res) => { waivers.updateAllTeams(req, res, knex) });
-app.patch('/schedule/:id', (req, res) => { 
+app.patch('/schedule/:id', (req, res) => {
+    console.log(req.body); 
     if (req.body.vis_team_score) {
         schedule.updateVisTeamScore(req, res, knex);
     } else if (req.body.home_team_score) {

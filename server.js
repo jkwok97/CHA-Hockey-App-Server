@@ -282,6 +282,14 @@ app.patch('/draft-table/:id', (req, res) => {
 });
 
 app.patch('/waivers/:id', (req, res) => { waivers.updateAllTeams(req, res, knex) });
+app.patch('/schedule/:id', (req, res) => { 
+    console.log(req.body);
+    if (req.body.vis_team_score) {
+        schedule.updateVisTeamScore(req, res, knex);
+    } else if (req.body.home_team_score) {
+        schedule.updateHomeTeamScore(req, res, knex);
+    }
+});
 
 app.delete('/salaries/:id/forward', (req, res) => { player.deleteForwardSalary(req, res, knex) });
 app.delete('/salaries/:id/defense', (req, res) => { player.deleteDefenseSalary(req, res, knex) });

@@ -192,6 +192,7 @@ const getPlayer = (req, res, knex) => {
 }
 
 const updatePlayer = (req, res, knex) => {
+    console.log(req.body);
     knex('drafts').where({id: req.params.id}).update({
         draft_year: req.body.draft_year,
         round_num: req.body.round_num,

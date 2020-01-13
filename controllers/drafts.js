@@ -213,7 +213,46 @@ const updatePlayer = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const deletePlayer = (req, res, knex) => {
+    knex('drafts').where('id', req.params.id).del()
+        .then(resp => {
+            if (resp) {
+                console.log("success")
+                res.json("Success!")
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
+const addPlayer = (req, res, knex) => {
+    knex('drafts').insert({
+        draft_year: req.body.draft_year,
+        round_num: req.body.round_num,
+        number_num: req.body.number_num,
+        team: req.body.team,
+        player_name: req.body.player_name,
+        player_pos: req.body.player_pos,
+        teamshort: req.body.teamshort
+    }).then(resp => {
+        if (resp) {
+            console.log("success")
+            res.json("Success!")
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })     
+}
+
 module.exports = {
     handleDraftsGet, getDraftTable, tradeRoundOnePick, tradeRoundTwoPick, tradeRoundThreePick, tradeRoundFourPick,
-    tradeRoundFivePick, getPlayer, updatePlayer 
+    tradeRoundFivePick, getPlayer, updatePlayer, deletePlayer, addPlayer
 };

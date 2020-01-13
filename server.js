@@ -262,10 +262,7 @@ app.put('/salaries/:id', (req, res) => {
     }
 })
 
-app.put('/drafts/:id', (req, res) => {
-    console,log("in put drafts");
-    drafts.updatePlayer(req, res, knex)
-});
+app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 app.patch('/players-stats/name/:id', (req, res) => { player_stats.updateName(req, res, knex, hookUrl) });

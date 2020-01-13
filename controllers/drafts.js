@@ -180,8 +180,7 @@ const tradeRoundFivePick = (req, res, knex, hookUrl) => {
 }
 
 const getPlayer = (req, res, knex) => {
-    console.log(req.params.id);
-    knex.select('*').from('draft_table').where({id: req.params.id})
+    knex.select('*').from('drafts').where({id: req.params.id})
         .then(data => {
             if (data.length) {
                 res.json(data);

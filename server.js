@@ -32,12 +32,9 @@ app.get('/', (req, res) => { res.send("it is working"); });
 app.get('/champions/', (req, res) => {champions.handleChampionsGet(req, res, knex)});
 
 app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
+app.get('/drafts/:id', (req, res) => {drafts.getPlayer(req, res, knex)});
 
 app.get('/draft-table/', (req, res) => {drafts.getDraftTable(req, res, knex)});
-app.get('/draft-table/:id', (req, res) => {
-    console.log("in draft player")
-    drafts.getPlayer(req, res, knex)
-});
 
 app.get('/real-stats/', (req, res) => {
     if (req.query.pace) {

@@ -191,7 +191,27 @@ const getPlayer = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const updatePlayer = (req, res, knex) => {
+    knex('drafts').where({id: req.params.id}).update({
+        draft_year: req.body.draft_year,
+        round_num: req.body.round_num,
+        number_num: req.body.number_num,
+        team: req.body.team,
+        player_name: req.body.player_name,
+        player_pos: req.body.player_pos,
+        teamshort: req.body.teamshort
+    })
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting draft')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
     handleDraftsGet, getDraftTable, tradeRoundOnePick, tradeRoundTwoPick, tradeRoundThreePick, tradeRoundFourPick,
-    tradeRoundFivePick, getPlayer
+    tradeRoundFivePick, getPlayer, updatePlayer 
 };

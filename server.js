@@ -264,6 +264,8 @@ app.put('/salaries/:id', (req, res) => {
 
 app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 
+app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)});
+
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 app.patch('/players-stats/name/:id', (req, res) => { player_stats.updateName(req, res, knex, hookUrl) });
 
@@ -300,11 +302,15 @@ app.delete('/salaries/:id/goalie', (req, res) => { player.deleteGoalieSalary(req
 
 app.delete('/drafts/:id', (req, res) => { drafts.deletePlayer(req, res, knex) });
 
+app.delete('/champions/:id', (req, res) => { champions.deleteChamp(req, res, knex) });
+
 app.post('/salaries/forward', (req, res) => { player.addForwardSalary(req, res, knex) })
 app.post('/salaries/defense', (req, res) => { player.addDefenseSalary(req, res, knex) })
 app.post('/salaries/goalie', (req, res) => { player.addGoalieSalary(req, res, knex) })
 
 app.post('/drafts/', (req, res) => { drafts.addPlayer(req, res, knex) })
+
+app.post('/champions/', (req, res) => { champions.addChamp(req, res, knex) })
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

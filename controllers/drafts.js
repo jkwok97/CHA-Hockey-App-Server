@@ -179,7 +179,19 @@ const tradeRoundFivePick = (req, res, knex, hookUrl) => {
         });
 }
 
+const getPlayer = (req, res, knex) => {
+    knex.select('*').from('draft_table').where({id: req.params.id})
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting draft')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
     handleDraftsGet, getDraftTable, tradeRoundOnePick, tradeRoundTwoPick, tradeRoundThreePick, tradeRoundFourPick,
-    tradeRoundFivePick
+    tradeRoundFivePick, getPlayer
 };

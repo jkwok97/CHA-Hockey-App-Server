@@ -159,7 +159,7 @@ const getAllNHLRookieStats = (req, res) => {
 }
 
 const getAllNHLGoalieStats = (req, res) => {
-    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%2011`,
+    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20gamesPlayed%20%3E=%2020`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 let leaders = JSON.parse(body);

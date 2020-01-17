@@ -2,6 +2,7 @@ DROP TABLE players_ratings;
 
 CREATE TABLE players_ratings (
     id serial PRIMARY KEY,
+    player_id text NOT NULL,
     player_name text NOT NULL,
     team_name text,
     position text NOT NULL,
@@ -39,7 +40,7 @@ CREATE TABLE players_ratings (
     assist_rating text NOT NULL
 );
 
-\copy players_ratings (player_name, team_name, position, games_played, goals, assists, points, plus_minus, penalty_minutes, pp_goals, sh_goals, gw_goals, gt_goals, shots, shooting_pct, game_fatigue, shift_fatigue, c_rate, l_rate, r_rate, ld_rate, rd_rate, shooting, skating, speed, passing, forecheck, physical, intimidation, clear_crease, rock, pk, shot_block, face_off, assist_rating ) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/playerRatings.tsv'
+\copy players_ratings (player_id, player_name, team_name, position, games_played, goals, assists, points, plus_minus, penalty_minutes, pp_goals, sh_goals, gw_goals, gt_goals, shots, shooting_pct, game_fatigue, shift_fatigue, c_rate, l_rate, r_rate, ld_rate, rd_rate, shooting, skating, speed, passing, forecheck, physical, intimidation, clear_crease, rock, pk, shot_block, face_off, assist_rating ) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/playerRatings.tsv'
 
 do $$
 declare maxid int;

@@ -223,7 +223,7 @@ const getAllNHLRookieSummary = (req, res) => {
 }
 
 const getChaTeam = (req, res, knex) => {
-    knex.select('team_name').from('players_stats').where('player_name', req.query.player)
+    knex.select('team_name', 'player_id').from('players_stats').where('player_name', req.query.player)
         .then(data => {
             if (data.length) {
                 res.json(data[0]['team_name']);

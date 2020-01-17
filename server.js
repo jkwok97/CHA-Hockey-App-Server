@@ -44,9 +44,9 @@ app.get('/real-stats/', (req, res) => {
     }
 });
 
-app.get('/player-ratings/:name', (req, res) => {player.getPlayerRatings(req, res, knex)});
+app.get('/player-ratings/:id', (req, res) => {player.getPlayerRatings(req, res, knex)});
 
-app.get('/goalie-ratings/:name', (req, res) => {goalie.getPlayerRatings(req, res, knex)});
+app.get('/goalie-ratings/:id', (req, res) => {goalie.getPlayerRatings(req, res, knex)});
 
 app.get('/players-stats/', (req, res) => {
     if (req.query.year && req.query.type) {
@@ -156,7 +156,7 @@ app.get('/team-stats/:teamName', (req, res) => {
     }
 });
 
-app.get('/players/:name', (req, res) => { 
+app.get('/players/:id', (req, res) => { 
     if (req.query.type && req.query.league) {
         player.getPlayerStatsByTypeWithJoin(req, res, knex);
     } else if (req.query.type) {
@@ -168,7 +168,7 @@ app.get('/players/:name', (req, res) => {
     }
 })
 
-app.get('/goalies/:name', (req, res) => { 
+app.get('/goalies/:id', (req, res) => { 
     if (req.query.type && req.query.league) {
         goalie.getPlayerStatsByTypeWithJoin(req, res, knex);
     } else if (req.query.type) {

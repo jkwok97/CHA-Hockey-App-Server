@@ -2,6 +2,7 @@ DROP TABLE goalie_stats;
 
 CREATE TABLE goalie_stats (
     id serial PRIMARY KEY,
+    player_id numeric NOT NULL,
     player_name text NOT NULL,
     team_name text,
     games_played numeric NOT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE goalie_stats (
     player_status text NOT NULL
 );
 
-\copy goalie_stats (player_name, team_name, games_played, minutes_played, goals_against_avg, wins, loss, ties, en_goals, shutouts, goals_against, saves, shots_for, save_pct, goals, assists, points, penalty_minutes, pass_complete, pass_incomplete, pass_attempts, pass_pct, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct, playing_year, season_type, player_status) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/goalieStats.tsv'
+\copy goalie_stats (player_id, player_name, team_name, games_played, minutes_played, goals_against_avg, wins, loss, ties, en_goals, shutouts, goals_against, saves, shots_for, save_pct, goals, assists, points, penalty_minutes, pass_complete, pass_incomplete, pass_attempts, pass_pct, penalty_minor, penalty_minor_coincidental, penalty_major, penalty_fighting_major, penalty_match, penalty_misconduct, penalty_game_misconduct, penalty_gross_misconduct, playing_year, season_type, player_status) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/goalieStats.tsv'
 
 do $$
 declare maxid int;

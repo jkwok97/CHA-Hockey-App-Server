@@ -9,9 +9,9 @@ currentNHLSeason = '20192020';
 // https://statsapi.web.nhl.com/api/v1/people/8470595/stats?stats=statsSingleSeason&season=20192020
 
 const getPlayerStats = (req, res, knex) => {
-    console.log(req.params.name);
+    console.log(req.params.id);
     knex.select('*').from('players_stats as a')
-        .where('a.player_name', req.params.name).orderBy('a.playing_year', 'desc')
+        .where('a.player_id', req.params.id).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -26,9 +26,9 @@ const getPlayerStats = (req, res, knex) => {
 }
 
 const getPlayerStatsByType = (req, res, knex) => {
-    console.log(req.params.name);
+    console.log(req.params.id);
     knex.select('*').from('players_stats as a')
-        .where('a.player_name', req.params.name).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')
+        .where('a.player_id', req.params.id).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -47,7 +47,7 @@ const getPlayerStatsWithJoin = (req, res, knex) => {
     console.log(req.query.league);
     knex.select('*').from('players_stats as a')
         .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
-        .where('a.player_name', req.params.name).orderBy('a.playing_year', 'desc')
+        .where('a.player_id', req.params.id).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -66,7 +66,7 @@ const getPlayerStatsByTypeWithJoin = (req, res, knex) => {
     console.log(req.query.league);
     knex.select('*').from('players_stats as a')
         .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
-        .where('a.player_name', req.params.name).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')
+        .where('a.player_id', req.params.id).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -234,7 +234,7 @@ const getChaTeam = (req, res, knex) => {
 }
 
 const getPlayerRatings = (req, res, knex) => {
-    knex.select('*').from('players_ratings').where('player_name', req.params.name)
+    knex.select('*').from('players_ratings').where('player_id', req.params.id)
         .then(data => {
             if (data.length) {
                 res.json(data);

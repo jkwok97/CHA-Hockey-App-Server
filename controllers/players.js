@@ -65,7 +65,7 @@ const getPlayerStatsByTypeWithJoin = (req, res, knex) => {
     console.log(req.params.name);
     console.log(req.query.league);
     knex.select('*').from('players_stats as a')
-        .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
+        .fullOuterJoin('nhl_players as b', 'a.player_id', '=', 'b.player_id')
         .where('a.player_id', req.params.id).where('a.season_type', req.query.type).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {

@@ -25,9 +25,9 @@ const getPlayerStatsByType = (req, res, knex) => {
 }
 
 const getPlayerStatsWithJoin = (req, res, knex) => {
-    console.log(req.params.name);
+    console.log(req.params.id);
     knex.select('*').from('goalie_stats as a')
-    .fullOuterJoin('nhl_players as b', 'a.player_name', '=', 'b.player_name')
+    .fullOuterJoin('nhl_players as b', 'a.player_id', '=', 'b.cha_goalie_id')
     .where('a.player_id', req.params.id).orderBy('a.playing_year', 'desc')
         .then(data => {
             if (data.length) {

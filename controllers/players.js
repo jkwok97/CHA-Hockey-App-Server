@@ -227,8 +227,8 @@ const getChaTeam = (req, res, knex) => {
         .orderBy('playing_year', 'desc')
         .then(data => {
             if (data.length) {
-                console.log(data);
-                res.json(data[0]['team_name']);
+                // console.log(data);
+                res.json(data[0]);
             } else {
                 res.status(400).json('error getting player');
             }

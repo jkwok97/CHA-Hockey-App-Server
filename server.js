@@ -185,9 +185,9 @@ app.get('/nhl-leaders/', (req, res) => {
         player.getAllNHLPlayerStats(req, res);
     } else if (req.query.sort && req.query.playerType == "goalie") {
         player.getAllNHLGoalieStats(req, res);
-    } else if (req.query.player && req.query.playerType == "player") {
+    } else if (req.query.id && req.query.playerType == "player") {
         player.getChaTeam(req, res, knex);
-    } else if (req.query.player && req.query.playerType == "goalie") {
+    } else if (req.query.id && req.query.playerType == "goalie") {
         goalie.getGoalieChaTeam(req, res, knex);
     }
 });

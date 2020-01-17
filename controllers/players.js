@@ -224,6 +224,7 @@ const getAllNHLRookieSummary = (req, res) => {
 
 const getChaTeam = (req, res, knex) => {
     knex.select('team_name', 'player_id').from('players_stats').where('player_name', req.query.player)
+        .orderBy('playing_year', 'desc')
         .then(data => {
             if (data.length) {
                 console.log(data);

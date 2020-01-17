@@ -226,6 +226,7 @@ const getChaTeam = (req, res, knex) => {
     knex.select('team_name', 'player_id').from('players_stats').where('player_name', req.query.player)
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data[0]['team_name']);
             } else {
                 res.status(400).json('error getting player');

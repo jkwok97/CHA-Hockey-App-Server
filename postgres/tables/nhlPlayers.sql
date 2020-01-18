@@ -4,8 +4,8 @@ CREATE TABLE nhl_players (
     id serial PRIMARY KEY,
     player_name text NOT NULL,
     player_nhl_id text NOT NULL,
-    cha_player_id text,
-    cha_goalie_id text
+    cha_player_id numeric,
+    cha_goalie_id numeric
 );
 
 \copy nhl_players (player_name, player_nhl_id, cha_player_id, cha_goalie_id) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/nhlApi.tsv' WITH NULL ''

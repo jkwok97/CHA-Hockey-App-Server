@@ -11,6 +11,7 @@ const goalie_stats = require('./controllers/goalie_stats');
 const users = require('./controllers/users');
 const waivers = require('./controllers/waivers');
 const schedule = require('./controllers/schedule');
+const salaries = require('./controllers/salaries');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -206,37 +207,37 @@ app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)}
 
 app.get('/salaries/', (req, res) => {
     if (req.query.position == "forward" && req.query.team) {
-        player.getTeamForwardSalaries(req, res, knex);
+        salaries.getTeamForwardSalaries(req, res, knex);
     } else if (req.query.position == "defense" && req.query.team) {
-        player.getTeamDefenseSalaries(req, res, knex);
+        salaries.getTeamDefenseSalaries(req, res, knex);
     } else if (req.query.position == "goalie" && req.query.team) {
-        player.getTeamGoalieSalaries(req, res, knex);
+        salaries.getTeamGoalieSalaries(req, res, knex);
     } else if (req.query.position == "forward") {
-        player.getForwardSalaries(req, res, knex);
+        salaries.getForwardSalaries(req, res, knex);
     } else if (req.query.position == "defense") {
-        player.getDefenseSalaries(req, res, knex);
+        salaries.getDefenseSalaries(req, res, knex);
     } else if (req.query.position == "goalie") {
-        player.getGoalieSalaries(req, res, knex);
+        salaries.getGoalieSalaries(req, res, knex);
     }
 });
 
 app.get('/salaries/all', (req, res) => {
     if (req.query.position == "forward") {
-        player.getAllForwardSalaries(req, res, knex);
+        salaries.getAllForwardSalaries(req, res, knex);
     } else if (req.query.position == "defense") {
-        player.getAllDefenseSalaries(req, res, knex);
+        salaries.getAllDefenseSalaries(req, res, knex);
     } else if (req.query.position == "goalie") {
-        player.getAllGoalieSalaries(req, res, knex);
+        salaries.getAllGoalieSalaries(req, res, knex);
     }
 })
 
 app.get('/salaries/:id', (req, res) => {
     if (req.query.position == "forward") {
-        player.getForwardIndividualSalary(req, res, knex);
+        salaries.getForwardIndividualSalary(req, res, knex);
     } else if (req.query.position == "defense") {
-        player.getDefenseIndividualSalary(req, res, knex);
+        salaries.getDefenseIndividualSalary(req, res, knex);
     } else if (req.query.position == "goalie") {
-        player.getGoalieIndividualSalary(req, res, knex);
+        salaries.getGoalieIndividualSalary(req, res, knex);
     }
 })
 
@@ -254,11 +255,11 @@ app.get('/schedule/', (req, res) => {
 
 app.put('/salaries/:id', (req, res) => { 
     if (req.body.type == "forward") {
-        player.updateForwardSalary(req, res, knex);
+        salaries.updateForwardSalary(req, res, knex);
     } else if (req.body.type == "defense") {
-        player.updateDefenseSalary(req, res, knex);
+        salaries.updateDefenseSalary(req, res, knex);
     } else if (req.body.type == "goalie") {
-        player.updateGoalieSalary(req, res, knex);
+        salaries.updateGoalieSalary(req, res, knex);
     }
 })
 
@@ -296,17 +297,17 @@ app.patch('/schedule/:id', (req, res) => {
     }
 });
 
-app.delete('/salaries/:id/forward', (req, res) => { player.deleteForwardSalary(req, res, knex) });
-app.delete('/salaries/:id/defense', (req, res) => { player.deleteDefenseSalary(req, res, knex) });
-app.delete('/salaries/:id/goalie', (req, res) => { player.deleteGoalieSalary(req, res, knex) });
+app.delete('/salaries/:id/forward', (req, res) => { salaries.deleteForwardSalary(req, res, knex) });
+app.delete('/salaries/:id/defense', (req, res) => { salaries.deleteDefenseSalary(req, res, knex) });
+app.delete('/salaries/:id/goalie', (req, res) => { salaries.deleteGoalieSalary(req, res, knex) });
 
 app.delete('/drafts/:id', (req, res) => { drafts.deletePlayer(req, res, knex) });
 
 app.delete('/champions/:id', (req, res) => { champions.deleteChamp(req, res, knex) });
 
-app.post('/salaries/forward', (req, res) => { player.addForwardSalary(req, res, knex) })
-app.post('/salaries/defense', (req, res) => { player.addDefenseSalary(req, res, knex) })
-app.post('/salaries/goalie', (req, res) => { player.addGoalieSalary(req, res, knex) })
+app.post('/salaries/forward', (req, res) => { salaries.addForwardSalary(req, res, knex) })
+app.post('/salaries/defense', (req, res) => { salaries.addDefenseSalary(req, res, knex) })
+app.post('/salaries/goalie', (req, res) => { salaries.addGoalieSalary(req, res, knex) })
 
 app.post('/drafts/', (req, res) => { drafts.addPlayer(req, res, knex) })
 

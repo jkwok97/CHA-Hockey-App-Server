@@ -2,7 +2,7 @@ DROP TABLE players_stats;
 
 CREATE TABLE players_stats (
     id serial PRIMARY KEY,
-    player_id text,
+    player_id numeric NOT NULL,
     player_name text NOT NULL,
     team_name text,
     position text NOT NULL,

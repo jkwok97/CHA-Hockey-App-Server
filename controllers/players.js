@@ -252,400 +252,396 @@ const getPlayerRatings = (req, res, knex) => {
     })
 }
 
-const getForwardSalaries = (req, res, knex) => {
-    knex.select('*').from('forward_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type)
-        .where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
-}
+// const getForwardSalaries = (req, res, knex) => {
+//     knex.select('*').from('forward_salaries as a')
+//         .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type)
+//         .where('b.playing_year', req.query.year)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })
+// }
 
-const getDefenseSalaries = (req, res, knex) => {
-    knex.select('*').from('defense_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
-}
+// const getDefenseSalaries = (req, res, knex) => {
+//     knex.select('*').from('defense_salaries as a')
+//         .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })
+// }
 
-const getGoalieSalaries = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries as a')
-        .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
-}
+// const getGoalieSalaries = (req, res, knex) => {
+//     knex.select('*').from('goalie_salaries as a')
+//         .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })
+// }
 
-const getTeamForwardSalaries = (req, res, knex) => {
-    knex.select('*').from('forward_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type)
-        .where('b.playing_year', req.query.year)
-        .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
-}
+// const getTeamForwardSalaries = (req, res, knex) => {
+//     knex.select('*').from('forward_salaries as a')
+//         .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type)
+//         .where('b.playing_year', req.query.year)
+//         .where('b.team_name', req.query.team)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })
+// }
 
-const getTeamDefenseSalaries = (req, res, knex) => {
-    knex.select('*').from('defense_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })
-}
+// const getTeamDefenseSalaries = (req, res, knex) => {
+//     knex.select('*').from('defense_salaries as a')
+//         .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
+//         .where('b.team_name', req.query.team)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })
+// }
 
-const getTeamGoalieSalaries = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries as a')
-        .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
-        .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getTeamGoalieSalaries = (req, res, knex) => {
+//     knex.select('*').from('goalie_salaries as a')
+//         .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
+//         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
+//         .where('b.team_name', req.query.team)
+//         .orderBy('a.current_season_salary', 'desc')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getGoalieIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries').where('id', req.params.id)
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getGoalieIndividualSalary = (req, res, knex) => {
+//     knex.select('*').from('goalie_salaries').where('id', req.params.id)
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getDefenseIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('defense_salaries').where('id', req.params.id)
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getDefenseIndividualSalary = (req, res, knex) => {
+//     knex.select('*').from('defense_salaries').where('id', req.params.id)
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getForwardIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('forward_salaries').where('id', req.params.id)
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getForwardIndividualSalary = (req, res, knex) => {
+//     knex.select('*').from('forward_salaries').where('id', req.params.id)
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getAllForwardSalaries = (req, res, knex) => {
-    knex.select('*').from('forward_salaries')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getAllForwardSalaries = (req, res, knex) => {
+//     knex.select('*').from('forward_salaries')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getAllDefenseSalaries = (req, res, knex) => {
-    knex.select('*').from('defense_salaries')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getAllDefenseSalaries = (req, res, knex) => {
+//     knex.select('*').from('defense_salaries')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const getAllGoalieSalaries = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries')
-        .then(data => {
-            if (data.length) {
-                res.json(data);
-            } else {
-                res.status(400).json('error getting stats')
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const getAllGoalieSalaries = (req, res, knex) => {
+//     knex.select('*').from('goalie_salaries')
+//         .then(data => {
+//             if (data.length) {
+//                 res.json(data);
+//             } else {
+//                 res.status(400).json('error getting stats')
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const updateForwardSalary = (req, res, knex) => {
-    knex('forward_salaries').where('id', req.params.id)
-        .update({
-            player_name: req.body.name,
-            current_season_salary: req.body.current,
-            year_two: req.body.two,
-            year_three: req.body.three,
-            year_four: req.body.four,
-            year_five: req.body.five
-        })
-        .then(resp => {
-            if (resp) {
-                console.log("success")
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const updateForwardSalary = (req, res, knex) => {
+//     knex('forward_salaries').where('id', req.params.id)
+//         .update({
+//             player_name: req.body.name,
+//             current_season_salary: req.body.current,
+//             year_two: req.body.two,
+//             year_three: req.body.three,
+//             year_four: req.body.four,
+//             year_five: req.body.five
+//         })
+//         .then(resp => {
+//             if (resp) {
+//                 console.log("success")
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const updateDefenseSalary = (req, res, knex) => {
-    knex('defense_salaries').where('id', req.params.id)
-        .update({
-            player_name: req.body.name,
-            current_season_salary: req.body.current,
-            year_two: req.body.two,
-            year_three: req.body.three,
-            year_four: req.body.four,
-            year_five: req.body.five
-        })
-        .then(resp => {
-            if (resp) {
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const updateDefenseSalary = (req, res, knex) => {
+//     knex('defense_salaries').where('id', req.params.id)
+//         .update({
+//             player_name: req.body.name,
+//             current_season_salary: req.body.current,
+//             year_two: req.body.two,
+//             year_three: req.body.three,
+//             year_four: req.body.four,
+//             year_five: req.body.five
+//         })
+//         .then(resp => {
+//             if (resp) {
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const updateGoalieSalary = (req, res, knex) => {
-    knex('goalie_salaries').where('id', req.params.id)
-        .update({
-            player_name: req.body.name,
-            current_season_salary: req.body.current,
-            year_two: req.body.two,
-            year_three: req.body.three,
-            year_four: req.body.four,
-            year_five: req.body.five
-        })
-        .then(resp => {
-            if (resp) {
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const updateGoalieSalary = (req, res, knex) => {
+//     knex('goalie_salaries').where('id', req.params.id)
+//         .update({
+//             player_name: req.body.name,
+//             current_season_salary: req.body.current,
+//             year_two: req.body.two,
+//             year_three: req.body.three,
+//             year_four: req.body.four,
+//             year_five: req.body.five
+//         })
+//         .then(resp => {
+//             if (resp) {
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const deleteForwardSalary = (req, res, knex) => {
-    knex('forward_salaries').where('id', req.params.id).del()
-        .then(resp => {
-            if (resp) {
-                console.log("success")
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const deleteForwardSalary = (req, res, knex) => {
+//     knex('forward_salaries').where('id', req.params.id).del()
+//         .then(resp => {
+//             if (resp) {
+//                 console.log("success")
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const deleteDefenseSalary = (req, res, knex) => {
-    knex('defense_salaries').where('id', req.params.id).del()
-        .then(resp => {
-            if (resp) {
-                console.log("success")
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const deleteDefenseSalary = (req, res, knex) => {
+//     knex('defense_salaries').where('id', req.params.id).del()
+//         .then(resp => {
+//             if (resp) {
+//                 console.log("success")
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const deleteGoalieSalary = (req, res, knex) => {
-    knex('goalie_salaries').where('id', req.params.id).del()
-        .then(resp => {
-            if (resp) {
-                console.log("success")
-                res.json("Success!")
-            } else {
-                res.status(400).json('Error!'); 
-            }
-        })
-        .catch(err => {
-            console.log(err); 
-            res.status(400).json('not found');
-        })
-}
+// const deleteGoalieSalary = (req, res, knex) => {
+//     knex('goalie_salaries').where('id', req.params.id).del()
+//         .then(resp => {
+//             if (resp) {
+//                 console.log("success")
+//                 res.json("Success!")
+//             } else {
+//                 res.status(400).json('Error!'); 
+//             }
+//         })
+//         .catch(err => {
+//             console.log(err); 
+//             res.status(400).json('not found');
+//         })
+// }
 
-const addForwardSalary = (req, res, knex) => {
-    knex('forward_salaries').insert({
-        player_name: req.body.name,
-        current_season_salary: req.body.current,
-        year_two: req.body.two,
-        year_three: req.body.three,
-        year_four: req.body.four,
-        year_five: req.body.five
-    }).then(resp => {
-        if (resp) {
-            console.log("success")
-            res.json("Success!")
-        } else {
-            res.status(400).json('Error!'); 
-        }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })     
-}
+// const addForwardSalary = (req, res, knex) => {
+//     knex('forward_salaries').insert({
+//         player_name: req.body.name,
+//         current_season_salary: req.body.current,
+//         year_two: req.body.two,
+//         year_three: req.body.three,
+//         year_four: req.body.four,
+//         year_five: req.body.five
+//     }).then(resp => {
+//         if (resp) {
+//             console.log("success")
+//             res.json("Success!")
+//         } else {
+//             res.status(400).json('Error!'); 
+//         }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })     
+// }
 
-const addDefenseSalary = (req, res, knex) => {
-    knex('defense_salaries').insert({
-        player_name: req.body.name,
-        current_season_salary: req.body.current,
-        year_two: req.body.two,
-        year_three: req.body.three,
-        year_four: req.body.four,
-        year_five: req.body.five
-    }).then(resp => {
-        if (resp) {
-            console.log("success")
-            res.json("Success!")
-        } else {
-            res.status(400).json('Error!'); 
-        }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })     
-}
+// const addDefenseSalary = (req, res, knex) => {
+//     knex('defense_salaries').insert({
+//         player_name: req.body.name,
+//         current_season_salary: req.body.current,
+//         year_two: req.body.two,
+//         year_three: req.body.three,
+//         year_four: req.body.four,
+//         year_five: req.body.five
+//     }).then(resp => {
+//         if (resp) {
+//             console.log("success")
+//             res.json("Success!")
+//         } else {
+//             res.status(400).json('Error!'); 
+//         }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })     
+// }
 
-const addGoalieSalary = (req, res, knex) => {
-    knex('goalie_salaries').insert({
-        player_name: req.body.name,
-        current_season_salary: req.body.current,
-        year_two: req.body.two,
-        year_three: req.body.three,
-        year_four: req.body.four,
-        year_five: req.body.five
-    }).then(resp => {
-        if (resp) {
-            console.log("success")
-            res.json("Success!")
-        } else {
-            res.status(400).json('Error!'); 
-        }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })     
-}
+// const addGoalieSalary = (req, res, knex) => {
+//     knex('goalie_salaries').insert({
+//         player_name: req.body.name,
+//         current_season_salary: req.body.current,
+//         year_two: req.body.two,
+//         year_three: req.body.three,
+//         year_four: req.body.four,
+//         year_five: req.body.five
+//     }).then(resp => {
+//         if (resp) {
+//             console.log("success")
+//             res.json("Success!")
+//         } else {
+//             res.status(400).json('Error!'); 
+//         }
+//     })
+//     .catch(err => {
+//         console.log(err); 
+//         res.status(400).json('not found');
+//     })     
+// }
 
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, getNhlPlayerStats,
-    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, getForwardSalaries, 
-    getDefenseSalaries, getGoalieSalaries, getTeamForwardSalaries, getTeamDefenseSalaries, getTeamGoalieSalaries,
-    getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary, getGoalieIndividualSalary,
-    getDefenseIndividualSalary, getForwardIndividualSalary, getAllForwardSalaries, getAllDefenseSalaries,
-    getAllGoalieSalaries, updateForwardSalary, updateDefenseSalary, updateGoalieSalary, deleteForwardSalary,
-    deleteDefenseSalary, deleteGoalieSalary, addForwardSalary, addDefenseSalary, addGoalieSalary
+    getOnPaceNhlPlayerStats, getPlayerRatings, getAllNHLPlayerStats, getChaTeam, 
+    getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary
 };

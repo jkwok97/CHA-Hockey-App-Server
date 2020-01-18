@@ -7,7 +7,7 @@ currentNHLSeason = '20192020';
 
 const getForwardSalaries = (req, res, knex) => {
     knex.select('*').from('forward_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type)
         .where('b.playing_year', req.query.year)
         .orderBy('a.current_season_salary', 'desc')
@@ -26,7 +26,7 @@ const getForwardSalaries = (req, res, knex) => {
 
 const getDefenseSalaries = (req, res, knex) => {
     knex.select('*').from('defense_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .orderBy('a.current_season_salary', 'desc')
         .then(data => {
@@ -44,7 +44,7 @@ const getDefenseSalaries = (req, res, knex) => {
 
 const getGoalieSalaries = (req, res, knex) => {
     knex.select('*').from('goalie_salaries as a')
-        .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('goalie_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .orderBy('a.current_season_salary', 'desc')
         .then(data => {
@@ -62,7 +62,7 @@ const getGoalieSalaries = (req, res, knex) => {
 
 const getTeamForwardSalaries = (req, res, knex) => {
     knex.select('*').from('forward_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type)
         .where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
@@ -82,7 +82,7 @@ const getTeamForwardSalaries = (req, res, knex) => {
 
 const getTeamDefenseSalaries = (req, res, knex) => {
     knex.select('*').from('defense_salaries as a')
-        .innerJoin('players_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
         .orderBy('a.current_season_salary', 'desc')
@@ -101,7 +101,7 @@ const getTeamDefenseSalaries = (req, res, knex) => {
 
 const getTeamGoalieSalaries = (req, res, knex) => {
     knex.select('*').from('goalie_salaries as a')
-        .innerJoin('goalie_stats as b', 'a.player_name', 'b.player_name')
+        .innerJoin('goalie_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
         .orderBy('a.current_season_salary', 'desc')
@@ -212,6 +212,7 @@ const updateForwardSalary = (req, res, knex) => {
     knex('forward_salaries').where('id', req.params.id)
         .update({
             player_name: req.body.name,
+            player_id: req.body.player_id,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,
@@ -236,6 +237,7 @@ const updateDefenseSalary = (req, res, knex) => {
     knex('defense_salaries').where('id', req.params.id)
         .update({
             player_name: req.body.name,
+            player_id: req.body.player_id,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,
@@ -259,6 +261,7 @@ const updateGoalieSalary = (req, res, knex) => {
     knex('goalie_salaries').where('id', req.params.id)
         .update({
             player_name: req.body.name,
+            player_id: req.body.player_id,
             current_season_salary: req.body.current,
             year_two: req.body.two,
             year_three: req.body.three,

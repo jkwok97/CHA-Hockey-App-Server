@@ -330,7 +330,12 @@ const deleteGoalieSalary = (req, res, knex) => {
 }
 
 const addForwardSalary = (req, res, knex) => {
+    let nextId = knex('players_stats').max('player_id').then(resp => {
+        return resp + 1;
+    })
+    console.log(nextId);
     knex('forward_salaries').insert({
+        player_id: nextId,
         player_name: req.body.name,
         current_season_salary: req.body.current,
         year_two: req.body.two,
@@ -352,6 +357,10 @@ const addForwardSalary = (req, res, knex) => {
 }
 
 const addDefenseSalary = (req, res, knex) => {
+    let nextId = knex('players_stats').max('player_id').then(resp => {
+        return resp + 1;
+    })
+    console.log(nextId);
     knex('defense_salaries').insert({
         player_name: req.body.name,
         current_season_salary: req.body.current,
@@ -374,6 +383,10 @@ const addDefenseSalary = (req, res, knex) => {
 }
 
 const addGoalieSalary = (req, res, knex) => {
+    let nextId = knex('goalie_stats').max('player_id').then(resp => {
+        return resp + 1;
+    })
+    console.log(nextId);
     knex('goalie_salaries').insert({
         player_name: req.body.name,
         current_season_salary: req.body.current,

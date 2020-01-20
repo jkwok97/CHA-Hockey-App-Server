@@ -330,30 +330,34 @@ const deleteGoalieSalary = (req, res, knex) => {
 }
 
 const addForwardSalary = (req, res, knex) => {
-    let nextId = knex('players_stats').max('player_id').then(resp => {
-        return resp + 1;
-    })
-    console.log(nextId);
-    knex('forward_salaries').insert({
-        player_id: nextId,
-        player_name: req.body.name,
-        current_season_salary: req.body.current,
-        year_two: req.body.two,
-        year_three: req.body.three,
-        year_four: req.body.four,
-        year_five: req.body.five
-    }).then(resp => {
+    knex('players_stats').max('player_id').then(resp => {
         if (resp) {
-            console.log("success")
-            res.json("Success!")
+            let nextId = resp + 1;
+            console.log(nextId);
+            knex('forward_salaries').insert({
+                player_id: nextId,
+                player_name: req.body.name,
+                current_season_salary: req.body.current,
+                year_two: req.body.two,
+                year_three: req.body.three,
+                year_four: req.body.four,
+                year_five: req.body.five
+            }).then(resp => {
+                if (resp) {
+                    console.log("success")
+                    res.json("Success!")
+                } else {
+                    res.status(400).json('Error!'); 
+                }
+            })
+            .catch(err => {
+                console.log(err); 
+                res.status(400).json('not found');
+            })
         } else {
-            res.status(400).json('Error!'); 
+            res.status(400).json('Could Not Find Next Id');
         }
-    })
-    .catch(err => {
-        console.log(err); 
-        res.status(400).json('not found');
-    })     
+    })   
 }
 
 const addDefenseSalary = (req, res, knex) => {

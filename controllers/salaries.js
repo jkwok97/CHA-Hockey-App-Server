@@ -333,7 +333,7 @@ const addForwardSalary = (req, res, knex) => {
     knex('players_stats').max('player_id').then(resp => {
         if (resp) {
             console.log(resp);
-            let nextId = resp + 1;
+            let nextId = Number(resp[0].max) + 1;
             console.log(nextId);
             knex('forward_salaries').insert({
                 player_id: nextId,

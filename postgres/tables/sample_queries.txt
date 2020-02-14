@@ -1,0 +1,5 @@
+select * from teams 
+full outer join users_v2 on teams.users_v2_id = users_v2.id 
+full outer join divisions on teams.divisions_id = divisions.id 
+where users_v2.id = 15;
+

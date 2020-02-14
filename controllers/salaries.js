@@ -119,7 +119,7 @@ const getTeamGoalieSalaries = (req, res, knex) => {
 }
 
 const getGoalieIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries').where('id', req.params.id)
+    knex.select('*').from('goalie_salaries').where('player_id', req.params.id)
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -134,7 +134,7 @@ const getGoalieIndividualSalary = (req, res, knex) => {
 }
 
 const getDefenseIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('defense_salaries').where('id', req.params.id)
+    knex.select('*').from('defense_salaries').where('player_id', req.params.id)
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -149,7 +149,7 @@ const getDefenseIndividualSalary = (req, res, knex) => {
 }
 
 const getForwardIndividualSalary = (req, res, knex) => {
-    knex.select('*').from('forward_salaries').where('id', req.params.id)
+    knex.select('*').from('forward_salaries').where('player_id', req.params.id)
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -330,42 +330,38 @@ const deleteGoalieSalary = (req, res, knex) => {
 }
 
 const addForwardSalary = (req, res, knex) => {
-    knex('players_stats').max('player_id').then(resp => {
+    knex('forward_salaries').insert({
+        player_name: req.body.name,
+        current_season_salary: req.body.current,
+        year_two: req.body.two,
+        year_three: req.body.three,
+        year_four: req.body.four,
+        year_five: req.body.five
+    }).then(resp => {
         if (resp) {
-            console.log(resp);
-            let nextId = Number(resp[0].max) + 1;
-            console.log(nextId);
-            knex('forward_salaries').insert({
-                player_id: nextId,
-                player_name: req.body.name,
-                current_season_salary: req.body.current,
-                year_two: req.body.two,
-                year_three: req.body.three,
-                year_four: req.body.four,
-                year_five: req.body.five
-            }).then(resp => {
-                if (resp) {
-                    console.log("success")
-                    res.json("Success!")
-                } else {
-                    res.status(400).json('Error!'); 
-                }
-            })
-            .catch(err => {
-                console.log(err); 
-                res.status(400).json('not found');
-            })
+            console.log("success")
+            res.json("Success!")
         } else {
-            res.status(400).json('Could Not Find Next Id');
+            res.status(400).json('Error!'); 
         }
-    })   
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })
+    // knex('players_stats').max('player_id').then(resp => {
+    //     if (resp) {
+    //         console.log(resp);
+    //         let nextId = Number(resp[0].max) + 1;
+    //         console.log(nextId);
+            
+    //     } else {
+    //         res.status(400).json('Could Not Find Next Id');
+    //     }
+    // })   
 }
 
 const addDefenseSalary = (req, res, knex) => {
-    let nextId = knex('players_stats').max('player_id').then(resp => {
-        return resp + 1;
-    })
-    console.log(nextId);
     knex('defense_salaries').insert({
         player_name: req.body.name,
         current_season_salary: req.body.current,
@@ -388,10 +384,6 @@ const addDefenseSalary = (req, res, knex) => {
 }
 
 const addGoalieSalary = (req, res, knex) => {
-    let nextId = knex('goalie_stats').max('player_id').then(resp => {
-        return resp + 1;
-    })
-    console.log(nextId);
     knex('goalie_salaries').insert({
         player_name: req.body.name,
         current_season_salary: req.body.current,

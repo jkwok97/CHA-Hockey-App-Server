@@ -1,20 +1,42 @@
-Seattle Storm	SEA	Matt	Hamilton	hammerfilms@gmail.com	false
-Oakland Assassins	OAK	Joseph	Sutherland	josephsutherland@gmail.com	false
-Kelowna Mountaineers	KEL	Randy	Foster	randyfoster_1@hotmail.com	false
-Victoria Vipers	VIC	Ryan	Bender	benderzone@gmail.com	false
-San Francisco Fighting Cocks	SFC	Darren	Koyata	darren.koyata@sonroc.ca	false
-Memphis Hound Dogs	MEM	Rick	Lundy	rlundy99@gmail.com	false
-Oklahoma City Oil Barons	OKL	Colin	Baillon	acbails27@gmail.com	false
-Cheyenne Desperado	CHY	Ferrel	Hedberg	ferrelhedberg@yahoo.ca	false
-Wichita Wolfpack	WIT	Lucas	Bristow	myskywalker69@hotmail.com	false
-Lone Star Brahmas	LSB	Graham	Witherspoon	witherspoon_g@hotmail.com	false
-Milwaukee Ice Dragons	MIL	Lee	Snowden	lee_snowden@hotmail.com	true
-Indianapolis Goats	IND	Scott	Snowden	snowden_scott@hotmail.com	false
-Peoria Prowlers	PEO	Barry	Bristow	babyhuey@telus.net	false
-Mississauga North Stars	MSG	Joe	Scardigno	josephscardigno@hotmail.com	false
-Green Bay Glory	GRE	Brian	Dillon	bdillon@joeyrestaurants.com	false
-Augusta Green Jackets	AUG	Darcy	Donaldson	ddonaldson.13@hotmail.com	false
-Staten Island Killer Bees	STA	Jeff	Kwok	jkwok97@gmail.com	true
-Cincinnati Cylcones	CIN	John	Chin	j.chin@telus.net	false
-South Carolina Stingrays	SCS	Kelly	Gardner	chill0089@shaw.ca	false
-Atlanta Flashers	ATL	Patrick	Ryan	pataryan1@gmail.com	false
+Matt	Hamilton	hammerfilms@gmail.com	FALSE	TRUE
+Joseph	Sutherland	josephsutherland@gmail.com	FALSE	TRUE
+Randy	Foster	randyfoster_1@hotmail.com	FALSE	TRUE
+Ryan	Bender	benderzone@gmail.com	FALSE	TRUE
+Darren	Koyata	darren.koyata@sonroc.ca	FALSE	TRUE
+Rick	Lundy	rlundy99@gmail.com	FALSE	TRUE
+Colin	Baillon	acbails27@gmail.com	FALSE	TRUE
+Ferrel	Hedberg	ferrelhedberg@yahoo.ca	FALSE	TRUE
+Lucas	Bristow	myskywalker69@hotmail.com	FALSE	TRUE
+Graham	Witherspoon	witherspoon_g@hotmail.com	FALSE	TRUE
+Lee	Snowden	lee_snowden@hotmail.com	TRUE	TRUE
+Scott	Snowden	snowden_scott@hotmail.com	FALSE	TRUE
+Barry	Bristow	babyhuey@telus.net	FALSE	TRUE
+Joe	Scardigno	josephscardigno@hotmail.com	FALSE	TRUE
+Brian	Dillon	bdillon@joeyrestaurants.com	FALSE	TRUE
+Darcy	Donaldson	ddonaldson.13@hotmail.com	FALSE	TRUE
+Jeff	Kwok	jkwok97@gmail.com	TRUE	TRUE
+John	Chin	j.chin@telus.net	FALSE	TRUE
+Kelly	Gardner	chill0089@shaw.ca	FALSE	TRUE
+Patrick	Ryan	pataryan1@gmail.com	FALSE	TRUE
+Corey	Abbott		FALSE	FALSE
+Michael	Stafford		FALSE	FALSE
+Jordan	Schartner		FALSE	FALSE
+Jason	Stanier		FALSE	FALSE
+Kevin	Schmitz		FALSE	FALSE
+Chad	Fisher		FALSE	FALSE
+Greg	Abbott		FALSE	FALSE
+Ciaran	Murtagh		FALSE	FALSE
+Tim	Ross		FALSE	FALSE
+Scott	Cochrane		FALSE	FALSE
+Nick	McCurry		FALSE	FALSE
+Kyle	Einar		FALSE	FALSE
+Matt	Beatty		FALSE	FALSE
+Travis	Quinn		FALSE	FALSE
+Ben	Bruchet		FALSE	FALSE
+Dan	Wood		FALSE	FALSE
+Adam	Martin		FALSE	FALSE
+Ryan	Pollock		FALSE	FALSE
+Randy	Lazzarotto		FALSE	FALSE
+Darren	Ward		FALSE	FALSE
+Jeff	Muggleston		FALSE	FALSE
+Al	Godfrey		FALSE	FALSE

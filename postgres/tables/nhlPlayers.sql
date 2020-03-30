@@ -8,6 +8,7 @@ CREATE TABLE nhl_players (
     cha_goalie_id numeric
 );
 
+
 \copy nhl_players (player_name, player_nhl_id, cha_player_id, cha_goalie_id) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/nhlApi.tsv' WITH NULL ''
 
 do $$

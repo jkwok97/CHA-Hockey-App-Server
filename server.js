@@ -270,12 +270,7 @@ app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)});
 
 app.put('/transactions/acquire', (req, res) => {
-    if (req.body.players) {
-        transactions.acquirePlayers(req.body.players, res, knex, waiversHookUrl)
-    }
-    if (req.body.goalies) {
-        transactions.acquireGoalies(req.body.goalies, res, knex, waiversHookUrl)
-    }
+    transactions.acquire(req.body.players, res, knex, waiversHookUrl)
 });
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });

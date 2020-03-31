@@ -1,6 +1,6 @@
 const request = require('request');
 
-const acquire = (req, res, knex, hookUrl) => {
+const acquire = (req, res, knex, waiversHookUrl) => {
 
     const players = req.body.players;
     const goalies = req.body.goalies;
@@ -42,7 +42,7 @@ const acquire = (req, res, knex, hookUrl) => {
 
         const goaliesString = changeToString(goalies);
 
-        request.post(hookUrl, {
+        request.post(waiversHookUrl, {
             json: {
                 'text': `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: ${ playersString } ${ goaliesString }`,
                 'channel': '#waivers-and-drops',
@@ -68,10 +68,12 @@ const acquire = (req, res, knex, hookUrl) => {
 }
 
 const changeToString = (array) => {
+    console.log(array);
     let string = '';
     array.forEach((element) => {
         string.concat(`${element} ,`)
     })
+    console.log(string);
     return string;
 }
 

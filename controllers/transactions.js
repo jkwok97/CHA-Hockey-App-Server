@@ -1,11 +1,8 @@
 const request = require('request');
 
-const acquire = (req, res, knex, waiversHookUrl) => {
+const acquirePlayer = (players, res, knex, waiversHookUrl) => {
 
-    console.log(req.body);
-
-    const players = req.body.players;
-    const goalies = req.body.goalies;
+    console.log(players);
 
     if (players && players.length > 0) {
         players.forEach(player => {
@@ -19,6 +16,11 @@ const acquire = (req, res, knex, waiversHookUrl) => {
                 });
         });
     }
+    
+}
+
+const acquireGoalie = (goalies, res, knex, waiversHookUrl) => {
+    console.log(goalies);
 
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
@@ -36,7 +38,7 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 }
 
 module.exports = {
-    acquire
+    acquirePlayer, acquireGoalie
 };
 
 

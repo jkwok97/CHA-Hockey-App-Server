@@ -269,9 +269,8 @@ app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 
 app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)});
 
-app.put('/transactions/acquire', (req, res) => {
-    transactions.acquire(req, res, knex, waiversHookUrl)
-});
+app.put('/transactions/acquire', (req, res) => {transactions.acquire(req, res, knex, waiversHookUrl)});
+app.put('/transactions/release', (req, res) => {transactions.release(req, res, knex, waiversHookUrl)});
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 app.patch('/players-stats/name/:id', (req, res) => { player_stats.updateName(req, res, knex, hookUrl) });

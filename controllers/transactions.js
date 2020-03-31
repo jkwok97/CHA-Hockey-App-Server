@@ -2,7 +2,7 @@ const request = require('request');
 
 const acquire = (req, res, knex, waiversHookUrl) => {
 
-    console.log(req)
+    console.log(req.body);
 
     const players = req.body.players;
     const goalies = req.body.goalies;
@@ -12,7 +12,7 @@ const acquire = (req, res, knex, waiversHookUrl) => {
             knex('players_stats').where({id: player.id}).update({team_name: player.team_name})
                 .then(resp => {
                     if (resp) {
-                        res.status(200);
+                        res.status(200).json("Updated Player Team");
                     } else {
                         res.status(400).json("Error Updating Player");
                     }
@@ -25,7 +25,7 @@ const acquire = (req, res, knex, waiversHookUrl) => {
             knex('goalie_stats').where({id: goalie.id}).update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {
-                        res.status(200);
+                        res.status(200).json("Updated Goalie Team");
                     } else {
                         res.status(400).json("Error Updating Goalie");
                     }

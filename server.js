@@ -12,6 +12,7 @@ const users = require('./controllers/users');
 const waivers = require('./controllers/waivers');
 const schedule = require('./controllers/schedule');
 const salaries = require('./controllers/salaries');
+const transactions = require('./controllers/transactions');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -21,6 +22,7 @@ const knex = require('knex')({
     }
 });
 const hookUrl = process.env.SLACK_WEBHOOK;
+const waiversHookUrl = process.env.SLACK_WAIVERS_WEBHOOK;
 
 const app = express();
 
@@ -266,6 +268,8 @@ app.put('/salaries/:id', (req, res) => {
 app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 
 app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)});
+
+app.put('/transactions/acquire', (req, res) => {transactions.acquire(req, res, knex, waiversHookUrl)});
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });
 app.patch('/players-stats/name/:id', (req, res) => { player_stats.updateName(req, res, knex, hookUrl) });

@@ -70,10 +70,9 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 const changeToString = (array) => {
     let string = '';
     array.forEach((element) => {
-        console.log(`player name: ${element.player_name}`);
-        string.concat(`${element.player_name} ,`)
+        string += `${element.player_name}, `
     })
-    console.log(string);
+    console.log(`new string: ${string}`);
     return string;
 }
 

@@ -38,12 +38,9 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 
     if (!error) {
 
-        const playersString;
-        const goaliesString;
+        const playersString = changeToString(players);
+        const goaliesString = changeToString(goalies);
 
-        if (players) { playersString = changeToString(players); }
-        if (goalies) { goaliesString = changeToString(goalies); }
-        
         request.post(waiversHookUrl, {
             json: {
                 'text': `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: ${ playersString } ${ goaliesString }`,
@@ -71,9 +68,11 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 
 const changeToString = (array) => {
     let string = '';
-    array.forEach((element) => {
-        string += `${element.player_name}, `
-    })
+    if (array) {
+        array.forEach((element) => {
+            string += `${element.player_name}, `
+        })
+    }
     return string;
 }
 

@@ -1,17 +1,17 @@
 const request = require('request');
 
-const acquirePlayer = (players, res, knex, waiversHookUrl) => {
+const acquirePlayers = (players, res, knex, waiversHookUrl) => {
 
-    console.log(players);
+    console.log('players: ' + players);
 
     if (players && players.length > 0) {
         players.forEach(player => {
             knex('players_stats').where({id: player.id}).update({team_name: player.team_name})
                 .then(resp => {
                     if (resp) {
-                        res.status(200).json("Updated Player Team");
+                        res.status(200).json(`Updated ${player.player_name} Team`);
                     } else {
-                        res.status(400).json("Error Updating Player");
+                        res.status(400).json(`Error Updating ${player.player_name}`);
                     }
                 });
         });
@@ -19,17 +19,17 @@ const acquirePlayer = (players, res, knex, waiversHookUrl) => {
     
 }
 
-const acquireGoalie = (goalies, res, knex, waiversHookUrl) => {
-    console.log(goalies);
+const acquireGoalies = (goalies, res, knex, waiversHookUrl) => {
+    console.log('goalies: ' + goalies);
 
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
             knex('goalie_stats').where({id: goalie.id}).update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {
-                        res.status(200).json("Updated Goalie Team");
+                        res.status(200).json(`Updated ${goalie.player_name} Team`);
                     } else {
-                        res.status(400).json("Error Updating Goalie");
+                        res.status(400).json(`Error Updating ${goalie.player_name}`);
                     }
                 });
         })
@@ -38,7 +38,7 @@ const acquireGoalie = (goalies, res, knex, waiversHookUrl) => {
 }
 
 module.exports = {
-    acquirePlayer, acquireGoalie
+    acquirePlayers, acquireGoalies
 };
 
 

@@ -271,10 +271,10 @@ app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)})
 
 app.put('/transactions/acquire', (req, res) => {
     if (req.body.players) {
-        transactions.acquirePlayer(req.players, res, knex, waiversHookUrl)
+        transactions.acquirePlayers(req.players, res, knex, waiversHookUrl)
     }
     if (req.body.goalies) {
-        transactions.acquireGoalie(req.goalies, res, knex, waiversHookUrl)
+        transactions.acquireGoalies(req.goalies, res, knex, waiversHookUrl)
     }
 });
 

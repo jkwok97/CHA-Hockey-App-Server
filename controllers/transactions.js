@@ -1,12 +1,10 @@
 const request = require('request');
 
-const acquire = (req, res, knex, waiversHookUrl) => {
+const acquire = (req, res, knex, hookUrl) => {
 
     const players = req.body.players;
     const goalies = req.body.goalies;
-
-    console.log('players: ' + players);
-    console.log('goalies: ' + goalies);
+    const team = req.body.team;
 
     let error = false;
 
@@ -22,9 +20,6 @@ const acquire = (req, res, knex, waiversHookUrl) => {
                 })
                 .catch(err => {res.status(400).json("Server Error!")});
         });
-
-        console.log('players: ' + players);
-
     }
 
     if (goalies && goalies.length > 0) {
@@ -39,11 +34,29 @@ const acquire = (req, res, knex, waiversHookUrl) => {
                 })
                 .catch(err => {res.status(400).json("Server Error!")});
         });
-
-        console.log('goalies: ' + goalies);
     }
 
     if (!error) {
+
+        const playersString = changeToString(players);
+
+        const goaliesString = changeToString(goalies);
+
+        request.post(hookUrl, {
+            json: {
+                'text': `:rotating_light: WAIVER PICK UP ALERT :rotating_light: \n \n To ${team}: ${ playersString } ${ goaliesString }`,
+                'channel': '#waivers-and-drops',
+                'username': 'League Office',
+                'icon_emoji': ':office:'
+            }
+        }, (error, res, body) => {
+            if (error) {
+                console.log(error);
+                return
+            } else {
+                console.log(body);
+            }
+        })
         res.status(200).json({
             players: players,
             goalies: goalies
@@ -52,6 +65,14 @@ const acquire = (req, res, knex, waiversHookUrl) => {
         res.status(400).json("Error Updating Players")
     }
     
+}
+
+const changeToString = (array) => {
+    let string = '';
+    array.forEach((element) => {
+        string.concat(`${element} ,`)
+    })
+    return string;
 }
 
 // const acquireGoalies = (goalies, res, knex, waiversHookUrl) => {

@@ -270,7 +270,7 @@ app.put('/drafts/:id', (req, res) => {drafts.updatePlayer(req, res, knex)});
 app.put('/champions/:id', (req, res) => {champions.updateChamp(req, res, knex)});
 
 app.put('/transactions/acquire', (req, res) => {
-    transactions.acquire(req, res, knex, waiversHookUrl)
+    transactions.acquire(req, res, knex, hookUrl)
 });
 
 app.patch('/players-stats/:id', (req, res) => { player_stats.tradePlayer(req, res, knex, hookUrl) });

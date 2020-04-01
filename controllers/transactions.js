@@ -186,6 +186,108 @@ const trade = (req, res, knex, hookUrl) => {
         });
     }
 
+    if (teamOnePicks && teamOnePicks.length > 0) {
+
+        teamOnePicks.forEach((pick) => {
+            switch (pick.pick_value) {
+                case '1st':
+                    knex('draft_table').where({team_name: pick.team}).update({round_one: teamOneNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '2nd':
+                    knex('draft_table').where({team_name: pick.team}).update({round_two: teamOneNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '3rd':
+                    knex('draft_table').where({team_name: pick.team}).update({round_three: teamOneNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '4th':
+                    knex('draft_table').where({team_name: pick.team}).update({round_four: teamOneNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '5th':
+                    knex('draft_table').where({team_name: pick.team}).update({round_five: teamOneNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                default:
+                    break;
+            }
+            
+        })
+    }
+
+    if (teamTwoPicks && teamTwoPicks.length > 0) {
+
+        teamTwoPicks.forEach((pick) => {
+            switch (pick.pick_value) {
+                case '1st':
+                    knex('draft_table').where({team_name: pick.team}).update({round_one: teamTwoNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '2nd':
+                    knex('draft_table').where({team_name: pick.team}).update({round_two: teamTwoNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '3rd':
+                    knex('draft_table').where({team_name: pick.team}).update({round_three: teamTwoNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '4th':
+                    knex('draft_table').where({team_name: pick.team}).update({round_four: teamTwoNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                case '5th':
+                    knex('draft_table').where({team_name: pick.team}).update({round_five: teamTwoNewTeam})
+                        .then(resp => {
+                            if (resp) { console.log(resp); }
+                            else { error = true; }
+                        })
+                        .catch(err => { res.status(400).json("Server Error!") });
+                    break;
+                default:
+                    break;
+            }
+            
+        })
+    }
+
     if (!error) {
 
         const teamOnePlayersString = changeToString(teamOnePlayers);

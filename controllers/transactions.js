@@ -146,15 +146,11 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    const players = [];
-    players.push(teamOnePlayers);
-    players.push(teamTwoPlayers);
+    const players = teamOnePlayers.concat(teamTwoPlayers);
 
     console.log(players);
 
-    const goalies = [];
-    goalies.push(teamOneGoalies);
-    goalies.push(teamTwoGoalies);
+    const goalies = teamOneGoalies.concat(teamTwoGoalies);
 
     console.log(goalies);
 

@@ -158,10 +158,10 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    updatePlayers(teamOnePlayers);
-    updatePlayers(teamTwoPlayers);
-    updateGoalies(teamOneGoalies);
-    updateGoalies(teamTwoGoalies);
+    updatePlayers(teamOnePlayers, knex);
+    updatePlayers(teamTwoPlayers, knex);
+    updateGoalies(teamOneGoalies, knex);
+    updateGoalies(teamTwoGoalies, knex);
 
     if (teamOnePicks && teamOnePicks.length > 0) {
 
@@ -318,7 +318,7 @@ const trade = (req, res, knex, hookUrl) => {
     
 }
 
-const updatePlayers = (players) => {
+const updatePlayers = (players, knex) => {
     console.log(players);
     if (players && players.length > 0) {
         players.forEach(player => {
@@ -338,7 +338,7 @@ const updatePlayers = (players) => {
     }
 }
 
-const updateGoalies = (goalies) => {
+const updateGoalies = (goalies, knex) => {
     console.log(goalies);
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {

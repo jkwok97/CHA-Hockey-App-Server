@@ -166,23 +166,55 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    if (teamOnePlayers && teamTwoPlayers) {
-        this.players = teamOnePlayers.concat(teamTwoPlayers);
-    } else if (!teamOnePlayers && teamTwoPlayers) {
-        this.players = teamTwoPlayers
-    } else if (teamOnePlayers && !teamTwoPlayers) {
-        this.players = teamOnePlayers
+    if (teamOnePlayers && teamOnePlayers.length > 0) {
+        console.log("adding team one players");
+        teamOnePlayers.forEach(player => {
+            this.players.push(player);
+        })
     }
+
+    if (teamTwoPlayers && teamTwoPlayers.length > 0) {
+        console.log("adding team two players");
+        teamTwoPlayers.forEach(player => {
+            this.players.push(player);
+        })
+    }
+
+    // if (teamOnePlayers && teamTwoPlayers) {
+    //     console.log(teamOnePlayers);
+    //     console.log(teamTwoPlayers);
+    //     this.players = teamOnePlayers.concat(teamTwoPlayers);
+    // } else if (!teamOnePlayers && teamTwoPlayers) {
+    //     this.players = teamTwoPlayers
+    // } else if (teamOnePlayers && !teamTwoPlayers) {
+    //     this.players = teamOnePlayers
+    // }
 
     console.log("players transaction: " + players);
 
-    if (teamOneGoalies && teamTwoGoalies) {
-        this.goalies = teamOneGoalies.concat(teamTwoGoalies);
-    } else if (!teamOneGoalies && teamTwoGoalies) {
-        this.goalies = teamTwoGoalies
-    } else if (teamOneGoalies && !teamTwoGoalies) {
-        this.goalies = teamOneGoalies
+    if (teamOneGoalies && teamOneGoalies.length > 0) {
+        console.log("adding team one goalies");
+        teamOneGoalies.forEach(goalie => {
+            this.goalies.push(goalie);
+        })
     }
+
+    if (teamTwoGoalies && teamTwoGoalies.length > 0) {
+        console.log("adding team two goalie");
+        teamTwoGoalies.forEach( goalie => {
+            this.goalies.push(goalie);
+        })
+    }
+
+    // if (teamOneGoalies && teamTwoGoalies) {
+    //     console.log(teamOneGoalies);
+    //     console.log(teamTwoGoalies);
+    //     this.goalies = teamOneGoalies.concat(teamTwoGoalies);
+    // } else if (!teamOneGoalies && teamTwoGoalies) {
+    //     this.goalies = teamTwoGoalies
+    // } else if (teamOneGoalies && !teamTwoGoalies) {
+    //     this.goalies = teamOneGoalies
+    // }
 
     console.log("goalies transaction: " + goalies);
 

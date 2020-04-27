@@ -331,7 +331,7 @@ const changePicksToString = (array) => {
     let string = '';
     if (array) {
         array.forEach((element) => {
-            string += `${element.team} ${element.pick_value}`
+            string += `${element.team} ${element.pick_value} ${element.draft_year}`
         })
     }
     return string;

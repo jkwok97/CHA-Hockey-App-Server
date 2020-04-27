@@ -7,10 +7,11 @@ CREATE TABLE draft_table (
     round_two text NOT null,
     round_three text NOT null,
     round_four text NOT null,
-    round_five text NOT null
+    round_five text NOT null,
+    draft_year text NOT null
 );
 
-\copy draft_table (team_name, round_one, round_two, round_three, round_four, round_five) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/draftTable.tsv' WITH NULL ''
+\copy draft_table (team_name, round_one, round_two, round_three, round_four, round_five, draft_year) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/draftTable.tsv' WITH NULL ''
 
 do $$
 declare maxid int;

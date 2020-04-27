@@ -13,6 +13,7 @@ const getForwardSalaries = (req, res, knex) => {
         .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')
@@ -31,6 +32,7 @@ const getDefenseSalaries = (req, res, knex) => {
         .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')
@@ -49,6 +51,7 @@ const getGoalieSalaries = (req, res, knex) => {
         .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')

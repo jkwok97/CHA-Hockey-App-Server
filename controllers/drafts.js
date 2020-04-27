@@ -24,6 +24,18 @@ const getDraftTable = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const getAllDraftTable = (req, res, knex) => {
+    knex.select('*').from('draft_table').where({draft_year: req.query.season})
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting draft')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 const tradeRoundOnePick = (req, res, knex, hookUrl) => {
     // console.log(hookUrl);
     knex('draft_table').where({id: req.params.id}).update({round_one: req.body.team})
@@ -254,5 +266,5 @@ const addPlayer = (req, res, knex) => {
 
 module.exports = {
     handleDraftsGet, getDraftTable, tradeRoundOnePick, tradeRoundTwoPick, tradeRoundThreePick, tradeRoundFourPick,
-    tradeRoundFivePick, getPlayer, updatePlayer, deletePlayer, addPlayer
+    tradeRoundFivePick, getPlayer, updatePlayer, deletePlayer, addPlayer, getAllDraftTable
 };

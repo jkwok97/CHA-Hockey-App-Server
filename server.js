@@ -38,6 +38,7 @@ app.get('/drafts/', (req, res) => {drafts.handleDraftsGet(req, res, knex)});
 app.get('/drafts/:id', (req, res) => {drafts.getPlayer(req, res, knex)});
 
 app.get('/draft-table/', (req, res) => {drafts.getDraftTable(req, res, knex)});
+app.get('/draft-table/all', (req, res) => {drafts.getAllDraftTable(req, res, knex)});
 
 app.get('/real-stats/', (req, res) => {
     if (req.query.pace) {

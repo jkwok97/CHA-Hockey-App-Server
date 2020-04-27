@@ -10,7 +10,7 @@ const getForwardSalaries = (req, res, knex) => {
         .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type)
         .where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -28,7 +28,7 @@ const getDefenseSalaries = (req, res, knex) => {
     knex.select('*').from('defense_salaries as a')
         .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -46,7 +46,7 @@ const getGoalieSalaries = (req, res, knex) => {
     knex.select('*').from('goalie_salaries as a')
         .innerJoin('goalie_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -66,7 +66,7 @@ const getTeamForwardSalaries = (req, res, knex) => {
         .where('b.season_type', req.query.type)
         .where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -85,7 +85,7 @@ const getTeamDefenseSalaries = (req, res, knex) => {
         .innerJoin('players_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -104,7 +104,7 @@ const getTeamGoalieSalaries = (req, res, knex) => {
         .innerJoin('goalie_stats as b', 'a.player_id', 'b.player_id')
         .where('b.season_type', req.query.type).where('b.playing_year', req.query.year)
         .where('b.team_name', req.query.team)
-        .orderBy('a.current_season_salary', 'desc')
+        .orderBy('a.year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);

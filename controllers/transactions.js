@@ -10,7 +10,10 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 
     if (players && players.length > 0) {
         players.forEach(player => {
-            knex('players_stats').where({id: player.id}).update({team_name: player.team_name})
+            knex('players_stats').where({id: player.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: player.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);
@@ -24,7 +27,10 @@ const acquire = (req, res, knex, waiversHookUrl) => {
 
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
-            knex('goalie_stats').where({id: goalie.id}).update({team_name: goalie.team_name})
+            knex('goalie_stats').where({id: goalie.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);
@@ -76,7 +82,10 @@ const release = (req, res, knex, waiversHookUrl) => {
 
     if (players && players.length > 0) {
         players.forEach(player => {
-            knex('players_stats').where({id: player.id}).update({team_name: player.team_name})
+            knex('players_stats').where({id: player.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: player.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);
@@ -90,7 +99,10 @@ const release = (req, res, knex, waiversHookUrl) => {
 
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
-            knex('goalie_stats').where({id: goalie.id}).update({team_name: goalie.team_name})
+            knex('goalie_stats').where({id: goalie.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);
@@ -167,7 +179,10 @@ const trade = (req, res, knex, hookUrl) => {
 
     if (players && players.length > 0) {
         players.forEach(player => {
-            knex('players_stats').where({id: player.id}).update({team_name: player.team_name})
+            knex('players_stats').where({id: player.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: player.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);
@@ -181,7 +196,10 @@ const trade = (req, res, knex, hookUrl) => {
 
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
-            knex('goalie_stats').where({id: goalie.id}).update({team_name: goalie.team_name})
+            knex('goalie_stats').where({id: goalie.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {
                         console.log(resp);

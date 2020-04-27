@@ -25,7 +25,7 @@ const getDraftTable = (req, res, knex) => {
 }
 
 const getAllDraftTable = (req, res, knex) => {
-    knex.select('*').from('draft_table').where({draft_year: req.query.season})
+    knex.select('*').from('draft_table')
         .then(data => {
             if (data.length) {
                 res.json(data);

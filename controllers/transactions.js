@@ -146,14 +146,6 @@ const release = (req, res, knex, waiversHookUrl) => {
 
 const trade = (req, res, knex, hookUrl) => {
 
-    console.log("TeamOnePlayers:" + req.body.teamOne.players[0]);
-    console.log("TeamOneGoalies:" + req.body.teamOne.goalies[0]);
-    console.log("TeamTwoPlayers:" + req.body.teamTwo.players[0]);
-    console.log("TeamTwoGoalies:" + req.body.teamTwo.goalies[0]);
-
-    let players = [];
-    let goalies = [];
-
     const teamOnePlayers = req.body.teamOne.players;
     const teamOneGoalies = req.body.teamOne.goalies;
     const teamOnePicks = req.body.teamOne.picks;
@@ -166,91 +158,10 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    if (teamOnePlayers && teamOnePlayers.length > 0) {
-        console.log("adding team one players");
-        teamOnePlayers.forEach(player => {
-            this.players.push(player);
-        })
-    }
-
-    if (teamTwoPlayers && teamTwoPlayers.length > 0) {
-        console.log("adding team two players");
-        teamTwoPlayers.forEach(player => {
-            this.players.push(player);
-        })
-    }
-
-    // if (teamOnePlayers && teamTwoPlayers) {
-    //     console.log(teamOnePlayers);
-    //     console.log(teamTwoPlayers);
-    //     this.players = teamOnePlayers.concat(teamTwoPlayers);
-    // } else if (!teamOnePlayers && teamTwoPlayers) {
-    //     this.players = teamTwoPlayers
-    // } else if (teamOnePlayers && !teamTwoPlayers) {
-    //     this.players = teamOnePlayers
-    // }
-
-    console.log("players transaction: " + players);
-
-    if (teamOneGoalies && teamOneGoalies.length > 0) {
-        console.log("adding team one goalies");
-        teamOneGoalies.forEach(goalie => {
-            this.goalies.push(goalie);
-        })
-    }
-
-    if (teamTwoGoalies && teamTwoGoalies.length > 0) {
-        console.log("adding team two goalie");
-        teamTwoGoalies.forEach( goalie => {
-            this.goalies.push(goalie);
-        })
-    }
-
-    // if (teamOneGoalies && teamTwoGoalies) {
-    //     console.log(teamOneGoalies);
-    //     console.log(teamTwoGoalies);
-    //     this.goalies = teamOneGoalies.concat(teamTwoGoalies);
-    // } else if (!teamOneGoalies && teamTwoGoalies) {
-    //     this.goalies = teamTwoGoalies
-    // } else if (teamOneGoalies && !teamTwoGoalies) {
-    //     this.goalies = teamOneGoalies
-    // }
-
-    console.log("goalies transaction: " + goalies);
-
-    if (players && players.length > 0) {
-        players.forEach(player => {
-            knex('players_stats').where({id: player.id})
-                .where({playing_year: player.playing_year})
-                .where({season_type: player.season_type})
-                .update({team_name: player.team_name})
-                .then(resp => {
-                    if (resp) {
-                        console.log(resp);
-                    } else {
-                        error = true;
-                    }
-                })
-                .catch(err => {res.status(400).json("Server Error!")});
-        });
-    }
-
-    if (goalies && goalies.length > 0) {
-        goalies.forEach((goalie) => {
-            knex('goalie_stats').where({id: goalie.id})
-                .where({playing_year: player.playing_year})
-                .where({season_type: player.season_type})
-                .update({team_name: goalie.team_name})
-                .then(resp => {
-                    if (resp) {
-                        console.log(resp);
-                    } else {
-                        error = true;
-                    }
-                })
-                .catch(err => {res.status(400).json("Server Error!")});
-        });
-    }
+    updatePlayers(teamOnePlayers);
+    updatePlayers(teamTwoPlayers);
+    updateGoalies(teamOneGoalies);
+    updateGoalies(teamTwoGoalies);
 
     if (teamOnePicks && teamOnePicks.length > 0) {
 
@@ -405,6 +316,46 @@ const trade = (req, res, knex, hookUrl) => {
         res.status(400).json("Error Updating Players")
     }
     
+}
+
+const updatePlayers = (players) => {
+    console.log(players);
+    if (players && players.length > 0) {
+        players.forEach(player => {
+            knex('players_stats').where({id: player.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: player.team_name})
+                .then(resp => {
+                    if (resp) {
+                        console.log(resp);
+                    } else {
+                        error = true;
+                    }
+                })
+                .catch(err => {res.status(400).json("Server Error!")});
+        });
+    }
+}
+
+const updateGoalies = (goalies) => {
+    console.log(goalies);
+    if (goalies && goalies.length > 0) {
+        goalies.forEach((goalie) => {
+            knex('goalie_stats').where({id: goalie.id})
+                .where({playing_year: player.playing_year})
+                .where({season_type: player.season_type})
+                .update({team_name: goalie.team_name})
+                .then(resp => {
+                    if (resp) {
+                        console.log(resp);
+                    } else {
+                        error = true;
+                    }
+                })
+                .catch(err => {res.status(400).json("Server Error!")});
+        });
+    }
 }
 
 const changePicksToString = (array) => {

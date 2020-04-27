@@ -146,13 +146,13 @@ const release = (req, res, knex, waiversHookUrl) => {
 
 const trade = (req, res, knex, hookUrl) => {
 
-    console.log("TeamOnePlayers:" + req.body.teamOne.players);
-    console.log("TeamOneGoalies:" + req.body.teamOne.goalies);
-    console.log("TeamTwoPlayers:" + req.body.teamTwo.players);
-    console.log("TeamTwoGoalies:" + req.body.teamTwo.goalies);
+    console.log("TeamOnePlayers:" + req.body.teamOne.players[0]);
+    console.log("TeamOneGoalies:" + req.body.teamOne.goalies[0]);
+    console.log("TeamTwoPlayers:" + req.body.teamTwo.players[0]);
+    console.log("TeamTwoGoalies:" + req.body.teamTwo.goalies[0]);
 
-    let players;
-    let goalies;
+    let players = [];
+    let goalies = [];
 
     const teamOnePlayers = req.body.teamOne.players;
     const teamOneGoalies = req.body.teamOne.goalies;
@@ -174,6 +174,8 @@ const trade = (req, res, knex, hookUrl) => {
         this.players = teamOnePlayers
     }
 
+    console.log("players transaction: " + players);
+
     if (teamOneGoalies && teamTwoGoalies) {
         this.goalies = teamOneGoalies.concat(teamTwoGoalies);
     } else if (!teamOneGoalies && teamTwoGoalies) {
@@ -181,8 +183,6 @@ const trade = (req, res, knex, hookUrl) => {
     } else if (teamOneGoalies && !teamTwoGoalies) {
         this.goalies = teamOneGoalies
     }
-        
-    console.log("players transaction: " + players);
 
     console.log("goalies transaction: " + goalies);
 

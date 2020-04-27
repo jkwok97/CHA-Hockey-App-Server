@@ -146,7 +146,8 @@ const release = (req, res, knex, waiversHookUrl) => {
 
 const trade = (req, res, knex, hookUrl) => {
 
-    console.log("body:" + req.body);
+    console.log("TeamOne:" + req.body.teamOne);
+    console.log("TeamTwo:" + req.body.teamTwo);
 
     let players;
     let goalies;

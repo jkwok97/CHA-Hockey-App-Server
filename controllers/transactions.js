@@ -161,21 +161,13 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    if (teamOnePlayers) {
-        this.players = teamOnePlayers.concat(teamTwoPlayers);
-    } else {
-        this.players = teamTwoPlayers;
-    }
+    this.players = teamOnePlayers.concat(teamTwoPlayers);
+
+    this.goalies = teamOneGoalies.concat(teamTwoGoalies);
     
-    console.log(players);
+    console.log("players transaction: " + players);
 
-    if (teamOneGoalies) {
-        this.goalies = teamOneGoalies.concat(teamTwoGoalies);
-    } else {
-        this.goalies = teamTwoGoalies;
-    }
-
-    console.log(goalies);
+    console.log("goalies transaction: " + goalies);
 
     if (players && players.length > 0) {
         players.forEach(player => {

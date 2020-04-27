@@ -100,8 +100,8 @@ const release = (req, res, knex, waiversHookUrl) => {
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
             knex('goalie_stats').where({id: goalie.id})
-                .where({playing_year: player.playing_year})
-                .where({season_type: player.season_type})
+                .where({playing_year: goalie.playing_year})
+                .where({season_type: goalie.season_type})
                 .update({team_name: goalie.team_name})
                 .then(resp => {
                     if (resp) {

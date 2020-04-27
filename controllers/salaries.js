@@ -164,7 +164,7 @@ const getForwardIndividualSalary = (req, res, knex) => {
 }
 
 const getAllForwardSalaries = (req, res, knex) => {
-    knex.select('*').from('forward_salaries')
+    knex.select('*').from('forward_salaries').orderBy('year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -179,7 +179,7 @@ const getAllForwardSalaries = (req, res, knex) => {
 }
 
 const getAllDefenseSalaries = (req, res, knex) => {
-    knex.select('*').from('defense_salaries')
+    knex.select('*').from('defense_salaries').orderBy('year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);
@@ -194,7 +194,7 @@ const getAllDefenseSalaries = (req, res, knex) => {
 }
 
 const getAllGoalieSalaries = (req, res, knex) => {
-    knex.select('*').from('goalie_salaries')
+    knex.select('*').from('goalie_salaries').orderBy('year_two', 'desc')
         .then(data => {
             if (data.length) {
                 res.json(data);

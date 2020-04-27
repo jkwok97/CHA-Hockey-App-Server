@@ -134,6 +134,9 @@ const release = (req, res, knex, waiversHookUrl) => {
 
 const trade = (req, res, knex, hookUrl) => {
 
+    let players;
+    let goalies;
+
     const teamOnePlayers = req.body.teamOne.players;
     const teamOneGoalies = req.body.teamOne.goalies;
     const teamOnePicks = req.body.teamOne.picks;
@@ -146,11 +149,23 @@ const trade = (req, res, knex, hookUrl) => {
 
     let error = false;
 
-    const players = teamOnePlayers.concat(teamTwoPlayers);
-
+    if (teamTwoPlayers && teamOnePlayers) {
+        this.players = teamOnePlayers.concat(teamTwoPlayers);
+    } else if (teamOnePlayers && !teamTwoPlayers) {
+        this.players = teamOnePlayers;
+    } else if (!teamOnePlayers && teamTwoPlayers) {
+        this.players = teamTwoPlayers;
+    }
+    
     console.log(players);
 
-    const goalies = teamOneGoalies.concat(teamTwoGoalies);
+    if (teamTwoGoalies && teamOneGoalies) {
+        this.goalies = teamOneGoalies.concat(teamTwoGoalies);
+    } else if (teamOneGoalies && !teamTwoGoalies) {
+        this.goalies = teamOneGoalies;
+    } else if (!teamOneGoalies && teamTwoGoalies) {
+        this.goalies = teamTwoGoalies;
+    }
 
     console.log(goalies);
 

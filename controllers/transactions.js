@@ -369,7 +369,7 @@ const changePicksToString = (array) => {
 }
 
 // TEMPORARY FUNCTION TO FORMAT PLAYER NAME UNTIL NEW DB IS UP
-const changeName = (player) => {
+const changeName = (name) => {
     const nameArray = name.split(',');
     const newName = `${nameArray[1]} ${nameArray[0]}`;
     return newName.trim();

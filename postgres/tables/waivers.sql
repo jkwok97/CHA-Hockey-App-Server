@@ -16,3 +16,8 @@ begin
 end;
 
 $$ language plpgsql;
+
+
+UPDATE waivers
+SET team_name = 'VSJ'
+WHERE id = '12';

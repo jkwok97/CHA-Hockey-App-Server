@@ -1,0 +1,1 @@
+\copy draft_order_v2 (team_id, round_one, round_two, round_three, round_four, round_five, draft_year) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/v2/insert_draft_order_v2.tsv' WITH NULL ''

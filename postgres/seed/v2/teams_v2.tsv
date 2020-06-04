@@ -1,0 +1,54 @@
+SHORT	CITY	NICKNAME	FALSE	999	LOGO	ALTLOGO	COLOR	TEXTCOLOR	99
+ATL	Atlanta	Flashers	TRUE	21	../../assets/team_logos/Flashers.png		#cd0000	white	5
+AUG	Augusta	Green Jackets	TRUE	17	../../assets/team_logos/GreenJackets.png		#005746	white	5
+CHY	Cheyenne	Desperado	TRUE	9	../../assets/team_logos/Desperado.png		#b40b07	white	4
+CIN	Cincinnati	Cyclones	TRUE	19	../../assets/team_logos/Cyclones.png		#eb0d2d	white	5
+GRE	Green Bay	Glory	TRUE	16	../../assets/team_logos/Glory.png		#31b18a	white	3
+IND	Indianapolis	Goats	TRUE	13	../../assets/team_logos/Goats.png		#e0771f	white	3
+KEL	Kelowna	Mountaineers	TRUE	4	../../assets/team_logos/Mountaineers.png		#ec131e	white	2
+LSB	Lone Star	Brahmas	TRUE	11	../../assets/team_logos/Brahmas.png		#d09a2c	white	4
+MEM	Memphis	Hound Dogs	TRUE	7	../../assets/team_logos/HoundDogs.png		#488cc4	white	4
+MIL	Milwaukee	Ice Dragons	TRUE	12	../../assets/team_logos/Dragons.png		#830083	white	3
+MSG	Mississauga	North Stars	TRUE	15	../../assets/team_logos/NorthStars.png		#035f32	white	3
+OAK	Oakland	Assassins	TRUE	3	../../assets/team_logos/Assassins.png		#e10000	white	2
+OKL	Oklahoma	Oil Barons	TRUE	8	../../assets/team_logos/OilBarons.png		#f6c522	black	4
+PEO	Peoria	Prowlers	TRUE	14	../../assets/team_logos/Prowlers.png		#a87f4a	white	3
+SFC	San Francisco	Fighting Cocks	TRUE	6	../../assets/team_logos/Cocks.png		#2a4543	white	2
+SEA	Seattle	Storm	TRUE	2	../../assets/team_logos/Storm.png		#000122	white	2
+SCS	South Carolina	Stingrays	TRUE	20	../../assets/team_logos/Rays.png		#00395f	white	5
+STA	Staten Island	Killer Bees	TRUE	18	../../assets/team_logos/KillerBees.png		#d28507	white	5
+VIC	Victoria	Vipers	FALSE	5	../../assets/team_logos/Vipers.png		#5ebe7d	black	2
+WIT	Wichita	Wolfpack	TRUE	10	../../assets/team_logos/Wolfpack.png		#051443	white	4
+MIS	Mississippi	Mudbugs	FALSE	18	../../assets/team_logos/mudbugs.png		#000122	white	
+CHA	Charlotte	Storm	FALSE	21	../../assets/team_logos/chastorm.png		#000122	white	
+STS	Seattle	Surge	FALSE	22	../../assets/team_logos/surge.png		#000122	white	
+LVD	Las Vegas	Desperado	FALSE	9	../../assets/team_logos/lasdesperado.png		#000122	white	
+SAO	San Antonio	Outlaws	FALSE	20	../../assets/team_logos/outlaws.png		#000122	white	
+OAO	Oakland	Oceanus	FALSE	3	../../assets/team_logos/oceanus.png		#000122	white	
+ATC	Atlantic City	Aces	FALSE	23	../../assets/team_logos/aces.png		#000122	white	
+TOL	Toledo	Honey Badgers	FALSE	24	../../assets/team_logos/badgers.png		#000123	white	
+BRA	Brandon	Bandits	FALSE	25	../../assets/team_logos/bandits.png		#000124	white	
+CLE	Cleveland	Barons	FALSE	26	../../assets/team_logos/barons.png		#000125	white	
+ALB	Albuquerque	Chupacabras	FALSE	27	../../assets/team_logos/chupacabras.png		#000126	white	
+HAL	Halifax	Conquerers	FALSE	28	../../assets/team_logos/conquerers.png		#000127	white	
+SDC	San Diego	Crush	FALSE	9	../../assets/team_logos/crush.png		#000128	white	
+WIN	Winnipeg	Hellcats	FALSE	29	../../assets/team_logos/hellcats.png		#000129	white	
+MGA	Mississauga	Indians	FALSE	30	../../assets/team_logos/indians.png		#000130	white	
+SAL	Salem	Indians	FALSE	30	../../assets/team_logos/indians.png		#000131	white	
+JAC	Jacksonville	Jokers	FALSE	31	../../assets/team_logos/jokers.png		#000132	white	
+LVL	Louisville	Lionhearts	FALSE	32	../../assets/team_logos/lionhearts.png		#000133	white	
+ABB	Abbotsford	Loggerheads	FALSE	33	../../assets/team_logos/loggerheads.png		#000134	white	
+HAM	Hamilton	Predators	FALSE	34	../../assets/team_logos/predators.png		#000135	white	
+HAR	Hamilton	Rednecks	FALSE	35	../../assets/team_logos/rednecks.png		#000136	white	
+CBR	Cape Breton	Royals	FALSE	36	../../assets/team_logos/royals.png		#000137	white	
+RDR	Red Deer	Rustlers	FALSE	37	../../assets/team_logos/rustlers.png		#000138	white	
+HAS	Halifax	Schooners	FALSE	38	../../assets/team_logos/schooners.png		#000139	white	
+QUE	Quebec City	Thundercats	FALSE	24	../../assets/team_logos/thundercats.png		#000140	white	
+LOU	Louisiana	Voodoo	FALSE	39	../../assets/team_logos/voodoo.png		#000141	white	
+WAS	Washington	Whiskeyjacks	FALSE	40	../../assets/team_logos/whiskeyjacks.png		#000142	white	
+TAL	Tallahasse	Crimsontide	FALSE	41	../../assets/team_logos/crimsontide.png		#000143	white	
+POR	Portland	Beavers	FALSE	42	../../assets/team_logos/beavers.png		#000144	white	
+HOU	Houston	Comets	FALSE	43	../../assets/team_logos/comets.png		#000145	white	
+SGD	Salem	Grave Diggers	FALSE	30	../../assets/team_logos/gravediggers.png		#000146	white	
+VSJ	Victoria	Stellar Jays	TRUE	44	../../assets/team_logos/jays.png	../../assets/team_logos/jays-large.png	#c2e1fc	#051443	2
+FA	Free	Agent	TRUE	-1	../../assets/team_logos/Free_Agent_logo_square.jpg		#000122	white	

@@ -112,9 +112,29 @@ const oneTeamStatsGrouped = (req, res, knex) => {
         .catch(err => res.status(400).json('not found'))
 }
 
+// ****************************************************************************************
+//                                       VERSION 2
+// ****************************************************************************************
+
+const getTeamsByUser = (req, res, knex) => {
+    knex.select('*').from('teams_v2').where('users_id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                res.json(data);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
     allTeamsStatsByYear, allTeamsStatsAllTime, teamStatsByYear, teamStatsAllTime, teamStatsByYearByType,
-    teamStatsByType, allTeamsStatsByYearByType, allTeamsStatsByType, allTeamsStatsGrouped, oneTeamStatsGrouped
+    teamStatsByType, allTeamsStatsByYearByType, allTeamsStatsByType, allTeamsStatsGrouped, oneTeamStatsGrouped,
+
+
+
+    getTeamsByUser
 };
 
 

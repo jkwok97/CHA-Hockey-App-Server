@@ -39,6 +39,8 @@ app.get('/', (req, res) => { res.send("it is working"); });
 app.get('/v2/users/', (req, res) => {users.getUsers(req, res, knex)});
 app.get('/v2/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
+app.get('/v2/:id/teams', (req, res) => {teams.getTeamsByUser(req, res, knex)});
+
 // ****************************************************************************************
 //                                       VERSION 1
 // ****************************************************************************************

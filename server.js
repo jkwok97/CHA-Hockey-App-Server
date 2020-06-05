@@ -36,7 +36,8 @@ app.get('/', (req, res) => { res.send("it is working"); });
 //                                       VERSION 2
 // ****************************************************************************************
 
-
+app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
+app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 // ****************************************************************************************
 //                                       VERSION 1
@@ -329,6 +330,10 @@ app.post('/salaries/goalie', (req, res) => { salaries.addGoalieSalary(req, res, 
 app.post('/drafts/', (req, res) => { drafts.addPlayer(req, res, knex) })
 
 app.post('/champions/', (req, res) => { champions.addChamp(req, res, knex) })
+
+// ****************************************************************************************
+//                                      END VERSION 1
+// ****************************************************************************************
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is running on port ${process.env.PORT}`);

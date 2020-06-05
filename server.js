@@ -36,8 +36,8 @@ app.get('/', (req, res) => { res.send("it is working"); });
 //                                       VERSION 2
 // ****************************************************************************************
 
-app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
-app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
+app.get('/v2/users/', (req, res) => {users.getUsers(req, res, knex)});
+app.get('/v2/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 // ****************************************************************************************
 //                                       VERSION 1

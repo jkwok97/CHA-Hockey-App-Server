@@ -120,6 +120,7 @@ const getTeamsByUser = (req, res, knex) => {
     knex.select('*').from('teams_v2').where('users_id', req.params.id)
         .then(data => {
             if (data.length) {
+                console.log(data);
                 res.json(data);
             } else {
                 res.status(400).json('error getting stats')

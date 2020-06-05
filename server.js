@@ -13,6 +13,7 @@ const waivers = require('./controllers/waivers');
 const schedule = require('./controllers/schedule');
 const salaries = require('./controllers/salaries');
 const transactions = require('./controllers/transactions');
+const nhl = require('./controllers/nhl');
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -41,6 +42,32 @@ app.get('/v2/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 app.get('/v2/:id/teams', (req, res) => {teams.getTeamsByUser(req, res, knex)});
 
+app.get('/nhl-leaders/', (req, res) => {
+    if (req.query.sort && req.query.playerType == "skater") {
+        nhl.getAllNHLPlayerStats(req, res);
+    } else if (req.query.sort && req.query.playerType == "goalie") {
+        nhl.getAllNHLGoalieStats(req, res);
+    } else if (req.query.id && req.query.playerType == "player") {
+        player.getChaTeam(req, res, knex);
+    } else if (req.query.id && req.query.playerType == "goalie") {
+        goalie.getGoalieChaTeam(req, res, knex);
+    }
+});
+
+app.get('/nhl-leaders/summary', (req, res) => { nhl.getNHLPlayerSummary(req, res) });
+
+app.get('/nhl-rookie-leaders/', (req, res) => { nhl.getAllNHLRookieStats(req, res) });
+
+app.get('/nhl-rookie-leaders/summary', (req, res) => { player.getAllNHLRookieSummary(req, res) });
+
+app.get('/nhl-stats/player', (req, res) => {
+    if (req.query.pace) {
+        nhl.getOnPaceNhlPlayerStats(req, res);
+    } else {
+        nhl.getNhlPlayerStats(req, res);
+    }
+});
+
 // ****************************************************************************************
 //                                       VERSION 1
 // ****************************************************************************************
@@ -52,14 +79,6 @@ app.get('/drafts/:id', (req, res) => {drafts.getPlayer(req, res, knex)});
 
 app.get('/draft-table/', (req, res) => {drafts.getDraftTable(req, res, knex)});
 app.get('/draft-table/all', (req, res) => {drafts.getAllDraftTable(req, res, knex)});
-
-app.get('/real-stats/', (req, res) => {
-    if (req.query.pace) {
-        player.getOnPaceNhlPlayerStats(req, res);
-    } else {
-        player.getNhlPlayerStats(req, res);
-    }
-});
 
 app.get('/player-ratings/:id', (req, res) => {player.getPlayerRatings(req, res, knex)});
 
@@ -196,24 +215,6 @@ app.get('/goalies/:id', (req, res) => {
         goalie.getPlayerStats(req, res, knex);
     }
 })
-
-app.get('/nhl-leaders/', (req, res) => {
-    if (req.query.sort && req.query.playerType == "skater") {
-        player.getAllNHLPlayerStats(req, res);
-    } else if (req.query.sort && req.query.playerType == "goalie") {
-        player.getAllNHLGoalieStats(req, res);
-    } else if (req.query.id && req.query.playerType == "player") {
-        player.getChaTeam(req, res, knex);
-    } else if (req.query.id && req.query.playerType == "goalie") {
-        goalie.getGoalieChaTeam(req, res, knex);
-    }
-});
-
-app.get('/nhl-leaders/summary', (req, res) => { player.getNHLPlayerSummary(req, res) });
-
-app.get('/nhl-rookie-leaders/', (req, res) => { player.getAllNHLRookieStats(req, res) });
-
-app.get('/nhl-rookie-leaders/summary', (req, res) => { player.getAllNHLRookieSummary(req, res) });
 
 app.get('/users/', (req, res) => {users.getUsers(req, res, knex)});
 

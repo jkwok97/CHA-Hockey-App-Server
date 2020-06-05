@@ -98,6 +98,6 @@ const getPlayerRatings = (req, res, knex) => {
 
 module.exports = {
     getPlayerStats, getPlayerStatsByType, getPlayerStatsWithJoin, getPlayerStatsByTypeWithJoin, 
-    getPlayerRatings, getAllNHLPlayerStats, getChaTeam, 
+    getPlayerRatings, getChaTeam, 
     
 };

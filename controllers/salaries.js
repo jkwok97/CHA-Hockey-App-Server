@@ -363,17 +363,7 @@ const addForwardSalary = (req, res, knex) => {
     .catch(err => {
         console.log(err); 
         res.status(400).json('not found');
-    })
-    // knex('players_stats').max('player_id').then(resp => {
-    //     if (resp) {
-    //         console.log(resp);
-    //         let nextId = Number(resp[0].max) + 1;
-    //         console.log(nextId);
-            
-    //     } else {
-    //         res.status(400).json('Could Not Find Next Id');
-    //     }
-    // })   
+    }) 
 }
 
 const addDefenseSalary = (req, res, knex) => {

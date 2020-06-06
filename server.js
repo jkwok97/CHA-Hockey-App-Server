@@ -47,6 +47,10 @@ app.get('/v2/users/edit/:id', (req, res) => {users.getUserById(req, res, knex)})
 
 app.put('/v2/users/edit/:id', (req, res) => {users.updateUser(req, res, knex)});
 
+app.post('/v2/users/add', (req, res) => {users.addUser(req, res, knex)});
+
+app.delete('/v2/users/delete/:id', (req, res) => {users.deleteUser(req, res, knex)});
+
 // ****************************************************************************************
 //                                       Teams
 // ****************************************************************************************

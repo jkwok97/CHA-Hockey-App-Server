@@ -49,7 +49,24 @@ const getUsers = (req, res, knex) => {
 }
 
 const addUser = (req, res, knex) => {
-
+    knex('users_v2').insert({
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        isadmin: req.body.isadmin,
+        isactive: req.body.isactive
+    }).then(resp => {
+        if (resp) {
+            const result = {
+                statusCode: 200,
+                message: 'Add User Success',
+                result: resp
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    }).catch(err => res.status(400).json('Add User Error'))
 }
 
 const updateUser = (req, res, knex) => {
@@ -64,7 +81,7 @@ const updateUser = (req, res, knex) => {
             if (resp) {
                 const result = {
                     statusCode: 200,
-                    message: 'Request Success',
+                    message: 'Update User Success',
                     result: resp
                 }
                 res.json(result);
@@ -75,7 +92,19 @@ const updateUser = (req, res, knex) => {
 }
 
 const deleteUser = (req, res, knex) => {
-    
+    knex('users_v2').where({id: req.params.id}).del()
+        .then(resp => {
+            if (resp) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Delete User Success',
+                    result: resp
+                }
+                res.json(result)
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        }).catch(err => res.status(400).json('Deleting User Error'))
 }
 
 module.exports = {

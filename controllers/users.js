@@ -53,7 +53,25 @@ const addUser = (req, res, knex) => {
 }
 
 const updateUser = (req, res, knex) => {
-    
+    knex('users_v2').where({id: req.params.id})
+        .update({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            isadmin: req.body.isadmin,
+            isactive: req.body.isactive
+        }).then(resp => {
+            if (resp) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: resp
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        }).catch(err => res.status(400).json('Updating User Error'))
 }
 
 const deleteUser = (req, res, knex) => {

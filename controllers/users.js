@@ -18,7 +18,12 @@ const getUsers = (req, res, knex) => {
     knex.select('*').from('users_v2')
         .then(data => {
             if (data.length) {
-                res.json(data);
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
             } else {
                 res.status(400).json('error getting stats')
             }
@@ -26,6 +31,18 @@ const getUsers = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const addUser = (req, res, knex) => {
+
+}
+
+const updateUser = (req, res, knex) => {
+    
+}
+
+const deleteUser = (req, res, knex) => {
+    
+}
+
 module.exports = {
-    getUser, getUsers
+    getUser, getUsers, addUser, updateUser, deleteUser
 };

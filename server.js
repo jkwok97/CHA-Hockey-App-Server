@@ -8,12 +8,18 @@ const player = require('./controllers/players');
 const goalie = require('./controllers/goalies');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
-const users = require('./controllers/users');
 const waivers = require('./controllers/waivers');
 const schedule = require('./controllers/schedule');
 const salaries = require('./controllers/salaries');
 const transactions = require('./controllers/transactions');
+
+
+const users = require('./controllers/users');
 const nhl = require('./controllers/nhl');
+const playerInfo = require('./controllers/playerInfo');
+
+
+
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -50,6 +56,19 @@ app.put('/v2/users/edit/:id', (req, res) => {users.updateUser(req, res, knex)});
 app.post('/v2/users/add', (req, res) => {users.addUser(req, res, knex)});
 
 app.delete('/v2/users/delete/:id', (req, res) => {users.deleteUser(req, res, knex)});
+
+// ****************************************************************************************
+//                                       Players
+// ****************************************************************************************
+
+app.get('/v2/players/', (req, res) => {playerInfo.getAllPlayers(req, res, knex)});
+app.get('/v2/players/edit/:id', (req, res) => {playerInfo.getPlayer(req, res, knex)});
+
+app.put('/v2/users/players/:id', (req, res) => {playerInfo.updatePlayer(req, res, knex)});
+
+app.post('/v2/players/add', (req, res) => {playerInfo.addPlayer(req, res, knex)});
+
+app.delete('/v2/players/delete/:id', (req, res) => {playerInfo.deletePlayer(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Teams

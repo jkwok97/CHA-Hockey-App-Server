@@ -17,6 +17,7 @@ const transactions = require('./controllers/transactions');
 const users = require('./controllers/users');
 const nhl = require('./controllers/nhl');
 const playerInfo = require('./controllers/playerInfo');
+const salaries_v2 = require('./controllers/salaries_v2');
 
 
 
@@ -72,6 +73,18 @@ app.post('/v2/players/add', (req, res) => {playerInfo.addPlayer(req, res, knex)}
 app.delete('/v2/players/delete/:id', (req, res) => {playerInfo.deletePlayer(req, res, knex)});
 
 // ****************************************************************************************
+//                                       Salaries
+// ****************************************************************************************
+
+app.get('/v2/players/salaries', (req, res) => {salaries_v2.getAllSalaries(req, res, knex)});
+app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalaries(req, res, knex)});
+// app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getPlayer(req, res, knex)});
+
+app.put('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.updateSalary(req, res, knex)});
+
+app.post('/v2/players/salaries/add', (req, res) => {salaries_v2.addSalary(req, res, knex)});
+
+// ****************************************************************************************
 //                                       Teams
 // ****************************************************************************************
 
@@ -106,10 +119,6 @@ app.get('/nhl-stats/player', (req, res) => {
         nhl.getNhlPlayerStats(req, res);
     }
 });
-
-// ****************************************************************************************
-//                                       
-// ****************************************************************************************
 
 // ****************************************************************************************
 //                                       VERSION 1

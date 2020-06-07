@@ -50,12 +50,6 @@ const getPlayer = (req, res, knex) => {
         }).catch(err => res.status(400).json('player not found'))
 }
 
-
-// knex('table name')
-//             .insert(dataset)
-//             .returning('id')
-//             .then(([id]) => console.log(id));  //id here
-
 const addPlayer = (req, res, knex) => {
     knex('players_v2').insert({
         firstname: req.body.firstname,

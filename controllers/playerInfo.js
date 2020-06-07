@@ -18,6 +18,22 @@ const getAllPlayers = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getAllPlayersByActive = (req, res, knex) => {
+    knex.select('*').from('players_v2').where('isactive', req.query.isactive)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const getPlayer = (req, res, knex) => {
     knex.select('*').from('players_v2').where('id', req.params.id)
         .then(data => {
@@ -102,5 +118,5 @@ const deletePlayer = (req, res, knex) => {
 
 
 module.exports = {
-    getAllPlayers, getPlayer, addPlayer, updatePlayer, deletePlayer
+    getAllPlayers, getPlayer, getAllPlayersByActive, addPlayer, updatePlayer, deletePlayer
 };

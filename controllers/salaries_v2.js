@@ -25,6 +25,7 @@ const getAllActiveSalaries = (req, res, knex) => {
     knex.select('*').from('players_v2')
         .fullOuterJoin('salaries_v2', 'players_v2.id', 'salaries_v2.player_id')
         .where('players_v2.isactive', req.query.isactive)
+        .havingNotNull('salaries_v2.season_2020')
         .then(data => {
             if (data.length) {
                 const result = {

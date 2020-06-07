@@ -78,8 +78,10 @@ const updatePlayer = (req, res, knex) => {
             } else {
                 res.status(400).json('Error!'); 
             }
-        }).catch(err => res.status(400).json('Updating Player Error'))
-}
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('Updating Player Error')
+        })
 
 const deletePlayer = (req, res, knex) => {
     knex('players_v2').where({id: req.params.id}).del()
@@ -94,7 +96,7 @@ const deletePlayer = (req, res, knex) => {
             } else {
                 res.status(400).json('Error!'); 
             }
-        }).catch(err => res.status(400).json('Deleting Player Error'))
+        }).catch(err => res.status(400).json('Deleting Play Error'))
 }
 
 

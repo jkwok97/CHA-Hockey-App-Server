@@ -64,7 +64,7 @@ app.delete('/v2/users/delete/:id', (req, res) => {users.deleteUser(req, res, kne
 app.get('/v2/players/', (req, res) => {playerInfo.getAllPlayers(req, res, knex)});
 app.get('/v2/players/edit/:id', (req, res) => {playerInfo.getPlayer(req, res, knex)});
 
-app.put('/v2/users/players/:id', (req, res) => {playerInfo.updatePlayer(req, res, knex)});
+app.put('/v2/players/edit/:id', (req, res) => {playerInfo.updatePlayer(req, res, knex)});
 
 app.post('/v2/players/add', (req, res) => {playerInfo.addPlayer(req, res, knex)});
 

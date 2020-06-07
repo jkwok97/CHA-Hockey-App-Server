@@ -50,6 +50,12 @@ const getPlayer = (req, res, knex) => {
         }).catch(err => res.status(400).json('player not found'))
 }
 
+
+// knex('table name')
+//             .insert(dataset)
+//             .returning('id')
+//             .then(([id]) => console.log(id));  //id here
+
 const addPlayer = (req, res, knex) => {
     knex('players_v2').insert({
         firstname: req.body.firstname,
@@ -59,12 +65,12 @@ const addPlayer = (req, res, knex) => {
         isgoalie: req.body.isgoalie,
         isdefense: req.body.isdefense,
         isforward: req.body.isforward,
-    }).then(resp => {
-        if (resp) {
+    }).returning('id').then(([id]) => {
+        if (id) {
             const result = {
                 statusCode: 200,
                 message: 'Add Player Success',
-                result: resp
+                result: id
             }
             res.json(result);
         } else {

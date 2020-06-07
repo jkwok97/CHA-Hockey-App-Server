@@ -82,6 +82,7 @@ const updatePlayer = (req, res, knex) => {
             console.log(err);
             res.status(400).json('Updating Player Error')
         })
+}
 
 const deletePlayer = (req, res, knex) => {
     knex('players_v2').where({id: req.params.id}).del()

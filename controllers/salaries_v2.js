@@ -20,23 +20,6 @@ const getAllSalaries = (req, res, knex) => {
 
 const getAllActiveSalaries = (req, res, knex) => {
 
-    // knex.select('*').from('salaries_v2').leftJoin('players_v2', function() {
-    //     this.on('players_v2.id', '=', 'salaries_v2.player_id')
-    //   })
-    //   .where('players_v2.isactive', req.query.isactive)
-    //   .then(data => {
-    //     if (data.length) {
-    //         const result = {
-    //             statusCode: 200,
-    //             message: 'Request Success',
-    //             result: data
-    //         }
-    //         res.json(result);
-    //     } else {
-    //         res.status(400).json('error getting salary')
-    //     }
-    // }).catch(err => res.status(400).json('not found'))
-
     knex.select('*').from('players_v2')
         .fullOuterJoin('salaries_v2', 'players_v2.id', 'salaries_v2.player_id')
         .where('players_v2.isactive', req.query.isactive)
@@ -53,21 +36,22 @@ const getAllActiveSalaries = (req, res, knex) => {
             }
         }).catch(err => res.status(400).json('not found'))
 
-    // knex('salaries_v2').join('players_v2', 'players_v2.id', '=', 'salaries_v2.player_id')
-    //     .select('*')
-    //     .where('players_v2.isactive', req.query.isactive)
-    //     .then(data => {
-    //         if (data.length) {
-    //             const result = {
-    //                 statusCode: 200,
-    //                 message: 'Request Success',
-    //                 result: data
-    //             }
-    //             res.json(result);
-    //         } else {
-    //             res.status(400).json('error getting salary')
-    //         }
-    //     }).catch(err => res.status(400).json('not found'))
+}
+
+const getSalary = (req, res, knex) => {
+    knex.select('*').from('salaries_v2').where('id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('No Salary Associated With That Id')
+            }
+        }).catch(err => res.status(400).json('salary not found'))
 }
 
 const addSalary = (req, res, knex) => {
@@ -152,5 +136,5 @@ const updateSalary = (req, res, knex) => {
 
 
 module.exports = {
-    getAllSalaries, getAllActiveSalaries, addSalary, updateSalary
+    getAllSalaries, getAllActiveSalaries, getSalary, addSalary, updateSalary
 };

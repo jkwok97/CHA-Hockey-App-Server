@@ -78,7 +78,7 @@ app.delete('/v2/players/delete/:id', (req, res) => {playerInfo.deletePlayer(req,
 
 app.get('/v2/players/salaries', (req, res) => {salaries_v2.getAllSalaries(req, res, knex)});
 app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalaries(req, res, knex)});
-// app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getPlayer(req, res, knex)});
+app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getSalary(req, res, knex)});
 
 app.put('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.updateSalary(req, res, knex)});
 

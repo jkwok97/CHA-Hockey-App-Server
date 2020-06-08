@@ -19,6 +19,7 @@ const nhl = require('./controllers/nhl');
 const playerInfo = require('./controllers/playerInfo');
 const salaries_v2 = require('./controllers/salaries_v2');
 const teams_v2 = require('./controllers/teams_v2');
+const league = require('./controllers/league');
 
 
 
@@ -44,6 +45,12 @@ app.get('/', (req, res) => { res.send("it is working"); });
 // ****************************************************************************************
 //                                       VERSION 2
 // ****************************************************************************************
+
+// ****************************************************************************************
+//                                       League
+// ****************************************************************************************
+
+app.get('/v2/league/divisions', (req, res) => {league.getDivisions(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Users

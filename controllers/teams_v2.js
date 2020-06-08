@@ -112,9 +112,9 @@ const updateTeam = (req, res, knex) => {
 
 const addTeam = (req, res, knex) => {
     knex('teams_v2').insert({
-        shortName: req.body.shortName,
+        shortName: req.body.shortname,
         city: req.body.city,
-        nickName: req.body.nickName,
+        nickName: req.body.nickname,
         isactive : req.body.isactive,
         users_id : req.body.users_id,
         teamlogo: req.body.teamlogo,
@@ -126,14 +126,14 @@ const addTeam = (req, res, knex) => {
         if (resp) {
             const result = {
                 statusCode: 200,
-                message: 'Add Player Success',
+                message: 'Add Team Success',
                 result: resp
             }
             res.json(result);
         } else {
             res.status(400).json('Error!'); 
         }
-    }).catch(err => res.status(400).json('Add Player Error'))
+    }).catch(err => res.status(400).json('Add Team Error'))
 }
 
 const deleteTeam = (req, res, knex) => {

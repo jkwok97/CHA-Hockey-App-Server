@@ -84,9 +84,9 @@ const getTeamById = (req, res, knex) => {
 const updateTeam = (req, res, knex) => {
     knex('teams_v2').where({id: req.params.id})
         .update({
-            shortName: req.body.shortName,
+            shortname: req.body.shortname,
             city: req.body.city,
-            nickName: req.body.nickName,
+            nickname: req.body.nickname,
             isactive : req.body.isactive,
             users_id : req.body.users_id,
             teamlogo: req.body.teamlogo,
@@ -112,9 +112,9 @@ const updateTeam = (req, res, knex) => {
 
 const addTeam = (req, res, knex) => {
     knex('teams_v2').insert({
-        shortName: req.body.shortname,
+        shortname: req.body.shortname,
         city: req.body.city,
-        nickName: req.body.nickname,
+        nickname: req.body.nickname,
         isactive : req.body.isactive,
         users_id : req.body.users_id,
         teamlogo: req.body.teamlogo,
@@ -133,10 +133,7 @@ const addTeam = (req, res, knex) => {
         } else {
             res.status(400).json('Error!'); 
         }
-    }).catch(err => {
-        console.log(err);
-        res.status(400).json('Add Team Error')}
-        )
+    }).catch(err => res.status(400).json('Add Team Error'))
 }
 
 const deleteTeam = (req, res, knex) => {

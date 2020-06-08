@@ -98,7 +98,7 @@ const updateTeam = (req, res, knex) => {
             if (resp) {
                 const result = {
                     statusCode: 200,
-                    message: 'Update Player Success',
+                    message: 'Update Team Success',
                     result: resp
                 }
                 res.json(result);
@@ -106,7 +106,7 @@ const updateTeam = (req, res, knex) => {
                 res.status(400).json('Error!'); 
             }
         }).catch(err => {
-            res.status(400).json('Updating Player Error')
+            res.status(400).json('Updating Team Error')
         })
 }
 

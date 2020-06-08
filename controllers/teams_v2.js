@@ -1,5 +1,17 @@
 const getTeams = (req, res, knex) => {
-    knex.select('*')
+    knex.select(
+        'a.id',
+        'a.users_id',
+        'a.shortname',
+        'a.city',
+        'a.nickname',
+        'a.isactive',
+        'a.teamlogo',
+        'a.divisions_id',
+        'b.firstname',
+        'b.lastname',
+        'c.divisionname'
+    )
     .from('teams_v2 as a')
     .leftJoin('users_v2 as b', 'b.id', 'a.users_id')
     .leftJoin('divisions_v2 as c', 'c.id', 'a.divisions_id')

@@ -22,9 +22,9 @@ const getAllActiveSalaries = (req, res, knex) => {
 
     knex.select('*').from('users').fullOuterJoin('accounts', 'users.id', 'accounts.user_id')
 
-    knex.select('*').from('players_v2')
-        .fullOuterJoin('salaries_v2', 'players_v2.id', 'salaries_v2.player_id')
-        .where('players_v2.isactive', req.query.isactive)
+    knex.select('*').from('salaries_v2 as a')
+        .fullOuterJoin('players_v2 as b', 'a.player_id', 'b.id')
+        .where('b.isactive', req.query.isactive)
         .then(data => {
             if (data.length) {
                 const result = {

@@ -1,5 +1,6 @@
 const getDivisions = (req, res, knex) => {
     knex.select('*').from('divisions_v2')
+        .where('isactive', true)
         .then(data => {
             if (data.length) {
                 const result = {

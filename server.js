@@ -18,6 +18,7 @@ const users = require('./controllers/users');
 const nhl = require('./controllers/nhl');
 const playerInfo = require('./controllers/playerInfo');
 const salaries_v2 = require('./controllers/salaries_v2');
+const teams_v2 = require('./controllers/teams_v2');
 
 
 
@@ -88,7 +89,16 @@ app.post('/v2/players/salaries/add', (req, res) => {salaries_v2.addSalary(req, r
 //                                       Teams
 // ****************************************************************************************
 
-app.get('/v2/:id/teams', (req, res) => {teams.getTeamsByUser(req, res, knex)});
+app.get('/v2/teams', (req, res) => {teams_v2.getTeams(req, res, knex)});
+app.get('/v2/teams/active', (req, res) => {teams_v2.getTeamsByActive(req, res, knex)});
+app.get('/v2/teams/user/:id', (req, res) => {teams_v2.getTeamsByUser(req, res, knex)});
+app.get('/v2/teams/:id', (req, res) => {teams_v2.getTeamById(req, res, knex)});
+
+app.put('/v2/teams/:id', (req, res) => {teams_v2.updateTeam(req, res, knex)});
+
+app.post('/v2/teams', (req, res) => {teams_v2.addTeam(req, res, knex)});
+
+app.delete('/v2/teams/:id', (req, res) => {teams_v2.deleteTeam(req, res, knex)});
 
 // ****************************************************************************************
 //                                       NHL

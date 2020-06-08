@@ -20,9 +20,37 @@ const getAllSalaries = (req, res, knex) => {
 
 const getAllActiveSalaries = (req, res, knex) => {
 
-    knex.select('*').from('players_v2')
-        .fullOuterJoin('salaries_v2', 'players_v2.id', 'salaries_v2.player_id')
-        .where('players_v2.isactive', req.query.isactive)
+    knex.select(
+        'a.id',
+        'a.player_id',
+        'a.season_2020',
+        'a.season_2021',
+        'a.season_2022',
+        'a.season_2023',
+        'a.season_2024',
+        'a.season_2025',
+        'a.season_2026',
+        'a.season_2027',
+        'a.season_2028',
+        'a.season_2029',
+        'a.season_2030',
+        'a.season_2031',
+        'a.season_2032',
+        'a.season_2033',
+        'a.season_2034',
+        'a.season_2035',
+        'a.season_2036',
+        'a.season_2037',
+        'a.season_2038',
+        'a.season_2039',
+        'a.season_2040',
+        'b.firstname',
+        'b.lastname',
+        'b.isactive'
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .where('b.isactive', req.query.isactive)
         .then(data => {
             if (data.length) {
                 const result = {

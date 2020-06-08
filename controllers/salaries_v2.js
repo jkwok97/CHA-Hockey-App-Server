@@ -21,7 +21,7 @@ const getAllSalaries = (req, res, knex) => {
 const getAllActiveSalaries = (req, res, knex) => {
 
     knex('salaries_v2').join('players_v2', 'salaries_v2.player_id', '=', 'players_v2.id')
-        .select('salaries_v2.id')
+        .select('*')
         .where('players_v2.isactive', req.query.isactive)
         .then(data => {
             if (data.length) {

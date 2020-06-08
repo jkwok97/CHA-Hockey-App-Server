@@ -20,11 +20,9 @@ const getAllSalaries = (req, res, knex) => {
 
 const getAllActiveSalaries = (req, res, knex) => {
 
-    knex.select('*').from('users').fullOuterJoin('accounts', 'users.id', 'accounts.user_id')
-
-    knex.select('*').from('salaries_v2 as a')
-        .fullOuterJoin('players_v2 as b', 'a.player_id', 'b.id')
-        .where('b.isactive', req.query.isactive)
+    knex('salaries_v2').join('players_v2', 'salaries_v2.player_id', '=', 'players_v2.id')
+        .select('salaries_v2.id')
+        .where('players_v2.isactive', req.query.isactive)
         .then(data => {
             if (data.length) {
                 const result = {
@@ -37,6 +35,22 @@ const getAllActiveSalaries = (req, res, knex) => {
                 res.status(400).json('error getting salary')
             }
         }).catch(err => res.status(400).json('not found'))
+
+    // knex.select('*').from('salaries_v2 as a')
+    //     .fullOuterJoin('players_v2 as b', 'a.player_id', 'b.id')
+    //     .where('b.isactive', req.query.isactive)
+    //     .then(data => {
+    //         if (data.length) {
+    //             const result = {
+    //                 statusCode: 200,
+    //                 message: 'Request Success',
+    //                 result: data
+    //             }
+    //             res.json(result);
+    //         } else {
+    //             res.status(400).json('error getting salary')
+    //         }
+    //     }).catch(err => res.status(400).json('not found'))
 }
 
 const addSalary = (req, res, knex) => {

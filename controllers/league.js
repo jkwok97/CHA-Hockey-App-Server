@@ -1,4 +1,5 @@
 const getDivisions = (req, res, knex) => {
+
     knex.select('*').from('divisions_v2')
         .where('isactive', true)
         .then(data => {
@@ -14,6 +15,7 @@ const getDivisions = (req, res, knex) => {
             }
     })
     .catch(err => res.status(400).json('not found'))
+    
 }
 
 module.exports = { 

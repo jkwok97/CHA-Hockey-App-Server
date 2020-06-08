@@ -51,39 +51,33 @@ const getPlayer = (req, res, knex) => {
 }
 
 const addPlayer = (req, res, knex) => {
-    knex('players_v2').insert({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        nhl_id: req.body.nhl_id,
-        isactive: req.body.isactive,
-        isgoalie: req.body.isgoalie,
-        isdefense: req.body.isdefense,
-        isforward: req.body.isforward,
-    }).returning('id').then(([id]) => {
-        if (id) {
-            const result = {
-                statusCode: 200,
-                message: 'Add Player Success',
-                result: id
+
+    const playerData = req.body;
+
+    knex('players_v2')
+        .insert(playerData)
+        .returning('id')
+        .then(([id]) => {
+            if (id) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Add Player Success',
+                    result: id
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('Error!'); 
             }
-            res.json(result);
-        } else {
-            res.status(400).json('Error!'); 
-        }
-    }).catch(err => res.status(400).json('Add Player Error'))
+        }).catch(err => res.status(400).json('Add Player Error'))
 }
 
 const updatePlayer = (req, res, knex) => {
+
+    const playerData = req.body;
+
     knex('players_v2').where({id: req.params.id})
-        .update({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            nhl_id: req.body.nhl_id,
-            isactive: req.body.isactive,
-            isgoalie: req.body.isgoalie,
-            isdefense: req.body.isdefense,
-            isforward: req.body.isforward,
-        }).then(resp => {
+        .update(playerData)
+        .then(resp => {
             if (resp) {
                 const result = {
                     statusCode: 200,
@@ -94,10 +88,7 @@ const updatePlayer = (req, res, knex) => {
             } else {
                 res.status(400).json('Error!'); 
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('Updating Player Error')
-        })
+        }).catch(err => res.status(400).json('Updating Player Error'))
 }
 
 const deletePlayer = (req, res, knex) => {

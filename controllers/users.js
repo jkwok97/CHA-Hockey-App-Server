@@ -47,35 +47,32 @@ const getUsers = (req, res, knex) => {
 }
 
 const addUser = (req, res, knex) => {
-    knex('users_v2').insert({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        isadmin: req.body.isadmin,
-        isactive: req.body.isactive
-    }).then(resp => {
-        if (resp) {
-            const result = {
-                statusCode: 200,
-                message: 'Add User Success',
-                result: resp
+
+    const userData = req.body;
+
+    knex('users_v2')
+        .insert(userData)
+        .then(resp => {
+            if (resp) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Add User Success',
+                    result: resp
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('Error!'); 
             }
-            res.json(result);
-        } else {
-            res.status(400).json('Error!'); 
-        }
-    }).catch(err => res.status(400).json('Add User Error'))
+        }).catch(err => res.status(400).json('Add User Error'))
 }
 
 const updateUser = (req, res, knex) => {
+
+    const userData = req.body;
+
     knex('users_v2').where({id: req.params.id})
-        .update({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            email: req.body.email,
-            isadmin: req.body.isadmin,
-            isactive: req.body.isactive
-        }).then(resp => {
+        .update(userData)
+        .then(resp => {
             if (resp) {
                 const result = {
                     statusCode: 200,

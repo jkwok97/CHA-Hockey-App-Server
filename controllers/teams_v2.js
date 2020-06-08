@@ -1,13 +1,6 @@
 const getTeams = (req, res, knex) => {
     knex.select(
-        'a.id',
-        'a.users_id',
-        'a.shortname',
-        'a.city',
-        'a.nickname',
-        'a.isactive',
-        'a.teamlogo',
-        'a.divisions_id',
+        'a.*',
         'b.firstname',
         'b.lastname',
         'c.divisionname'
@@ -82,19 +75,12 @@ const getTeamById = (req, res, knex) => {
 }
 
 const updateTeam = (req, res, knex) => {
+
+    const teamData = req.body;
+
     knex('teams_v2').where({id: req.params.id})
-        .update({
-            shortname: req.body.shortname,
-            city: req.body.city,
-            nickname: req.body.nickname,
-            isactive : req.body.isactive,
-            users_id : req.body.users_id,
-            teamlogo: req.body.teamlogo,
-            teamaltlogo: req.body.teamaltlogo,
-            teamcolor: req.body.teamcolor,
-            teamtextcolor: req.body.teamtextcolor,
-            divisions_id: req.body.divisions_id
-        }).then(resp => {
+        .update(teamData)
+        .then(resp => {
             if (resp) {
                 const result = {
                     statusCode: 200,
@@ -111,18 +97,10 @@ const updateTeam = (req, res, knex) => {
 }
 
 const addTeam = (req, res, knex) => {
-    knex('teams_v2').insert({
-        shortname: req.body.shortname,
-        city: req.body.city,
-        nickname: req.body.nickname,
-        isactive : req.body.isactive,
-        users_id : req.body.users_id,
-        teamlogo: req.body.teamlogo,
-        teamaltlogo: req.body.teamaltlogo,
-        teamcolor: req.body.teamcolor,
-        teamtextcolor: req.body.teamtextcolor,
-        divisions_id: req.body.divisions_id
-    }).then( resp => {
+
+    const teamData = req.body;
+
+    knex('teams_v2').insert(teamData).then( resp => {
         if (resp) {
             const result = {
                 statusCode: 200,

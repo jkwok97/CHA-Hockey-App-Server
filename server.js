@@ -20,8 +20,8 @@ const playerInfo = require('./controllers/playerInfo');
 const salaries_v2 = require('./controllers/salaries_v2');
 const teams_v2 = require('./controllers/teams_v2');
 const league = require('./controllers/league');
-
-
+const playersStats_v2 = require('./controllers/playersStats_v2');
+const goaliesStats_v2 = require('./controllers/goaliesStats_v2');
 
 const morgan = require('morgan');
 const knex = require('knex')({
@@ -79,6 +79,24 @@ app.put('/v2/players/edit/:id', (req, res) => {playerInfo.updatePlayer(req, res,
 app.post('/v2/players/add', (req, res) => {playerInfo.addPlayer(req, res, knex)});
 
 app.delete('/v2/players/delete/:id', (req, res) => {playerInfo.deletePlayer(req, res, knex)});
+
+// ****************************************************************************************
+//                                       Players Stats
+// ****************************************************************************************
+
+app.get('/v2/players-stats/', (req, res) => {playersStats_v2.getPlayersStats(req, res, knex)});
+app.get('/v2/players-stats/:id', (req, res) => {playersStats_v2.getPlayersStatsById(req, res, knex)});
+
+app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersStatsById(req, res, knex)});
+
+// ****************************************************************************************
+//                                       Goalies Stats
+// ****************************************************************************************
+
+app.get('/v2/goalies-stats/', (req, res) => {goaliesStats_v2.getGoaliesStats(req, res, knex)});
+app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsById(req, res, knex)});
+
+app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Salaries

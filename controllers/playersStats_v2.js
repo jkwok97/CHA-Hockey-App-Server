@@ -11,6 +11,8 @@ const getPlayersStats = (req, res, knex) => {
         )
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
         .then(data => {
             if (data.length) {
                 const result = {
@@ -40,6 +42,8 @@ const getPlayersStatsById = (req, res, knex) => {
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('a.id', req.params.id)
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
         .then(data => {
             if (data.length) {
                 const result = {

@@ -133,7 +133,10 @@ const addTeam = (req, res, knex) => {
         } else {
             res.status(400).json('Error!'); 
         }
-    }).catch(err => res.status(400).json('Add Team Error'))
+    }).catch(err => {
+        console.log(err);
+        res.status(400).json('Add Team Error')}
+        )
 }
 
 const deleteTeam = (req, res, knex) => {

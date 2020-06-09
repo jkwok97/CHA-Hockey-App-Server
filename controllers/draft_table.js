@@ -49,7 +49,22 @@ const getDraftTableById = (req, res, knex) => {
 }
 
 const updateDraftTableById = (req, res, knex) => {
+    const tableData = req.body;
 
+    knex('draft_order_v2').where({id: req.params.id})
+        .update(tableData)
+        .then(resp => {
+            if (resp) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Update Draft Table Success',
+                    result: resp
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        }).catch(err => res.status(400).json('Updating Draft Table Error'))
 }
 
 module.exports = {

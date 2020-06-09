@@ -121,7 +121,7 @@ app.put('/v2/draft/edit/:id', (req, res) => {draft_v2.updateDraftedPlayer(req, r
 
 app.post('/v2/draft/add', (req, res) => {draft_v2.addDraftedPlayer(req, res, knex)});
 
-app.delete('/v2/draft/:id', (req, res) => {draft_v2.deleteDraftedPlayer(req, res, knex)});
+app.delete('/v2/draft/edit/:id', (req, res) => {draft_v2.deleteDraftedPlayer(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Salaries

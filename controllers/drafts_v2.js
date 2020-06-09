@@ -103,10 +103,7 @@ const deleteDraftedPlayer = (req, res, knex) => {
         } else {
             res.status(400).json('Error!'); 
         }
-    }).catch(err => {
-        console.log(err);
-        res.status(400).json('Deleting Drafted Player Error')}
-        )
+    }).catch(err => res.status(400).json('Deleting Drafted Player Error'))
 }
 
 module.exports = {

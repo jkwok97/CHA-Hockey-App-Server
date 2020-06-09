@@ -59,10 +59,13 @@ const getPlayersStatsById = (req, res, knex) => {
 const getActivePlayersByTeam = (req, res, knex) => {
 
     knex.select(
+        'a.id',
+        'a.player_id',
         'a.team_name',
-        'b.id',
         'b.firstname',
         'b.lastname',
+        'b.isactive',
+        'b.isgoalie',
         'c.city',
         'c.nickname'
         )
@@ -70,6 +73,7 @@ const getActivePlayersByTeam = (req, res, knex) => {
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.team_name', req.params.id)
+        .where('b.isactive', req.query.isactive)
         .then(data => {
             if (data.length) {
                 const result = {

@@ -7,3 +7,6 @@ FULL OUTER JOIN salaries_v2
 ON players_v2.id = salaries_v2.player_id
 WHERE players_v2.id = '2';
 
+UPDATE players_stats_v2
+SET team_name = 'LOU'
+WHERE id = '2';

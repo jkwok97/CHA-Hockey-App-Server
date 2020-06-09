@@ -44,13 +44,12 @@ const getGoaliesStatsById = (req, res, knex) => {
         .from('goalies_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('a.id', req.params.id)
-        .first()
         .then(data => {
             if (data.length) {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: data[0]
                 }
                 res.json(result);
             } else {

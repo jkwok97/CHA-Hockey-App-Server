@@ -61,7 +61,8 @@ const getActivePlayersByTeam = (req, res, knex) => {
     knex.select(
         'a.team_name',
         'b.id',
-        'b.isactive',
+        'b.firstname',
+        'b.lastname',
         'c.city',
         'c.nickname'
         )
@@ -74,7 +75,7 @@ const getActivePlayersByTeam = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data[0]
+                    result: data
                 }
                 res.json(result);
             } else {

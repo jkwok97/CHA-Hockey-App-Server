@@ -23,6 +23,7 @@ const league = require('./controllers/league');
 const playersStats_v2 = require('./controllers/playersStats_v2');
 const goaliesStats_v2 = require('./controllers/goaliesStats_v2');
 const draft_table = require('./controllers/draft_table');
+const draft_v2 = require('./controllers/drafts_v2');
 
 const morgan = require('morgan');
 const knex = require('knex')({
@@ -107,6 +108,19 @@ app.get('/v2/draft-table', (req, res) => {draft_table.getDraftTableByYear(req, r
 app.get('/v2/draft-table/:id', (req, res) => {draft_table.getDraftTableById(req, res, knex)});
 
 app.patch('/v2/draft-table/:id', (req, res) => {draft_table.updateDraftTableById(req, res, knex)});
+
+// ****************************************************************************************
+//                                       Draft Player
+// ****************************************************************************************
+
+app.get('/v2/draft', (req, res) => {draft_v2.getDraftedPlayers(req, res, knex)});
+app.get('/v2/draft/:id', (req, res) => {draft_v2.getDraftedPlayerById(req, res, knex)});
+
+app.put('/v2/draft/edit/:id', (req, res) => {draft_v2.updateDraftedPlayer(req, res, knex)});
+
+app.post('/v2/draft/add', (req, res) => {draft_v2.addDraftedPlayer(req, res, knex)});
+
+app.delete('/v2/draft/:id', (req, res) => {draft_v2.deleteDraftedPlayer(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Salaries

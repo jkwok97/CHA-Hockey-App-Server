@@ -88,6 +88,7 @@ app.delete('/v2/players/delete/:id', (req, res) => {playerInfo.deletePlayer(req,
 
 app.get('/v2/players-stats/', (req, res) => {playersStats_v2.getPlayersStats(req, res, knex)});
 app.get('/v2/players-stats/:id', (req, res) => {playersStats_v2.getPlayersStatsById(req, res, knex)});
+app.get('/v2/players-stats/team/:id', (req, res) => {playersStats_v2.getActivePlayersByTeam(req, res, knex)});
 
 app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersStatsById(req, res, knex)});
 

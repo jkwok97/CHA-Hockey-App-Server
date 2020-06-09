@@ -56,6 +56,33 @@ const getPlayersStatsById = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getActivePlayersByTeam = (req, res, knex) => {
+
+    knex.select(
+        'a.team_name',
+        'b.id',
+        'b.isactive',
+        'c.city',
+        'c.nickname'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data[0]
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const updatePlayersStatsById = (req, res, knex) => {
 
     const playerStatData = req.body;
@@ -77,5 +104,5 @@ const updatePlayersStatsById = (req, res, knex) => {
 }
 
 module.exports = {
-    getPlayersStats, getPlayersStatsById, updatePlayersStatsById
+    getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, updatePlayersStatsById
 };

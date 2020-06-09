@@ -22,7 +22,10 @@ const getDraftedPlayers = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting drafted players')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('not found')}
+            )
 }
 
 const getDraftedPlayerById = (req, res, knex) => {

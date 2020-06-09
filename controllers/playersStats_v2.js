@@ -68,7 +68,7 @@ const getActivePlayersByTeam = (req, res, knex) => {
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
-        .where('a.id', req.params.id)
+        .where('a.team_name', req.params.id)
         .then(data => {
             if (data.length) {
                 const result = {

@@ -10,7 +10,6 @@ const getDraftedPlayers = (req, res, knex) => {
         .from('drafts_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-        .from('drafts_v2')
         .then(data => {
             if (data.length) {
                 const result = {
@@ -22,10 +21,7 @@ const getDraftedPlayers = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting drafted players')
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')}
-            )
+        }).catch(err => res.status(400).json('not found'))
 }
 
 const getDraftedPlayerById = (req, res, knex) => {

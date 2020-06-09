@@ -22,6 +22,7 @@ const teams_v2 = require('./controllers/teams_v2');
 const league = require('./controllers/league');
 const playersStats_v2 = require('./controllers/playersStats_v2');
 const goaliesStats_v2 = require('./controllers/goaliesStats_v2');
+const draft_table = require('./controllers/draft_table');
 
 const morgan = require('morgan');
 const knex = require('knex')({
@@ -99,6 +100,15 @@ app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsB
 app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
 
 // ****************************************************************************************
+//                                       Draft Table
+// ****************************************************************************************
+
+app.get('/v2/draft-table', (req, res) => {draft_table.getDraftTableByYear(req, res, knex)});
+app.get('/v2/draft-table/:id', (req, res) => {draft_table.getDraftTableById(req, res, knex)});
+
+app.patch('/v2/draft-table/:id', (req, res) => {draft_table.updateDraftTableById(req, res, knex)});
+
+// ****************************************************************************************
 //                                       Salaries
 // ****************************************************************************************
 
@@ -154,6 +164,23 @@ app.get('/nhl-stats/player', (req, res) => {
         nhl.getNhlPlayerStats(req, res);
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ****************************************************************************************
 //                                       VERSION 1

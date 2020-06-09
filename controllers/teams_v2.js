@@ -148,5 +148,5 @@ const deleteTeam = (req, res, knex) => {
 }
 
 module.exports = { 
-    getTeams, getTeamsByActive, getTeamsByUser, getTeamById, updateTeam, addTeam, deleteTeam
+    getTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, updateTeam, addTeam, deleteTeam
 }

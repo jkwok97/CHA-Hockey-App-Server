@@ -1,5 +1,15 @@
 const getDraftedPlayers = (req, res, knex) => {
-    knex.select('*')
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        )
+        .from('drafts_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
         .from('drafts_v2')
         .then(data => {
             if (data.length) {

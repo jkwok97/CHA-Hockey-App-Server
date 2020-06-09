@@ -42,6 +42,7 @@ const getPlayersStatsById = (req, res, knex) => {
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('a.id', req.params.id)
+        .first()
         .then(data => {
             if (data.length) {
                 const result = {

@@ -50,10 +50,6 @@ const getDraftTableById = (req, res, knex) => {
 
 const getDraftPicksByTeam = (req, res, knex) => {
 
-    console.log(req.params.id, typeof(req.params.id));
-    console.log(req.query.currentSeason, typeof(req.query.currentSeason))
-    console.log(req.query.nextSeason)
-
     knex.raw(
     `SELECT 
         a.*,
@@ -64,7 +60,7 @@ const getDraftPicksByTeam = (req, res, knex) => {
         FROM draft_order_v2 as a 
         LEFT JOIN teams_v2 as b 
         ON a.team_id = b.id
-        WHERE (${req.params.id} in (team_id, round_one, round_two, round_three, round_four, round_five)
+        WHERE (${Number(req.params.id)} in (team_id, round_one, round_two, round_three, round_four, round_five)
         AND (a.draft_year = ${req.query.currentSeason} OR a.draft_year = ${req.query.nextSeason}));`
     ).then(data => {
         if (data.length) {

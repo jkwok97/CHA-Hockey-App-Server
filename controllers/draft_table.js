@@ -50,6 +50,10 @@ const getDraftTableById = (req, res, knex) => {
 
 const getDraftPicksByTeam = (req, res, knex) => {
 
+    console.log(req.params.id, typeof(req.params.id));
+    console.log(req.query.currentSeason, typeof(req.query.currentSeason))
+    console.log(req.query.nextSeason)
+
     knex.raw(
     `SELECT 
         a.*,

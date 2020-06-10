@@ -60,8 +60,7 @@ const getDraftPicksByTeam = (req, res, knex) => {
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
         .where('a.draft_year', req.query.currentSeason)
         .orWhere('a.draft_year', req.query.nextSeason)
-        .whereIn(['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'],
-            req.params.id)
+        .whereIn(['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'],[req.params.id])
         .then(data => {
             if (data.length) {
                 const result = {

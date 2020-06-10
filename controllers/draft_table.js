@@ -49,33 +49,34 @@ const getDraftTableById = (req, res, knex) => {
 }
 
 const getDraftPicksByTeam = (req, res, knex) => {
-    knex.select(
-        'a.*',
-        'b.shortname',
-        'b.city',
-        'b.nickname',
-        'b.teamlogo'
-        )
-        .from('draft_order_v2 as a')
-        .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
-        .where('a.draft_year', req.query.currentSeason)
-        .orWhere('a.draft_year', req.query.nextSeason)
-        .whereIn(['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'],[req.params.id])
-        .then(data => {
-            if (data.length) {
-                const result = {
-                    statusCode: 200,
-                    message: 'Request Success',
-                    result: data[0]
-                }
-                res.json(result);
-            } else {
-                res.status(400).json('error getting pick stat')
+
+    knex.raw(
+    `SELECT 
+        a.*,
+        b.shortname,
+        b.city,
+        b.nickname,
+        b.teamlogo
+        FROM draft_order_v2 as a 
+        LEFT JOIN teams_v2 as b 
+        ON a.team_id = b.id
+        WHERE (${req.params.id} in (team_id, round_one, round_two, round_three, round_four, round_five)
+        AND (a.draft_year = ${req.query.currentSeason} OR a.draft_year = ${req.query.nextSeason}));`
+    ).then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data[0]
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')}
-            )
+            res.json(result);
+        } else {
+            res.status(400).json('error getting pick stat')
+        }
+    }).catch(err => {
+        console.log(err);
+        res.status(400).json('not found')}
+        )
 }
 
 const updateDraftTableById = (req, res, knex) => {

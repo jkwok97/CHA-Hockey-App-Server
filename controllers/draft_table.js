@@ -60,15 +60,15 @@ const getDraftPicksByTeam = (req, res, knex) => {
         )
         .from('draft_order_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
-        // .whereIn(req.param.id, ['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'])
-        .where('a.draft_year', req.query.currentSeason)
+        .whereIn(req.param.id, ['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'])
+        .andWhere('a.draft_year', req.query.currentSeason)
         .orWhere('a.draft_year', req.query.nextSeason)
         .then(data => {
             if (data.length) {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data[0]
+                    result: data
                 }
                 res.json(result);
             } else {

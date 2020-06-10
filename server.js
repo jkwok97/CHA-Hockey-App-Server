@@ -108,6 +108,7 @@ app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesS
 
 app.get('/v2/draft-table', (req, res) => {draft_table.getDraftTableByYear(req, res, knex)});
 app.get('/v2/draft-table/:id', (req, res) => {draft_table.getDraftTableById(req, res, knex)});
+app.get('/v2/draft-table/team/:id', (req, res) => {draft_table.getDraftPicksByTeam(req, res, knex)});
 
 app.patch('/v2/draft-table/:id', (req, res) => {draft_table.updateDraftTableById(req, res, knex)});
 

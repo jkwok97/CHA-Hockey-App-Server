@@ -22,5 +22,4 @@ b.teamlogo
 FROM draft_order_v2 as a 
 LEFT JOIN teams_v2 as b 
 ON a.team_id = b.id
-WHERE (19 in (team_id, round_one, round_two, round_three, round_four, round_five)
-AND (a.draft_year = '2020' OR a.draft_year = '2021'));
+WHERE (19 in (team_id, round_one, round_two, round_three, round_four, round_five) AND (a.draft_year = '2020' OR a.draft_year = '2021'));

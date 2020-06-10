@@ -74,6 +74,7 @@ const getActivePlayersByTeam = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.team_name', req.params.id)
         .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
         .where('b.isactive', req.query.isactive)
         .orderBy('b.lastname', 'asc')
         .then(data => {

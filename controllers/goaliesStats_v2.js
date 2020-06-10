@@ -88,7 +88,9 @@ const getActiveGoaliesByTeam = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting player stat')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => {
+            console.log(err)
+            res.status(400).json('not found')})
 }
 
 const updateGoaliesStatsById = (req, res, knex) => {

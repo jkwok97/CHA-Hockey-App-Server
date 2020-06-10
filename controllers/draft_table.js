@@ -62,7 +62,7 @@ const getDraftPicksByTeam = (req, res, knex) => {
         FROM draft_order_v2 as a 
         LEFT JOIN teams_v2 as b 
         ON a.team_id = b.id
-        WHERE (${id} in (team_id, round_one, round_two, round_three, round_four, round_five)
+        WHERE (${id}::REAL in (team_id, round_one, round_two, round_three, round_four, round_five)
         AND (a.draft_year = ${req.query.currentSeason} OR a.draft_year = ${req.query.nextSeason}));`
     ).then(data => {
         if (data.length) {

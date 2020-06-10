@@ -98,7 +98,7 @@ app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersS
 
 app.get('/v2/goalies-stats/', (req, res) => {goaliesStats_v2.getGoaliesStats(req, res, knex)});
 app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsById(req, res, knex)});
-app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActivePlayersByTeam(req, res, knex)});
+app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActiveGoaliesByTeam(req, res, knex)});
 
 app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
 

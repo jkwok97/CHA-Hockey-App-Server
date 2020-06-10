@@ -24,6 +24,33 @@ const getDraftedPlayers = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getDraftedPlayersBySeason = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        )
+        .from('drafts_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+        .where('a.draft_year', req.query.draft_year)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting drafted players')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const getDraftedPlayerById = (req, res, knex) => {
     knex.select(
         'a.*',
@@ -107,5 +134,5 @@ const deleteDraftedPlayer = (req, res, knex) => {
 }
 
 module.exports = {
-    getDraftedPlayers, getDraftedPlayerById, addDraftedPlayer, updateDraftedPlayer, deleteDraftedPlayer
+    getDraftedPlayers, getDraftedPlayerById, getDraftedPlayersBySeason, addDraftedPlayer, updateDraftedPlayer, deleteDraftedPlayer
 };

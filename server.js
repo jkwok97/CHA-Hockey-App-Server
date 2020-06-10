@@ -98,6 +98,7 @@ app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersS
 
 app.get('/v2/goalies-stats/', (req, res) => {goaliesStats_v2.getGoaliesStats(req, res, knex)});
 app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsById(req, res, knex)});
+app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActivePlayersByTeam(req, res, knex)});
 
 app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
 
@@ -116,6 +117,7 @@ app.patch('/v2/draft-table/:id', (req, res) => {draft_table.updateDraftTableById
 
 app.get('/v2/draft', (req, res) => {draft_v2.getDraftedPlayers(req, res, knex)});
 app.get('/v2/draft/:id', (req, res) => {draft_v2.getDraftedPlayerById(req, res, knex)});
+app.get('/v2/draft/season', (req, res) => {draft_v2.getDraftedPlayersBySeason(req, res, knex)});
 
 app.put('/v2/draft/edit/:id', (req, res) => {draft_v2.updateDraftedPlayer(req, res, knex)});
 

@@ -18,7 +18,7 @@ const getDraftTableByYear = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('error getting goalie stat')
+                res.status(400).json('error getting pick stat')
             }
         }).catch(err => res.status(400).json('not found'))
 }
@@ -43,7 +43,33 @@ const getDraftTableById = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('error getting goalie stat')
+                res.status(400).json('error getting pick stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getDraftPicksByTeam = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.shortname',
+        'b.city',
+        'b.nickname',
+        'b.teamlogo'
+        )
+        .from('draft_order_v2 as a')
+        .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
+        .whereIn(['a.team_id', 'a.round_one', 'a.round_two', 'a.round_three', 'a.round_four', 'a.round_five'],
+            req.params.id)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data[0]
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting pick stat')
             }
         }).catch(err => res.status(400).json('not found'))
 }
@@ -68,5 +94,5 @@ const updateDraftTableById = (req, res, knex) => {
 }
 
 module.exports = {
-    getDraftTableByYear, getDraftTableById, updateDraftTableById
+    getDraftTableByYear, getDraftTableById, getDraftPicksByTeam, updateDraftTableById
 };

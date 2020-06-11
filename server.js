@@ -24,6 +24,7 @@ const playersStats_v2 = require('./controllers/playersStats_v2');
 const goaliesStats_v2 = require('./controllers/goaliesStats_v2');
 const draft_table = require('./controllers/draft_table');
 const draft_v2 = require('./controllers/drafts_v2');
+const transactions_v2 = require('./controllers/transactions_v2');
 
 const morgan = require('morgan');
 const knex = require('knex')({
@@ -153,6 +154,14 @@ app.put('/v2/teams/:id', (req, res) => {teams_v2.updateTeam(req, res, knex)});
 app.post('/v2/teams', (req, res) => {teams_v2.addTeam(req, res, knex)});
 
 app.delete('/v2/teams/:id', (req, res) => {teams_v2.deleteTeam(req, res, knex)});
+
+// ****************************************************************************************
+//                                    Transactions
+// ****************************************************************************************
+
+app.put('/v2/transactions/acquire', (req, res) => {transactions_v2.acquire(req, res, knex, waiversHookUrl)});
+app.put('/v2/transactions/release', (req, res) => {transactions_v2.release(req, res, knex, waiversHookUrl)});
+app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res, knex, hookUrl)});
 
 // ****************************************************************************************
 //                                       NHL

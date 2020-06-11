@@ -145,11 +145,13 @@ const trade = (req, res, knex, hookUrl) => {
     const teamOneGoalies = req.body.teamOne.goalies;
     const teamOnePicks = req.body.teamOne.picks;
     const teamOneNewTeam = req.body.teamOne.newTeam;
+    const teamOneNewTeamId = req.body.teamOne.newTeamId;
 
     const teamTwoPlayers = req.body.teamTwo.players;
     const teamTwoGoalies = req.body.teamTwo.goalies;
     const teamTwoPicks = req.body.teamTwo.picks;
     const teamTwoNewTeam = req.body.teamTwo.newTeam;
+    const teamTwoNewTeamId = req.body.teamTwo.newTeamId;
 
     let error = false;
 
@@ -161,13 +163,16 @@ const trade = (req, res, knex, hookUrl) => {
     console.log("team one picks ============> ", teamOnePicks)
     console.log("team two picks ============> ", teamTwoPicks)
 
+    // team one picks ============>  [ { id: 9, team: 'IND', pick_value: '4th', draft_year: '2020' } ]
+    // team two picks ============>  [ { id: 2, team: 'MSG', pick_value: '4th', draft_year: '2020' } ]
+
     if (teamOnePicks && teamOnePicks.length > 0) {
 
         teamOnePicks.forEach((pick) => {
             switch (pick.pick_value) {
                 case '1st':
-                    knex('draft_order_v2').where({id: teamTwoPicks[0].id})
-                        .update({round_one: teamOneNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_one: teamOneNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -175,8 +180,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '2nd':
-                    knex('draft_order_v2').where({id: teamTwoPicks[0].id})
-                        .update({round_two: teamOneNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_two: teamOneNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -184,8 +189,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '3rd':
-                    knex('draft_order_v2').where({id: teamTwoPicks[0].id})
-                        .update({round_three: teamOneNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_three: teamOneNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -193,8 +198,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '4th':
-                    knex('draft_order_v2').where({id: teamTwoPicks[0].id})
-                        .update({round_four: teamOneNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_four: teamOneNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -202,8 +207,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '5th':
-                    knex('draft_order_v2').where({id: teamTwoPicks[0].id})
-                        .update({round_five: teamOneNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_five: teamOneNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -222,8 +227,8 @@ const trade = (req, res, knex, hookUrl) => {
         teamTwoPicks.forEach((pick) => {
             switch (pick.pick_value) {
                 case '1st':
-                    knex('draft_order_v2').where({id: teamOnePicks[0].id})
-                        .update({round_one: teamTwoNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_one: teamTwoNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -231,8 +236,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '2nd':
-                    knex('draft_order_v2').where({id: teamOnePicks[0].id})
-                        .update({round_two: teamTwoNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_two: teamTwoNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -240,8 +245,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '3rd':
-                    knex('draft_order_v2').where({id: teamOnePicks[0].id})
-                        .update({round_three: teamTwoNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_three: teamTwoNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -249,8 +254,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '4th':
-                    knex('draft_order_v2').where({id: teamOnePicks[0].id})
-                        .update({round_four: teamTwoNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_four: teamTwoNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }
@@ -258,8 +263,8 @@ const trade = (req, res, knex, hookUrl) => {
                         .catch(err => { res.status(400).json("Server Error!") });
                     break;
                 case '5th':
-                    knex('draft_order_v2').where({id: teamOnePicks[0].id})
-                        .update({round_five: teamTwoNewTeam})
+                    knex('draft_order_v2').where('id', pick.id)
+                        .update({round_five: teamTwoNewTeamId})
                         .then(resp => {
                             if (resp) { console.log(resp); }
                             else { error = true; }

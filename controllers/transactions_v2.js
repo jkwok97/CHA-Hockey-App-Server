@@ -158,6 +158,9 @@ const trade = (req, res, knex, hookUrl) => {
     updateGoalies(teamOneGoalies, knex);
     updateGoalies(teamTwoGoalies, knex);
 
+    console.log("team one picks ============> ", teamOnePicks)
+    console.log("team two picks ============> ", teamTwoPicks)
+
     if (teamOnePicks && teamOnePicks.length > 0) {
 
         teamOnePicks.forEach((pick) => {

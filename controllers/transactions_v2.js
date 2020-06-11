@@ -160,12 +160,6 @@ const trade = (req, res, knex, hookUrl) => {
     updateGoalies(teamOneGoalies, knex);
     updateGoalies(teamTwoGoalies, knex);
 
-    console.log("team one picks ============> ", teamOnePicks)
-    console.log("team two picks ============> ", teamTwoPicks)
-
-    // team one picks ============>  [ { id: 9, team: 'IND', pick_value: '4th', draft_year: '2020' } ]
-    // team two picks ============>  [ { id: 2, team: 'MSG', pick_value: '4th', draft_year: '2020' } ]
-
     if (teamOnePicks && teamOnePicks.length > 0) {
 
         teamOnePicks.forEach((pick) => {
@@ -323,7 +317,6 @@ const trade = (req, res, knex, hookUrl) => {
 }
 
 const updatePlayers = (players, knex) => {
-    console.log(players);
     if (players && players.length > 0) {
         players.forEach(player => {
             knex('players_stats_v2')
@@ -342,7 +335,6 @@ const updatePlayers = (players, knex) => {
 }
 
 const updateGoalies = (goalies, knex) => {
-    console.log(goalies);
     if (goalies && goalies.length > 0) {
         goalies.forEach((goalie) => {
             knex('goalies_stats_v2')

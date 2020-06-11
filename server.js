@@ -26,6 +26,7 @@ const draft_table = require('./controllers/draft_table');
 const draft_v2 = require('./controllers/drafts_v2');
 const transactions_v2 = require('./controllers/transactions_v2');
 
+
 const morgan = require('morgan');
 const knex = require('knex')({
     client: 'pg',
@@ -183,7 +184,7 @@ app.get('/nhl-leaders/summary', (req, res) => { nhl.getNHLPlayerSummary(req, res
 
 app.get('/nhl-rookie-leaders/', (req, res) => { nhl.getAllNHLRookieStats(req, res) });
 
-app.get('/nhl-rookie-leaders/summary', (req, res) => { player.getAllNHLRookieSummary(req, res) });
+app.get('/nhl-rookie-leaders/summary', (req, res) => { nhl.getAllNHLRookieSummary(req, res) });
 
 app.get('/nhl-stats/player', (req, res) => {
     if (req.query.pace) {

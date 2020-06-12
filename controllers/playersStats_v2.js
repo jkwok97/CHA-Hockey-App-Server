@@ -98,7 +98,8 @@ const getCurrentPlayersBySeasonByType = (req, res, knex) => {
         'b.lastname',
         'b.isgoalie',
         'c.city',
-        'c.nickname'
+        'c.nickname',
+        'c.teamlogo'
         )
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')

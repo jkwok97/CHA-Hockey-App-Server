@@ -25,6 +25,7 @@ const goaliesStats_v2 = require('./controllers/goaliesStats_v2');
 const draft_table = require('./controllers/draft_table');
 const draft_v2 = require('./controllers/drafts_v2');
 const transactions_v2 = require('./controllers/transactions_v2');
+const teamStats_v2 = require('./controllers/teamStats_v2');
 
 
 const morgan = require('morgan');
@@ -107,6 +108,12 @@ app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActiveGo
 app.get('/v2/goalies-stats/current/team/:id', (req, res) => {goaliesStats_v2.getGoaliesBySeasonByTypeByTeam(req, res, knex)});
 
 app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
+
+// ****************************************************************************************
+//                                       Team Stats
+// ****************************************************************************************
+
+app.get('/v2/team-stats/:userId/type', (req, res) => {teamStats_v2.getStatsBySeasonTypeByUser(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Draft Table

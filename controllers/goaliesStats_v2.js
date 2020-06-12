@@ -104,7 +104,7 @@ const getGoaliesBySeasonByTypeByTeam = (req, res, knex) => {
         'c.teamlogo'
         )
         .from('goalies_stats_v2 as a')
-        .leftJoin('goalies_stats_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.id', req.params.id)
         .where('a.playing_year', req.query.playing_year)

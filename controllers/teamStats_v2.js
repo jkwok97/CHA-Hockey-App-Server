@@ -6,7 +6,7 @@ const getStatsBySeasonTypeByUser = (req, res, knex) => {
         'c.teamlogo'
         )
         .from('team_stats_v2 as a')
-        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
         .where('c.users_id', req.params.userId)
         .where('a.season_type', req.query.season_type)
         .orderBy('a.points', 'asc')

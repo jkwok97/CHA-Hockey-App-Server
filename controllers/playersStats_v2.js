@@ -91,7 +91,7 @@ const getActivePlayersByTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getCurrentPlayersBySeasonByType = (req, res, knex) => {
+const getPlayersBySeasonByTypeByTeam = (req, res, knex) => {
     knex.select(
         'a.*',
         'b.firstname',
@@ -143,5 +143,6 @@ const updatePlayersStatsById = (req, res, knex) => {
 }
 
 module.exports = {
-    getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, getCurrentPlayersBySeasonByType, updatePlayersStatsById
+    getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, getPlayersBySeasonByTypeByTeam, 
+    updatePlayersStatsById
 };

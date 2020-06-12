@@ -93,6 +93,37 @@ const getActiveGoaliesByTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getGoaliesBySeasonByTypeByTeam = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('goalies_stats_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('c.id', req.params.id)
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('b.lastname', 'asc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const updateGoaliesStatsById = (req, res, knex) => {
 
     const playerStatData = req.body;
@@ -115,5 +146,6 @@ const updateGoaliesStatsById = (req, res, knex) => {
 }
 
 module.exports = {
-    getGoaliesStats, getGoaliesStatsById, getActiveGoaliesByTeam, updateGoaliesStatsById
+    getGoaliesStats, getGoaliesStatsById, getActiveGoaliesByTeam, getGoaliesBySeasonByTypeByTeam,
+    updateGoaliesStatsById
 };

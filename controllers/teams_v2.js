@@ -92,7 +92,7 @@ const getTeamLogo = (req, res, knex) => {
 }
 
 const getUserIdByTeamName = (req, res, knex) => {
-    knex.select('users_id').from('teams_v2').where('shortName', req.params.teamName)
+    knex.select('users_id').from('teams_v2').where('shortname', req.params.teamName)
         .then(data => {
             if (data.length) {
                 const result = {

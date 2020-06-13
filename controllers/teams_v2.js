@@ -91,6 +91,23 @@ const getTeamLogo = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const getUserIdByTeamName = (req, res, knex) => {
+    knex.select('users_id').from('teams_v2').where('shortName', req.params.teamName)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting stats')
+            }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 const updateTeam = (req, res, knex) => {
 
     const teamData = req.body;
@@ -148,5 +165,6 @@ const deleteTeam = (req, res, knex) => {
 }
 
 module.exports = { 
-    getTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, updateTeam, addTeam, deleteTeam
+    getTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, getUserIdByTeamName,
+    updateTeam, addTeam, deleteTeam
 }

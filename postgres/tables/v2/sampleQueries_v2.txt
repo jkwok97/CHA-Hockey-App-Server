@@ -23,3 +23,78 @@ FROM draft_order_v2 as a
 LEFT JOIN teams_v2 as b 
 ON a.team_id = b.id
 WHERE (19 in (team_id, round_one, round_two, round_three, round_four, round_five) AND (a.draft_year = '2020' OR a.draft_year = '2021'));
+
+
+
+SELECT agents.agent_code,agents.agent_name,
+SUM(orders.advance_amount)
+FROM agents,orders
+WHERE agents.agent_code=orders.agent_code
+GROUP BY agents.agent_code,agents.agent_name
+ORDER BY agents.agent_code;
+
+select
+b.firstname,
+b.lastname,
+b.isgoalie,
+c.city,
+c.nickname,
+c.teamlogo,
+a.season_type as season_type, 
+a.team_name as team_name, 
+sum(a.games_played) as games_played, 
+sum(a.goals) as goals, 
+sum(a.assists) as assists, 
+sum(a.points) as points, 
+sum(a.plus_minus) as plus_minus, 
+sum(a.penalty_minutes) as penalty_minutes, 
+sum(a.sh_goals) as sh_goals, 
+sum(a.pp_goals) as pp_goals, 
+sum(a.gw_goals) as gw_goals, 
+sum(a.gt_goals) as gt_goals, 
+sum(a.shots) as shots, 
+sum(a.minutes_played) as minutes_played, 
+sum(a.hits) as hits, 
+sum(a.blocked_shots) as blocked_shots
+from
+players_stats_v2 as a,
+players_v2 as b,
+teams_v2 as c
+where b.id = a.player_id
+and
+team_name = 'STA'
+AND
+season_type = 'Regular' 
+group by b.firstname, b.lastname, b.isgoalie, a.season_type, a.team_name;
+
+
+
+
+
+
+
+
+
+
+season_type as season_type, 
+team_name as team_name, 
+sum(games_played) as games_played, 
+sum(goals) as goals, 
+sum(assists) as assists, 
+sum(points) as points, 
+sum(plus_minus) as plus_minus, 
+sum(penalty_minutes) as penalty_minutes, 
+sum(sh_goals) as sh_goals, 
+sum(pp_goals) as pp_goals, 
+sum(gw_goals) as gw_goals, 
+sum(gt_goals) as gt_goals, 
+sum(shots) as shots, 
+sum(minutes_played) as minutes_played, 
+sum(hits) as hits, 
+sum(blocked_shots) as blocked_shots, 
+player_id
+from players_stats_v2 as a
+where team_name = 'STA' 
+and 
+season_type = 'Regular'
+group by a.player_id, a.team_name, a.season_type;

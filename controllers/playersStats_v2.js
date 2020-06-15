@@ -164,22 +164,24 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         'a.id',
         'a.season_type',
         'a.team_name',
-        'a.sum(a.games_played) as games_played',
-        'a.sum(a.goals) as goals',
-        'a.sum(a.assists) as assists',
-        'a.sum(a.points) as points',
-        'a.sum(a.plus_minus) as plus_minus',
-        'a.sum(a.penalty_minutes) as penalty_minutes',
-        'a.sum(a.sh_goals) as sh_goals',
-        'a.sum(a.pp_goals) as pp_goals',
-        'a.sum(a.gw_goals) as gw_goals',
-        'a.sum(a.gt_goals) as gt_goals',
-        'a.sum(a.shots) as shots',
-        'a.sum(a.minutes_played) as minutes_played',
-        'a.sum(a.hits) as hits',
-        'a.sum(a.blocked_shots) as blocked_shots'
         )
         .from('players_stats_v2 as a')
+        .sum(
+            'a.games_played as games_played',
+            'a.goals as goals',
+            'a.assists as assists',
+            'a.points as points',
+            'a.plus_minus as plus_minus',
+            'a.penalty_minutes as penalty_minutes',
+            'a.sh_goals as sh_goals',
+            'a.pp_goals as pp_goals',
+            'a.gw_goals as gw_goals',
+            'a.gt_goals as gt_goals',
+            'a.shots as shots',
+            'a.minutes_played as minutes_played',
+            'a.hits as hits',
+            'a.blocked_shots as blocked_shots'
+        )
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.users_id', req.params.id)

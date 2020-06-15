@@ -205,6 +205,6 @@ const updatePlayersStatsById = (req, res, knex) => {
 
 module.exports = {
     getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, 
-    getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser,
+    getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser, getPlayersByShowByTypeByUser,
     updatePlayersStatsById
 };

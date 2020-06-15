@@ -122,7 +122,7 @@ const getPlayersBySeasonByTypeByTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getPlayersByTypeByTeam = (req, res, knex) => {
+const getPlayersByTypeByUser = (req, res, knex) => {
     knex.select(
         'a.*',
         'b.firstname',
@@ -135,7 +135,7 @@ const getPlayersByTypeByTeam = (req, res, knex) => {
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
-        .where('c.id', req.params.id)
+        .where('c.users_id', req.params.id)
         .where('a.season_type', req.query.season_type)
         .orderBy('a.points', 'desc')
         .then(data => {
@@ -174,6 +174,6 @@ const updatePlayersStatsById = (req, res, knex) => {
 
 module.exports = {
     getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, 
-    getPlayersBySeasonByTypeByTeam, getPlayersByTypeByTeam,
+    getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser,
     updatePlayersStatsById
 };

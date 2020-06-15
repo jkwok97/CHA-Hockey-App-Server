@@ -153,21 +153,38 @@ const getPlayersByTypeByUser = (req, res, knex) => {
 }
 
 getPlayersByShowByTypeByUser = (req, res, knex) => {
+
     knex.select(
-        'a.*',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
         'c.city',
         'c.nickname',
-        'c.teamlogo'
+        'c.teamlogo',
+        'a.id',
+        'a.season_type',
+        'a.team_name',
+        'sum(a.games_played) as games_played',
+        'sum(a.goals) as goals',
+        'sum(a.assists) as assists',
+        'sum(a.points) as points',
+        'sum(a.plus_minus) as plus_minus',
+        'sum(a.penalty_minutes) as penalty_minutes',
+        'sum(a.sh_goals) as sh_goals',
+        'sum(a.pp_goals) as pp_goals',
+        'sum(a.gw_goals) as gw_goals',
+        'sum(a.gt_goals) as gt_goals',
+        'sum(a.shots) as shots',
+        'sum(a.minutes_played) as minutes_played',
+        'sum(a.hits) as hits',
+        'sum(a.blocked_shots) as blocked_shots'
         )
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.users_id', req.params.id)
         .where('a.season_type', req.query.season_type)
-        .groupByRaw('b.id, c.shortname, a.season_type')
+        .groupByRaw('b.id, a.team_name, a.season_type')
         .orderBy('a.points', 'desc')
         .then(data => {
             if (data.length) {

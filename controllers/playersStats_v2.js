@@ -182,11 +182,11 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
             'a.hits as hits',
             'a.blocked_shots as blocked_shots'
         )
+        .groupByRaw('a.player_id, a.team_name, a.season_type')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.users_id', req.params.id)
         .where('a.season_type', req.query.season_type)
-        .groupByRaw('b.id, a.team_name, a.season_type', 'c.city')
         .orderBy('a.points', 'desc')
         .then(data => {
             if (data.length) {

@@ -181,7 +181,7 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.users_id', req.params.id)
         .where('a.season_type', req.query.season_type)
-        .orderBy('a.points', 'desc')
+        .orderBy('points', 'desc')
         .then(data => {
             if (data.length) {
                 const result = {

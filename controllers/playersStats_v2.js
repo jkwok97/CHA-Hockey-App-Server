@@ -155,7 +155,7 @@ const getPlayersByTypeByUser = (req, res, knex) => {
 getPlayersByShowByTypeByUser = (req, res, knex) => {
 
     knex('players_stats_v2 as a')
-        .sum({ sum: [
+        .sum([
             'a.games_played as games_played',
             'a.goals as goals',
             'a.assists as assists',
@@ -170,8 +170,7 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
             'a.minutes_played as minutes_played',
             'a.hits as hits',
             'a.blocked_shots as blocked_shots'
-        ]}
-        )
+        ])
         .groupByRaw('a.player_id, a.team_name, a.season_type')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')

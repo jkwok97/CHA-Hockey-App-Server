@@ -155,13 +155,7 @@ const getPlayersByTypeByUser = (req, res, knex) => {
 getPlayersByShowByTypeByUser = (req, res, knex) => {
 
     knex.select(
-        'b.firstname',
-        'b.lastname',
-        'b.isgoalie',
-        'c.city',
-        'c.nickname',
-        'c.teamlogo',
-        'a.id',
+        'a.player_id',
         'a.season_type',
         'a.team_name',
         )
@@ -182,7 +176,7 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
             'a.hits as hits',
             'a.blocked_shots as blocked_shots'
         )
-        .groupByRaw('a.player_id, a.team_name, a.season_type, b.firstname, b.lastname, b.isgoalie, c.city, c.nickname, c.teamlogo, a.id')
+        .groupByRaw('a.player_id, a.team_name, a.season_type')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('c.users_id', req.params.id)

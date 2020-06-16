@@ -194,7 +194,7 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
     ;`)
     .then(data => {
         console.log(data);
-        if (data.length) {
+        if (data.rows.length) {
             const result = {
                 statusCode: 200,
                 message: 'Request Success',

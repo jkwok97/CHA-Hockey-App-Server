@@ -180,7 +180,7 @@ const getGoaliesByShowByTypeByUser = (req, res, knex) => {
         sum(goals) as goals, 
         sum(assists) as assists, 
         sum(points) as points, 
-        sum(penalty_minutes) as penalty_minutes,
+        sum(penalty_minutes) as penalty_minutes
         from
         goalies_stats_v2 as a
         left join players_v2 as b
@@ -195,7 +195,6 @@ const getGoaliesByShowByTypeByUser = (req, res, knex) => {
         group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
     ;`)
     .then(data => {
-        console.log(data);
         if (data.rows.length) {
             const result = {
                 statusCode: 200,

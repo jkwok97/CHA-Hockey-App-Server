@@ -55,7 +55,7 @@ sum(a.minutes_played) as minutes_played,
 sum(a.hits) as hits, 
 sum(a.blocked_shots) as blocked_shots
 from
-players_stats_v2 as a,
+players_stats_v2 as a
 players_v2 as b
 where a.player_id = b.id
 and
@@ -73,7 +73,10 @@ b.lastname as lastname,
 b.isgoalie as isgoalie,
 a.player_id as player_id,
 a.season_type as season_type, 
-a.team_name as team_name, 
+a.team_name as team_name,
+c.city as city, 
+c.nickname as nickname,
+c.teamlogo,
 sum(a.games_played) as games_played, 
 sum(a.goals) as goals, 
 sum(a.assists) as assists, 
@@ -89,21 +92,21 @@ sum(a.minutes_played) as minutes_played,
 sum(a.hits) as hits, 
 sum(a.blocked_shots) as blocked_shots
 from
-players_stats_v2 as a,
-players_v2 as b
-left join
-teams_v2 as c on c.shortname = a.team_name
+players_stats_v2 as a
+left join players_v2 as b
+on b.id = a.player_id
+left join teams_v2 as c
+on c.shortname = a.team_name
 where (a.player_id = b.id
-and
-a.team_name = 'STA'
 AND
 a.season_type = 'Regular'
 and
 c.users_id = '18')
-group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
+group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
 ;
 
-
+and
+a.team_name = 'STA'
 
 
 

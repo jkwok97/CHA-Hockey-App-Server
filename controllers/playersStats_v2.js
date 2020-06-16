@@ -154,6 +154,9 @@ const getPlayersByTypeByUser = (req, res, knex) => {
 
 getPlayersByShowByTypeByUser = (req, res, knex) => {
 
+    console.log(req.params.id)
+    console.log(req.query.season_type)
+
     knex.raw(`
         select
         b.firstname as firstname,
@@ -161,7 +164,10 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         b.isgoalie as isgoalie,
         a.player_id as player_id,
         a.season_type as season_type, 
-        a.team_name as team_name, 
+        a.team_name as team_name,
+        c.city as city, 
+        c.nickname as nickname,
+        c.teamlogo,
         sum(a.games_played) as games_played, 
         sum(a.goals) as goals, 
         sum(a.assists) as assists, 
@@ -177,14 +183,17 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         sum(a.hits) as hits, 
         sum(a.blocked_shots) as blocked_shots
         from
-        players_stats_v2 as a,
-        players_v2 as b
-        where a.player_id = b.id
-        and
-        a.team_name = ${req.query.team_name}
+        players_stats_v2 as a
+        left join players_v2 as b
+        on b.id = a.player_id
+        left join teams_v2 as c
+        on c.shortname = a.team_name
+        where (a.player_id = b.id
         AND
         a.season_type = ${req.query.season_type}
-        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
+        and
+        c.users_id = ${req.params.id})
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
     ;`)
     .then(data => {
         if (data.length) {

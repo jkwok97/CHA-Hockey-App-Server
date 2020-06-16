@@ -118,6 +118,7 @@ app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesS
 // ****************************************************************************************
 
 app.get('/v2/team-stats/:userId/type', (req, res) => {teamStats_v2.getStatsBySeasonTypeByUser(req, res, knex)});
+app.get('/v2/team-stats/season', (req, res) => {teamStats_v2.getStatsBySeasonByType(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Draft Table

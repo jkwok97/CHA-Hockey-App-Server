@@ -181,9 +181,9 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         players_v2 as b
         where a.player_id = b.id
         and
-        a.team_name = 'STA'
+        a.team_name = ${req.query.team_name}
         AND
-        a.season_type = 'Regular'
+        a.season_type = ${req.query.season_type}
         group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
     ;`)
     .then(data => {

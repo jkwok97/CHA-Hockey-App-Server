@@ -152,7 +152,7 @@ const getPlayersByTypeByUser = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-getPlayersByShowByTypeByUser = (req, res, knex) => {
+const getPlayersByShowByTypeByUser = (req, res, knex) => {
 
     knex.raw(`
         select
@@ -193,7 +193,6 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
     ;`)
     .then(data => {
-        console.log(data);
         if (data.rows.length) {
             const result = {
                 statusCode: 200,
@@ -204,10 +203,7 @@ getPlayersByShowByTypeByUser = (req, res, knex) => {
         } else {
             res.status(400).json('error getting player stat')
         }
-    }).catch(err => {
-        console.log(err);
-        res.status(400).json('not found')}
-        )
+    }).catch(err => res.status(400).json('not found'))
 }
 
 const updatePlayersStatsById = (req, res, knex) => {

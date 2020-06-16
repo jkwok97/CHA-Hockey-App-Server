@@ -124,6 +124,90 @@ const getGoaliesBySeasonByTypeByTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getGoaliesByTypeByUser = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('c.users_id', req.params.id)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.points', 'desc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getGoaliesByShowByTypeByUser = (req, res, knex) => {
+
+    knex.raw(`
+        select
+        b.firstname as firstname,
+        b.lastname as lastname,
+        b.isgoalie as isgoalie,
+        a.player_id as player_id,
+        a.season_type as season_type, 
+        a.team_name as team_name,
+        c.city as city, 
+        c.nickname as nickname,
+        c.teamlogo,
+        sum(games_played) as games_played, 
+        sum(wins) as wins, 
+        sum(loss) as loss, 
+        sum(ties) as ties, 
+        sum(minutes_played) as minutes_played, 
+        sum(en_goals) as en_goals, 
+        sum(shutouts) as shutouts, 
+        sum(goals_against) as goals_against, 
+        sum(saves) as saves, 
+        sum(shots_for) as shots_for, 
+        sum(goals) as goals, 
+        sum(assists) as assists, 
+        sum(points) as points, 
+        sum(penalty_minutes) as penalty_minutes,
+        from
+        goalies_stats_v2 as a
+        left join players_v2 as b
+        on b.id = a.player_id
+        left join teams_v2 as c
+        on c.shortname = a.team_name
+        where (a.player_id = b.id
+        and
+        a.season_type = '${req.query.season_type}'
+        and
+        c.users_id = '${req.params.id}')
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
+    ;`)
+    .then(data => {
+        if (data.rows.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data.rows
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting player stat')
+        }
+    }).catch(err => res.status(400).json('not found'))
+}
+
 const updateGoaliesStatsById = (req, res, knex) => {
 
     const playerStatData = req.body;
@@ -146,6 +230,7 @@ const updateGoaliesStatsById = (req, res, knex) => {
 }
 
 module.exports = {
-    getGoaliesStats, getGoaliesStatsById, getActiveGoaliesByTeam, getGoaliesBySeasonByTypeByTeam,
+    getGoaliesStats, getGoaliesStatsById, getActiveGoaliesByTeam, 
+    getGoaliesBySeasonByTypeByTeam, getGoaliesByTypeByUser, getGoaliesByShowByTypeByUser, 
     updateGoaliesStatsById
 };

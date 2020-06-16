@@ -154,41 +154,37 @@ const getPlayersByTypeByUser = (req, res, knex) => {
 
 getPlayersByShowByTypeByUser = (req, res, knex) => {
 
-
     knex.raw(`
-    select
-    b.firstname,
-    b.lastname,
-    b.isgoalie,
-    c.city,
-    c.nickname,
-    c.teamlogo,
-    a.season_type as season_type, 
-    a.team_name as team_name, 
-    sum(a.games_played) as games_played, 
-    sum(a.goals) as goals, 
-    sum(a.assists) as assists, 
-    sum(a.points) as points, 
-    sum(a.plus_minus) as plus_minus, 
-    sum(a.penalty_minutes) as penalty_minutes, 
-    sum(a.sh_goals) as sh_goals, 
-    sum(a.pp_goals) as pp_goals, 
-    sum(a.gw_goals) as gw_goals, 
-    sum(a.gt_goals) as gt_goals, 
-    sum(a.shots) as shots, 
-    sum(a.minutes_played) as minutes_played, 
-    sum(a.hits) as hits, 
-    sum(a.blocked_shots) as blocked_shots
-    from
-    players_stats_v2 as a,
-    players_v2 as b,
-    teams_v2 as c
-    where b.id = a.player_id
-    and
-    team_name = 'STA'
-    AND
-    season_type = 'Regular' 
-    group by b.firstname, b.lastname, b.isgoalie, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
+        select
+        b.firstname as firstname,
+        b.lastname as lastname,
+        b.isgoalie as isgoalie,
+        a.player_id as player_id,
+        a.season_type as season_type, 
+        a.team_name as team_name, 
+        sum(a.games_played) as games_played, 
+        sum(a.goals) as goals, 
+        sum(a.assists) as assists, 
+        sum(a.points) as points, 
+        sum(a.plus_minus) as plus_minus, 
+        sum(a.penalty_minutes) as penalty_minutes, 
+        sum(a.sh_goals) as sh_goals, 
+        sum(a.pp_goals) as pp_goals, 
+        sum(a.gw_goals) as gw_goals, 
+        sum(a.gt_goals) as gt_goals, 
+        sum(a.shots) as shots, 
+        sum(a.minutes_played) as minutes_played, 
+        sum(a.hits) as hits, 
+        sum(a.blocked_shots) as blocked_shots
+        from
+        players_stats_v2 as a,
+        players_v2 as b
+        where a.player_id = b.id
+        and
+        a.team_name = 'STA'
+        AND
+        a.season_type = 'Regular'
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
     ;`)
     .then(data => {
         if (data.length) {

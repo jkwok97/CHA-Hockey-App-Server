@@ -34,12 +34,10 @@ GROUP BY agents.agent_code,agents.agent_name
 ORDER BY agents.agent_code;
 
 select
-b.firstname,
-b.lastname,
-b.isgoalie,
-c.city,
-c.nickname,
-c.teamlogo,
+b.firstname as firstname,
+b.lastname as lastname,
+b.isgoalie as isgoalie,
+a.player_id as player_id,
 a.season_type as season_type, 
 a.team_name as team_name, 
 sum(a.games_played) as games_played, 
@@ -58,14 +56,15 @@ sum(a.hits) as hits,
 sum(a.blocked_shots) as blocked_shots
 from
 players_stats_v2 as a,
-players_v2 as b,
-teams_v2 as c
-where b.id = a.player_id
+players_v2 as b
+where a.player_id = b.id
 and
-team_name = 'STA'
+a.team_name = 'STA'
 AND
-season_type = 'Regular' 
-group by b.firstname, b.lastname, b.isgoalie, a.season_type, a.team_name;
+a.season_type = 'Regular'
+group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
+;
+
 
 
 

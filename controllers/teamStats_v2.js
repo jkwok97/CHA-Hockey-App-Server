@@ -35,7 +35,7 @@ const getStatsBySeasonByType = (req, res, knex) => {
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-        .where('a.playing_year', req.params.playing_year)
+        .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
         .orderBy('a.points', 'asc')
         .then(data => {

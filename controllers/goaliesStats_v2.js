@@ -195,6 +195,7 @@ const getGoaliesByShowByTypeByUser = (req, res, knex) => {
         group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
     ;`)
     .then(data => {
+        console.log(data);
         if (data.rows.length) {
             const result = {
                 statusCode: 200,
@@ -205,7 +206,10 @@ const getGoaliesByShowByTypeByUser = (req, res, knex) => {
         } else {
             res.status(400).json('error getting player stat')
         }
-    }).catch(err => res.status(400).json('not found'))
+    }).catch(err => {
+        console.log(err)
+        res.status(400).json('not found')
+    })
 }
 
 const updateGoaliesStatsById = (req, res, knex) => {

@@ -97,6 +97,7 @@ const getPlayersBySeasonByTypeByTeam = (req, res, knex) => {
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
+        'b.nhl_id',
         'c.city',
         'c.nickname',
         'c.teamlogo'

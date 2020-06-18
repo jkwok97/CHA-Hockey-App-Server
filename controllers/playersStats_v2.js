@@ -372,7 +372,7 @@ const getAssistsLeaders = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getGoalsLeaders = (req, ress, knex) => {
+const getGoalsLeaders = (req, res, knex) => {
     knex.select(
         'a.goals',
         'b.firstname',

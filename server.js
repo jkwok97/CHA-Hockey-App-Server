@@ -100,6 +100,8 @@ app.get('/v2/players-stats/show/history/user/:id', (req, res) => {playersStats_v
 app.get('/v2/players-stats/leaders/points', (req, res) => {playersStats_v2.getPointLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/defense', (req, res) => {playersStats_v2.getDefenseLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/rookies', (req, res) => {playersStats_v2.getRookieLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/assists', (req, res) => {playersStats_v2.getAssistsLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/goals', (req, res) => {playersStats_v2.getGoalsLeaders(req, res, knex)});
 
 app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersStatsById(req, res, knex)});
 

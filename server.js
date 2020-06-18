@@ -108,6 +108,8 @@ app.get('/v2/players-stats/leaders/shots', (req, res) => {playersStats_v2.getSho
 app.get('/v2/players-stats/leaders/blocked', (req, res) => {playersStats_v2.getBlockedShotsLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/penalties', (req, res) => {playersStats_v2.getPenaltyLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/minutes', (req, res) => {playersStats_v2.getMinutesLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/plus', (req, res) => {playersStats_v2.getPlusMinusLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/minus', (req, res) => {playersStats_v2.getWorstPlusMinusLeaders(req, res, knex)});
 
 app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersStatsById(req, res, knex)});
 

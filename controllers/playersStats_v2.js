@@ -227,8 +227,47 @@ const updatePlayersStatsById = (req, res, knex) => {
         }).catch(err => res.status(400).json('Updating Player Stat Error'))
 }
 
+
+// ================================= LEADERS ===========================================
+
+const getPointLeaders = (req, res, knex) => {
+    knex.select(
+        'a.games_played',
+        'a.goals',
+        'a.assists',
+        'a.points',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.points', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
     getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, 
     getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser, getPlayersByShowByTypeByUser,
+    getPointLeaders,
     updatePlayersStatsById
 };

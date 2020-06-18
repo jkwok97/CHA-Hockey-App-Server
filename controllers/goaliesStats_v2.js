@@ -297,6 +297,7 @@ const getShutoutLeaders = (req, res, knex) => {
 }
 
 const getSavePctLeaders = (req, res, knex) => {
+
     knex.select(
         'a.save_pct',
         'b.firstname',
@@ -312,6 +313,7 @@ const getSavePctLeaders = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
+        .where('a.games_played', '>', req.query.min_games)
         .orderBy('a.save_pct', 'desc')
         .limit(10)
         .then(data => {
@@ -344,7 +346,8 @@ const getGaaLeaders = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
-        .orderBy('a.goals_against_avg', 'desc')
+        .where('a.games_played', '>', req.query.min_games)
+        .orderBy('a.goals_against_avg', 'asc')
         .limit(10)
         .then(data => {
             if (data.length) {

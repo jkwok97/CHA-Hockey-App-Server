@@ -406,7 +406,7 @@ const getGoalsLeaders = (req, res, knex) => {
 
 const getPpGoalsLeaders = (req, res, knex) => {
     knex.select(
-        'a.goals',
+        'a.pp_goals',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
@@ -438,7 +438,7 @@ const getPpGoalsLeaders = (req, res, knex) => {
 
 const getShGoalsLeaders = (req, res, knex) => {
     knex.select(
-        'a.goals',
+        'a.sh_goals',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',

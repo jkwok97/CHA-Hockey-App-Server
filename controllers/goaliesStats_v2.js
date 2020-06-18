@@ -232,8 +232,169 @@ const updateGoaliesStatsById = (req, res, knex) => {
 
 }
 
+const getWinsLeaders = (req, res, knex) => {
+    knex.select(
+        'a.wins',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.wins', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getShutoutLeaders = (req, res, knex) => {
+    knex.select(
+        'a.shutouts',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.shutouts', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getSavePctLeaders = (req, res, knex) => {
+    knex.select(
+        'a.save_pct',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.save_pct', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getGaaLeaders = (req, res, knex) => {
+    knex.select(
+        'a.goals_against_avg',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.goals_against_avg', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getShotsFacedLeaders = (req, res, knex) => {
+    knex.select(
+        'a.shots_for',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.shots_for', 'desc')
+        .limit(10)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 module.exports = {
     getGoaliesStats, getGoaliesStatsById, getActiveGoaliesByTeam, 
     getGoaliesBySeasonByTypeByTeam, getGoaliesByTypeByUser, getGoaliesByShowByTypeByUser, 
+    getWinsLeaders, getShutoutLeaders, getSavePctLeaders, getGaaLeaders, getShotsFacedLeaders,
     updateGoaliesStatsById
 };

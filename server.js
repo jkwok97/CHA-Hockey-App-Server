@@ -128,6 +128,12 @@ app.get('/v2/goalies-stats/current/team/:id', (req, res) => {goaliesStats_v2.get
 app.get('/v2/goalies-stats/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByTypeByUser(req, res, knex)});
 app.get('/v2/goalies-stats/show/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByShowByTypeByUser(req, res, knex)});
 
+app.get('/v2/goalies-stats/leaders/wins', (req, res) => {goaliesStats_v2.getWinsLeaders(req, res, knex)});
+app.get('/v2/goalies-stats/leaders/shutouts', (req, res) => {goaliesStats_v2.getShutoutLeaders(req, res, knex)});
+app.get('/v2/goalies-stats/leaders/savepct', (req, res) => {goaliesStats_v2.getSavePctLeaders(req, res, knex)});
+app.get('/v2/goalies-stats/leaders/gaa', (req, res) => {goaliesStats_v2.getGaaLeaders(req, res, knex)});
+app.get('/v2/goalies-stats/leaders/shots', (req, res) => {goaliesStats_v2.getShotsFacedLeaders(req, res, knex)});
+
 app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesStatsById(req, res, knex)});
 
 // ****************************************************************************************

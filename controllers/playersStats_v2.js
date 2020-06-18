@@ -284,8 +284,7 @@ const getDefenseLeaders = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
-        .where('a.position', 'LD')
-        .orWhere('a.position', 'RD')
+        .where('b.isDefense', 'true')
         .orderBy('a.points', 'desc')
         .limit(10)
         .then(data => {

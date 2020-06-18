@@ -235,6 +235,7 @@ const updateGoaliesStatsById = (req, res, knex) => {
 const getWinsLeaders = (req, res, knex) => {
     knex.select(
         'a.wins',
+        'a.games_played',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
@@ -267,6 +268,7 @@ const getWinsLeaders = (req, res, knex) => {
 const getShutoutLeaders = (req, res, knex) => {
     knex.select(
         'a.shutouts',
+        'a.games_played',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
@@ -300,6 +302,7 @@ const getSavePctLeaders = (req, res, knex) => {
 
     knex.select(
         'a.save_pct',
+        'a.games_played',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
@@ -333,6 +336,7 @@ const getSavePctLeaders = (req, res, knex) => {
 const getGaaLeaders = (req, res, knex) => {
     knex.select(
         'a.goals_against_avg',
+        'a.games_played',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',
@@ -366,6 +370,7 @@ const getGaaLeaders = (req, res, knex) => {
 const getShotsFacedLeaders = (req, res, knex) => {
     knex.select(
         'a.shots_for',
+        'a.games_played',
         'b.firstname',
         'b.lastname',
         'b.isgoalie',

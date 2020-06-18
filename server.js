@@ -104,6 +104,8 @@ app.get('/v2/players-stats/leaders/assists', (req, res) => {playersStats_v2.getA
 app.get('/v2/players-stats/leaders/goals', (req, res) => {playersStats_v2.getGoalsLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/ppgoals', (req, res) => {playersStats_v2.getPpGoalsLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/shgoals', (req, res) => {playersStats_v2.getShGoalsLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/shots', (req, res) => {playersStats_v2.getShotsLeaders(req, res, knex)});
+app.get('/v2/players-stats/leaders/blocked', (req, res) => {playersStats_v2.getBlockedShotsLeaders(req, res, knex)});
 
 app.patch('/v2/players-stats/:id', (req, res) => {playersStats_v2.updatePlayersStatsById(req, res, knex)});
 

@@ -53,9 +53,7 @@ const getStatsBySeasonByType = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting team stat')
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')})
+        }).catch(err => {res.status(400).json('not found')})
 }
 
 const getStatsBySeasonByTypeByConference = (req, res, knex) => {
@@ -93,9 +91,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting team stat')
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')})
+        }).catch(err => res.status(400).json('not found'))
 }
 
 const getStatsBySeasonByTypeByDivision = (req, res, knex) => {

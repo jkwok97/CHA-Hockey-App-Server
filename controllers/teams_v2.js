@@ -58,12 +58,7 @@ const getCurrentTeams = (req, res, knex) => {
                     },
                 ]
             }
-
-            const result = {
-                statusCode: 200,
-                message: 'Request Success',
-                result: data
-            }
+            
             res.json(result);
         } else {
             res.status(400).json('error getting stats')

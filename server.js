@@ -125,6 +125,7 @@ app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsB
 app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActiveGoaliesByTeam(req, res, knex)});
 
 app.get('/v2/goalies-stats/season', (req, res) => {
+    console.log(req);
     console.log("hello from server.js");
     goaliesStats_v2.getGoaliesBySeasonByType(req, res, knex)
 });

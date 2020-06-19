@@ -109,6 +109,7 @@ const getGoaliesBySeasonByType = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
+        .where('a.games_played', '>', 0)
         .orderBy('a.wins', 'desc')
         .then(data => {
             if (data.length) {

@@ -29,6 +29,7 @@ const getCurrentTeams = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
+        'c.teamaltlogo',
         'd.divisionname',
         'e.conferencename'
     )
@@ -37,7 +38,6 @@ const getCurrentTeams = (req, res, knex) => {
     .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
     .where('c.isactive', req.query.isactive)
     .then(data => {
-        console.log(data);
         if (data.length) {
 
             const northWest = data.filter((team) => team['divisionname'] === 'North West');
@@ -65,9 +65,7 @@ const getCurrentTeams = (req, res, knex) => {
             res.status(400).json('error getting stats')
         }
     })
-    .catch(err => {
-        console.log(err);
-        res.status(400).json('not found')})
+    .catch(err => res.status(400).json('not found'))
 }
 
 const getTeamsByActive = (req, res, knex) => {

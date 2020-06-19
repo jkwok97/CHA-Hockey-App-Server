@@ -111,6 +111,7 @@ const getGoaliesBySeasonByType = (req, res, knex) => {
         .where('a.season_type', req.query.season_type)
         .orderBy('b.lastname', 'asc')
         .then(data => {
+            console.log(data);
             if (data.length) {
                 const result = {
                     statusCode: 200,

@@ -28,6 +28,7 @@ const getCurrentTeams = (req, res, knex) => {
         'c.id',
         'c.city',
         'c.nickname',
+        'c.shortname',
         'c.teamlogo',
         'c.teamaltlogo',
         'd.divisionname',

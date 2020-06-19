@@ -64,7 +64,9 @@ const getCurrentTeams = (req, res, knex) => {
             res.status(400).json('error getting stats')
         }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json('not found')})
 }
 
 const getTeamsByActive = (req, res, knex) => {

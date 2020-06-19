@@ -124,6 +124,8 @@ app.get('/v2/goalies-stats/', (req, res) => {goaliesStats_v2.getGoaliesStats(req
 app.get('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.getGoaliesStatsById(req, res, knex)});
 app.get('/v2/goalies-stats/team/:id', (req, res) => {goaliesStats_v2.getActiveGoaliesByTeam(req, res, knex)});
 
+app.get('/v2/goalies-stats/season', (req, res) => {goaliesStats_v2.getGoaliesBySeasonByType(req, res, knex)});
+
 app.get('/v2/goalies-stats/current/team/:id', (req, res) => {goaliesStats_v2.getGoaliesBySeasonByTypeByTeam(req, res, knex)});
 app.get('/v2/goalies-stats/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByTypeByUser(req, res, knex)});
 app.get('/v2/goalies-stats/show/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByShowByTypeByUser(req, res, knex)});

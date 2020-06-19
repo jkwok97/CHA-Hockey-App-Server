@@ -88,6 +88,48 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                         {name: 'Western', teams: western},
                     ]
                 }
+
+                res.json(result);
+            } else {
+                res.status(400).json('error getting team stat')
+            }
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('not found')})
+}
+
+const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        'd.divisionname',
+        )
+        .from('team_stats_v2 as a')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+        .leftJoin('divisions_v2 as d', 'd.id', 'c.divisions_id')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.points', 'asc')
+        .then(data => {
+            if (data.length) {
+
+                const northWest = data.filter((team) => team['divisionname'] === 'North West');
+                const northEast = data.filter((team) => team['divisionname'] === 'North East');
+                const southWest = data.filter((team) => team['divisionname'] === 'South West');
+                const southEast = data.filter((team) => team['divisionname'] === 'South East');
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: [ 
+                        {name: 'North West', teams: northWest}, 
+                        {name: 'North East', teams: northEast},
+                        {name: 'South West', teams: southWest}, 
+                        {name: 'South Eest', teams: southEast},
+                    ]
+                }
                 
                 res.json(result);
             } else {
@@ -100,5 +142,5 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
 
 module.exports = {
     getStatsBySeasonTypeByUser, getStatsBySeasonByType,
-    getStatsBySeasonByTypeByConference
+    getStatsBySeasonByTypeByConference, getStatsBySeasonByTypeByDivision
 };

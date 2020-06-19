@@ -37,7 +37,7 @@ const getStatsBySeasonByType = (req, res, knex) => {
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-        .leftJoin('divisions_v2 as d', 'd.id', 'c.division_id')
+        .leftJoin('divisions_v2 as d', 'd.id', 'c.divisions_id')
         .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)

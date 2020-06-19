@@ -94,6 +94,7 @@ const getActiveGoaliesByTeam = (req, res, knex) => {
 }
 
 const getGoaliesBySeasonByType = (req, res, knex) => {
+    console.log("hello");
     knex.select(
         'a.*',
         'b.firstname',

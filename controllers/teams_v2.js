@@ -35,7 +35,7 @@ const getCurrentTeams = (req, res, knex) => {
     .from('teams_v2 as c')
     .leftJoin('divisions_v2 as d', 'd.id', 'c.divisions_id')
     .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
-    .where('isactive', req.query.isactive)
+    .where('c.isactive', req.query.isactive)
     .then(data => {
         if (data.length) {
 
@@ -58,7 +58,7 @@ const getCurrentTeams = (req, res, knex) => {
                     },
                 ]
             }
-            
+
             res.json(result);
         } else {
             res.status(400).json('error getting stats')

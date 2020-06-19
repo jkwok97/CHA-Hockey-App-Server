@@ -59,6 +59,72 @@ const getPlayersBySeasonByType = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getPlayersBySeasonByTypeByForwards = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.nhl_id',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .where('b.isforward', 'true')
+        .where('a.games_played', '>', 0)
+        .orderBy('a.points', 'desc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getPlayersBySeasonByTypeByDefense = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.nhl_id',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .where('a.games_played', '>', 0)
+        .where('b.isdefense', 'true')
+        .orderBy('a.points', 'desc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const getPlayersStatsById = (req, res, knex) => {
 
     knex.select(
@@ -790,7 +856,7 @@ const getHitsLeaders = (req, res, knex) => {
 
 module.exports = {
     getPlayersStats, getPlayersStatsById, getActivePlayersByTeam, 
-    getPlayersBySeasonByType,
+    getPlayersBySeasonByType, getPlayersBySeasonByTypeByForwards, getPlayersBySeasonByTypeByDefense,
     getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser, getPlayersByShowByTypeByUser,
     getPointLeaders, getDefenseLeaders, getRookieLeaders, getAssistsLeaders, getGoalsLeaders,
     getPpGoalsLeaders, getShGoalsLeaders, getBlockedShotsLeaders, getShotsLeaders,

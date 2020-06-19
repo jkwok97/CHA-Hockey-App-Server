@@ -94,6 +94,8 @@ app.get('/v2/players-stats/:id', (req, res) => {playersStats_v2.getPlayersStatsB
 app.get('/v2/players-stats/team/:id', (req, res) => {playersStats_v2.getActivePlayersByTeam(req, res, knex)});
 
 app.get('/v2/players-stats/season/current', (req, res) => {playersStats_v2.getPlayersBySeasonByType(req, res, knex)});
+app.get('/v2/players-stats/season/forwards', (req, res) => {playersStats_v2.getPlayersBySeasonByTypeByForwards(req, res, knex)});
+app.get('/v2/players-stats/season/defense', (req, res) => {playersStats_v2.getPlayersBySeasonByTypeByDefense(req, res, knex)});
 
 app.get('/v2/players-stats/current/team/:id', (req, res) => {playersStats_v2.getPlayersBySeasonByTypeByTeam(req, res, knex)});
 app.get('/v2/players-stats/history/user/:id', (req, res) => {playersStats_v2.getPlayersByTypeByUser(req, res, knex)});

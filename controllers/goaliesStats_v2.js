@@ -94,7 +94,6 @@ const getActiveGoaliesByTeam = (req, res, knex) => {
 }
 
 const getGoaliesBySeasonByType = (req, res, knex) => {
-    console.log("hello from function");
     knex.select(
         'a.*',
         'b.firstname',
@@ -110,9 +109,8 @@ const getGoaliesBySeasonByType = (req, res, knex) => {
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
-        .orderBy('b.lastname', 'asc')
+        .orderBy('a.wins', 'desc')
         .then(data => {
-            console.log(data);
             if (data.length) {
                 const result = {
                     statusCode: 200,
@@ -123,9 +121,7 @@ const getGoaliesBySeasonByType = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting player stat')
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')})
+        }).catch(err => res.status(400).json('not found'))
 }
 
 const getGoaliesBySeasonByTypeByTeam = (req, res, knex) => {

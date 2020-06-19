@@ -23,6 +23,55 @@ const getTeams = (req, res, knex) => {
 .catch(err => res.status(400).json('not found'))
 }
 
+const getCurrentTeams = (req, res, knex) => {
+    knex.select(
+        'c.id',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        'd.divisionname',
+        'e.conferencename'
+    )
+    .from('teams_v2 as c')
+    .leftJoin('divisions_v2 as d', 'd.id', 'c.divisions_id')
+    .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
+    .where('isactive', req.query.isactive)
+    .then(data => {
+        if (data.length) {
+
+            const northWest = data.filter((team) => team['divisionname'] === 'North West');
+            const northEast = data.filter((team) => team['divisionname'] === 'North East');
+            const southWest = data.filter((team) => team['divisionname'] === 'South West');
+            const southEast = data.filter((team) => team['divisionname'] === 'South East');
+
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: [ 
+                    {name: 'Eastern', divisions: [
+                         { name: 'North East', teams: northEast},
+                         { name: 'South East', teams: southEast}]
+                    }, 
+                    {name: 'Western', divisions: [
+                        { name: 'North West', teams: northWest},
+                        { name: 'South West', teams: southWest}]
+                    },
+                ]
+            }
+
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 const getTeamsByActive = (req, res, knex) => {
     knex.select('*').from('teams_v2').where('isactive', req.query.isactive)
         .then(data => {
@@ -165,6 +214,6 @@ const deleteTeam = (req, res, knex) => {
 }
 
 module.exports = { 
-    getTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, getUserIdByTeamName,
+    getTeams, getCurrentTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, getUserIdByTeamName,
     updateTeam, addTeam, deleteTeam
 }

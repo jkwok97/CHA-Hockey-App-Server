@@ -199,6 +199,8 @@ app.get('/v2/teams/:id', (req, res) => {teams_v2.getTeamById(req, res, knex)});
 app.get('/v2/teams/:id/logo', (req, res) => {teams_v2.getTeamLogo(req, res, knex)});
 app.get('/v2/teams/:teamName/user/', (req, res) => {teams_v2.getUserIdByTeamName(req, res, knex)});
 
+app.get('/v2/teams/current', (req, res) => {teams_v2.getCurrentTeams(req, res, knex)});
+
 app.put('/v2/teams/:id', (req, res) => {teams_v2.updateTeam(req, res, knex)});
 
 app.post('/v2/teams', (req, res) => {teams_v2.addTeam(req, res, knex)});

@@ -37,6 +37,7 @@ const getCurrentTeams = (req, res, knex) => {
     .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
     .where('c.isactive', req.query.isactive)
     .then(data => {
+        console.log(data);
         if (data.length) {
 
             const northWest = data.filter((team) => team['divisionname'] === 'North West');

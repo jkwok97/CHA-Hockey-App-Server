@@ -83,8 +83,12 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: [ {eastern}, {western} ]
+                    result: [ 
+                        {name: 'Eastern', teams: eastern}, 
+                        {name: 'Western', teams: western},
+                    ]
                 }
+                
                 res.json(result);
             } else {
                 res.status(400).json('error getting team stat')

@@ -73,13 +73,25 @@ const getSalaryByTeamId = (req, res, knex) => {
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
+        .where('c.playing_year', req.query.playing_year)
+        .where('c.season_type', req.query.season_type)
         .then(data => {
             if (data.length) {
+
+                const forwards = data.filter((player) => player['isforward'] === true);
+                const defense = data.filter((player) => player['isdefense'] === true);
+                const goalies = data.filter((player) => player['isgoalie'] === true);
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: [ 
+                        {forwards: {players: forwards}}, 
+                        {defense: {players: defense}},
+                        {goalies: {players: goalies}},
+                    ]
                 }
+
                 res.json(result);
             } else {
                 res.status(400).json('error getting salary')

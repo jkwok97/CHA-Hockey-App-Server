@@ -58,7 +58,7 @@ const getSalary = (req, res, knex) => {
         }).catch(err => res.status(400).json('salary not found'))
 }
 
-const getSalaryByTeamId = (req, res, knex) => {
+const getPlayerSalaryByTeamId = (req, res, knex) => {
     knex.select(
         'a.*',
         'b.firstname',
@@ -79,15 +79,13 @@ const getSalaryByTeamId = (req, res, knex) => {
 
                 const forwards = data.filter((player) => player['isforward'] === true);
                 const defense = data.filter((player) => player['isdefense'] === true);
-                const goalies = data.filter((player) => player['isgoalie'] === true);
 
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: [ 
-                        {forwards: {players: forwards}}, 
-                        {defense: {players: defense}},
-                        {goalies: {players: goalies}},
+                        {forwards: forwards}, 
+                        {defense: defense},
                     ]
                 }
 
@@ -95,9 +93,39 @@ const getSalaryByTeamId = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting salary')
             }
-        }).catch(err => {
-            console.log(err);
-            res.status(400).json('not found')})
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getGoalieSalaryByTeamId = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isforward',
+        'b.isdefense',
+        'b.isgoalie',
+        'b.isactive'
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'b.id')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
+        .where('d.id', req.params.id)
+        .where('c.playing_year', req.query.playing_year)
+        .then(data => {
+            if (data.length) {
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+
+                res.json(result);
+            } else {
+                res.status(400).json('error getting salary')
+            }
+        }).catch(err => res.status(400).json('not found'))
 }
 
 const addSalary = (req, res, knex) => {
@@ -147,6 +175,6 @@ const updateSalary = (req, res, knex) => {
 
 module.exports = {
     getAllSalaries, getAllActiveSalaries, getSalary, 
-    getSalaryByTeamId,
+    getPlayerSalaryByTeamId, getGoalieSalaryByTeamId,
     addSalary, updateSalary
 };

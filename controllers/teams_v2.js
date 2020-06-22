@@ -120,7 +120,9 @@ const getTeamById = (req, res, knex) => {
                 res.status(400).json('error getting stats')
             }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => {
+        console.log(err)
+        res.status(400).json('not found')})
 }
 
 const getTeamLogo = (req, res, knex) => {

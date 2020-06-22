@@ -104,7 +104,10 @@ const getTeamsByUser = (req, res, knex) => {
 }
 
 const getTeamById = (req, res, knex) => {
-    knex.select('*').from('teams_v2').where('id', req.params.id)
+    knex.select('a.*', 'b.firstname', 'b.lastname')
+        .from('teams_v2 as a')
+        .leftJoin('users_v2 as b', 'b.id', 'a.users_id')
+        .where('id', req.params.id)
         .then(data => {
             if (data.length) {
                 const result = {

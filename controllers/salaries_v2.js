@@ -83,12 +83,11 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: [ 
-                        {forwards: forwards}, 
-                        {defense: defense},
-                    ]
+                    result: {
+                        forwards: {players: forwards},
+                        defense: {players: defense}
+                    }
                 }
-
                 res.json(result);
             } else {
                 res.status(400).json('error getting salary')

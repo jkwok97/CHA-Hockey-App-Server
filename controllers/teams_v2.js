@@ -107,7 +107,7 @@ const getTeamById = (req, res, knex) => {
     knex.select('a.*', 'b.firstname', 'b.lastname')
         .from('teams_v2 as a')
         .leftJoin('users_v2 as b', 'b.id', 'a.users_id')
-        .where('id', req.params.id)
+        .where('a.id', req.params.id)
         .then(data => {
             if (data.length) {
                 const result = {
@@ -120,9 +120,7 @@ const getTeamById = (req, res, knex) => {
                 res.status(400).json('error getting stats')
             }
     })
-    .catch(err => {
-        console.log(err)
-        res.status(400).json('not found')})
+    .catch(err => res.status(400).json('not found'))
 }
 
 const getTeamLogo = (req, res, knex) => {

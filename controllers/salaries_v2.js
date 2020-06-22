@@ -74,7 +74,6 @@ const getSalaryByTeamId = (req, res, knex) => {
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .where('c.playing_year', req.query.playing_year)
-        .where('c.season_type', req.query.season_type)
         .then(data => {
             if (data.length) {
 

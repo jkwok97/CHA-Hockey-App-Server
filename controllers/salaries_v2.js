@@ -70,7 +70,7 @@ const getSalaryByTeamId = (req, res, knex) => {
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
-        .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.player_id')
+        .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .then(data => {

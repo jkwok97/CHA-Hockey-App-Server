@@ -26,6 +26,33 @@ const getStatsBySeasonTypeByUser = (req, res, knex) => {
             res.status(400).json('not found')})
 }
 
+const getTeamStatsByTeamIdBySeasonbyType = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        )
+        .from('team_stats_v2 as a')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+        .where('a.team_id', req.params.id)
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .orderBy('a.points', 'asc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting team stat')
+            }
+        }).catch(err => {res.status(400).json('not found')})
+}
+
 const getStatsBySeasonByType = (req, res, knex) => {
     knex.select(
         'a.*',
@@ -137,6 +164,6 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
 }
 
 module.exports = {
-    getStatsBySeasonTypeByUser, getStatsBySeasonByType,
+    getStatsBySeasonTypeByUser, getStatsBySeasonByType, getTeamStatsByTeamIdBySeasonbyType, 
     getStatsBySeasonByTypeByConference, getStatsBySeasonByTypeByDivision
 };

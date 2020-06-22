@@ -148,6 +148,7 @@ app.patch('/v2/goalies-stats/:id', (req, res) => {goaliesStats_v2.updateGoaliesS
 
 app.get('/v2/team-stats/:userId/type', (req, res) => {teamStats_v2.getStatsBySeasonTypeByUser(req, res, knex)});
 app.get('/v2/team-stats/season', (req, res) => {teamStats_v2.getStatsBySeasonByType(req, res, knex)});
+app.get('/v2/team-stats/season/team/:id', (req, res) => {teamStats_v2.getTeamStatsByTeamIdBySeasonbyType(req, res, knex)});
 
 app.get('/v2/team-stats/season/conference', (req, res) => {teamStats_v2.getStatsBySeasonByTypeByConference(req, res, knex)});
 app.get('/v2/team-stats/season/division', (req, res) => {teamStats_v2.getStatsBySeasonByTypeByDivision(req, res, knex)});

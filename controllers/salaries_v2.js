@@ -1,7 +1,3 @@
-// ****************************************************************************************
-//                                       VERSION 2
-// ****************************************************************************************
-
 const getAllSalaries = (req, res, knex) => {
     knex.select('*').from('salaries_v2')
         .then(data => {
@@ -62,6 +58,37 @@ const getSalary = (req, res, knex) => {
         }).catch(err => res.status(400).json('salary not found'))
 }
 
+const getSalaryByTeamId = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isforward',
+        'b.isdefense',
+        'b.isgoalie',
+        'b.isactive'
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.player_id')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
+        .where('d.id', req.params.id)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting salary')
+            }
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('not found')})
+}
+
 const addSalary = (req, res, knex) => {
 
     const salaryData = req.body;
@@ -108,5 +135,7 @@ const updateSalary = (req, res, knex) => {
 
 
 module.exports = {
-    getAllSalaries, getAllActiveSalaries, getSalary, addSalary, updateSalary
+    getAllSalaries, getAllActiveSalaries, getSalary, 
+    getSalaryByTeamId,
+    addSalary, updateSalary
 };

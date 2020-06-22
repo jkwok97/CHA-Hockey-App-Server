@@ -184,6 +184,8 @@ app.get('/v2/players/salaries', (req, res) => {salaries_v2.getAllSalaries(req, r
 app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalaries(req, res, knex)});
 app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getSalary(req, res, knex)});
 
+app.get('/v2/salaries/team/:id', (req, res) => {salaries_v2.getSalaryByTeamId(req, res, knex)});
+
 app.put('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.updateSalary(req, res, knex)});
 
 app.post('/v2/players/salaries/add', (req, res) => {salaries_v2.addSalary(req, res, knex)});

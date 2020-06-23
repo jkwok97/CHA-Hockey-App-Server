@@ -29,16 +29,15 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         'b.shortname',
         'b.city',
         'b.nickname',
-        'b.teamlogo',
-        'c.points'
+        'b.teamlogo'
         )
         .from('draft_order_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
         .leftJoin('team_stats_v2 as c', 'c.team_id', 'b.id')
         .where('a.draft_year', req.query.draft_year)
-        // .where('c.playing_year', req.query.playing_year)
-        // .where('c.season_type', req.query.season_type)
-        // .orderBy('c.points', 'asc')
+        .where('c.playing_year', req.query.playing_year)
+        .where('c.season_type', req.query.season_type)
+        .orderBy('c.points', 'asc')
         .then(data => {
             if (data.length) {
                 const result = {

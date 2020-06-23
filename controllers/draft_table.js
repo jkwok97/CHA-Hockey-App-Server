@@ -24,9 +24,6 @@ const getDraftTableByYear = (req, res, knex) => {
 }
 
 const getDraftTableByYearByStandings = (req, res, knex) => {
-    console.log(req.query.draft_year)
-    console.log(req.query.playing_year)
-    console.log(req.query.season_type)
     knex.select(
         'a.*',
         'b.shortname',
@@ -38,8 +35,8 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
         .leftJoin('team_stats_v2 as c', 'c.team_id', 'a.team_id')
         .where('a.draft_year', req.query.draft_year)
-        .where('c.playing_year', req.query.playing_year)
-        .where('c.season_type', req.query.season_type)
+        // .where('c.playing_year', req.query.playing_year)
+        // .where('c.season_type', req.query.season_type)
         .orderBy('c.points', 'desc')
         .then(data => {
             if (data.length) {

@@ -3,7 +3,8 @@ const getStatsBySeasonTypeByUser = (req, res, knex) => {
         'a.*',
         'c.city',
         'c.nickname',
-        'c.teamlogo'
+        'c.teamlogo',
+        'c.shortname'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -32,6 +33,7 @@ const getTeamStatsByTeamIdBySeasonbyType = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
+        'c.shortname'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -59,6 +61,7 @@ const getStatsBySeasonByType = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
+        'c.shortname',
         'd.divisionname',
         'e.conferencename'
         )
@@ -89,6 +92,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
+        'c.shortname',
         'd.divisionname',
         'e.conferencename'
         )
@@ -127,6 +131,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
+        'c.shortname',
         'd.divisionname',
         )
         .from('team_stats_v2 as a')

@@ -24,6 +24,9 @@ const getDraftTableByYear = (req, res, knex) => {
 }
 
 const getDraftTableByYearByStandings = (req, res, knex) => {
+    console.log(req.query.draft_year)
+    console.log(req.query.playing_year)
+    console.log(req.query.season_type)
     knex.select(
         'a.*',
         'b.shortname',

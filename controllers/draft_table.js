@@ -23,6 +23,37 @@ const getDraftTableByYear = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+const getDraftTableByYearByStandings = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.shortname',
+        'b.city',
+        'b.nickname',
+        'b.teamlogo'
+        )
+        .from('draft_order_v2 as a')
+        .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
+        .leftJoin('team_stats_v2 as c', 'c.team_id', 'a.team_id')
+        .where('a.draft_year', req.query.draft_year)
+        .where('c.playing_year', req.query.playing_year)
+        .where('c.season_type', req.query.season_type)
+        .orderBy('c.points', 'desc')
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting pick stat')
+            }
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('not found')})
+}
+
 const getDraftTableById = (req, res, knex) => {
     knex.select(
         'a.*',
@@ -100,5 +131,6 @@ const updateDraftTableById = (req, res, knex) => {
 }
 
 module.exports = {
-    getDraftTableByYear, getDraftTableById, getDraftPicksByTeam, updateDraftTableById
+    getDraftTableByYear, getDraftTableById, getDraftPicksByTeam, getDraftTableByYearByStandings,
+    updateDraftTableById
 };

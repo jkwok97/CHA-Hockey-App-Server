@@ -155,7 +155,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
                         {name: 'North West', teams: northWest}, 
                         {name: 'North East', teams: northEast},
                         {name: 'South West', teams: southWest}, 
-                        {name: 'South Eest', teams: southEast},
+                        {name: 'South East', teams: southEast},
                     ]
                 }
                 

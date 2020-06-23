@@ -174,7 +174,7 @@ const updateSalary = (req, res, knex) => {
 
 
 module.exports = {
-    getAllSalaries, getAllActiveSalaries, getSalary, 
+    getAllSalaries, getAllActiveSalaries, getSalary,
     getPlayerSalaryByTeamId, getGoalieSalaryByTeamId,
     addSalary, updateSalary
 };

@@ -162,7 +162,7 @@ app.get('/v2/draft-table/:id', (req, res) => {draft_table.getDraftTableById(req,
 app.get('/v2/draft-table/team/:id', (req, res) => {draft_table.getDraftPicksByTeam(req, res, knex)});
 
 // app.get('/v2/draft-table/standings', (req, res) => {draft_table.getDraftTableByYearByStandings(req, res, knex)});
-app.get('/v2/draft-table/season-standings', (req, res) => {draft_table.getDraftTableByYearByStandings(req, res, knex)});
+app.get('/v2/draft-table/season-standings', (req, res) => {draft_table.getDraftTableByYear(req, res, knex)});
 // app.get('/v2/draft-table/standings', (req, res) => {draft_table.getDraftTableByYearByStandings(req, res, knex)});
 
 

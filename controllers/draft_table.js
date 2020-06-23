@@ -33,13 +33,12 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         )
         .from('draft_order_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
-        // .leftJoin('team_stats_v2 as c', 'c.team_id', 'a.team_id')
+        .leftJoin('team_stats_v2 as c', 'c.team_id', 'a.team_id')
         .where('a.draft_year', req.query.draft_year)
-        // .where('c.playing_year', req.query.playing_year)
-        // .where('c.season_type', req.query.season_type)
-        // .orderBy('c.points', 'desc')
+        .where('c.playing_year', req.query.playing_year)
+        .where('c.season_type', req.query.season_type)
+        .orderBy('c.points', 'desc')
         .then(data => {
-            console.log(data)
             if (data.length) {
                 const result = {
                     statusCode: 200,

@@ -161,7 +161,7 @@ app.get('/v2/draft-table', (req, res) => {draft_table.getDraftTableByYear(req, r
 app.get('/v2/draft-table/:id', (req, res) => {draft_table.getDraftTableById(req, res, knex)});
 app.get('/v2/draft-table/team/:id', (req, res) => {draft_table.getDraftPicksByTeam(req, res, knex)});
 
-app.get('/v2/draft-table/standings', (req, res) => {
+app.get('/v2/draft-table/by-standings/', (req, res) => {
     console.log(req.query.playing_year + 'in server');
     draft_table.getDraftTableByYearByStandings(req, res, knex)
 });

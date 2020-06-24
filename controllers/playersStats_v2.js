@@ -344,10 +344,6 @@ const getStatsByTypeSummed = (req, res, knex) => {
         b.isgoalie as isgoalie,
         a.player_id as player_id,
         a.season_type as season_type, 
-        a.team_name as team_name,
-        c.city as city, 
-        c.nickname as nickname,
-        c.teamlogo,
         sum(a.games_played) as games_played, 
         sum(a.goals) as goals, 
         sum(a.assists) as assists, 
@@ -366,14 +362,12 @@ const getStatsByTypeSummed = (req, res, knex) => {
         players_stats_v2 as a
         left join players_v2 as b
         on b.id = a.player_id
-        left join teams_v2 as c
-        on c.shortname = a.team_name
         where (a.player_id = b.id
         and
         a.points > '0'
         and
         a.season_type = '${req.query.season_type}')
-        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
     ;`)
     .then(data => {
         if (data.rows.length) {

@@ -139,7 +139,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
         sum(penalty_minutes) as penalty_minutes, 
         sum(shots_for) as shots_for, 
         sum(shots_against) as shots_against, 
-        sum(shut_outs) as shut_outs,
+        sum(shut_outs) as shut_outs
         from
         team_stats_v2 as a
         left join teams_v2 as c

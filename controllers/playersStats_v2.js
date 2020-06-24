@@ -367,7 +367,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
         a.points > '0'
         and
         a.season_type = '${req.query.season_type}')
-        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type
     ;`)
     .then(data => {
         if (data.rows.length) {

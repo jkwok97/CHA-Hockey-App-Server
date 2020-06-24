@@ -103,6 +103,10 @@ app.get('/v2/players-stats/show/history/user/:id', (req, res) => {playersStats_v
 
 app.get('/v2/players-stats/type/all-time', (req, res) => {playersStats_v2.getStatsByTypeSummed(req, res, knex)});
 app.get('/v2/players-stats/type/season', (req, res) => {playersStats_v2.getStatsbyType(req, res, knex)});
+app.get('/v2/players-stats/type/all-time/forward', (req, res) => {playersStats_v2.getForwardStatsByTypeSummed(req, res, knex)});
+app.get('/v2/players-stats/type/season/forward', (req, res) => {playersStats_v2.getForwardStatsbyType(req, res, knex)});
+app.get('/v2/players-stats/type/all-time/defense', (req, res) => {playersStats_v2.getDefenseStatsByTypeSummed(req, res, knex)});
+app.get('/v2/players-stats/type/season/defense', (req, res) => {playersStats_v2.getDefenseStatsbyType(req, res, knex)});
 
 app.get('/v2/players-stats/leaders/points', (req, res) => {playersStats_v2.getPointLeaders(req, res, knex)});
 app.get('/v2/players-stats/leaders/defense', (req, res) => {playersStats_v2.getDefenseLeaders(req, res, knex)});

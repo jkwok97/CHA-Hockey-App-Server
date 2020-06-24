@@ -386,6 +386,174 @@ const getStatsByTypeSummed = (req, res, knex) => {
     })
 }
 
+const getForwardStatsbyType = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.season_type', req.query.season_type)
+        .where('b.isforward', 'true')
+        .where('points', '>', 0)
+        .orderBy('a.points', 'desc')
+        .limit(1500)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getForwardStatsByTypeSummed = (req, res, knex) => {
+    knex.raw(`
+        select
+        b.firstname as firstname,
+        b.lastname as lastname,
+        b.isgoalie as isgoalie,
+        a.player_id as player_id,
+        a.season_type as season_type, 
+        sum(a.games_played) as games_played, 
+        sum(a.goals) as goals, 
+        sum(a.assists) as assists, 
+        sum(a.points) as points, 
+        sum(a.plus_minus) as plus_minus, 
+        sum(a.penalty_minutes) as penalty_minutes, 
+        sum(a.sh_goals) as sh_goals, 
+        sum(a.pp_goals) as pp_goals, 
+        sum(a.gw_goals) as gw_goals, 
+        sum(a.gt_goals) as gt_goals, 
+        sum(a.shots) as shots, 
+        sum(a.minutes_played) as minutes_played, 
+        sum(a.hits) as hits, 
+        sum(a.blocked_shots) as blocked_shots
+        from
+        players_stats_v2 as a
+        left join players_v2 as b
+        on b.id = a.player_id
+        where (a.player_id = b.id
+        and
+        b.isforward = 'true'
+        and
+        a.points > '0'
+        and
+        a.season_type = '${req.query.season_type}')
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type
+    ;`)
+    .then(data => {
+        if (data.rows.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data.rows
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting player stat')
+        }
+    }).catch(err => {
+        console.log(err)
+        res.status(400).json('not found')
+    })
+}
+
+const getDefenseStatsbyType = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
+        .where('a.season_type', req.query.season_type)
+        .where('b.isdefense', 'true')
+        .where('points', '>', 0)
+        .orderBy('a.points', 'desc')
+        .limit(1500)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getDefenseStatsByTypeSummed = (req, res, knex) => {
+    knex.raw(`
+        select
+        b.firstname as firstname,
+        b.lastname as lastname,
+        b.isgoalie as isgoalie,
+        a.player_id as player_id,
+        a.season_type as season_type, 
+        sum(a.games_played) as games_played, 
+        sum(a.goals) as goals, 
+        sum(a.assists) as assists, 
+        sum(a.points) as points, 
+        sum(a.plus_minus) as plus_minus, 
+        sum(a.penalty_minutes) as penalty_minutes, 
+        sum(a.sh_goals) as sh_goals, 
+        sum(a.pp_goals) as pp_goals, 
+        sum(a.gw_goals) as gw_goals, 
+        sum(a.gt_goals) as gt_goals, 
+        sum(a.shots) as shots, 
+        sum(a.minutes_played) as minutes_played, 
+        sum(a.hits) as hits, 
+        sum(a.blocked_shots) as blocked_shots
+        from
+        players_stats_v2 as a
+        left join players_v2 as b
+        on b.id = a.player_id
+        where (a.player_id = b.id
+        and
+        b.isdefense = 'true'
+        and
+        a.points > '0'
+        and
+        a.season_type = '${req.query.season_type}')
+        group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type
+    ;`)
+    .then(data => {
+        if (data.rows.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data.rows
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting player stat')
+        }
+    }).catch(err => {
+        console.log(err)
+        res.status(400).json('not found')
+    })
+}
+
 const updatePlayersStatsById = (req, res, knex) => {
 
     const playerStatData = req.body;
@@ -940,6 +1108,8 @@ module.exports = {
     getPlayersBySeasonByType, getPlayersBySeasonByTypeByForwards, getPlayersBySeasonByTypeByDefense,
     getPlayersBySeasonByTypeByTeam, getPlayersByTypeByUser, getPlayersByShowByTypeByUser,
     getStatsByTypeSummed, getStatsbyType, 
+    getForwardStatsbyType, getForwardStatsByTypeSummed,
+    getDefenseStatsByTypeSummed, getDefenseStatsbyType,
     getPointLeaders, getDefenseLeaders, getRookieLeaders, getAssistsLeaders, getGoalsLeaders,
     getPpGoalsLeaders, getShGoalsLeaders, getBlockedShotsLeaders, getShotsLeaders,
     getPenaltyLeaders, getMinutesLeaders, getPlusMinusLeaders, getWorstPlusMinusLeaders,

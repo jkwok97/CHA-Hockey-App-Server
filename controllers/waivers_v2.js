@@ -1,5 +1,12 @@
 const getAllTeams = (req, res, knex) => {
-    knex.select('*').from('waivers_v2')
+    knex.select(
+        'a.*',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo'
+        )
+        .from('waivers_v2 as a')
+        .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
         .then(data => {
             if (data.length) {
                 res.json(data);

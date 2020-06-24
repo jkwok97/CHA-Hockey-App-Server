@@ -153,8 +153,8 @@ app.get('/v2/team-stats/season/team/:id', (req, res) => {teamStats_v2.getTeamSta
 app.get('/v2/team-stats/season/conference', (req, res) => {teamStats_v2.getStatsBySeasonByTypeByConference(req, res, knex)});
 app.get('/v2/team-stats/season/division', (req, res) => {teamStats_v2.getStatsBySeasonByTypeByDivision(req, res, knex)});
 
-app.get('/v2/team-stats/all-time', (req, res) => {teamStats_v2.getStatsBySeasonByTypeSummed(req, res, knex)});
-app.get('/v2/team-stats/type', (req, res) => {teamStats_v2.getStatsbyType(req, res, knex)});
+app.get('/v2/team-stats/type/all-time', (req, res) => {teamStats_v2.getStatsBySeasonByTypeSummed(req, res, knex)});
+app.get('/v2/team-stats/type/season', (req, res) => {teamStats_v2.getStatsbyType(req, res, knex)});
 
 // ****************************************************************************************
 //                                       Draft Table

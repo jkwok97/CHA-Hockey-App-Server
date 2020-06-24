@@ -319,7 +319,9 @@ const getStatsbyType = (req, res, knex) => {
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'a.team_name')
         .where('a.season_type', req.query.season_type)
+        .where('points', '>', 0)
         .orderBy('a.points', 'desc')
+        .limit(1500)
         .then(data => {
             if (data.length) {
                 const result = {
@@ -368,6 +370,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
         on c.shortname = a.team_name
         where (a.player_id = b.id
         and
+        a.points > '0'
         a.season_type = '${req.query.season_type}')
         group by b.firstname, b.lastname, b.isgoalie, a.player_id, a.season_type, a.team_name, c.city, c.nickname, c.teamlogo
     ;`)

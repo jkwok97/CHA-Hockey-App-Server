@@ -7,7 +7,7 @@ const getAllTeams = (req, res, knex) => {
         )
         .from('waivers_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-        .orderBy('a.priority_number', 'desc')
+        .orderBy('a.priority_number', 'asc')
         .then(data => {
             if (data.length) {
                 res.json(data);

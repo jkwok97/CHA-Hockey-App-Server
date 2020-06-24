@@ -141,6 +141,9 @@ app.get('/v2/goalies-stats/current/team/:id', (req, res) => {goaliesStats_v2.get
 app.get('/v2/goalies-stats/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByTypeByUser(req, res, knex)});
 app.get('/v2/goalies-stats/show/history/user/:id', (req, res) => {goaliesStats_v2.getGoaliesByShowByTypeByUser(req, res, knex)});
 
+app.get('/v2/goalies-stats/type/all-time', (req, res) => {goaliesStats_v2.getGoalieStatsByTypeSummed(req, res, knex)});
+app.get('/v2/goalies-stats/type/season', (req, res) => {goaliesStats_v2.getGoalieStatsbyType(req, res, knex)});
+
 app.get('/v2/goalies-stats/leaders/wins', (req, res) => {goaliesStats_v2.getWinsLeaders(req, res, knex)});
 app.get('/v2/goalies-stats/leaders/shutouts', (req, res) => {goaliesStats_v2.getShutoutLeaders(req, res, knex)});
 app.get('/v2/goalies-stats/leaders/savepct', (req, res) => {goaliesStats_v2.getSavePctLeaders(req, res, knex)});

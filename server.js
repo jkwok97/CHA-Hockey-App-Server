@@ -8,7 +8,6 @@ const player = require('./controllers/players');
 const goalie = require('./controllers/goalies');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
-const waivers = require('./controllers/waivers');
 const schedule = require('./controllers/schedule');
 const salaries = require('./controllers/salaries');
 const transactions = require('./controllers/transactions');
@@ -480,10 +479,6 @@ app.get('/salaries/:id', (req, res) => {
     }
 })
 
-app.get('/waivers/', (req, res) => {
-    waivers.getAllTeams(req, res, knex);
-})
-
 app.get('/schedule/', (req, res) => {
     if (req.query.day) {
         schedule.getNextDays(req, res, knex);
@@ -530,7 +525,6 @@ app.patch('/draft-table/:id', (req, res) => {
     }
 });
 
-app.patch('/waivers/:id', (req, res) => { waivers.updateAllTeams(req, res, knex) });
 app.patch('/schedule/:id', (req, res) => {
     console.log(req.body); 
     if (req.body.vis_team_score) {

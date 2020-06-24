@@ -26,6 +26,7 @@ const draft_table = require('./controllers/draft_table');
 const draft_v2 = require('./controllers/drafts_v2');
 const transactions_v2 = require('./controllers/transactions_v2');
 const teamStats_v2 = require('./controllers/teamStats_v2');
+const waivers_v2 = require('./controllers/waivers_v2');
 
 
 const morgan = require('morgan');
@@ -233,6 +234,14 @@ app.delete('/v2/teams/:id', (req, res) => {teams_v2.deleteTeam(req, res, knex)})
 app.put('/v2/transactions/acquire', (req, res) => {transactions_v2.acquire(req, res, knex, waiversHookUrl)});
 app.put('/v2/transactions/release', (req, res) => {transactions_v2.release(req, res, knex, waiversHookUrl)});
 app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res, knex, hookUrl)});
+
+// ****************************************************************************************
+//                                    Waivers
+// ****************************************************************************************
+
+app.get('/v2/waivers/', (req, res) => {waivers_v2.getAllTeams(req, res, knex);})
+
+app.patch('/v2/waivers/:id', (req, res) => { waivers_v2.updateAllTeams(req, res, knex) });
 
 // ****************************************************************************************
 //                                       NHL

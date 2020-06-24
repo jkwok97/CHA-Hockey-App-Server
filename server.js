@@ -183,6 +183,7 @@ app.patch('/v2/draft-table/:id', (req, res) => {draft_table.updateDraftTableById
 // ****************************************************************************************
 
 app.get('/v2/draft', (req, res) => {draft_v2.getDraftedPlayers(req, res, knex)});
+app.get('/v2/draft/ordered', (req, res) => {draft_v2.getDraftedPlayersOrdered(req, res, knex)});
 app.get('/v2/draft/:id', (req, res) => {draft_v2.getDraftedPlayerById(req, res, knex)});
 app.get('/v2/draft/season', (req, res) => {draft_v2.getDraftedPlayersBySeason(req, res, knex)});
 

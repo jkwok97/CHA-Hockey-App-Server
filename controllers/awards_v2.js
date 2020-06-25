@@ -58,10 +58,10 @@ const getScorers = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
-    .leftJoin('players_stats_v2 as f', 'f.player_id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.player_id', 'e.id')
     .where('b.award_type', 'scorer')
     .where('f.playing_year', 'a.cha_season')
-    .orderBy('cha_season', 'desc')
+    .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
             const result = {
@@ -105,10 +105,10 @@ const getDefense = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
-    .leftJoin('players_stats_v2 as f', 'f.player_id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.player_id', 'e.id')
     .where('b.award_type', 'defense')
     .where('f.playing_year', 'a.cha_season')
-    .orderBy('cha_season', 'desc')
+    .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
             const result = {
@@ -150,10 +150,10 @@ const getRookies = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
-    .leftJoin('players_stats_v2 as f', 'f.player_id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.player_id', 'e.id')
     .where('b.award_type', 'rookie')
     .where('f.playing_year', 'a.cha_season')
-    .orderBy('cha_season', 'desc')
+    .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
             const result = {
@@ -195,10 +195,10 @@ const getGoalies = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
-    .leftJoin('goalies_stats_v2 as f', 'f.player_id', 'a.player_id')
+    .leftJoin('goalies_stats_v2 as f', 'f.player_id', 'e.id')
     .where('b.award_type', 'goalie')
     .where('f.playing_year', 'a.cha_season')
-    .orderBy('cha_season', 'desc')
+    .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
             const result = {
@@ -269,10 +269,10 @@ const getSeason = (req, res, knex) => {
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
-    .leftJoin('team_stats_v2 as e', 'e.team_id', 'a.team_id')
+    .leftJoin('team_stats_v2 as e', 'e.team_id', 'c.id')
     .where('b.award_type', 'season')
     .where('e.playing_year', 'a.cha_season')
-    .orderBy('cha_season', 'desc')
+    .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
             const result = {

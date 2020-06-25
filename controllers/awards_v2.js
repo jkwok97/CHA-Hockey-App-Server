@@ -6,7 +6,7 @@ const getChampions = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
-        'c.teamColor',
+        'c.teamcolor',
         'd.firstname',
         'd.lastname'
     )

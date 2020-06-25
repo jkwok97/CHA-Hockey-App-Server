@@ -1,6 +1,7 @@
 const getChampions = (req, res, knex) => {
     knex.select(
         'a.id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -35,6 +36,7 @@ const getScorers = (req, res, knex) => {
     knex.select(
         'a.id',
         'a.player_id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -73,6 +75,7 @@ const getDefense = (req, res, knex) => {
     knex.select(
         'a.id',
         'a.player_id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -111,6 +114,7 @@ const getRookies = (req, res, knex) => {
     knex.select(
         'a.id',
         'a.player_id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -149,6 +153,7 @@ const getGoalies = (req, res, knex) => {
     knex.select(
         'a.id',
         'a.player_id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -186,6 +191,7 @@ const getGoalies = (req, res, knex) => {
 const getGm = (req, res, knex) => {
     knex.select(
         'a.id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',
@@ -219,6 +225,7 @@ const getGm = (req, res, knex) => {
 const getSeason = (req, res, knex) => {
     knex.select(
         'a.id',
+        'a.display_season',
         'a.cha_season',
         'b.display_name',
         'c.city',

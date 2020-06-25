@@ -58,9 +58,11 @@ const getScorers = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
-    .leftJoin('players_stats_v2 as f', 'f.player_id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', function() {
+        this.on('f.player_id', '=', 'a.player_id')
+        this.andOnVal('f.playing_year', '=', 'a.cha_season')
+    })
     .where('b.award_type', 'scorer')
-    .where('f.playing_year', 'a.cha_season')
     .where('f.season_type', 'Regular')
     .orderBy('display_season', 'desc')
     .then(data => {

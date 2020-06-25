@@ -74,7 +74,9 @@ const getScorers = (req, res, knex) => {
             res.status(400).json('error getting stats')
         }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json('not found')})
 }
 
 const getDefense = (req, res, knex) => {

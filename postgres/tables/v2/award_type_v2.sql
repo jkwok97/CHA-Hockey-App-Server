@@ -6,6 +6,7 @@ CREATE TABLE award_type_v2 (
     display_name text NOT NULL
 );
 
+
 \copy award_type_v2 (award_type, display_name) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/v2/award_type_v2.tsv' WITH NULL ''
 
 do $$

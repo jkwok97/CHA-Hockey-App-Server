@@ -26,6 +26,7 @@ const draft_v2 = require('./controllers/drafts_v2');
 const transactions_v2 = require('./controllers/transactions_v2');
 const teamStats_v2 = require('./controllers/teamStats_v2');
 const waivers_v2 = require('./controllers/waivers_v2');
+const awards_v2 = require('./controllers/awards_v2');
 
 
 const morgan = require('morgan');
@@ -242,6 +243,18 @@ app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res,
 app.get('/v2/waivers/', (req, res) => {waivers_v2.getAllTeams(req, res, knex);})
 
 app.patch('/v2/waivers/:id', (req, res) => { waivers_v2.updateAllTeams(req, res, knex) });
+
+// ****************************************************************************************
+//                                    Awards
+// ****************************************************************************************
+
+app.get('/v2/awards/champions', (req, res) => {awards_v2.getChampions(req, res, knex);})
+app.get('/v2/awards/scorers', (req, res) => {awards_v2.getScorers(req, res, knex);})
+app.get('/v2/awards/defense', (req, res) => {awards_v2.getDefense(req, res, knex);})
+app.get('/v2/awards/rookies', (req, res) => {awards_v2.getRookies(req, res, knex);})
+app.get('/v2/awards/goalies', (req, res) => {awards_v2.getGoalies(req, res, knex);})
+app.get('/v2/awards/gm', (req, res) => {awards_v2.getGm(req, res, knex);})
+app.get('/v2/awards/season', (req, res) => {awards_v2.getSeason(req, res, knex);})
 
 // ****************************************************************************************
 //                                       NHL

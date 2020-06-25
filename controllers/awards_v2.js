@@ -48,13 +48,19 @@ const getScorers = (req, res, knex) => {
         'e.firstname as playerfirst',
         'e.lastname as playerlast',
         'e.nhl_id',
+        'f.games_played',
+        'f.goals',
+        'f.assists',
+        'f.points'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.id', 'a.player_id')
     .where('b.award_type', 'scorer')
+    .where('f.playing_year', 'a.cha_season')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -87,13 +93,19 @@ const getDefense = (req, res, knex) => {
         'e.firstname as playerfirst',
         'e.lastname as playerlast',
         'e.nhl_id',
+        'f.games_played',
+        'f.goals',
+        'f.assists',
+        'f.points'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.id', 'a.player_id')
     .where('b.award_type', 'defense')
+    .where('f.playing_year', 'a.cha_season')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -126,13 +138,19 @@ const getRookies = (req, res, knex) => {
         'e.firstname as playerfirst',
         'e.lastname as playerlast',
         'e.nhl_id',
+        'f.games_played',
+        'f.goals',
+        'f.assists',
+        'f.points'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
+    .leftJoin('players_stats_v2 as f', 'f.id', 'a.player_id')
     .where('b.award_type', 'rookie')
+    .where('f.playing_year', 'a.cha_season')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -165,13 +183,19 @@ const getGoalies = (req, res, knex) => {
         'e.firstname as playerfirst',
         'e.lastname as playerlast',
         'e.nhl_id',
+        'f.games_played',
+        'f.wins',
+        'f.goals_against_avg',
+        'f.save_pct'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'e.id', 'a.player_id')
+    .leftJoin('goalies_stats_v2 as f', 'f.id', 'a.player_id')
     .where('b.award_type', 'goalie')
+    .where('f.playing_year', 'a.cha_season')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -233,13 +257,19 @@ const getSeason = (req, res, knex) => {
         'c.teamlogo',
         'c.teamcolor',
         'd.firstname',
-        'd.lastname'
+        'd.lastname',
+        'e.wins',
+        'e.goals_for',
+        'e.goals_against',
+        'e.points'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
+    .leftJoin('team_stats_v2 as e', 'e.team_id', 'a.team_id')
     .where('b.award_type', 'season')
+    .where('e.playing_year', 'a.cha_season')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {

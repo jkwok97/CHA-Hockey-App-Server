@@ -52,7 +52,7 @@ const getScorers = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
     .leftJoin('players_v2 as e', 'd.id', 'a.player_id')
-    .where('b.award_type', 'champ')
+    .where('b.award_type', 'scorer')
     .orderBy('cha_season', 'desc')
     .then(data => {
         if (data.length) {

@@ -610,6 +610,7 @@ const updatePlayersStatsById = (req, res, knex) => {
 
 const getPointLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.games_played',
         'a.goals',
         'a.assists',
@@ -645,6 +646,7 @@ const getPointLeaders = (req, res, knex) => {
 
 const getDefenseLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.games_played',
         'a.goals',
         'a.assists',
@@ -684,6 +686,7 @@ const getDefenseLeaders = (req, res, knex) => {
 
 const getRookieLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.games_played',
         'a.goals',
         'a.assists',
@@ -720,6 +723,7 @@ const getRookieLeaders = (req, res, knex) => {
 
 const getAssistsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.assists',
         'b.firstname',
         'b.lastname',
@@ -752,6 +756,7 @@ const getAssistsLeaders = (req, res, knex) => {
 
 const getGoalsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.goals',
         'b.firstname',
         'b.lastname',
@@ -784,6 +789,7 @@ const getGoalsLeaders = (req, res, knex) => {
 
 const getPpGoalsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.pp_goals',
         'b.firstname',
         'b.lastname',
@@ -816,6 +822,7 @@ const getPpGoalsLeaders = (req, res, knex) => {
 
 const getShGoalsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.sh_goals',
         'b.firstname',
         'b.lastname',
@@ -848,6 +855,7 @@ const getShGoalsLeaders = (req, res, knex) => {
 
 const getBlockedShotsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.blocked_shots',
         'b.firstname',
         'b.lastname',
@@ -880,6 +888,7 @@ const getBlockedShotsLeaders = (req, res, knex) => {
 
 const getShotsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.shots',
         'b.firstname',
         'b.lastname',
@@ -912,6 +921,7 @@ const getShotsLeaders = (req, res, knex) => {
 
 const getPenaltyLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.penalty_minutes',
         'b.firstname',
         'b.lastname',
@@ -944,6 +954,7 @@ const getPenaltyLeaders = (req, res, knex) => {
 
 const getMinutesLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.minutes_played',
         'b.firstname',
         'b.lastname',
@@ -976,6 +987,7 @@ const getMinutesLeaders = (req, res, knex) => {
 
 const getPlusMinusLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.plus_minus',
         'b.firstname',
         'b.lastname',
@@ -1008,6 +1020,7 @@ const getPlusMinusLeaders = (req, res, knex) => {
 
 const getWorstPlusMinusLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.plus_minus',
         'b.firstname',
         'b.lastname',
@@ -1040,6 +1053,7 @@ const getWorstPlusMinusLeaders = (req, res, knex) => {
 
 const getLongStreakLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.longest_points_streak',
         'b.firstname',
         'b.lastname',
@@ -1072,6 +1086,7 @@ const getLongStreakLeaders = (req, res, knex) => {
 
 const getStreakLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.current_points_streak',
         'b.firstname',
         'b.lastname',
@@ -1104,6 +1119,7 @@ const getStreakLeaders = (req, res, knex) => {
 
 const getHitsLeaders = (req, res, knex) => {
     knex.select(
+        'a.player_id',
         'a.hits',
         'b.firstname',
         'b.lastname',

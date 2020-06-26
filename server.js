@@ -79,6 +79,10 @@ app.delete('/v2/users/delete/:id', (req, res) => {users.deleteUser(req, res, kne
 app.get('/v2/players/', (req, res) => {playerInfo.getAllPlayers(req, res, knex)});
 app.get('/v2/players/:id', (req, res) => {playerInfo.getPlayerInfo(req, res, knex)});
 app.get('/v2/goalies/:id', (req, res) => {playerInfo.getGoalieInfo(req, res, knex)});
+
+app.get('/v2/players/nhl/:id', (req, res) => {playerInfo.getPlayerLogoByNhlId(req, res, knex)});
+app.get('/v2/goalies/nhl/:id', (req, res) => {playerInfo.getGoalieLogoByNhlId(req, res, knex)});
+
 app.get('/v2/players/active', (req, res) => {playerInfo.getAllPlayersByActive(req, res, knex)});
 app.get('/v2/players/edit/:id', (req, res) => {playerInfo.getPlayer(req, res, knex)});
 

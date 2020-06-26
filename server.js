@@ -206,6 +206,9 @@ app.get('/v2/players/salaries', (req, res) => {salaries_v2.getAllSalaries(req, r
 app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalaries(req, res, knex)});
 app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getSalary(req, res, knex)});
 
+app.get('/v2/players/salaries/player-info/player', (req, res) => {salaries_v2.getPlayerInfo(req, res, knex)});
+app.get('/v2/players/salaries/player-info/goalie', (req, res) => {salaries_v2.getGoalieInfo(req, res, knex)});
+
 app.get('/v2/salaries/team/:id/players', (req, res) => {salaries_v2.getPlayerSalaryByTeamId(req, res, knex)});
 app.get('/v2/salaries/team/:id/goalies', (req, res) => {salaries_v2.getGoalieSalaryByTeamId(req, res, knex)});
 

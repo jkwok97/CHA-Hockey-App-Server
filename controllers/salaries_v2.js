@@ -172,9 +172,80 @@ const updateSalary = (req, res, knex) => {
         })
 }
 
+const getPlayerInfo = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isforward',
+        'b.isdefense',
+        'b.isgoalie',
+        'b.isactive',
+        'd.city',
+        'd.nickname',
+        'd.teamcolor',
+        'd.teamtextcolor'
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
+        .where('b.id', req.params.id)
+        .then(data => {
+            if (data.length) {
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+
+                res.json(result);
+            } else {
+                res.status(400).json('error getting salary')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getGoalieInfo = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isforward',
+        'b.isdefense',
+        'b.isgoalie',
+        'b.isactive',
+        'd.city',
+        'd.nickname',
+        'd.teamcolor',
+        'd.teamtextcolor'
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'b.id')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
+        .where('b.id', req.params.id)
+        .then(data => {
+            if (data.length) {
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+
+                res.json(result);
+            } else {
+                res.status(400).json('error getting salary')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 
 module.exports = {
     getAllSalaries, getAllActiveSalaries, getSalary,
     getPlayerSalaryByTeamId, getGoalieSalaryByTeamId,
+    getPlayerInfo, getGoalieInfo,
     addSalary, updateSalary
 };

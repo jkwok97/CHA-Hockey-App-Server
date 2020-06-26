@@ -4,7 +4,8 @@ const getStatsBySeasonTypeByUser = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
-        'c.shortname'
+        'c.shortname',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -33,7 +34,8 @@ const getTeamStatsByTeamIdBySeasonbyType = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
-        'c.shortname'
+        'c.shortname',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -63,7 +65,8 @@ const getStatsBySeasonByType = (req, res, knex) => {
         'c.teamlogo',
         'c.shortname',
         'd.divisionname',
-        'e.conferencename'
+        'e.conferencename',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -94,7 +97,8 @@ const getStatsbyType = (req, res, knex) => {
         'c.teamlogo',
         'c.shortname',
         'd.divisionname',
-        'e.conferencename'
+        'e.conferencename',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -124,6 +128,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
         c.city as city, 
         c.nickname as nickname,
         c.teamlogo,
+        c.isactive,
         sum(games_played) as games_played, 
         sum(wins) as wins, 
         sum(loss) as loss, 
@@ -145,7 +150,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
         left join teams_v2 as c
         on c.id = a.team_id
         where a.season_type = '${req.query.season_type}'
-        group by a.team_id, a.season_type, c.city, c.nickname, c.teamlogo
+        group by a.team_id, a.season_type, c.city, c.nickname, c.teamlogo, c.isactive
     ;`)
     .then(data => {
         if (data.rows.length) {
@@ -172,7 +177,8 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         'c.teamlogo',
         'c.shortname',
         'd.divisionname',
-        'e.conferencename'
+        'e.conferencename',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
@@ -211,6 +217,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         'c.teamlogo',
         'c.shortname',
         'd.divisionname',
+        'c.isactive'
         )
         .from('team_stats_v2 as a')
         .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')

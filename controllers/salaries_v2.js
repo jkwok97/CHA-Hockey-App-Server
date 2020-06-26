@@ -172,26 +172,13 @@ const updateSalary = (req, res, knex) => {
         })
 }
 
-const getPlayerInfo = (req, res, knex) => {
+const getPlayerSalariesByPlayerId = (req, res, knex) => {
     knex.select(
-        'a.*',
-        'b.firstname',
-        'b.lastname',
-        'b.isforward',
-        'b.isdefense',
-        'b.isgoalie',
-        'b.isactive',
-        'b.nhl_id',
-        'd.city',
-        'd.nickname',
-        'd.teamcolor',
-        'd.teamtextcolor',
-        'd.teamlogo'
+        'a.*'
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
-        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('b.id', req.params.id)
         .orderBy('c.playing_year', 'desc')
         .then(data => {
@@ -210,26 +197,13 @@ const getPlayerInfo = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getGoalieInfo = (req, res, knex) => {
+const getGoalieSalariesByPlayerId = (req, res, knex) => {
     knex.select(
-        'a.*',
-        'b.firstname',
-        'b.lastname',
-        'b.isforward',
-        'b.isdefense',
-        'b.isgoalie',
-        'b.isactive',
-        'b.nhl_id',
-        'd.city',
-        'd.nickname',
-        'd.teamcolor',
-        'd.teamtextcolor',
-        'd.teamlogo'
+        'a.*'
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'b.id')
-        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('b.id', req.params.id)
         .orderBy('c.playing_year', 'desc')
         .then(data => {
@@ -252,6 +226,6 @@ const getGoalieInfo = (req, res, knex) => {
 module.exports = {
     getAllSalaries, getAllActiveSalaries, getSalary,
     getPlayerSalaryByTeamId, getGoalieSalaryByTeamId,
-    getPlayerInfo, getGoalieInfo,
+    getPlayerSalariesByPlayerId, getGoalieSalariesByPlayerId,
     addSalary, updateSalary
 };

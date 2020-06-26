@@ -184,7 +184,8 @@ const getPlayerInfo = (req, res, knex) => {
         'd.city',
         'd.nickname',
         'd.teamcolor',
-        'd.teamtextcolor'
+        'd.teamtextcolor',
+        'd.teamlogo'
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
@@ -220,7 +221,8 @@ const getGoalieInfo = (req, res, knex) => {
         'd.city',
         'd.nickname',
         'd.teamcolor',
-        'd.teamtextcolor'
+        'd.teamtextcolor',
+        'd.teamlogo'
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')

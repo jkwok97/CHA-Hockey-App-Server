@@ -198,7 +198,7 @@ const getPlayerInfo = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: data[0]
                 }
 
                 res.json(result);
@@ -234,7 +234,7 @@ const getGoalieInfo = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: data[0]
                 }
 
                 res.json(result);

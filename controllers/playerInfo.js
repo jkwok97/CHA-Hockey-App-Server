@@ -62,7 +62,7 @@ const getPlayerInfo = (req, res, knex) => {
         .from('players_v2 as a')
         .leftJoin('players_stats_v2 as b', 'b.player_id', 'a.id')
         .leftJoin('teams_v2 as c', 'c.shortname', 'b.team_name')
-        .where('id', req.params.id)
+        .where('a.id', req.params.id)
         .orderBy('b.playing_year', 'desc')
         .then(data => {
             if (data.length) {

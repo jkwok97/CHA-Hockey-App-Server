@@ -175,7 +175,7 @@ const getPlayerStatsByPlayerId = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data[0]
+                    result: data
                 }
                 res.json(result);
             } else {

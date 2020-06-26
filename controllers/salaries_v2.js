@@ -191,6 +191,7 @@ const getPlayerInfo = (req, res, knex) => {
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('b.id', req.params.id)
+        .orderBy('c.playing_year', 'desc')
         .then(data => {
             if (data.length) {
 
@@ -226,6 +227,7 @@ const getGoalieInfo = (req, res, knex) => {
         .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'b.id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('b.id', req.params.id)
+        .orderBy('c.playing_year', 'desc')
         .then(data => {
             if (data.length) {
 

@@ -9,7 +9,6 @@ const goalie = require('./controllers/goalies');
 const teams = require('./controllers/teams');
 const goalie_stats = require('./controllers/goalie_stats');
 const schedule = require('./controllers/schedule');
-const salaries = require('./controllers/salaries');
 const transactions = require('./controllers/transactions');
 
 

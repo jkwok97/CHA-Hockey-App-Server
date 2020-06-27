@@ -316,14 +316,13 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
-        'c.teamcolor',
         'd.firstname',
         'd.lastname',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-    .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
+    .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
     .leftJoin('players_stats_v2 as e', function() {
         this
         .on('e.team_name', '=', 'c.shortname')
@@ -356,14 +355,13 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
         'c.city',
         'c.nickname',
         'c.teamlogo',
-        'c.teamcolor',
         'd.firstname',
         'd.lastname',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
-    .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
+    .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
     .leftJoin('goalies_stats_v2 as e', function() {
         this
         .on('e.team_name', '=', 'c.shortname')

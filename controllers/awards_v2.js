@@ -371,7 +371,7 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
-const getTeamAwardsByTeamId = (req, res, knex) => {
+const getTeamAwardsByUserId = (req, res, knex) => {
     knex.select(
         'a.id',
         'a.display_season',
@@ -391,7 +391,7 @@ const getTeamAwardsByTeamId = (req, res, knex) => {
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
     .leftJoin('users_v2 as e', 'e.id', 'a.users_id')
-    .where('a.team_id', req.params.id)
+    .where('a.users_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -411,5 +411,5 @@ const getTeamAwardsByTeamId = (req, res, knex) => {
 
 module.exports = {
     getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
-    getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByTeamId
+    getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByUserId
 };

@@ -313,7 +313,6 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
         'a.display_season',
         'a.cha_season',
         'b.display_name',
-        'c.city',
         'c.nickname',
         'c.teamlogo',
         'd.firstname',
@@ -323,12 +322,12 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
-    .leftJoin('players_stats_v2 as e', function() {
-        this
-        .on('e.team_name', '=', 'c.shortname')
-        .on('e.playing_year', '=', 'a.cha_season')
-    })
-    .where('e.season_type', 'Regular')
+    // .leftJoin('players_stats_v2 as e', function() {
+    //     this
+    //     .on('e.team_name', '=', 'c.shortname')
+    //     .on('e.playing_year', '=', 'a.cha_season')
+    // })
+    // .where('e.season_type', 'Regular')
     .where('a.player_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
@@ -352,7 +351,6 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
         'a.display_season',
         'a.cha_season',
         'b.display_name',
-        'c.city',
         'c.nickname',
         'c.teamlogo',
         'd.firstname',
@@ -362,12 +360,12 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
-    .leftJoin('goalies_stats_v2 as e', function() {
-        this
-        .on('e.team_name', '=', 'c.shortname')
-        .on('e.playing_year', '=', 'a.cha_season')
-    })
-    .where('e.season_type', 'Regular')
+    // .leftJoin('goalies_stats_v2 as e', function() {
+    //     this
+    //     .on('e.team_name', '=', 'c.shortname')
+    //     .on('e.playing_year', '=', 'a.cha_season')
+    // })
+    // .where('e.season_type', 'Regular')
     .where('a.player_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {

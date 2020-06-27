@@ -330,6 +330,7 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
         .on('e.playing_year', '=', 'a.cha_season')
     })
     .where('e.season_type', 'Regular')
+    .where('a.player_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -369,6 +370,7 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
         .on('e.playing_year', '=', 'a.cha_season')
     })
     .where('e.season_type', 'Regular')
+    .where('a.player_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {

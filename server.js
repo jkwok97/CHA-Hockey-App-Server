@@ -481,42 +481,6 @@ app.get('/users/:email', (req, res) => {users.getUser(req, res, knex)});
 
 app.get('/player-info/', (req, res) => {player_stats.getAllPlayerInfo(req, res)});
 
-app.get('/salaries/', (req, res) => {
-    if (req.query.position == "forward" && req.query.team) {
-        salaries.getTeamForwardSalaries(req, res, knex);
-    } else if (req.query.position == "defense" && req.query.team) {
-        salaries.getTeamDefenseSalaries(req, res, knex);
-    } else if (req.query.position == "goalie" && req.query.team) {
-        salaries.getTeamGoalieSalaries(req, res, knex);
-    } else if (req.query.position == "forward") {
-        salaries.getForwardSalaries(req, res, knex);
-    } else if (req.query.position == "defense") {
-        salaries.getDefenseSalaries(req, res, knex);
-    } else if (req.query.position == "goalie") {
-        salaries.getGoalieSalaries(req, res, knex);
-    }
-});
-
-app.get('/salaries/all', (req, res) => {
-    if (req.query.position == "forward") {
-        salaries.getAllForwardSalaries(req, res, knex);
-    } else if (req.query.position == "defense") {
-        salaries.getAllDefenseSalaries(req, res, knex);
-    } else if (req.query.position == "goalie") {
-        salaries.getAllGoalieSalaries(req, res, knex);
-    }
-})
-
-app.get('/salaries/:id', (req, res) => {
-    if (req.query.position == "forward") {
-        salaries.getForwardIndividualSalary(req, res, knex);
-    } else if (req.query.position == "defense") {
-        salaries.getDefenseIndividualSalary(req, res, knex);
-    } else if (req.query.position == "goalie") {
-        salaries.getGoalieIndividualSalary(req, res, knex);
-    }
-})
-
 app.get('/schedule/', (req, res) => {
     if (req.query.day) {
         schedule.getNextDays(req, res, knex);
@@ -572,17 +536,9 @@ app.patch('/schedule/:id', (req, res) => {
     }
 });
 
-app.delete('/salaries/:id/forward', (req, res) => { salaries.deleteForwardSalary(req, res, knex) });
-app.delete('/salaries/:id/defense', (req, res) => { salaries.deleteDefenseSalary(req, res, knex) });
-app.delete('/salaries/:id/goalie', (req, res) => { salaries.deleteGoalieSalary(req, res, knex) });
-
 app.delete('/drafts/:id', (req, res) => { drafts.deletePlayer(req, res, knex) });
 
 app.delete('/champions/:id', (req, res) => { champions.deleteChamp(req, res, knex) });
-
-app.post('/salaries/forward', (req, res) => { salaries.addForwardSalary(req, res, knex) })
-app.post('/salaries/defense', (req, res) => { salaries.addDefenseSalary(req, res, knex) })
-app.post('/salaries/goalie', (req, res) => { salaries.addGoalieSalary(req, res, knex) })
 
 app.post('/drafts/', (req, res) => { drafts.addPlayer(req, res, knex) })
 

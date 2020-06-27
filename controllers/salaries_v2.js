@@ -20,7 +20,10 @@ const getAllActiveSalaries = (req, res, knex) => {
         'a.*',
         'b.firstname',
         'b.lastname',
-        'b.isactive'
+        'b.isactive',
+        'b.isgoalie',
+        'b.isforward',
+        'b.isdefense'
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')

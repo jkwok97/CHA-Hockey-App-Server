@@ -322,12 +322,6 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
-    // .leftJoin('players_stats_v2 as e', function() {
-    //     this
-    //     .on('e.team_name', '=', 'c.shortname')
-    //     .on('e.playing_year', '=', 'a.cha_season')
-    // })
-    // .where('e.season_type', 'Regular')
     .where('a.player_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
@@ -360,13 +354,44 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
     .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
     .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
-    // .leftJoin('goalies_stats_v2 as e', function() {
-    //     this
-    //     .on('e.team_name', '=', 'c.shortname')
-    //     .on('e.playing_year', '=', 'a.cha_season')
-    // })
-    // .where('e.season_type', 'Regular')
     .where('a.player_id', req.params.id)
+    .orderBy('display_season', 'desc')
+    .then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
+const getTeamAwardsByTeamId = (req, res, knex) => {
+    knex.select(
+        'a.id',
+        'a.display_season',
+        'a.cha_season',
+        'b.display_name',
+        'c.nickname',
+        'c.teamlogo',
+        'c.teamcolor',
+        'd.firstname as playerfirst',
+        'd.lastname as playerlast',
+        'd.nhl_id',
+        'e.firstname as ownerfirst',
+        'e.lastname as ownerlast',
+    )
+    .from('awards_v2 as a')
+    .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
+    .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+    .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
+    .leftJoin('users_v2 as e', 'e.id', 'a.users_id')
+    .where('a.team_id', req.params.id)
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {
@@ -386,5 +411,5 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
 
 module.exports = {
     getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
-    getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId
+    getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByTeamId
 };

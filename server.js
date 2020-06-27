@@ -27,6 +27,7 @@ const transactions_v2 = require('./controllers/transactions_v2');
 const teamStats_v2 = require('./controllers/teamStats_v2');
 const waivers_v2 = require('./controllers/waivers_v2');
 const awards_v2 = require('./controllers/awards_v2');
+const ratings_v2 = require('./controllers/ratings_v2');
 
 
 const morgan = require('morgan');
@@ -268,6 +269,13 @@ app.get('/v2/awards/rookies', (req, res) => {awards_v2.getRookies(req, res, knex
 app.get('/v2/awards/goalies', (req, res) => {awards_v2.getGoalies(req, res, knex);})
 app.get('/v2/awards/gm', (req, res) => {awards_v2.getGm(req, res, knex);})
 app.get('/v2/awards/season', (req, res) => {awards_v2.getSeason(req, res, knex);})
+
+// ****************************************************************************************
+//                                    Ratings
+// ****************************************************************************************
+
+app.get('/v2/ratings/player/:id', (req, res) => {ratings_v2.getPlayerRatings(req, res, knex);})
+app.get('/v2/ratings/goalie/:id', (req, res) => {ratings_v2.getGoalieRatings(req, res, knex);})
 
 // ****************************************************************************************
 //                                       NHL

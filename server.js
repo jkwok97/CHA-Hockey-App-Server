@@ -269,6 +269,8 @@ app.get('/v2/awards/rookies', (req, res) => {awards_v2.getRookies(req, res, knex
 app.get('/v2/awards/goalies', (req, res) => {awards_v2.getGoalies(req, res, knex);})
 app.get('/v2/awards/gm', (req, res) => {awards_v2.getGm(req, res, knex);})
 app.get('/v2/awards/season', (req, res) => {awards_v2.getSeason(req, res, knex);})
+app.get('/v2/awards/player/:id', (req, res) => {awards_v2.getPlayerAwardsByPlayerId(req, res, knex);})
+app.get('/v2/awards/goalie/:id', (req, res) => {awards_v2.getGoalieAwardsByPlayerId(req, res, knex);})
 
 // ****************************************************************************************
 //                                    Ratings

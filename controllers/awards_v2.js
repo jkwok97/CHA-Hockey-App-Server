@@ -307,8 +307,86 @@ const getSeason = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const getPlayerAwardsByPlayerId = (req, res, knex) => {
+    knex.select(
+        'a.id',
+        'a.display_season',
+        'a.cha_season',
+        'b.display_name',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        'c.teamcolor',
+        'd.firstname',
+        'd.lastname',
+    )
+    .from('awards_v2 as a')
+    .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
+    .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+    .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
+    .leftJoin('players_stats_v2 as e', function() {
+        this
+        .on('e.team_name', '=', 'c.shortname')
+        .on('e.playing_year', '=', 'a.cha_season')
+    })
+    .where('e.season_type', 'Regular')
+    .orderBy('display_season', 'desc')
+    .then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
+const getGoalieAwardsByPlayerId = (req, res, knex) => {
+    knex.select(
+        'a.id',
+        'a.display_season',
+        'a.cha_season',
+        'b.display_name',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        'c.teamcolor',
+        'd.firstname',
+        'd.lastname',
+    )
+    .from('awards_v2 as a')
+    .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
+    .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+    .leftJoin('users_v2 as d', 'd.id', 'a.users_id')
+    .leftJoin('goalies_stats_v2 as e', function() {
+        this
+        .on('e.team_name', '=', 'c.shortname')
+        .on('e.playing_year', '=', 'a.cha_season')
+    })
+    .where('e.season_type', 'Regular')
+    .orderBy('display_season', 'desc')
+    .then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
 
 
 module.exports = {
-    getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason
+    getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
+    getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId
 };

@@ -139,7 +139,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
                 res.send(error)
             }
         }
-        
+
     });    
 }
 
@@ -172,9 +172,9 @@ const getCareerNHLPlayerStats = (req, res) => {
 }
 
 const getStats = (info) => {
-    const info = info['people'];
+    const playerInfo = info['people'];
 
-    const playerType = info.filter((item => item.primaryPosition.code))[0];
+    const playerType = playerInfo.filter((item => item.primaryPosition.code))[0];
 
     const s = info['people'][0]['stats'][0]['splits'];
     const playerStats = s;

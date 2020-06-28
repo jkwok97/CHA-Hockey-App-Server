@@ -202,8 +202,6 @@ const getStats = (info) => {
 
     const playerType = playerInfo.filter((item => item.primaryPosition.code))[0];
 
-    console.log(playerType);
-
     const s = info['people'][0]['stats'][0]['splits'];
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
@@ -272,7 +270,6 @@ const extractGoalieStats = (p) => {
         shortHandedShots: stat['stat']['shortHandedShots'],
         shotsAgainst: stat['stat']['shotsAgainst'],
         shutouts: stat['stat']['shutouts'],
-        ties: stat['stat']['ties'],
         timeOnIce: stat['stat']['timeOnIce'],
         wins: stat['stat']['wins'],
     }));

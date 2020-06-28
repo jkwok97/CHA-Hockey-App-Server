@@ -21,6 +21,7 @@ const getAllPlayers = (req, res, knex) => {
 const getAllPlayersByActive = (req, res, knex) => {
     knex.select('*').from('players_v2').where('isactive', req.query.isactive)
         .then(data => {
+            console.log("in this function")
             if (data.length) {
                 const result = {
                     statusCode: 200,
@@ -31,7 +32,10 @@ const getAllPlayersByActive = (req, res, knex) => {
             } else {
                 res.status(400).json('error getting stats')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => {
+            console.log("error in this function")
+            res.status(400).json('not found')
+        })
 }
 
 const getPlayer = (req, res, knex) => {

@@ -143,17 +143,13 @@ const getOnPaceNhlPlayerStats = (req, res) => {
     });    
 }
 
-const getCareerNHLPlayerStats = (req, res) => {
+const getNhlPlayerInfo = (req, res) => {
     request(`https://statsapi.web.nhl.com/api/v1/people/${req.params.id}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 const info = JSON.parse(body);
 
-                console.log(info);
-
-                const stats = getStats(info);
-
-                console.log(stats);
+                const stats = getInfo(info);
 
                 const result = {
                     statusCode: 200,
@@ -171,6 +167,36 @@ const getCareerNHLPlayerStats = (req, res) => {
         })
 }
 
+const getCareerNHLPlayerStats = (req, res) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${req.params.id}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+
+                const stats = getStats(info);
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: stats
+                }
+
+                res.send(result);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error)
+                }
+            } 
+        })
+}
+
+const getInfo = (info) => {
+    const playerInfo = info['people'];
+
+    return extractPlayerInfo(playerInfo);
+}
+
 const getStats = (info) => {
     const playerInfo = info['people'];
 
@@ -182,6 +208,16 @@ const getStats = (info) => {
 
     return playerType === 'G' ? extractGoalieStats(p) : extractPlayerStats(p);
      
+}
+
+const extractPlayerInfo = (p) => {
+    return info.map((item => ({
+        height: item.height,
+        birthCountry: item.birthCountry,
+        age: item.currentAge,
+        position: item.primaryPosition.code,
+        shoots: item.shootsCatches
+      })))[0];
 }
 
 const extractPlayerStats = (p) => {
@@ -242,5 +278,5 @@ const extractGoalieStats = (p) => {
 
 module.exports = {
     getAllNHLPlayerStats, getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary,
-    getNhlPlayerStats, getOnPaceNhlPlayerStats, getCareerNHLPlayerStats
+    getNhlPlayerStats, getOnPaceNhlPlayerStats, getCareerNHLPlayerStats, getNhlPlayerInfo
 };

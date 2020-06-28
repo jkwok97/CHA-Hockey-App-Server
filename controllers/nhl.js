@@ -211,7 +211,7 @@ const getStats = (info) => {
 }
 
 const extractPlayerInfo = (p) => {
-    return info.map((item => ({
+    return p.map((item => ({
         height: item.height,
         birthCountry: item.birthCountry,
         age: item.currentAge,

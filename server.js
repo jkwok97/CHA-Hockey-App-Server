@@ -178,6 +178,8 @@ app.get('/v2/team-stats/season/division', (req, res) => {teamStats_v2.getStatsBy
 app.get('/v2/team-stats/type/all-time', (req, res) => {teamStats_v2.getStatsByTypeSummed(req, res, knex)});
 app.get('/v2/team-stats/type/season', (req, res) => {teamStats_v2.getStatsbyType(req, res, knex)});
 
+app.get('/v2/team-stats/schedule/team/:id', (req, res) => {teamStats_v2.getStatsForSchedule(req, res, knex)});
+
 // ****************************************************************************************
 //                                       Draft Table
 // ****************************************************************************************

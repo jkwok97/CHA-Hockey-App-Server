@@ -50,14 +50,8 @@ const getGamesForDays = (req, res, knex) => {
         .from('schedule_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.vis_team_id')
         .leftJoin('teams_v2 as c', 'c.id', 'a.home_team_id')
-        .where(function() {
-            this.where('a.playing_year', req.query.playing_year)
-            .orWhere('a.game_day', req.query.day_one)
-            .orWhere('a.game_day', req.query.day_two)
-            .orWhere('a.game_day', req.query.day_three)
-            .orWhere('a.game_day', req.query.day_four)
-            .orWhere('a.game_day', req.query.day_five)
-        })
+        .where('a.playing_year', req.query.playing_year)
+        .whereBetween('a.game_day', [req.query.start_range, req.query.end_range])
         .then(data => {
             if (data.length) {
                 const result = {

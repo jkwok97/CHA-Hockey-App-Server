@@ -203,6 +203,8 @@ const getStats = (info) => {
     const playerType = playerInfo.filter((item => item.primaryPosition.code))[0];
 
     const s = info['people'][0]['stats'][0]['splits'];
+
+    console.log(info['people'][0]['stats'][2]['splits']);
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
 

@@ -206,8 +206,6 @@ const getStats = (info) => {
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
 
-    console.log(p);
-
     return playerType.primaryPosition.code === 'G' ? extractGoalieStats(p) : extractPlayerStats(p);
      
 }
@@ -225,6 +223,7 @@ const extractPlayerInfo = (p) => {
 const extractPlayerStats = (p) => {
     return p.map(stat => ({
         season: stat['season'],
+        team: stat['team']['teamName'],
         assists: stat['stat']['assists'],
         blocked: stat['stat']['blocked'],
         evenTimeOnIce: stat['stat']['evenTimeOnIce'],

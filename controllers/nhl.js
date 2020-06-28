@@ -143,7 +143,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
 }
 
 const getCareerNHLPlayerStats = (req, res) => {
-    request(`https://statsapi.web.nhl.com/api/v1/people/${req.params.nhlId}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`,
+    request(`https://statsapi.web.nhl.com/api/v1/people/${req.params.id}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`,
         (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 const info = JSON.parse(body);

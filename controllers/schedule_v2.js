@@ -15,7 +15,7 @@ const getAllSeasonGames = (req, res, knex) => {
         .from('schedule_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.vis_team_id')
         .leftJoin('teams_v2 as c', 'c.id', 'a.home_team_id')
-        .where('b.isactive', req.query.isactive)
+        .where('a.playing_year', req.query.playing_year)
         .then(data => {
             if (data.length) {
                 const result = {

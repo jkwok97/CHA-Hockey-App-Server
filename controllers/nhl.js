@@ -142,7 +142,104 @@ const getOnPaceNhlPlayerStats = (req, res) => {
     });    
 }
 
+const getCareerNHLPlayerStats = (req, res) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${req.params.nhlId}?expand=person.stats&stats=yearByYear,yearByYearPlayoffs,careerRegularSeason&expand=stats.team&site=en_nhlCA`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                const info = JSON.parse(body);
+
+                console.log(info);
+
+                const stats = getStats(info);
+
+                console.log(stats);
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: stats
+                }
+
+                res.send(result);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error)
+                }
+            } 
+        })
+}
+
+const getStats = (info) => {
+    const info = info['people'];
+
+    const playerType = info.filter((item => item.primaryPosition.code))[0];
+
+    const s = info['people'][0]['stats'][0]['splits'];
+    const playerStats = s;
+    const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
+
+    return playerType === 'G' ? extractGoalieStats(p) : extractPlayerStats(p);
+     
+}
+
+const extractPlayerStats = (p) => {
+    return p.map(stat => ({
+        season: stat['season'],
+        assists: stat['stat']['assists'],
+        blocked: stat['stat']['blocked'],
+        evenTimeOnIce: stat['stat']['evenTimeOnIce'],
+        faceOffPct: stat['stat']['faceOffPct'],
+        gameWinningGoals: stat['stat']['gameWinningGoals'],
+        games: stat['stat']['games'],
+        goals: stat['stat']['goals'],
+        hits: stat['stat']['hits'],
+        overTimeGoals: stat['stat']['overTimeGoals'],
+        penaltyMinutes: stat['stat']['penaltyMinutes'],
+        pim: stat['stat']['pim'],
+        plusMinus: stat['stat']['plusMinus'],
+        points: stat['stat']['points'],
+        powerPlayGoals: stat['stat']['powerPlayGoals'],
+        powerPlayPoints: stat['stat']['powerPlayPoints'],
+        powerPlayTimeOnIce: stat['stat']['powerPlayTimeOnIce'],
+        shifts: stat['stat']['shifts'],
+        shortHandedGoals: stat['stat']['shortHandedGoals'],
+        shortHandedPoints: stat['stat']['shortHandedPoints'],
+        shortHandedTimeOnIce: stat['stat']['shortHandedTimeOnIce'],
+        shotPct: stat['stat']['shotPct'],
+        shots: stat['stat']['shots'],
+        timeOnIce: stat['stat']['timeOnIce']
+    }));
+}
+
+const extractGoalieStats = (p) => {
+    return p.map(stat => ({
+        season: stat['season'],
+        evenSaves: stat['stat']['evenSaves'],
+        evenShots: stat['stat']['evenShots'],
+        evenStrengthSavePercentage: stat['stat']['evenStrengthSavePercentage'],
+        games: stat['stat']['games'],
+        gamesStarted: stat['stat']['gamesStarted'],
+        goalAgainstAverage: stat['stat']['goalAgainstAverage'],
+        goalsAgainst: stat['stat']['goalsAgainst'],
+        losses: stat['stat']['losses'],
+        powerPlaySavePercentage: stat['stat']['powerPlaySavePercentage'],
+        powerPlaySaves: stat['stat']['powerPlaySaves'],
+        powerPlayShots: stat['stat']['powerPlayShots'],
+        savePercentage: stat['stat']['savePercentage'],
+        saves: stat['stat']['saves'],
+        shortHandedSavePercentage: stat['stat']['shortHandedSavePercentage'],
+        shortHandedSaves: stat['stat']['shortHandedSaves'],
+        shortHandedShots: stat['stat']['shortHandedShots'],
+        shotsAgainst: stat['stat']['shotsAgainst'],
+        shutouts: stat['stat']['shutouts'],
+        ties: stat['stat']['ties'],
+        timeOnIce: stat['stat']['timeOnIce'],
+        wins: stat['stat']['wins'],
+    }));
+}
+
 module.exports = {
     getAllNHLPlayerStats, getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary,
-    getNhlPlayerStats, getOnPaceNhlPlayerStats
+    getNhlPlayerStats, getOnPaceNhlPlayerStats, getCareerNHLPlayerStats
 };

@@ -51,7 +51,7 @@ const getPlayer = (req, res, knex) => {
             } else {
                 res.status(400).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player not found'))
+        }).catch(err => res.status(400).json('individual player not found'))
 }
 
 const getPlayerInfo = (req, res, knex) => {
@@ -79,7 +79,7 @@ const getPlayerInfo = (req, res, knex) => {
             } else {
                 res.status(400).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player not found'))
+        }).catch(err => res.status(400).json('getPlayerInfo player not found'))
 }
 
 const getGoalieInfo = (req, res, knex) => {
@@ -107,7 +107,7 @@ const getGoalieInfo = (req, res, knex) => {
             } else {
                 res.status(400).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player not found'))
+        }).catch(err => res.status(400).json('goalie not found'))
 }
 
 const addPlayer = (req, res, knex) => {
@@ -187,7 +187,7 @@ const getPlayerLogoByNhlId = (req, res, knex) => {
             } else {
                 res.status(400).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player not found'))
+        }).catch(err => res.status(400).json('player logo not found'))
 }
 
 const getGoalieLogoByNhlId = (req, res, knex) => {
@@ -210,7 +210,7 @@ const getGoalieLogoByNhlId = (req, res, knex) => {
             } else {
                 res.status(400).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player not found'))
+        }).catch(err => res.status(400).json('goalie logo not found'))
 }
 
 

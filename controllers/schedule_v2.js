@@ -54,10 +54,37 @@ const getGamesForDays = (req, res, knex) => {
         .whereBetween('a.game_day', [req.query.start_range, req.query.end_range])
         .then(data => {
             if (data.length) {
+
+                const matches = data.map((game) => ({
+                    game_day: game.game_day,
+                    id: game.id,
+                    playing_year: game.playing_year,
+                    home_team: {
+                        game: game.home_team_game_number,
+                        team_id: game.home_team_id,
+                        score: game.home_team_score,
+                        city: game.hometeamcity,
+                        nickname: game.hometeamnickname,
+                        teamcolor: game.hometeamteamcolor,
+                        teamlogo: game.hometeamteamlogo,
+                        textcolor: game.hometeamteamtextcolor
+                    },
+                    vis_team: {
+                        game: game.vis_team_game_number,
+                        team_id: game.vis_team_id,
+                        score: game.vis_team_score,
+                        city: game.visteamcity,
+                        nickname: game.visteamnickname,
+                        teamcolor: game.visteamteamcolor,
+                        teamlogo: game.visteamteamlogo,
+                        textcolor: game.visteamteamtextcolor
+                    }
+                }))
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: matches
                 }
                 res.json(result);
             } else {

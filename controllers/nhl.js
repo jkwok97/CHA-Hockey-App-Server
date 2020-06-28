@@ -204,11 +204,13 @@ const getStats = (info) => {
 
     const s = info['people'][0]['stats'][0]['splits'];
 
-    console.log(info['people'][0]['stats'][2]['splits']);
+    const totals = info['people'][0]['stats'][2]['splits'][0];
+
+    console.log(totals);
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
 
-    return playerType.primaryPosition.code === 'G' ? extractGoalieStats(p) : extractPlayerStats(p);
+    return playerType.primaryPosition.code === 'G' ? extractGoalieStats(p, totals) : extractPlayerStats(p, totals);
      
 }
 
@@ -222,7 +224,7 @@ const extractPlayerInfo = (p) => {
       })))[0];
 }
 
-const extractPlayerStats = (p) => {
+const extractPlayerStats = (p, totals) => {
     return p.map(stat => ({
         season: stat['season'],
         team: stat['team']['teamName'],
@@ -248,11 +250,12 @@ const extractPlayerStats = (p) => {
         shortHandedTimeOnIce: stat['stat']['shortHandedTimeOnIce'],
         shotPct: stat['stat']['shotPct'],
         shots: stat['stat']['shots'],
-        timeOnIce: stat['stat']['timeOnIce']
+        timeOnIce: stat['stat']['timeOnIce'],
+        totals: totals['stat']
     }));
 }
 
-const extractGoalieStats = (p) => {
+const extractGoalieStats = (p, totals) => {
     return p.map(stat => ({
         season: stat['season'],
         evenSaves: stat['stat']['evenSaves'],
@@ -275,6 +278,7 @@ const extractGoalieStats = (p) => {
         shutouts: stat['stat']['shutouts'],
         timeOnIce: stat['stat']['timeOnIce'],
         wins: stat['stat']['wins'],
+        totals: totals['stat']
     }));
 }
 

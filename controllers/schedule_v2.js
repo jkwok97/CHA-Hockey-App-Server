@@ -50,12 +50,14 @@ const getGamesForDays = (req, res, knex) => {
         .from('schedule_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.vis_team_id')
         .leftJoin('teams_v2 as c', 'c.id', 'a.home_team_id')
-        .where('a.playing_year', req.query.playing_year)
-        .where('a.game_day', req.query.day_one)
-        .where('a.game_day', req.query.day_two)
-        .where('a.game_day', req.query.day_three)
-        .where('a.game_day', req.query.day_four)
-        .where('a.game_day', req.query.day_five)
+        .where(function() {
+            this.where('a.playing_year', req.query.playing_year)
+            .orWhere('a.game_day', req.query.day_one)
+            .orWhere('a.game_day', req.query.day_two)
+            .orWhere('a.game_day', req.query.day_three)
+            .orWhere('a.game_day', req.query.day_four)
+            .orWhere('a.game_day', req.query.day_five)
+        })
         .then(data => {
             if (data.length) {
                 const result = {
@@ -65,11 +67,11 @@ const getGamesForDays = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('error getting season games')
+                res.status(400).json('error getting day games')
             }
         }).catch(err => {
             console.log(error);
-            res.status(400).json('season games not found')
+            res.status(400).json('day games not found')
         })
 }
 

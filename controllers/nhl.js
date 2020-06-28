@@ -194,6 +194,8 @@ const getCareerNHLPlayerStats = (req, res) => {
 const getInfo = (info) => {
     const playerInfo = info['people'];
 
+    console.log(playerInfo);
+
     return extractPlayerInfo(playerInfo);
 }
 

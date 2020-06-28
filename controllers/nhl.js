@@ -206,7 +206,6 @@ const getStats = (info) => {
 
     const totals = info['people'][0]['stats'][2]['splits'][0];
 
-    console.log(totals);
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
 
@@ -258,6 +257,7 @@ const extractPlayerStats = (p, totals) => {
 const extractGoalieStats = (p, totals) => {
     return p.map(stat => ({
         season: stat['season'],
+        team: stat['team']['teamName'],
         evenSaves: stat['stat']['evenSaves'],
         evenShots: stat['stat']['evenShots'],
         evenStrengthSavePercentage: stat['stat']['evenStrengthSavePercentage'],

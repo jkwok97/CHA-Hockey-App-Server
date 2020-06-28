@@ -194,8 +194,6 @@ const getCareerNHLPlayerStats = (req, res) => {
 const getInfo = (info) => {
     const playerInfo = info['people'];
 
-    console.log(playerInfo);
-
     return extractPlayerInfo(playerInfo);
 }
 
@@ -207,6 +205,8 @@ const getStats = (info) => {
     const s = info['people'][0]['stats'][0]['splits'];
     const playerStats = s;
     const p = playerStats.filter((stat) => stat['league']['name'] === "National Hockey League");
+
+    console.log(p);
 
     return playerType.primaryPosition.code === 'G' ? extractGoalieStats(p) : extractPlayerStats(p);
      

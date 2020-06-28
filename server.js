@@ -83,7 +83,7 @@ app.get('/v2/goalies/:id', (req, res) => {playerInfo.getGoalieInfo(req, res, kne
 app.get('/v2/players/nhl/:id', (req, res) => {playerInfo.getPlayerLogoByNhlId(req, res, knex)});
 app.get('/v2/goalies/nhl/:id', (req, res) => {playerInfo.getGoalieLogoByNhlId(req, res, knex)});
 
-app.get('/v2/players/active', (req, res) => {playerInfo.getAllPlayersByActive(req, res, knex)});
+app.get('/v2/all-players/active', (req, res) => {playerInfo.getAllPlayersByActive(req, res, knex)});
 app.get('/v2/players/edit/:id', (req, res) => {playerInfo.getPlayer(req, res, knex)});
 
 app.put('/v2/players/edit/:id', (req, res) => {playerInfo.updatePlayer(req, res, knex)});

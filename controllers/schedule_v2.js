@@ -68,7 +68,8 @@ const getGamesForDays = (req, res, knex) => {
                         teamcolor: game.hometeamteamcolor,
                         teamlogo: game.hometeamteamlogo,
                         textcolor: game.hometeamteamtextcolor,
-                        vs_team: game.vis_team_id
+                        vs_team: game.vis_team_id,
+                        vs_team_name: game.visteamnickname
                     },
                     vis_team: {
                         game: game.vis_team_game_number,
@@ -79,7 +80,8 @@ const getGamesForDays = (req, res, knex) => {
                         teamcolor: game.visteamteamcolor,
                         teamlogo: game.visteamteamlogo,
                         textcolor: game.visteamteamtextcolor,
-                        vs_team: game.home_team_id
+                        vs_team: game.home_team_id,
+                        vs_team_name: game.hometeamnickname
                     }
                 }))
 

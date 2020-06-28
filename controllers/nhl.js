@@ -139,6 +139,7 @@ const getOnPaceNhlPlayerStats = (req, res) => {
                 res.send(error)
             }
         }
+        
     });    
 }
 

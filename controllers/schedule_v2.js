@@ -46,10 +46,18 @@ const getGamesForDays = (req, res, knex) => {
         'c.teamlogo as hometeamteamlogo',
         'c.teamcolor as hometeamteamcolor',
         'c.teamtextcolor as hometeamteamtextcolor',
+        'd.wins as visteamwins',
+        'd.loss as visteamloss',
+        'd.ties as visteamties', 
+        'e.wins as hometeamwins',
+        'e.loss as hometeamloss',
+        'e.ties as hometeamties'
         )
         .from('schedule_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.vis_team_id')
+        .leftJoin('team_stats_v2 as d', 'd.id', 'a.vis_team_id')
         .leftJoin('teams_v2 as c', 'c.id', 'a.home_team_id')
+        .leftJoin('team_stats_v2 as e', 'e.id', 'a.home_team_id')
         .where('a.playing_year', req.query.playing_year)
         .whereBetween('a.game_day', [req.query.start_range, req.query.end_range])
         .then(data => {
@@ -68,7 +76,10 @@ const getGamesForDays = (req, res, knex) => {
                         teamcolor: game.hometeamteamcolor,
                         teamlogo: game.hometeamteamlogo,
                         textcolor: game.hometeamteamtextcolor,
-                        vs_team: game.vis_team_id
+                        vs_team: game.vis_team_id,
+                        wins: hometeamwins,
+                        loss: hometeamloss,
+                        ties: hometeamties
                     },
                     vis_team: {
                         game: game.vis_team_game_number,
@@ -79,7 +90,10 @@ const getGamesForDays = (req, res, knex) => {
                         teamcolor: game.visteamteamcolor,
                         teamlogo: game.visteamteamlogo,
                         textcolor: game.visteamteamtextcolor,
-                        vs_team: game.home_team_id
+                        vs_team: game.home_team_id,
+                        wins: visteamwins,
+                        loss: visteamloss,
+                        ties: visteamties
                     }
                 }))
 

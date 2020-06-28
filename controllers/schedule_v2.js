@@ -6,7 +6,7 @@ const getAllSeasonGames = (req, res, knex) => {
         'b.teamlogo as visteamteamlogo',
         'b.teamcolor as visteamteamcolor',
         'b.teamtextcolor as visteamteamtextcolor',
-        'c.city as visteamcity',
+        'c.city as hometeamcity',
         'c.nickname as hometeamnickname',
         'c.teamlogo as hometeamteamlogo',
         'c.teamcolor as hometeamteamcolor',

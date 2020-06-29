@@ -168,5 +168,5 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
 // }
 
 module.exports = {
-    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam,getMatchupRecord
+    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam
 };

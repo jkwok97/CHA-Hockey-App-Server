@@ -35,9 +35,10 @@ const knex = require('knex')({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
-        ssl: true
+        ssl: { rejectUnauthorized: false }
     }
 });
+
 const hookUrl = process.env.SLACK_WEBHOOK;
 const waiversHookUrl = process.env.SLACK_WAIVERS_WEBHOOK;
 

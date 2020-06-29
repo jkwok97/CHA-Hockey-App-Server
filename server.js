@@ -293,6 +293,7 @@ app.get('/v2/schedule/last-five/:id', (req, res) => {schedule_v2.getLastFiveReco
 
 app.get('/v2/schedule/match-up', (req, res) => {schedule_v2.getMatchupRecord(req, res, knex);})
 
+
 // ****************************************************************************************
 //                                       NHL
 // ****************************************************************************************

@@ -116,7 +116,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .limit(5)
         .then(data => {
             if (data.length) {
-
+                
                 const lastFive = getLastFive(data);
 
                 console.log(lastFive);
@@ -134,7 +134,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
                     message: 'Request Success',
                     result: team
                 };
-                
+
                 res.json(result);
             } else {
                 res.status(400).json('error getting season games')
@@ -146,6 +146,9 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
 }
 
 const getLastFive = (data) => {
+
+    console.log(data);
+    console.log(typeof(data[0].home_team_score));
     let lastFive = [];
 
     data.forEach((game) => {
@@ -155,6 +158,8 @@ const getLastFive = (data) => {
             game.home_team_score > game.vis_team_score ? lastFive.push('W') : lastFive.push('L');
         }
     });
+
+    console.log(lastFive);
 
     return lastFive
 }

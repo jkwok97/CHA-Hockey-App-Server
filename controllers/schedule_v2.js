@@ -115,24 +115,26 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .orderBy('a.game_day', 'desc')
         .limit(5)
         .then(data => {
-
-            const lastFive = getLastFive(data);
-
-            console.log(lastFive);
-
-            const team = {
-                team_id: req.params.id,
-                last_five_record: lastFive
-            };
-
-            console.log(team);
-
             if (data.length) {
+
+                const lastFive = getLastFive(data);
+
+                console.log(lastFive);
+
+                const team = {
+                    team_id: req.params.id,
+                    last_five_record: lastFive
+                };
+
+                console.log(team);
+
+            
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: team
-                }
+                };
+                
                 res.json(result);
             } else {
                 res.status(400).json('error getting season games')

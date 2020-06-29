@@ -113,9 +113,10 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .where('a.playing_year', req.query.playing_year)
         .whereNotNull('a.vis_team_score')
         .orderBy('a.game_day', 'desc')
+        .limit(5)
         .then(data => {
 
-            console.log(data.slice(data.length - 5));
+            console.log(data);
 
 
 

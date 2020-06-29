@@ -117,7 +117,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .then(data => {
             if (data.length) {
                 
-                const lastFive = getLastFive(data);
+                const lastFive = getLastFive(data, req.params.id);
 
                 console.log(lastFive);
 
@@ -145,21 +145,16 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         })
 }
 
-const getLastFive = (data) => {
-
-    console.log(data);
-    console.log(typeof(data[0].home_team_score));
+const getLastFive = (data, id) => {
     let lastFive = [];
 
     data.forEach((game) => {
-        if (game.vis_team_id === req.params.id) {
+        if (game.vis_team_id === id) {
             game.vis_team_score > game.home_team_score ? lastFive.push('W') : lastFive.push('L');
-        } else if (game.home_team_id === req.params.id) {
+        } else if (game.home_team_id === id) {
             game.home_team_score > game.vis_team_score ? lastFive.push('W') : lastFive.push('L');
         }
     });
-
-    console.log(lastFive);
 
     return lastFive
 }

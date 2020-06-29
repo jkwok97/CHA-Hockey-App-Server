@@ -115,7 +115,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .orderBy('a.game_day', 'desc')
         .then(data => {
 
-            console.log(data);
+            console.log(data.slice(data.length - 5));
 
 
 

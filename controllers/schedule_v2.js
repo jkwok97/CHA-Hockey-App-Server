@@ -108,6 +108,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .from('schedule_v2 as a')
         .where('a.vis_team_id', req.params.id)
         .orWhere('a.home_team_id', req.params.id)
+        .where('a.playing_year', req.query.playing_year)
         .whereNotNull('a.vis_team_score')
         .orderBy('a.game_day', 'desc')
         .then(data => {

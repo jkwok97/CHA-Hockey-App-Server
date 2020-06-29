@@ -133,40 +133,6 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         })
 }
 
-const getMatchupRecord = (req, res, knex) => {
-    knex.select(
-        'a.*',
-        )
-        .from('schedule_v2 as a')
-        .where(function() {
-            this.where('a.vis_team_id', req.query.team_one_id)
-            .andWhere('a.home_team_id', req.query.team_two_id)
-        })
-        .orWhere(function() {
-            this.where('a.vis_team_id', req.query.team_two_id)
-            .andWhere('a.home_team_id', req.query.team_one_id)
-        })
-        .where('a.playing_year', req.query.playing_year)
-        .whereNotNull('a.vis_team_score')
-        .then(data => {
-            if (data.length) {
-
-                const result = {
-                    statusCode: 200,
-                    message: 'Request Success',
-                    result: data
-                };
-
-                res.json(result);
-            } else {
-                res.status(400).json('error getting season games')
-            }
-        }).catch(err => {
-            console.log(error);
-            res.status(400).json('season games not found')
-        })
-}
-
 module.exports = {
-    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam, getMatchupRecord
+    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam
 };

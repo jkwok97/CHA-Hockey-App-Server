@@ -87,7 +87,6 @@ const getTeamsByActive = (req, res, knex) => {
 }
 
 const getTeamsByUser = (req, res, knex) => {
-    console.log(req);
     knex.select('*').from('teams_v2').where('users_id', req.params.id)
         .then(data => {
             if (data.length) {

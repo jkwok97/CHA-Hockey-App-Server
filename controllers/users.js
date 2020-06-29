@@ -43,7 +43,10 @@ const getUsers = (req, res, knex) => {
                 res.status(400).json('error getting stats')
             }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => {
+        console.log(error);
+        res.status(400).json('not found')
+    })
 }
 
 const addUser = (req, res, knex) => {

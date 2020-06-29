@@ -101,10 +101,6 @@ const getGamesForDays = (req, res, knex) => {
         })
 }
 
-knex('users').where(function() {
-    this.where('id', 1).orWhere('id', '>', 10)
-  }).orWhere({name: 'Tester'})
-
 const getLastFiveRecordForTeam = (req, res, knex) => {
     knex.select(
         'a.*',

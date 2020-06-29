@@ -34,6 +34,7 @@ const getAllSeasonGames = (req, res, knex) => {
 }
 
 const getGamesForDays = (req, res, knex) => {
+
     knex.select(
         'a.*',
         'b.city as visteamcity',
@@ -83,7 +84,7 @@ const getGamesForDays = (req, res, knex) => {
                         vs_team: game.home_team_id,
                         vs_team_name: game.hometeamnickname
                     }
-                }))
+                }));
 
                 const result = {
                     statusCode: 200,
@@ -100,6 +101,38 @@ const getGamesForDays = (req, res, knex) => {
         })
 }
 
+const getLastFiveRecordForTeam = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        )
+        .from('schedule_v2 as a')
+        .where('a.vis_team_id', req.params.id)
+        .orWhere('a.home_team_id', req.params.id)
+        .whereNotNull('a.vis_team_score')
+        .orderBy('a.game_day', 'desc')
+        .then(data => {
+
+            console.log(data);
+
+
+
+
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting season games')
+            }
+        }).catch(err => {
+            console.log(error);
+            res.status(400).json('season games not found')
+        })
+}
+
 module.exports = {
-    getAllSeasonGames, getGamesForDays
+    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam
 };

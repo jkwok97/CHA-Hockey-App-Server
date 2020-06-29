@@ -289,7 +289,7 @@ app.get('/v2/ratings/goalie/:id', (req, res) => {ratings_v2.getGoalieRatings(req
 app.get('/v2/schedule', (req, res) => {schedule_v2.getAllSeasonGames(req, res, knex);})
 app.get('/v2/schedule/days', (req, res) => {schedule_v2.getGamesForDays(req, res, knex);})
 
-
+app.get('/v2/schedule/last-five/:id', (req, res) => {schedule_v2.getLastFiveRecordForTeam(req, res, knex);})
 
 // ****************************************************************************************
 //                                       NHL

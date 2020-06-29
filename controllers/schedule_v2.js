@@ -143,7 +143,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         })
 }
 
-getLastFive = (data) => {
+const getLastFive = (data) => {
     let lastFive = [];
 
     data.forEach((game) => {

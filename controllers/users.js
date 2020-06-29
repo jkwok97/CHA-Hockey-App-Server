@@ -3,7 +3,6 @@
 // ****************************************************************************************
 
 const getUser = (req, res, knex) => {
-    console.log(req);
     knex.select('*').from('users_v2').where('email', req.params.email)
         .then(data => {
             if (data.length) {

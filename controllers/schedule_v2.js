@@ -145,7 +145,7 @@ const getMatchupRecord = (req, res, knex) => {
         .orWhere(function() {
             this.where('a.vis_team_id', req.query.team_two_id)
             .andWhere('a.home_team_id', req.query.team_one_id)
-        }
+        })
         .where('a.playing_year', req.query.playing_year)
         .whereNotNull('a.vis_team_score')
         .then(data => {

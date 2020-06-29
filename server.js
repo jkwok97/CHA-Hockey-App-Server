@@ -321,6 +321,7 @@ app.get('/nhl-stats/player', (req, res) => {
     }
 });
 
+
 app.get('/nhl-stats/career/:id', (req, res) => { nhl.getCareerNHLPlayerStats(req, res) });
 app.get('/nhl-stats/player-info/:id', (req, res) => { nhl.getNhlPlayerInfo(req, res) });
 

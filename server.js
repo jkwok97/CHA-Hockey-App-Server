@@ -29,10 +29,8 @@ const awards_v2 = require('./controllers/awards_v2');
 const ratings_v2 = require('./controllers/ratings_v2');
 const schedule_v2 = require('./controllers/schedule_v2');
 
-
 const morgan = require('morgan');
 
-console.log(process.env.DATABASE_URL);
 const knex = require('knex')({
     client: 'pg',
     connection: {

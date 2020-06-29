@@ -116,18 +116,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .limit(5)
         .then(data => {
 
-            let lastFive = [];
-
-            console.log(data);
-            console.log(req.params.id);
-
-            data.forEach((game) => {
-                if (game.vis_team_id === req.params.id) {
-                    game.vis_team_score > game.home_team_score ? lastFive.push('W') : lastFive.push('L');
-                } else if (game.home_team_id === req.params.id) {
-                    game.home_team_score > game.vis_team_score ? lastFive.push('W') : lastFive.push('L');
-                }
-            });
+            const lastFive = getLastFive(data);
 
             console.log(lastFive);
 
@@ -137,7 +126,6 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
             };
 
             console.log(team);
-
 
             if (data.length) {
                 const result = {
@@ -153,6 +141,20 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
             console.log(error);
             res.status(400).json('season games not found')
         })
+}
+
+getLastFive = (data) => {
+    let lastFive = [];
+
+    data.forEach((game) => {
+        if (game.vis_team_id === req.params.id) {
+            game.vis_team_score > game.home_team_score ? lastFive.push('W') : lastFive.push('L');
+        } else if (game.home_team_id === req.params.id) {
+            game.home_team_score > game.vis_team_score ? lastFive.push('W') : lastFive.push('L');
+        }
+    });
+
+    return lastFive
 }
 
 module.exports = {

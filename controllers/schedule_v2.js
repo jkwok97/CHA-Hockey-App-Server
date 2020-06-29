@@ -118,6 +118,9 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
 
             let lastFive = [];
 
+            console.log(data);
+            console.log(req.params.id);
+
             data.forEach((game) => {
                 if (game.vis_team_id === req.params.id) {
                     game.vis_team_score > game.home_team_score ? lastFive.push('W') : lastFive.push('L');

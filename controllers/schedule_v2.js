@@ -116,19 +116,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
         .limit(5)
         .then(data => {
             if (data.length) {
-                
-                const lastFive = getLastFive(data, req.params.id);
 
-                console.log(lastFive);
-
-                const team = {
-                    team_id: req.params.id,
-                    last_five_record: lastFive
-                };
-
-                console.log(team);
-
-            
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
@@ -143,22 +131,6 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
             console.log(error);
             res.status(400).json('season games not found')
         })
-}
-
-const getLastFive = (data, id) => {
-    let lastFive = [];
-
-    console.log(data);
-
-    data.forEach((game) => {
-        if (game.vis_team_id === id) {
-            game.vis_team_score > game.home_team_score ? lastFive.push('W') : lastFive.push('L');
-        } else if (game.home_team_id === id) {
-            game.home_team_score > game.vis_team_score ? lastFive.push('W') : lastFive.push('L');
-        }
-    });
-
-    return lastFive
 }
 
 module.exports = {

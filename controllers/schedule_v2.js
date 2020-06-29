@@ -132,7 +132,7 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: team
+                    result: data
                 };
 
                 res.json(result);
@@ -147,6 +147,8 @@ const getLastFiveRecordForTeam = (req, res, knex) => {
 
 const getLastFive = (data, id) => {
     let lastFive = [];
+
+    console.log(data);
 
     data.forEach((game) => {
         if (game.vis_team_id === id) {

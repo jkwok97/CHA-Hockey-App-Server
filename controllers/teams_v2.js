@@ -87,6 +87,7 @@ const getTeamsByActive = (req, res, knex) => {
 }
 
 const getTeamsByUser = (req, res, knex) => {
+    console.log(req);
     knex.select('*').from('teams_v2').where('users_id', req.params.id)
         .then(data => {
             if (data.length) {
@@ -100,7 +101,10 @@ const getTeamsByUser = (req, res, knex) => {
                 res.status(400).json('error getting stats')
             }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => {
+        console.log(err)
+        res.status(400).json('not found')
+    })
 }
 
 const getTeamById = (req, res, knex) => {

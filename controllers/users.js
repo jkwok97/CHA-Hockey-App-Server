@@ -3,6 +3,7 @@
 // ****************************************************************************************
 
 const getUser = (req, res, knex) => {
+    console.log(req);
     knex.select('*').from('users_v2').where('email', req.params.email)
         .then(data => {
             if (data.length) {
@@ -10,7 +11,10 @@ const getUser = (req, res, knex) => {
             } else {
                 res.status(400).json('No Profile Associated With That Email')
             }
-        }).catch(err => res.status(400).json('user not found'))
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('user not found')
+        })
 }
 
 const getUserById = (req, res, knex) => {

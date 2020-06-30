@@ -216,7 +216,74 @@ const deleteTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('Deleting Team Error'))
 }
 
+const getPlayersByTeamName = (req, res, knex) => {
+
+    const players = getPlayers(req.params.teamName, req.query.season, req.query.seasonType);
+    const goalies = getGoalies(req.params.teamName, req.query.season, req.query.seasonType);
+
+    console.log(players);
+    console.log(goalies);
+
+    if (players && goalies) {
+        const result = {
+            statusCode: 200,
+            message: 'Success',
+            result: {
+                players,
+                goalies
+            }
+        }
+    
+        res.json(result)
+    } else {
+        res.status(400).json('Error!');
+    }
+}
+
+const getPlayers = (teamName, season, seasonType) => {
+    return knex.select(
+        'b.id as playerid',
+        'b.firstname',
+        'b.lastname'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .where('b.team_name', teamName)
+        .where('b.playing_year', season)
+        .where('b.season_type', seasonType)
+        .orderBy('b.lastname', 'asc')
+        .then(data => {
+            if (data.length) {
+                return data
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
+const getGoalies = (teamName, season, seasonType) => {
+    return knex.select(
+        'b.id as playerid',
+        'b.firstname',
+        'b.lastname'
+        )
+        .from('goalies_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .where('b.team_name', teamName)
+        .where('b.playing_year', season)
+        .where('b.season_type', seasonType)
+        .orderBy('b.lastname', 'asc')
+        .then(data => {
+            if (data.length) {
+                return data
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 module.exports = { 
-    getTeams, getCurrentTeams, getTeamsByActive, getTeamsByUser, getTeamById, getTeamLogo, getUserIdByTeamName,
-    updateTeam, addTeam, deleteTeam
+    getTeams, getCurrentTeams, getTeamsByActive, getTeamsByUser, getTeamById, 
+    getTeamLogo, getUserIdByTeamName, getPlayersByTeamName,
+    updateTeam, addTeam, deleteTeam, 
 }

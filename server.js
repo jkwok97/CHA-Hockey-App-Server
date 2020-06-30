@@ -236,6 +236,7 @@ app.get('/v2/teams/user/:id', (req, res) => {teams_v2.getTeamsByUser(req, res, k
 app.get('/v2/teams/:id', (req, res) => {teams_v2.getTeamById(req, res, knex)});
 app.get('/v2/teams/:id/logo', (req, res) => {teams_v2.getTeamLogo(req, res, knex)});
 app.get('/v2/teams/:teamName/user/', (req, res) => {teams_v2.getUserIdByTeamName(req, res, knex)});
+app.get('/v2/teams/:teamName/players/', (req, res) => {teams_v2.getPlayersByTeamName(req, res, knex)});
 
 app.get('/v2/teams/current/all', (req, res) => {teams_v2.getCurrentTeams(req, res, knex)});
 

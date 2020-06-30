@@ -265,6 +265,7 @@ app.patch('/v2/waivers/:id', (req, res) => { waivers_v2.updateAllTeams(req, res,
 //                                    Awards
 // ****************************************************************************************
 
+app.get('/v2/awards', (req, res) => {awards_v2.getAllAwardWinners(req, res, knex);})
 app.get('/v2/awards/champions', (req, res) => {awards_v2.getChampions(req, res, knex);})
 app.get('/v2/awards/scorers', (req, res) => {awards_v2.getScorers(req, res, knex);})
 app.get('/v2/awards/defense', (req, res) => {awards_v2.getDefense(req, res, knex);})

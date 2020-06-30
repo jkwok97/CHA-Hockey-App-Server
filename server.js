@@ -281,6 +281,10 @@ app.get('/v2/awards/award-types', (req, res) => {awards_v2.getAwardTypes(req, re
 
 app.post('/v2/awards', (req, res) => { awards_v2.addAwardWinner(req, res, knex) })
 
+app.put('/v2/awards/:id', (req, res) => {awards_v2.editAwardWinner(req, res, knex)});
+
+app.delete('/v2/awards/:id', (req, res) => { awards_v2.deleteAwardWinner(req, res, knex) });
+
 // ****************************************************************************************
 //                                    Ratings
 // ****************************************************************************************

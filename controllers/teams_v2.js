@@ -218,8 +218,26 @@ const deleteTeam = (req, res, knex) => {
 
 const getPlayersByTeamName = (req, res, knex) => {
 
-    const players = getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType);
-    const goalies = getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType);
+    let players;
+    let goalies;
+
+    getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
+        .then(data => {
+            players = data;
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).json('not found')
+        })
+
+    getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
+        .then(data => {
+            goalies = data;
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(400).json('not found')
+        })
 
     console.log(players);
     console.log(goalies);
@@ -252,13 +270,6 @@ const getPlayers = (knex, teamName, season, seasonType) => {
         .where('b.playing_year', season)
         .where('b.season_type', seasonType)
         .orderBy('b.lastname', 'asc')
-        .then(data => {
-            if (data.length) {
-                return data
-            } else {
-                res.status(400).json('error getting player stat')
-            }
-        }).catch(err => res.status(400).json('not found'))
 }
 
 const getGoalies = (knex, teamName, season, seasonType) => {
@@ -273,13 +284,6 @@ const getGoalies = (knex, teamName, season, seasonType) => {
         .where('b.playing_year', season)
         .where('b.season_type', seasonType)
         .orderBy('b.lastname', 'asc')
-        .then(data => {
-            if (data.length) {
-                return data
-            } else {
-                res.status(400).json('error getting player stat')
-            }
-        }).catch(err => res.status(400).json('not found'))
 }
 
 module.exports = { 

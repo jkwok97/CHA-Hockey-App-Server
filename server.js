@@ -288,14 +288,12 @@ app.get('/v2/ratings/goalie/:id', (req, res) => {ratings_v2.getGoalieRatings(req
 // ****************************************************************************************
 
 app.get('/v2/schedule', (req, res) => {schedule_v2.getAllSeasonGames(req, res, knex);})
-app.get('/v2/schedule/home/:id', (req, res) => {schedule_v2.updateHomeTeamScore(req, res, knex);})
-app.get('/v2/schedule/visitor/:id', (req, res) => {schedule_v2.updateVisTeamScore(req, res, knex);})
-
 app.get('/v2/schedule/days', (req, res) => {schedule_v2.getGamesForDays(req, res, knex);})
-
 app.get('/v2/schedule/last-five/:id', (req, res) => {schedule_v2.getLastFiveRecordForTeam(req, res, knex);})
-
 app.get('/v2/schedule/match-up', (req, res) => {schedule_v2.getMatchupRecord(req, res, knex);})
+
+app.patch('/v2/schedule/home/:id', (req, res) => {schedule_v2.updateHomeTeamScore(req, res, knex);})
+app.patch('/v2/schedule/visitor/:id', (req, res) => {schedule_v2.updateVisTeamScore(req, res, knex);})
 
 // ****************************************************************************************
 //                                       NHL

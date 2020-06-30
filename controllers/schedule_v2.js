@@ -169,7 +169,9 @@ const getMatchupRecord = (req, res, knex) => {
 }
 
 const updateHomeTeamScore = (req, res, knex) => {
-    knex('schedule_v2').where({id: req.params.id}).update({home_team_score: req.body.home_team_score})
+    knex('schedule_v2')
+    .where({id: req.params.id})
+    .update({home_team_score: req.body.home_team_score})
     .then(resp => {
         if (resp) {
 
@@ -191,7 +193,9 @@ const updateHomeTeamScore = (req, res, knex) => {
 }
 
 const updateVisTeamScore = (req, res, knex) => {
-    knex('schedule_v2').where({id: req.params.id}).update({vis_team_score: req.body.vis_team_score})
+    knex('schedule_v2')
+    .where({id: req.params.id})
+    .update({vis_team_score: req.body.vis_team_score})
     .then(resp => {
         if (resp) {
             const result = {

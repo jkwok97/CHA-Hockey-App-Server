@@ -218,7 +218,7 @@ const deleteTeam = (req, res, knex) => {
 
 const getPlayersByTeamName = (req, res, knex) => {
 
-    const players = getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
+    const players = await getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
                         .then(data => {
                             console.log(data);
                             return data;
@@ -228,7 +228,7 @@ const getPlayersByTeamName = (req, res, knex) => {
                             res.status(400).json('not found')
                         })
 
-    const goalies = getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
+    const goalies = await getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
                         .then(data => {
                             console.log(data);
                             return data;

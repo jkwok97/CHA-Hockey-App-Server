@@ -224,6 +224,7 @@ const getPlayersByTeamName = (req, res, knex) => {
     getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
         .then(data => {
             players = data;
+            console.log(players);
         })
         .catch(err => {
             console.log(err);
@@ -233,6 +234,7 @@ const getPlayersByTeamName = (req, res, knex) => {
     getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
         .then(data => {
             goalies = data;
+            console.log(goalies);
         })
         .catch(err => {
             console.log(err);
@@ -267,8 +269,8 @@ const getPlayers = (knex, teamName, season, seasonType) => {
         .from('players_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('a.team_name', teamName)
-        .where('b.playing_year', season)
-        .where('b.season_type', seasonType)
+        .where('a.playing_year', season)
+        .where('a.season_type', seasonType)
         .orderBy('b.lastname', 'asc')
 }
 
@@ -281,8 +283,8 @@ const getGoalies = (knex, teamName, season, seasonType) => {
         .from('goalies_stats_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('a.team_name', teamName)
-        .where('b.playing_year', season)
-        .where('b.season_type', seasonType)
+        .where('a.playing_year', season)
+        .where('a.season_type', seasonType)
         .orderBy('b.lastname', 'asc')
 }
 

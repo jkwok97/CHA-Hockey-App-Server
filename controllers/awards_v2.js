@@ -471,9 +471,69 @@ const getAwardTypes = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const addAwardWinner = (req, res, knex) => {
+    knex('awards_v2').insert({
+        display_season: req.body.display_season,
+        cha_season: req.body.cha_season,
+        team_id: req.body.team_id,
+        users_id: req.body.users_id,
+        player_id: req.body.player_id,
+        award_type: req.body.award_type
+    }).then(resp => {
+        if (resp) {
+            console.log("success")
+            res.json("Success!")
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    }) 
+}
+
+const editAwardWinner = (req, res, knex) => {
+    knex('awards_v2').where({id: req.params.id})
+    .update({
+        display_season: req.body.display_season,
+        cha_season: req.body.cha_season,
+        team_id: req.body.team_id,
+        users_id: req.body.users_id,
+        player_id: req.body.player_id,
+        award_type: req.body.award_type
+    })
+    .then(resp => {
+        if (resp) {
+            console.log("success")
+            res.json("Success!")
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
+const deleteAwardWinner = (req, res, knex) => {
+    knex('awards_v2').where('id', req.params.id).del()
+        .then(resp => {
+            if (resp) {
+                console.log("success")
+                res.json("Success!")
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        })
+        .catch(err => {
+            console.log(err); 
+            res.status(400).json('not found');
+        })
+}
+
 
 module.exports = {
     getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
     getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByUserId,
-    getAllAwardWinners, getAwardTypes
+    getAllAwardWinners, getAwardTypes,
+    addAwardWinner, editAwardWinner, deleteAwardWinner
 };

@@ -279,6 +279,8 @@ app.get('/v2/awards/goalie/:id', (req, res) => {awards_v2.getGoalieAwardsByPlaye
 app.get('/v2/awards/user/:id', (req, res) => {awards_v2.getTeamAwardsByUserId(req, res, knex);})
 app.get('/v2/awards/award-types', (req, res) => {awards_v2.getAwardTypes(req, res, knex);})
 
+app.post('/v2/awards', (req, res) => { awards_v2.addAwardWinner(req, res, knex) })
+
 // ****************************************************************************************
 //                                    Ratings
 // ****************************************************************************************

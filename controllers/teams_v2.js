@@ -238,9 +238,6 @@ const getPlayersByTeamName = async (req, res, knex) => {
                             res.status(400).json('not found')
                         })
 
-    console.log(players);
-    console.log(goalies);
-
     if (players && goalies) {
         const result = {
             statusCode: 200,

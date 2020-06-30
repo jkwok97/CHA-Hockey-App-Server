@@ -471,6 +471,47 @@ const getAwardTypes = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const getAwardWinnerById = (req, res, knex) => {
+    knex.select(
+        'a.id',
+        'a.display_season',
+        'a.cha_season',
+        'b.id as awardtypeid',
+        'b.display_name',
+        'c.id as teamid',
+        'c.city',
+        'c.nickname',
+        'c.teamlogo',
+        'c.teamcolor',
+        'd.id as playerid',
+        'd.firstname as playerfirst',
+        'd.lastname as playerlast',
+        'd.nhl_id',
+        'e.id as ownerid',
+        'e.firstname as ownerfirst',
+        'e.lastname as ownerlast',
+    )
+    .from('awards_v2 as a')
+    .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
+    .leftJoin('teams_v2 as c', 'c.id', 'a.team_id')
+    .leftJoin('players_v2 as d', 'd.id', 'a.player_id')
+    .leftJoin('users_v2 as e', 'e.id', 'a.users_id')
+    .where('a.id', req.params.id)
+    .then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data[0]
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 const addAwardWinner = (req, res, knex) => {
     knex('awards_v2').insert({
         display_season: req.body.display_season,
@@ -534,6 +575,6 @@ const deleteAwardWinner = (req, res, knex) => {
 module.exports = {
     getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
     getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByUserId,
-    getAllAwardWinners, getAwardTypes,
+    getAllAwardWinners, getAwardTypes, getAwardWinnerById,
     addAwardWinner, editAwardWinner, deleteAwardWinner
 };

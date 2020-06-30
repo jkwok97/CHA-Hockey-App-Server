@@ -454,6 +454,7 @@ const getAwardTypes = (req, res, knex) => {
         'a.*',
     )
     .from('award_type_v2 as a')
+    .whereNot('a.id', '1')
     .orderBy('display_name', 'desc')
     .then(data => {
         if (data.length) {

@@ -522,10 +522,7 @@ const addAwardWinner = (req, res, knex) => {
         award_type: req.body.award_type
     }).then(resp => {
 
-        console.log(resp);
-
         if (resp) {
-            console.log("success")
 
             const result = {
                 statusCode: 200,

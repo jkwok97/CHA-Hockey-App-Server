@@ -218,28 +218,25 @@ const deleteTeam = (req, res, knex) => {
 
 const getPlayersByTeamName = (req, res, knex) => {
 
-    let players;
-    let goalies;
+    const players = getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
+                        .then(data => {
+                            console.log(data);
+                            return data;
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            res.status(400).json('not found')
+                        })
 
-    getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
-        .then(data => {
-            players = data;
-            console.log(players);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json('not found')
-        })
-
-    getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
-        .then(data => {
-            goalies = data;
-            console.log(goalies);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(400).json('not found')
-        })
+    const goalies = getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
+                        .then(data => {
+                            console.log(data);
+                            return data;
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            res.status(400).json('not found')
+                        })
 
     console.log(players);
     console.log(goalies);

@@ -521,9 +521,18 @@ const addAwardWinner = (req, res, knex) => {
         player_id: req.body.player_id,
         award_type: req.body.award_type
     }).then(resp => {
+
+        console.log(resp);
+
         if (resp) {
             console.log("success")
-            res.json("Success!")
+
+            const result = {
+                statusCode: 200,
+                message: 'Add Player Success',
+            }
+
+            res.json(result)
         } else {
             res.status(400).json('Error!'); 
         }
@@ -546,8 +555,13 @@ const editAwardWinner = (req, res, knex) => {
     })
     .then(resp => {
         if (resp) {
-            console.log("success")
-            res.json("Success!")
+
+            const result = {
+                statusCode: 200,
+                message: 'Edit Player Success',
+            }
+
+            res.json(result)
         } else {
             res.status(400).json('Error!'); 
         }
@@ -559,8 +573,13 @@ const deleteAwardWinner = (req, res, knex) => {
     knex('awards_v2').where('id', req.params.id).del()
         .then(resp => {
             if (resp) {
-                console.log("success")
-                res.json("Success!")
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Delete Player Success',
+                }
+
+                res.json(result)
             } else {
                 res.status(400).json('Error!'); 
             }

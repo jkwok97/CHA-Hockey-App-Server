@@ -449,9 +449,30 @@ const getAllAwardWinners = (req, res, knex) => {
     .catch(err => res.status(400).json('not found'))
 }
 
+const getAwardTypes = (req, res, knex) => {
+    knex.select(
+        'a.*',
+    )
+    .from('award_type_v2 as a')
+    .orderBy('display_name', 'desc')
+    .then(data => {
+        if (data.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting stats')
+        }
+    })
+    .catch(err => res.status(400).json('not found'))
+}
+
 
 module.exports = {
     getChampions, getScorers, getDefense, getRookies, getGoalies, getGm, getSeason,
     getPlayerAwardsByPlayerId, getGoalieAwardsByPlayerId, getTeamAwardsByUserId,
-    getAllAwardWinners
+    getAllAwardWinners, getAwardTypes
 };

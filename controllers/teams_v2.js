@@ -220,7 +220,6 @@ const getPlayersByTeamName = async (req, res, knex) => {
 
     const players = await getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
                         .then(data => {
-                            console.log(data);
                             return data;
                         })
                         .catch(err => {
@@ -230,7 +229,6 @@ const getPlayersByTeamName = async (req, res, knex) => {
 
     const goalies = await getGoalies(knex, req.params.teamName, req.query.season, req.query.seasonType)
                         .then(data => {
-                            console.log(data);
                             return data;
                         })
                         .catch(err => {

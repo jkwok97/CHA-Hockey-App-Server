@@ -216,7 +216,7 @@ const deleteTeam = (req, res, knex) => {
         }).catch(err => res.status(400).json('Deleting Team Error'))
 }
 
-const getPlayersByTeamName = (req, res, knex) => {
+const getPlayersByTeamName = async (req, res, knex) => {
 
     const players = await getPlayers(knex, req.params.teamName, req.query.season, req.query.seasonType)
                         .then(data => {

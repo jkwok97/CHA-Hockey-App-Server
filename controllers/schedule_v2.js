@@ -168,6 +168,50 @@ const getMatchupRecord = (req, res, knex) => {
         })
 }
 
+const updateHomeTeamScore = (req, res, knex) => {
+    knex('schedule_v2').where({id: req.params.id}).update({home_team_score: req.body.home_team_score})
+    .then(resp => {
+        if (resp) {
+
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: 'Success!'
+            };
+
+            res.json(result)
+        } else {
+            res.status(400).json("Error Updating Score")
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json("Server Error!");
+    });
+}
+
+const updateVisTeamScore = (req, res, knex) => {
+    knex('schedule_v2').where({id: req.params.id}).update({vis_team_score: req.body.vis_team_score})
+    .then(resp => {
+        if (resp) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: 'Success!'
+            };
+
+            res.json(result)
+        } else {
+            res.status(400).json("Error Updating Score")
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(400).json("Server Error!");
+    });
+}
+
 module.exports = {
-    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam, getMatchupRecord
+    getAllSeasonGames, getGamesForDays, getLastFiveRecordForTeam, getMatchupRecord,
+    updateHomeTeamScore, updateVisTeamScore
 };

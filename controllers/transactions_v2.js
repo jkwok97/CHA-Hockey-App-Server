@@ -411,8 +411,12 @@ const getTransaction = (req, res, knex) => {
         d.team_two_id,
         d.team_two_picks,
         d.transaction_date,
-        (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '${req.params.id}') as team_one_players,
-        (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '${req.params.id}') as team_two_players
+        (select array_agg(p.firstname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '${req.params.id}') as team_one_firstnames,
+        (select array_agg(p.lastname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '${req.params.id}') as team_one_lastnames,
+        (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '${req.params.id}') as team_one_nhlids,
+        (select array_agg(p.firstname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '${req.params.id}') as team_two_firstnames,
+        (select array_agg(p.lastname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '${req.params.id}') as team_two_lastname,
+        (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '${req.params.id}') as team_two_nhlids
         from transactions_v2 d
         where d.id = '${req.params.id}'
         group by d.id
@@ -440,8 +444,12 @@ const getAllTransactions = (req, res, knex) => {
     d.team_two_id,
     d.team_two_picks,
     d.transaction_date,
-    (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_players,
-    (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_players
+    (select array_agg(p.firstname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_firstnames,
+    (select array_agg(p.lastname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_lastnames,
+    (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_nhlids,
+    (select array_agg(p.firstname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_firstnames,
+    (select array_agg(p.lastname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_lastname,
+    (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_nhlids
     from transactions_v2 d
     ;`)
     .then(data => {

@@ -401,7 +401,72 @@ const add = (req, res, knex) => {
     })
 }
 
+const getTransaction = (req, res, knex) => {
+
+    knex.raw(`
+        select 
+        d.id,
+        d.team_one_id,
+        d.team_one_picks,
+        d.team_two_id,
+        d.team_two_picks,
+        d.transaction_date,
+        (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '${req.params.id}') as team_one_players,
+        (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '${req.params.id}') as team_two_players
+        from transactions_v2 d
+        where d.id = '${req.params.id}'
+        group by d.id
+    ;`)
+    .then(data => {
+        if (data.rows.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data.rows
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting player stat')
+        }
+    }).catch(err => res.status(400).json('not found'))
+}
+
+const getAllTransactions = (req, res, knex) => {
+    knex.raw(`
+    select 
+    d.id,
+    d.team_one_id,
+    d.team_one_picks,
+    d.team_two_id,
+    d.team_two_picks,
+    d.transaction_date,
+    (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_players,
+    (select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_players
+    from transactions_v2 d
+    ;`)
+    .then(data => {
+        if (data.rows.length) {
+            const result = {
+                statusCode: 200,
+                message: 'Request Success',
+                result: data.rows
+            }
+            res.json(result);
+        } else {
+            res.status(400).json('error getting player stat')
+        }
+    }).catch(err => res.status(400).json('not found'))
+}
+
+const updateTransaction = (req, res, knex) => {
+
+}
+
+const deleteTransaction = (req, res, knex) => {
+
+}
+
 module.exports = {
     acquire, release, trade,
-    add
+    add, getTransaction, getAllTransactions, updateTransaction, deleteTransaction
 };

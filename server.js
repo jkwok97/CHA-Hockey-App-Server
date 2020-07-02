@@ -244,6 +244,9 @@ app.put('/v2/transactions/acquire', (req, res) => {transactions_v2.acquire(req, 
 app.put('/v2/transactions/release', (req, res) => {transactions_v2.release(req, res, knex, waiversHookUrl)});
 app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res, knex, hookUrl)});
 
+app.get('/v2/transactions', (req, res) => {transactions_v2.getAllTransactions(req, res, knex)});
+app.get('/v2/transactions/edit/:id', (req, res) => {transactions_v2.getTransaction(req, res, knex)});
+
 app.post('/v2/transactions/add', (req, res) => {transactions_v2.add(req, res, knex)});
 
 // ****************************************************************************************

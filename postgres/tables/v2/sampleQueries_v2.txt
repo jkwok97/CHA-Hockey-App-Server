@@ -138,3 +138,47 @@ where team_name = 'STA'
 and 
 season_type = 'Regular'
 group by a.player_id, a.team_name, a.season_type;
+
+
+
+
+
+-- 06-09-2020	To Oak: J. Roslovic To Sea: M. Wood, Oak 3rd
+
+-- INSERT INTO transactions_v2
+-- VALUES (
+--     '1',
+--     '2020-06-09',
+--     '13',
+--     '{}',
+--     '{1399}',
+--     '17',
+--     '{"Oak 3rd"}',
+--     '{1772}'
+-- );
+
+// select by id
+select 
+d.id,
+d.team_one_id,
+d.team_one_picks,
+d.team_two_id,
+d.team_two_picks,
+d.transaction_date,
+(select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = '1') as team_one_players,
+(select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = '1') as team_two_players
+from transactions_v2 d
+where d.id = '1'
+group by d.id;
+
+// select all
+select 
+d.id,
+d.team_one_id,
+d.team_one_picks,
+d.team_two_id,
+d.team_two_picks,
+d.transaction_date,
+(select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_one_players) where c.id = d.id) as team_one_players,
+(select array_agg(p) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_players
+from transactions_v2 d;

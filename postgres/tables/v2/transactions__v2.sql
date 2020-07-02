@@ -11,17 +11,11 @@ CREATE TABLE transactions_v2 (
     team_two_players numeric[]
 );
 
+do $$
+declare maxid int;
+begin
+    select max(id)+1 from transactions_v2 into maxid;
+    execute 'alter SEQUENCE transactions_v2_id_seq RESTART with '|| maxid;
+end;
 
-06-09-2020	To Oak: J. Roslovic To Sea: M. Wood, Oak 3rd
-
-INSERT INTO transactions_v2
-VALUES (
-    '1',
-    '2020-06-09',
-    '13',
-    '{}',
-    '{1399}',
-    '17',
-    '{"Oak 3rd"}',
-    '{1772}'
-);
+$$ language plpgsql;

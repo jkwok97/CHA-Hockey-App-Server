@@ -372,6 +372,36 @@ const changeToString = (array) => {
     return string;
 }
 
+const add = (req, res, knex) => {
+    knex('transactions_v2').insert({
+        transaction_date: req.body.transaction_date,
+        team_one_id: req.body.team_one_id,
+        team_one_picks: req.body.team_one_picks,
+        team_one_players: req.body.team_one_players,
+        team_two_id: req.body.team_two_id,
+        team_two_picks: req.body.team_two_picks,
+        team_two_players: req.body.team_two_players
+    }).then(resp => {
+
+        if (resp) {
+
+            const result = {
+                statusCode: 200,
+                message: 'Add Transaction Success',
+            }
+
+            res.json(result)
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })
+}
+
 module.exports = {
-    acquire, release, trade
+    acquire, release, trade,
+    add
 };

@@ -19,8 +19,8 @@ const getTeams = (req, res, knex) => {
         } else {
             res.status(400).json('error getting stats')
         }
-})
-.catch(err => res.status(400).json('not found'))
+    })
+    .catch(err => res.status(400).json('not found'))
 }
 
 const getCurrentTeams = (req, res, knex) => {
@@ -282,6 +282,6 @@ const getGoalies = (knex, teamName, season, seasonType) => {
 
 module.exports = { 
     getTeams, getCurrentTeams, getTeamsByActive, getTeamsByUser, getTeamById, 
-    getTeamLogo, getUserIdByTeamName, getPlayersByTeamName,
+    getTeamLogo, getUserIdByTeamName, getPlayersByTeamName, 
     updateTeam, addTeam, deleteTeam, 
 }

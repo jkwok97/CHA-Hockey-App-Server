@@ -244,6 +244,8 @@ app.put('/v2/transactions/acquire', (req, res) => {transactions_v2.acquire(req, 
 app.put('/v2/transactions/release', (req, res) => {transactions_v2.release(req, res, knex, waiversHookUrl)});
 app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res, knex, hookUrl)});
 
+app.post('/v2/transactions/add', (req, res) => {transactions_v2.add(req, res, knex)});
+
 // ****************************************************************************************
 //                                    Waivers
 // ****************************************************************************************

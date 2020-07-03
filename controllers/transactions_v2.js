@@ -428,7 +428,7 @@ const getTransaction = (req, res, knex) => {
             const result = {
                 statusCode: 200,
                 message: 'Request Success',
-                result: data.rows[0]
+                result: data.rows
             }
             res.json(result);
         } else {

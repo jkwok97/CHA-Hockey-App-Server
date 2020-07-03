@@ -471,6 +471,25 @@ const getAllTransactions = (req, res, knex) => {
 }
 
 const updateTransaction = (req, res, knex) => {
+    
+    const teamData = req.body;
+
+    knex('transactions_v2').where({id: req.params.id})
+        .update(teamData)
+        .then(resp => {
+            if (resp) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Update Transaction Success',
+                    result: resp
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('Error!'); 
+            }
+        }).catch(err => {
+            res.status(400).json('Updating Transaction Error')
+        })
 
 }
 

@@ -247,6 +247,8 @@ app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res,
 app.get('/v2/transactions', (req, res) => {transactions_v2.getAllTransactions(req, res, knex)});
 app.get('/v2/transactions/edit/:id', (req, res) => {transactions_v2.getTransaction(req, res, knex)});
 
+app.put('/v2/transactions/edit/:id', (req, res) => {transactions_v2.updateTransaction(req, res, knex)});
+
 app.post('/v2/transactions/add', (req, res) => {transactions_v2.add(req, res, knex)});
 
 // ****************************************************************************************

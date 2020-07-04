@@ -195,14 +195,14 @@ from transactions_v2 d;
 
 INSERT INTO transactions_v2
 VALUES (
-    '2',
-    '2020-06-09',
-    '13',
+    '3',
+    '2020-06-05',
+    '12',
     '{}',
-    '{1399}',
-    '17',
-    '{"Oak 3rd"}',
-    '{1772}'
+    '{212}',
+    '15',
+    '{"SCS 1st 2020", "MSG 3rd 2021", "MSG 5th 2021"}',
+    '{}'
 );
 
 To Msg: B. Burns To Peo: SC 1st, Msg 3rd (2021), Msg 5th (2021)

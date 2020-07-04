@@ -251,6 +251,8 @@ app.put('/v2/transactions/edit/:id', (req, res) => {transactions_v2.updateTransa
 
 app.post('/v2/transactions/add', (req, res) => {transactions_v2.add(req, res, knex)});
 
+app.delete('/v2/transactions/edit/:id', (req, res) => {transactions_v2.deleteTransaction(req, res, knex)});
+
 // ****************************************************************************************
 //                                    Waivers
 // ****************************************************************************************

@@ -494,7 +494,24 @@ const updateTransaction = (req, res, knex) => {
 }
 
 const deleteTransaction = (req, res, knex) => {
+    knex('transactions_v2').where('id', req.params.id).del()
+    .then(resp => {
+        if (resp) {
 
+            const result = {
+                statusCode: 200,
+                message: 'Delete Transaction Success',
+            }
+
+            res.json(result)
+        } else {
+            res.status(400).json('Error!'); 
+        }
+    })
+    .catch(err => {
+        console.log(err); 
+        res.status(400).json('not found');
+    })
 }
 
 module.exports = {

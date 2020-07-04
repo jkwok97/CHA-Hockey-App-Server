@@ -245,6 +245,8 @@ app.put('/v2/transactions/release', (req, res) => {transactions_v2.release(req, 
 app.put('/v2/transactions/trade', (req, res) => {transactions_v2.trade(req, res, knex, hookUrl)});
 
 app.get('/v2/transactions', (req, res) => {transactions_v2.getAllTransactions(req, res, knex)});
+app.get('/v2/transactions/date', (req, res) => {transactions_v2.getTransactionsByDateRange(req, res, knex)});
+
 app.get('/v2/transactions/edit/:id', (req, res) => {transactions_v2.getTransaction(req, res, knex)});
 
 app.put('/v2/transactions/edit/:id', (req, res) => {transactions_v2.updateTransaction(req, res, knex)});

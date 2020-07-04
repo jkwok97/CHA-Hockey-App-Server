@@ -1,115 +1,30 @@
 heroku pg:psql -a cha-hockey-app-server
+
 2: copy all from /tables directory and the file.sql and paste into terminal
 
 
+==================================================================
 
+INSERT INTO transactions_v2
+VALUES (
+    '64',
+    '2020-07-03',
+    '19',
+    '{"MSG 1st 2021"}',
+    '{1301}',
+    '53',
+    '{"MEM 1st 2021", "STA 2nd 2021"}',
+    '{}'
+);
 
-select id, team_id, team_name, playing_year, games_played, season_type from teams;
+04-27-2020	To Atl: E. Karlsson To Sta: Atl 2nd
 
+transaction_date: req.body.transaction_date,
+team_one_id: req.body.team_one_id,
+team_one_picks: req.body.team_one_picks,
+team_one_players: req.body.team_one_players,
+team_two_id: req.body.team_two_id,
+team_two_picks: req.body.team_two_picks,
+team_two_players: req.body.team_two_players
 
-select sum(games_played) as games_played, sum(goals) as goals, sum(assists) as assists, sum(points) as points, sum(plus_minus) as plus_minus, sum(penalty_minutes) as penalty_minutes, sum(sh_goals) as sh_goals, sum(pp_goals) as pp_goals, sum(gw_goals) as gw_goals, sum(gt_goals) as gt_goals, sum(shots) as shots, sum(minutes_played) as minutes_played, sum(hits) as hits, sum(blocked_shots) as blocked_shots, season_type, player_name, position from players_stats group by player_name;
-
-
-
-select 
-team_name as team_name,
-season_type as season_type,
-sum(games_played) as games_played, 
-sum(goals) as goals, sum(assists) as assists, 
-sum(points) as points, sum(plus_minus) as plus_minus, 
-sum(penalty_minutes) as penalty_minutes, 
-sum(sh_goals) as sh_goals, 
-sum(pp_goals) as pp_goals, 
-sum(gw_goals) as gw_goals, 
-sum(gt_goals) as gt_goals, 
-sum(shots) as shots, 
-sum(minutes_played) as minutes_played, 
-sum(hits) as hits, 
-sum(blocked_shots) as blocked_shots, 
-team_name,
-player_name 
-from players_stats 
-where team_name = 'STA' AND season_type = 'Playoffs'
-group by player_name, team_name, season_type;
-
-
-
-
-
-select 
-season_type as season_type,
-position as position,
-sum(games_played) as games_played, 
-sum(goals) as goals, 
-sum(assists) as assists, 
-sum(points) as points, 
-sum(plus_minus) as plus_minus, 
-sum(penalty_minutes) as penalty_minutes, 
-sum(sh_goals) as sh_goals, 
-sum(pp_goals) as pp_goals, 
-sum(gw_goals) as gw_goals, 
-sum(gt_goals) as gt_goals, 
-sum(shots) as shots, 
-sum(minutes_played) as minutes_played, 
-sum(hits) as hits, 
-sum(blocked_shots) as blocked_shots, 
-player_name 
-from players_stats 
-where season_type = 'Playoffs' 
-group by player_name, season_type, position;
-
-
-
-select 
-season_type as season_type, 
-team_name as team_name, 
-sum(games_played) as games_played, 
-sum(wins) as wins, 
-sum(loss) as loss, 
-sum(ties) as ties, 
-sum(minutes_played) as minutes_played, 
-sum(en_goals) as en_goals, 
-sum(shutouts) as shutouts, 
-sum(goals_against) as goals_against, 
-sum(saves) as saves, 
-sum(shots_for) as shots_for, 
-sum(goals) as goals, 
-sum(assists) as assists, 
-sum(points) as points, 
-sum(penalty_minutes) as penalty_minutes, 
-player_name 
-from goalie_stats 
-where team_name = 'STA' and season_type = 'Regular' 
-group by player_name, team_name, season_type;
-
-
-select 
-season_type as season_type,
-sum(games_played) as games_played, 
-sum(wins) as wins, 
-sum(loss) as loss, 
-sum(ties) as ties, 
-sum(points) as points, 
-sum(goals_for) as goals_for, 
-sum(goals_against) as goals_against,
-sum(pp_attempts) as pp_attempts, 
-sum(pp_goals) as pp_goals, 
-sum(pk_attempts) as pk_attempts,
-sum(pk_goals) as pk_goals,
-sum(sh_goals) as sh_goals,
-sum(penalty_minutes) as penalty_minutes,
-sum(shots_for) as shots_for,
-sum(shots_against) as shots_against,
-sum(shut_outs) as shut_outs, 
-team_name 
-from teams 
-where season_type = 'Regular' and team_name = 'STA'
-group by team_name, season_type;
-
-
-
-select * 
-from players_stats a
-full outer join nhlPlayers b
-on a.player_name = b.player_name
-where a.player_name = 'Hall, Taylor'
+==================================================================

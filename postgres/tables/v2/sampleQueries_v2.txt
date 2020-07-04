@@ -191,28 +191,3 @@ d.transaction_date,
 (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_nhlids
 from transactions_v2 d;
 
-==================================================================
-
-INSERT INTO transactions_v2
-VALUES (
-    '3',
-    '2020-06-05',
-    '12',
-    '{}',
-    '{212}',
-    '15',
-    '{"SCS 1st 2020", "MSG 3rd 2021", "MSG 5th 2021"}',
-    '{}'
-);
-
-To Msg: B. Burns To Peo: SC 1st, Msg 3rd (2021), Msg 5th (2021)
-
-transaction_date: req.body.transaction_date,
-team_one_id: req.body.team_one_id,
-team_one_picks: req.body.team_one_picks,
-team_one_players: req.body.team_one_players,
-team_two_id: req.body.team_two_id,
-team_two_picks: req.body.team_two_picks,
-team_two_players: req.body.team_two_players
-
-==================================================================

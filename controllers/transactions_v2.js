@@ -455,6 +455,7 @@ const getAllTransactions = (req, res, knex) => {
     (select array_agg(p.lastname) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_lastname,
     (select array_agg(p.nhl_id) from transactions_v2 c left join players_v2 p on p.id = any(c.team_two_players) where c.id = d.id) as team_two_nhlids
     from transactions_v2 d
+    order by d.transaction_date desc
     ;`)
     .then(data => {
         if (data.rows.length) {

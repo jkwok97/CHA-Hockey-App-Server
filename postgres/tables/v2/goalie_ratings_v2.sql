@@ -31,7 +31,7 @@ do $$
 declare maxid int;
 begin
     select max(id)+1 from goalie_ratings_v2 into maxid;
-    execute 'alter SEQUENCE goalie_ratings_id_seq RESTART with '|| maxid;
+    execute 'alter SEQUENCE goalie_ratings_v2_id_seq RESTART with '|| maxid;
 end;
 
 $$ language plpgsql;

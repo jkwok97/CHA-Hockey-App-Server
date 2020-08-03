@@ -293,6 +293,8 @@ app.delete('/v2/awards/winners/:id', (req, res) => { awards_v2.deleteAwardWinner
 
 app.get('/v2/ratings/player/:id', (req, res) => {ratings_v2.getPlayerRatings(req, res, knex);})
 app.get('/v2/ratings/goalie/:id', (req, res) => {ratings_v2.getGoalieRatings(req, res, knex);})
+app.get('/v2/ratings/player', (req, res) => {ratings_v2.getAllPlayerRatings(req, res, knex);})
+app.get('/v2/ratings/goalie', (req, res) => {ratings_v2.getAllGoalieRatings(req, res, knex);})
 
 // ****************************************************************************************
 //                                    Schedule

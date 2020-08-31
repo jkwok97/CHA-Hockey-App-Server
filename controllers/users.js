@@ -52,6 +52,8 @@ const addUser = (req, res, knex) => {
 
     const userData = req.body;
 
+    console.log(userData);
+
     knex('users_v2')
         .insert(userData)
         .then(resp => {

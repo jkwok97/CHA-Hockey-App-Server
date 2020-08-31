@@ -67,7 +67,10 @@ const addUser = (req, res, knex) => {
             } else {
                 res.status(400).json('Error!'); 
             }
-        }).catch(err => res.status(400).json('Add User Error'))
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json('Add User Error')
+        })
 }
 
 const updateUser = (req, res, knex) => {

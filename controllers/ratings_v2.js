@@ -29,16 +29,17 @@ const getPlayerRatings = (req, res, knex) => {
 const getTeamPlayerRatings = (req, res, knex) => {
     knex.select(
         'a.*',
-        'c.firstname',
-        'c.lastname',
-        'c.isgoalie',
-        'c.nhl_id'
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id'
         )
         .from('player_ratings_v2 as a')
-        .leftJoin('teams_v2 as b', 'b.id', req.params.teamId)
-        .leftJoin('players_v2 as c', 'c.id', 'c.player_id')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
+        .leftJoin('teams_v2 as d', 'd.team_name', 'c.team_name')
         .where('a.playing_year', req.query.playing_year)
-        .where('b.id', req.params.teamId)
+        .where('d.id', req.params.teamId)
         .then(data => {
             if (data.length) {
                 console.log(data);

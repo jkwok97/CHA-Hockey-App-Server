@@ -26,6 +26,39 @@ const getPlayerRatings = (req, res, knex) => {
             res.status(400).json('not found')})
 }
 
+const getTeamGoalieRatings = (req, res, knex) => {
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isgoalie',
+        'b.nhl_id',
+        'd.shortname'
+        )
+        .from('goalie_ratings_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'a.player_id')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
+        .where('c.playing_year', req.query.playing_year)
+        .where('a.playing_year', req.query.playing_year)
+        .where('d.shortname', req.params.team)
+        .then(data => {
+            if (data.length) {
+                console.log(data);
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stat')
+            }
+        }).catch(err => {
+            console.log(err)
+            res.status(400).json('not found')})
+}
+
 const getTeamPlayerRatings = (req, res, knex) => {
     knex.select(
         'a.*',
@@ -40,6 +73,7 @@ const getTeamPlayerRatings = (req, res, knex) => {
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'a.player_id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('c.playing_year', req.query.playing_year)
+        .where('a.playing_year', req.query.playing_year)
         .where('d.shortname', req.params.team)
         .then(data => {
             if (data.length) {
@@ -81,38 +115,6 @@ const getGoalieRatings = (req, res, knex) => {
                 res.status(400).json('error getting player stat')
             }
         }).catch(err => res.status(400).json('not found'))
-}
-
-const getTeamGoalieRatings = (req, res, knex) => {
-    knex.select(
-        'a.*',
-        'b.firstname',
-        'b.lastname',
-        'b.isgoalie',
-        'b.nhl_id',
-        'd.shortname'
-        )
-        .from('player_ratings_v2 as a')
-        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
-        .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'a.player_id')
-        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
-        .where('a.playing_year', req.query.playing_year)
-        .where('d.shortname', req.params.team)
-        .then(data => {
-            if (data.length) {
-                console.log(data);
-                const result = {
-                    statusCode: 200,
-                    message: 'Request Success',
-                    result: data
-                }
-                res.json(result);
-            } else {
-                res.status(400).json('error getting player stat')
-            }
-        }).catch(err => {
-            console.log(err)
-            res.status(400).json('not found')})
 }
 
 const getAllPlayerRatings = (req, res, knex) => {

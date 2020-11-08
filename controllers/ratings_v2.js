@@ -39,8 +39,8 @@ const getTeamPlayerRatings = (req, res, knex) => {
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'a.player_id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
-        .where('a.playing_year', req.query.playing_year)
-        .where('d.id', req.params.teamId)
+        .where('c.playing_year', req.query.playing_year)
+        .where('d.shortname', req.params.team)
         .then(data => {
             if (data.length) {
                 const result = {
@@ -97,9 +97,10 @@ const getTeamGoalieRatings = (req, res, knex) => {
         .leftJoin('goalies_stats_v2 as c', 'c.player_id', 'a.player_id')
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('a.playing_year', req.query.playing_year)
-        .where('d.id', req.params.teamId)
+        .where('d.shortname', req.params.team)
         .then(data => {
             if (data.length) {
+                console.log(data);
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',

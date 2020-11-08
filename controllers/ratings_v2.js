@@ -37,7 +37,7 @@ const getTeamPlayerRatings = (req, res, knex) => {
         .from('player_ratings_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .leftJoin('players_stats_v2 as c', 'c.player_id', 'b.id')
-        .leftJoin('teams_v2 as d', 'd.shortName', 'c.team_name')
+        .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('a.playing_year', req.query.playing_year)
         .where('d.id', req.params.teamId)
         .then(data => {

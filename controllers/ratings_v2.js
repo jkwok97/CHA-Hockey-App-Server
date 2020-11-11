@@ -127,7 +127,7 @@ const getAllPlayerRatings = (req, res, knex) => {
         'c.team_name',
         'd.teamlogo',
         'd.city',
-        'd.nickName'
+        'd.nickname'
         )
         .from('player_ratings_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
@@ -160,7 +160,7 @@ const getAllGoalieRatings = (req, res, knex) => {
         'c.team_name',
         'd.teamlogo',
         'd.city',
-        'd.nickName'
+        'd.nickname'
         )
         .from('goalie_ratings_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')

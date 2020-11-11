@@ -1,3 +1,33 @@
+const getFreeAgents = (req, res, knex) => {
+    knex.select(
+        'a.id',
+        'a.player_id',
+        'a.playing_year',
+        'a.season_type',
+        'a.player_status',
+        'b.firstname',
+        'b.lastname',
+        'c.*'
+        )
+        .from('players_stats_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .leftJoin('ratings_v2 as c', 'c.player_id', 'a.player_id')
+        .where('a.playing_year', req.query.playing_year)
+        .where('a.season_type', req.query.season_type)
+        .then(data => {
+            if (data.length) {
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: data
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting player stats')
+            }
+        }).catch(err => res.status(400).json('not found'))
+}
+
 const getPlayersStats = (req, res, knex) => {
     knex.select(
         'a.id',
@@ -1161,5 +1191,5 @@ module.exports = {
     getPpGoalsLeaders, getShGoalsLeaders, getBlockedShotsLeaders, getShotsLeaders,
     getPenaltyLeaders, getMinutesLeaders, getPlusMinusLeaders, getWorstPlusMinusLeaders,
     getLongStreakLeaders, getStreakLeaders, getHitsLeaders,
-    updatePlayersStatsById
+    updatePlayersStatsById, getFreeAgents
 };

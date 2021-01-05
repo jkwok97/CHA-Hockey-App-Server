@@ -62,6 +62,7 @@ const getSalary = (req, res, knex) => {
 }
 
 const getPlayerSalaryByTeamId = (req, res, knex) => {
+    console.log(req.query.is_protected);
     knex.select(
         'a.*',
         'b.firstname',
@@ -78,12 +79,11 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .where('c.playing_year', req.query.playing_year)
-        .where('b.is_protected', req.query.is_protected)
         .then(data => {
             if (data.length) {
 
-                const forwards = data.filter((player) => player['isforward'] === true);
-                const defense = data.filter((player) => player['isdefense'] === true);
+                const forwards = data.filter((player) => player['isforward'] === true && player['is_protected'] === req.query.is_protected);
+                const defense = data.filter((player) => player['isdefense'] === true && player['is_protected'] === req.query.is_protected);
 
                 const result = {
                     statusCode: 200,
@@ -101,6 +101,7 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
 }
 
 const getGoalieSalaryByTeamId = (req, res, knex) => {
+    console.log(req.query.is_protected);
     knex.select(
         'a.*',
         'b.firstname',
@@ -116,14 +117,15 @@ const getGoalieSalaryByTeamId = (req, res, knex) => {
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .where('c.playing_year', req.query.playing_year)
-        .where('b.is_protected', req.query.is_protected)
         .then(data => {
             if (data.length) {
+
+                const goalies = data.filter((player) => player['is_protected'] === req.query.is_protected);
 
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: goalies
                 }
 
                 res.json(result);

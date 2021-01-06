@@ -122,6 +122,9 @@ const getGoalieSalaryByTeamId = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
+                console.log(data);
+                console.log(req.query.is_protected);
+
                 const goalies = data.filter((player) => player['is_protected'] === req.query.is_protected);
 
                 const result = {

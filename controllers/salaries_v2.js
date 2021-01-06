@@ -71,6 +71,7 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
         'b.isdefense',
         'b.isgoalie',
         'b.isactive',
+        'b.is_protected',
         'c.position'
         )
         .from('salaries_v2 as a')
@@ -109,7 +110,8 @@ const getGoalieSalaryByTeamId = (req, res, knex) => {
         'b.isforward',
         'b.isdefense',
         'b.isgoalie',
-        'b.isactive'
+        'b.isactive',
+        'b.is_protected',
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')

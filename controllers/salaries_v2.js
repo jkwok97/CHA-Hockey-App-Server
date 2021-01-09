@@ -15,17 +15,21 @@ const getAllSalaries = (req, res, knex) => {
 }
 
 function getTeamForPlayer(player) {
-    console.log(player);
     if (player.isgoalie) {
-        return knex.select('a.teamlogo').from('goalies_stats_v2 as a').where(player.player_id === 'a.player_id')
+        console.log(player);
+        return knex.select('a.teamlogo').from('goalies_stats_v2 as a')
+                    .where(player.player_id === 'a.player_id')
+                    .where('a.playing_year' === '2020-21')
                     .then((teamLogo) => {
                         return teamLogo;
                     })
     } else {
-        return knex.select('a.teamlogo').from('players_stats_v2 as a').where(player.player_id === 'a.player_id')
-        .then((teamLogo) => {
-            return teamLogo;
-        })
+        return knex.select('a.teamlogo').from('players_stats_v2 as a')
+                    .where(player.player_id === 'a.player_id')
+                    .where('a.playing_year' === '2020-21')
+                    .then((teamLogo) => {
+                        return teamLogo;
+                    })
     }
 }
 

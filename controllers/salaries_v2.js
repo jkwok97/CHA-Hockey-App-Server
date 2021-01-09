@@ -50,14 +50,9 @@ const getAllActiveSalariesTest = (req, res, knex) => {
         .then(players => {
             if (players.length) {
 
-                console.log(players[0]);
-
                 players.forEach((player) => {
                     player.teamlogo = getTeamForPlayer(player);
-                    console.log(player.teamlogo);
                 });
-
-                console.log(players[0]);
 
                 const result = {
                     statusCode: 200,

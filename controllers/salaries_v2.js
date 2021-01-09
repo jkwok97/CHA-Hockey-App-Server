@@ -34,7 +34,7 @@ const getTeamForPlayers = (players) => {
 const getAllActiveSalariesTest = (req, res, knex) => {
 
     return getAllActiveSalaries(req, res, knex)
-        .then(getTeamForPlayers())
+        .then(getTeamForPlayers(players))
         .then(players => {
             if (players.length) {
 

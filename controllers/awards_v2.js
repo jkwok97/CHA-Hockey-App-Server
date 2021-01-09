@@ -402,7 +402,7 @@ const getTeamAwardsByUserId = (req, res, knex) => {
             }
             res.json(result);
         } else {
-            res.status(400).json('error getting stats')
+            res.status(200).json('error getting stats')
         }
     })
     .catch(err => res.status(200).json('not found'))

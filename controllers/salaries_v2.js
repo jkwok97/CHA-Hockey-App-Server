@@ -16,7 +16,7 @@ const getAllSalaries = (req, res, knex) => {
 
 function getTeamForPlayer(player) {
     console.log(player);
-    if (player.isGoalie) {
+    if (player.isgoalie) {
         return knex.select('a.teamlogo').from('goalies_stats_v2 as a').where(player.player_id === 'a.player_id')
                     .then((teamLogo) => {
                         return teamLogo;

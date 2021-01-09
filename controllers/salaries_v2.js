@@ -14,45 +14,29 @@ const getAllSalaries = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getTeamForPlayer = (player) => {
-    if (player.isgoalie) {
-        console.log(player);
-        return knex.select('a.teamlogo').from('goalies_stats_v2 as a')
-                    .where(player.player_id === 'a.player_id')
-                    .where('a.playing_year' === '2020-21')
-                    .then((teamLogo) => {
-                        return teamLogo;
-                    })
-    } else {
-        return knex.select('a.teamlogo').from('players_stats_v2 as a')
-                    .where(player.player_id === 'a.player_id')
-                    .where('a.playing_year' === '2020-21')
-                    .then((teamLogo) => {
-                        return teamLogo;
-                    })
-    }
+const getTeamForPlayers = (players) => {
+
+    return players.forEach((player) => {
+        if (player.isgoalie) {
+            console.log(player);
+            player.teamlogo = knex.select('a.teamlogo').from('goalies_stats_v2 as a')
+                                .where(player.player_id === 'a.player_id')
+                                .where('a.playing_year' === '2020-21')
+        } else {
+            player.teamlogo = knex.select('a.teamlogo').from('players_stats_v2 as a')
+                                .where(player.player_id === 'a.player_id')
+                                .where('a.playing_year' === '2020-21')
+        }
+    })
+    
 }
 
 const getAllActiveSalariesTest = (req, res, knex) => {
 
-    knex.select(
-        'a.*',
-        'b.firstname',
-        'b.lastname',
-        'b.isactive',
-        'b.isgoalie',
-        'b.isforward',
-        'b.isdefense',
-        )
-        .from('salaries_v2 as a')
-        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
-        .where('b.isactive', req.query.isactive)
+    return getAllActiveSalaries(req, res, knex)
+        .then(getTeamForPlayers())
         .then(players => {
             if (players.length) {
-
-                players.forEach((player) => {
-                    player.teamlogo = getTeamForPlayer(player);
-                });
 
                 const result = {
                     statusCode: 200,
@@ -68,8 +52,7 @@ const getAllActiveSalariesTest = (req, res, knex) => {
 }
 
 const getAllActiveSalaries = (req, res, knex) => {
-
-    knex.select(
+    return knex.select(
         'a.*',
         'b.firstname',
         'b.lastname',
@@ -81,20 +64,6 @@ const getAllActiveSalaries = (req, res, knex) => {
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('b.isactive', req.query.isactive)
-        .then(players => {
-            if (players.length) {
-
-                const result = {
-                    statusCode: 200,
-                    message: 'Request Success',
-                    result: players
-                }
-                res.json(result);
-            } else {
-                res.status(400).json('error getting salary')
-            }
-        }).catch(err => res.status(400).json('not found'))
-
 }
 
 const getSalary = (req, res, knex) => {

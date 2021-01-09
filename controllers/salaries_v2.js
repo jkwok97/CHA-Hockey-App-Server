@@ -14,7 +14,7 @@ const getAllSalaries = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-const getAllActiveSalaries = (req, res, knex) => {
+const getAllActiveSalariesTest = (req, res, knex) => {
 
     knex.select(
         'a.*',
@@ -40,6 +40,36 @@ const getAllActiveSalaries = (req, res, knex) => {
                 });
 
                 console.log(players[0]);
+
+                const result = {
+                    statusCode: 200,
+                    message: 'Request Success',
+                    result: players
+                }
+                res.json(result);
+            } else {
+                res.status(400).json('error getting salary')
+            }
+        }).catch(err => res.status(400).json('not found'))
+
+}
+
+const getAllActiveSalaries = (req, res, knex) => {
+
+    knex.select(
+        'a.*',
+        'b.firstname',
+        'b.lastname',
+        'b.isactive',
+        'b.isgoalie',
+        'b.isforward',
+        'b.isdefense',
+        )
+        .from('salaries_v2 as a')
+        .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
+        .where('b.isactive', req.query.isactive)
+        .then(players => {
+            if (players.length) {
 
                 const result = {
                     statusCode: 200,
@@ -249,5 +279,5 @@ module.exports = {
     getAllSalaries, getAllActiveSalaries, getSalary,
     getPlayerSalaryByTeamId, getGoalieSalaryByTeamId,
     getPlayerSalariesByPlayerId, getGoalieSalariesByPlayerId,
-    addSalary, updateSalary
+    addSalary, updateSalary, getAllActiveSalariesTest
 };

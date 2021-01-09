@@ -14,6 +14,20 @@ const getAllSalaries = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
+function getTeamForPlayer(player) {
+    if (player.isGoalie) {
+        return knex.select('a.teamlogo').from('goalies_stats_v2 as a').where(player.player_id === 'a.player_id')
+                    .then((teamLogo) => {
+                        return teamLogo;
+                    })
+    } else {
+        return knex.select('a.teamlogo').from('players_stats_v2 as a').where(player.player_id === 'a.player_id')
+        .then((teamLogo) => {
+            return teamLogo;
+        })
+    }
+}
+
 const getAllActiveSalariesTest = (req, res, knex) => {
 
     knex.select(
@@ -32,11 +46,8 @@ const getAllActiveSalariesTest = (req, res, knex) => {
             if (players.length) {
 
                 players.forEach((player) => {
-                    if (player.isGoalie) {
-                        player.teamlogo = knex.select('a.teamlogo').from('goalies_stats_v2 as a').where(player.player_id === 'a.player_id')
-                    } else {
-                        player.teamlogo = knex.select('a.teamlogo').from('players_stats_v2 as a').where(player.player_id === 'a.player_id')
-                    }
+                    player.teamlogo = getTeamForPlayer(player);
+                    console.log(player.teamlogo);
                 });
 
                 console.log(players[0]);

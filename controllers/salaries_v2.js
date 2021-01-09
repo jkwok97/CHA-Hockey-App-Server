@@ -96,9 +96,9 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('error getting salary')
+                res.status(200).json('error getting salary')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => res.status(200).json('not found'))
 }
 
 const getGoalieSalaryByTeamId = (req, res, knex) => {
@@ -133,9 +133,9 @@ const getGoalieSalaryByTeamId = (req, res, knex) => {
 
                 res.json(result);
             } else {
-                res.status(400).json('error getting salary')
+                res.status(200).json('error getting salary')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => res.status(200).json('not found'))
 }
 
 const addSalary = (req, res, knex) => {

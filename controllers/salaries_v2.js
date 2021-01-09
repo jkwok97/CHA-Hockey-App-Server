@@ -39,6 +39,8 @@ const getAllActiveSalaries = (req, res, knex) => {
                     }
                 });
 
+                console.log(players[0]);
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',

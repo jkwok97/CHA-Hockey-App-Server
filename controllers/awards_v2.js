@@ -405,7 +405,7 @@ const getTeamAwardsByUserId = (req, res, knex) => {
             res.status(400).json('error getting stats')
         }
     })
-    .catch(err => res.status(400).json('not found'))
+    .catch(err => res.status(200).json('not found'))
 }
 
 const getAllAwardWinners = (req, res, knex) => {

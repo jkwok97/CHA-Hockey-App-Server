@@ -14,7 +14,7 @@ const getAllSalaries = (req, res, knex) => {
         }).catch(err => res.status(400).json('not found'))
 }
 
-function getTeamForPlayer(player) {
+const getTeamForPlayer = (player) => {
     if (player.isgoalie) {
         console.log(player);
         return knex.select('a.teamlogo').from('goalies_stats_v2 as a')

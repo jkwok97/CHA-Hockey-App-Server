@@ -203,7 +203,7 @@ app.delete('/v2/draft/edit/:id', (req, res) => {draft_v2.deleteDraftedPlayer(req
 // ****************************************************************************************
 
 app.get('/v2/players/salaries', (req, res) => {salaries_v2.getAllSalaries(req, res, knex)});
-app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalariesTest(req, res, knex)});
+app.get('/v2/players/salaries/active', (req, res) => {salaries_v2.getAllActiveSalaries(req, res, knex)});
 app.get('/v2/players/salaries/edit/:id', (req, res) => {salaries_v2.getSalary(req, res, knex)});
 
 app.get('/v2/salaries/players/:id', (req, res) => {salaries_v2.getPlayerSalariesByPlayerId(req, res, knex)});

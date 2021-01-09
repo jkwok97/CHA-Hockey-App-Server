@@ -1,10 +1,10 @@
 DROP TABLE tmp_x;
 
-CREATE TEMP TABLE tmp_x AS SELECT * FROM teams_v2 LIMIT 0;
+CREATE TEMP TABLE tmp_x AS SELECT * FROM team_stats_v2 LIMIT 0;
 
-\copy tmp_x (team_id, games_played, wins, loss, ties, points, goals_for, goals_against, pp_attempts, pp_goals, pp_min, pk_attempts, pk_goals, pk_min, penalty_minutes, sh_goals, home_wins, home_loss, home_ties, road_wins, road_loss, road_ties, div_win, div_loss, div_tie, ot_win, ot_loss, lead_after_two_wins, lead_after_two_loss, lead_after_two_ties, trail_after_two_wins, trail_after_two_loss, trail_after_two_ties, even_after_two_wins, even_after_two_loss, even_after_two_ties, long_win_streak, shots_for, shots_against, face_off_won, face_off_lost, corner_won, corner_lost, pass_complete, pass_incomplete, empty_net, shut_outs, playing_year, season_type) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/v2/update_teams_stats_v2.tsv'
+\copy tmp_x (team_id, games_played, wins, loss, ties, points, goals_for, goals_against, pp_attempts, pp_goals, pp_min, pk_attempts, pk_goals, pk_min, penalty_minutes, sh_goals, home_wins, home_loss, home_ties, road_wins, road_loss, road_ties, div_win, div_loss, div_tie, ot_win, ot_loss, lead_after_two_wins, lead_after_two_loss, lead_after_two_ties, trail_after_two_wins, trail_after_two_loss, trail_after_two_ties, even_after_two_wins, even_after_two_loss, even_after_two_ties, long_win_streak, shots_for, shots_against, face_off_won, face_off_lost, corner_won, corner_lost, pass_complete, pass_incomplete, empty_net, shut_outs, playing_year, season_type) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/v2/update_team_stats_v2.tsv'
 
-UPDATE teams_v2
+UPDATE team_stats_v2
 SET 
     games_played = tmp_x.games_played,
     wins = tmp_x.wins,
@@ -55,6 +55,6 @@ SET
     playing_year = tmp_x.playing_year,
     season_type = tmp_x.season_type
 FROM   tmp_x
-WHERE  teams_v2.team_id = tmp_x.team_id AND teams_v2.playing_year = tmp_x.playing_year AND teams_v2.season_type = tmp_x.season_type;
+WHERE  team_stats_v2.team_id = tmp_x.team_id AND team_stats_v2.playing_year = tmp_x.playing_year AND team_stats_v2.season_type = tmp_x.season_type;
 
 DROP TABLE tmp_x;

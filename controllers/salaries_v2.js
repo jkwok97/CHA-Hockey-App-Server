@@ -23,17 +23,26 @@ const getAllActiveSalaries = (req, res, knex) => {
         'b.isactive',
         'b.isgoalie',
         'b.isforward',
-        'b.isdefense'
+        'b.isdefense',
         )
         .from('salaries_v2 as a')
         .leftJoin('players_v2 as b', 'b.id', 'a.player_id')
         .where('b.isactive', req.query.isactive)
-        .then(data => {
-            if (data.length) {
+        .then(players => {
+            if (players.length) {
+
+                players.forEach((player) => {
+                    if (player.isGoalie) {
+                        player.teamlogo = knex.select('a.teamlogo').from('goalies_stats_v2 as a').where(player.player_id === 'a.player_id')
+                    } else {
+                        player.teamlogo = knex.select('a.teamlogo').from('players_stats_v2 as a').where(player.player_id === 'a.player_id')
+                    }
+                });
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: players
                 }
                 res.json(result);
             } else {

@@ -192,6 +192,8 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
+                console.log(data);
+
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
@@ -230,6 +232,8 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         .orderBy('a.points', 'asc')
         .then(data => {
             if (data.length) {
+
+                console.log(data);
 
                 const northWest = data.filter((team) => team['divisionname'] === 'North West');
                 const northEast = data.filter((team) => team['divisionname'] === 'North East');

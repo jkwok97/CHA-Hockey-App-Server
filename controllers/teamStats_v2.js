@@ -198,6 +198,9 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
+                console.log(eastern[0]);
+                console.log(western[0]);
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',

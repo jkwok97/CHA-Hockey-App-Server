@@ -171,6 +171,7 @@ const getStatsByTypeSummed = (req, res, knex) => {
 }
 
 const getStatsBySeasonByTypeByConference = (req, res, knex) => {
+    console.log(req.query);
     knex.select(
         'a.*',
         'c.city',
@@ -211,6 +212,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
 }
 
 const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
+    console.log(req.query);
     knex.select(
         'a.*',
         'c.city',

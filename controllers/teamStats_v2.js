@@ -193,10 +193,10 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
             if (data.length) {
 
                 console.log(data.length);
-                console.log(data[0][0]);
+                console.log(data[0]);
 
-                const eastern = data[0].filter((team) => team['conferencename'] === 'Eastern');
-                const western = data[0].filter((team) => team['conferencename'] === 'Western');
+                const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
+                const western = data.filter((team) => team['conferencename'] === 'Western');
 
                 const result = {
                     statusCode: 200,
@@ -235,7 +235,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
             if (data.length) {
 
                 console.log(data.length);
-                console.log(data[0][0]);
+                console.log(data[0]);
 
                 const northWest = data[0].filter((team) => team['divisionname'] === 'North West');
                 const northEast = data[0].filter((team) => team['divisionname'] === 'North East');

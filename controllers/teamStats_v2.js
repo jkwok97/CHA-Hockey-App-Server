@@ -171,7 +171,6 @@ const getStatsByTypeSummed = (req, res, knex) => {
 }
 
 const getStatsBySeasonByTypeByConference = (req, res, knex) => {
-    console.log(req.query);
     knex.select(
         'a.*',
         'c.city',
@@ -195,7 +194,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
-                const final = {
+                const result = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: [ 
@@ -203,16 +202,17 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                         {name: 'Western', teams: western},
                     ]
                 }
-
-                res.json(final);
+                console.log(res.json(result));
+                res.json(result);
             } else {
                 res.status(400).json('error getting team stat')
             }
-        }).catch(err => res.status(400).json('not found'))
+        }).catch(err => {
+            res.status(400).json('not found')
+        });
 }
 
 const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
-    console.log(req.query);
     knex.select(
         'a.*',
         'c.city',
@@ -236,7 +236,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
                 const southWest = data.filter((team) => team['divisionname'] === 'South West');
                 const southEast = data.filter((team) => team['divisionname'] === 'South East');
 
-                const final = {
+                const result = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: [ 
@@ -246,14 +246,15 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
                         {name: 'South East', teams: southEast},
                     ]
                 }
-                
-                res.json(final);
+                console.log(res.json(result));
+                res.json(result);
             } else {
                 res.status(400).json('error getting team stat')
             }
         }).catch(err => {
             console.log(err);
-            res.status(400).json('not found')})
+            res.status(400).json('not found')
+        });
 }
 
 const getStatsForSchedule = (req, res, knex) => {

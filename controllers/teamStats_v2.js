@@ -210,6 +210,8 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                     ]
                 }
 
+                console.log(result);
+
                 res.json(result);
             } else {
                 res.status(400).json('error getting team stat')

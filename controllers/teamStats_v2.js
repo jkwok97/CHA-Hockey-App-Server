@@ -192,16 +192,10 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
-                console.log(data.length);
-                console.log(data[0]);
-
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
-                console.log(eastern[0]);
-                console.log(western[0]);
-
-                const result = {
+                const final = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: [ 
@@ -210,9 +204,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                     ]
                 }
 
-                console.log(result);
-
-                res.json(result);
+                res.json(final);
             } else {
                 res.status(400).json('error getting team stat')
             }
@@ -239,15 +231,12 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
-                console.log(data.length);
-                console.log(data[0]);
+                const northWest = data.filter((team) => team['divisionname'] === 'North West');
+                const northEast = data.filter((team) => team['divisionname'] === 'North East');
+                const southWest = data.filter((team) => team['divisionname'] === 'South West');
+                const southEast = data.filter((team) => team['divisionname'] === 'South East');
 
-                const northWest = data[0].filter((team) => team['divisionname'] === 'North West');
-                const northEast = data[0].filter((team) => team['divisionname'] === 'North East');
-                const southWest = data[0].filter((team) => team['divisionname'] === 'South West');
-                const southEast = data[0].filter((team) => team['divisionname'] === 'South East');
-
-                const result = {
+                const final = {
                     statusCode: 200,
                     message: 'Request Success',
                     result: [ 
@@ -258,7 +247,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
                     ]
                 }
                 
-                res.json(result);
+                res.json(final);
             } else {
                 res.status(400).json('error getting team stat')
             }

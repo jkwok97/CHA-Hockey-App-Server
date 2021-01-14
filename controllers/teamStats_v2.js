@@ -192,10 +192,11 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
-                console.log(data);
+                console.log(data.length);
+                console.log(data[0][0]);
 
-                const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
-                const western = data.filter((team) => team['conferencename'] === 'Western');
+                const eastern = data[0].filter((team) => team['conferencename'] === 'Eastern');
+                const western = data[0].filter((team) => team['conferencename'] === 'Western');
 
                 const result = {
                     statusCode: 200,
@@ -233,12 +234,13 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         .then(data => {
             if (data.length) {
 
-                console.log(data);
+                console.log(data.length);
+                console.log(data[0][0]);
 
-                const northWest = data.filter((team) => team['divisionname'] === 'North West');
-                const northEast = data.filter((team) => team['divisionname'] === 'North East');
-                const southWest = data.filter((team) => team['divisionname'] === 'South West');
-                const southEast = data.filter((team) => team['divisionname'] === 'South East');
+                const northWest = data[0].filter((team) => team['divisionname'] === 'North West');
+                const northEast = data[0].filter((team) => team['divisionname'] === 'North East');
+                const southWest = data[0].filter((team) => team['divisionname'] === 'South West');
+                const southEast = data[0].filter((team) => team['divisionname'] === 'South East');
 
                 const result = {
                     statusCode: 200,

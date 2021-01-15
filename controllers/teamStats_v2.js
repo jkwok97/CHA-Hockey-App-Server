@@ -187,7 +187,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         .leftJoin('conferences_v2 as e', 'e.id', 'd.conference_id')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
-        .orderBy('a.points', 'asc')
+        .orderBy('a.points', 'desc')
         .then(data => {
             if (data.length) {
 
@@ -227,7 +227,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
         .leftJoin('divisions_v2 as d', 'd.id', 'c.divisions_id')
         .where('a.playing_year', req.query.playing_year)
         .where('a.season_type', req.query.season_type)
-        .orderBy('a.points', 'asc')
+        .orderBy('a.points', 'desc')
         .then(data => {
             if (data.length) {
 

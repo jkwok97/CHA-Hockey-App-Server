@@ -194,13 +194,19 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
+                // const result = {
+                //     statusCode: 200,
+                //     message: 'Request Success',
+                //     result: [ 
+                //         {name: 'Eastern', teams: eastern}, 
+                //         {name: 'Western', teams: western},
+                //     ]
+                // }
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: [ 
-                        {name: 'Eastern', teams: eastern}, 
-                        {name: 'Western', teams: western},
-                    ]
+                    result: data
                 }
                 console.log(res.json(result));
                 res.json(result);

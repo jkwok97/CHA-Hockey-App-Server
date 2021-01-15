@@ -185,9 +185,9 @@ const getPlayerLogoByNhlId = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('No Player Associated With That Id')
+                res.status(200).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('player logo not found'))
+        }).catch(err => res.status(200).json('player logo not found'))
 }
 
 const getGoalieLogoByNhlId = (req, res, knex) => {
@@ -208,9 +208,9 @@ const getGoalieLogoByNhlId = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('No Player Associated With That Id')
+                res.status(200).json('No Player Associated With That Id')
             }
-        }).catch(err => res.status(400).json('goalie logo not found'))
+        }).catch(err => res.status(200).json('goalie logo not found'))
 }
 
 

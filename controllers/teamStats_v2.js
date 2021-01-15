@@ -194,21 +194,15 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
                 const eastern = data.filter((team) => team['conferencename'] === 'Eastern');
                 const western = data.filter((team) => team['conferencename'] === 'Western');
 
-                // const result = {
-                //     statusCode: 200,
-                //     message: 'Request Success',
-                //     result: [ 
-                //         {name: 'Eastern', teams: eastern}, 
-                //         {name: 'Western', teams: western},
-                //     ]
-                // }
-
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: [ 
+                        {name: 'Eastern', teams: eastern}, 
+                        {name: 'Western', teams: western},
+                    ]
                 }
-                console.log(res.json(result));
+
                 res.json(result);
             } else {
                 res.status(400).json('error getting team stat')
@@ -252,7 +246,7 @@ const getStatsBySeasonByTypeByDivision = (req, res, knex) => {
                         {name: 'South East', teams: southEast},
                     ]
                 }
-                console.log(res.json(result));
+                
                 res.json(result);
             } else {
                 res.status(400).json('error getting team stat')

@@ -115,7 +115,7 @@ const getAllNHLRookieSummary = (req, res) => {
 }
 
 const getNhlPlayerStats = (req, res) => {
-    request(`https://statsapi.web.nhl.com/api/v1/people/${req.query.id}/stats?stats=statsSingleSeason&season=20192020`, (error, response, body) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${req.query.id}/stats?stats=statsSingleSeason&season=20202021`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body)
             res.send(info);
@@ -129,7 +129,7 @@ const getNhlPlayerStats = (req, res) => {
 }
 
 const getOnPaceNhlPlayerStats = (req, res) => {
-    request(`https://statsapi.web.nhl.com/api/v1/people/${req.query.id}/stats?stats=onPaceRegularSeason&season=20192020`, (error, response, body) => {
+    request(`https://statsapi.web.nhl.com/api/v1/people/${req.query.id}/stats?stats=onPaceRegularSeason&season=20202021`, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             var info = JSON.parse(body)
             res.send(info);

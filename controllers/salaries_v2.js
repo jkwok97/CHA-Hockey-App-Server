@@ -79,6 +79,7 @@ const getPlayerSalaryByTeamId = (req, res, knex) => {
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .where('c.playing_year', req.query.playing_year)
+        .where('c.seaon_type', 'Regular')
         .where('b.is_protected', req.query.is_protected)
         .then(data => {
             if (data.length) {
@@ -119,6 +120,7 @@ const getGoalieSalaryByTeamId = (req, res, knex) => {
         .leftJoin('teams_v2 as d', 'd.shortname', 'c.team_name')
         .where('d.id', req.params.id)
         .where('c.playing_year', req.query.playing_year)
+        .where('c.seaon_type', 'Regular')
         .where('b.is_protected', req.query.is_protected)
         .then(data => {
             if (data.length) {

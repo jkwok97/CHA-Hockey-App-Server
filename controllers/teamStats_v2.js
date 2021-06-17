@@ -177,7 +177,7 @@ const getStatsBySeasonByTypeByConference = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.shortname',
-        'c.teamColor',
+        'c.teamcolor',
         'd.divisionname',
         'e.conferencename',
         'c.isactive'

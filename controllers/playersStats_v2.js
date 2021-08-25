@@ -6,6 +6,7 @@ const getPlayersStats = (req, res, knex) => {
         'a.playing_year',
         'a.season_type',
         'a.player_status',
+        'a.position',
         'b.firstname',
         'b.lastname',
         )
@@ -134,6 +135,7 @@ const getPlayersStatsById = (req, res, knex) => {
         'a.playing_year',
         'a.season_type',
         'a.player_status',
+        'a.position',
         'b.firstname',
         'b.lastname',
         )

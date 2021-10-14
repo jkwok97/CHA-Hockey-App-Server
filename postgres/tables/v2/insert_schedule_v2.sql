@@ -1,1 +1,1 @@
-\copy schedule_v2 (game_day, vis_team_id, vis_team_game_number, vis_team_score, home_team_id, home_team_game_number, home_team_score, playing_year) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/v2/insert_schedule_v2.tsv' WITH NULL ''
+\copy schedule_v2 (game_day, vis_team_id, vis_team_game_number, vis_team_score, home_team_id, home_team_game_number, home_team_score, playing_year) FROM '/Users/jeffkwok/Desktop/CHA-Hockey-app-server/postgres/seed/2021-22/insert_schedule_v2.tsv' WITH NULL ''

@@ -4,6 +4,7 @@ const getChampions = (req, res, knex) => {
         'a.display_season',
         'a.cha_season',
         'b.display_name',
+        'b.award_type as awardTypeId',
         'c.city',
         'c.nickname',
         'c.teamlogo',

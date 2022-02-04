@@ -431,14 +431,14 @@ const getAllAwardWinners = (req, res, knex) => {
         'f.goals',
         'f.assists',
         'f.points as playerpoints',
-        'g.wins as teamwins',
-        'g.goals_for',
-        'g.goals_against',
-        'g.points',
-        'h.games_played as goaliegamesplayed',
-        'h.wins as goaliewins',
-        'h.goals_against_avg',
-        'h.save_pct'
+        // 'g.wins as teamwins',
+        // 'g.goals_for',
+        // 'g.goals_against',
+        // 'g.points as teampoints',
+        // 'h.games_played as goaliegamesplayed',
+        // 'h.wins as goaliewins',
+        // 'h.goals_against_avg',
+        // 'h.save_pct'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -449,20 +449,17 @@ const getAllAwardWinners = (req, res, knex) => {
         this
         .on('f.player_id', '=', 'a.player_id')
         .on('f.playing_year', '=', 'a.cha_season')
-        .on('f.season_type', '=', 'Regular')
     })
-    .leftJoin('team_stats_v2 as g', function() {
-        this
-        .on('g.team_id', '=', 'a.team_id')
-        .on('g.playing_year', '=', 'a.cha_season')
-        .on('g.season_type', '=', 'Regular')
-    })
-    .leftJoin('goalies_stats_v2 as h', function() {
-        this
-        .on('h.player_id', '=', 'a.player_id')
-        .on('h.playing_year', '=', 'a.cha_season')
-        .on('h.season_type', '=', 'Regular')
-    })
+    // .leftJoin('team_stats_v2 as g', function() {
+    //     this
+    //     .on('g.team_id', '=', 'a.team_id')
+    //     .on('g.playing_year', '=', 'a.cha_season')
+    // })
+    // .leftJoin('goalies_stats_v2 as h', function() {
+    //     this
+    //     .on('h.player_id', '=', 'a.player_id')
+    //     .on('h.playing_year', '=', 'a.cha_season')
+    // })
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {

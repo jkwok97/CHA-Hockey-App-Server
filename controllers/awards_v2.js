@@ -460,6 +460,9 @@ const getAllAwardWinners = (req, res, knex) => {
         .on('h.player_id', '=', 'a.player_id')
         .on('h.playing_year', '=', 'a.cha_season')
     })
+    .where('f.season_type', 'Regular')
+    .where('g.season_type', 'Regular')
+    .where('h.season_type', 'Regular')
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {

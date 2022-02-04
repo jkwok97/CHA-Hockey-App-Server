@@ -449,7 +449,7 @@ const getAllAwardWinners = (req, res, knex) => {
         this
         .on('f.player_id', '=', 'a.player_id')
         .on('f.playing_year', '=', 'a.cha_season')
-        .on('b.award_type', '=', 'scorer')
+        .on('f.season_type', '=', 'Regular')
     })
     // .leftJoin('team_stats_v2 as g', function() {
     //     this

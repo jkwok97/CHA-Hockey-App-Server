@@ -9,8 +9,8 @@ const getChampions = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname',
-        'd.lastname'
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -44,10 +44,10 @@ const getScorers = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname as ownerfirst',
-        'd.lastname as ownerlast',
-        'e.firstname as playerfirst',
-        'e.lastname as playerlast',
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast',
+        'e.firstname as playerFirst',
+        'e.lastname as playerLast',
         'e.nhl_id',
         'f.games_played',
         'f.goals',
@@ -94,10 +94,10 @@ const getDefense = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname as ownerfirst',
-        'd.lastname as ownerlast',
-        'e.firstname as playerfirst',
-        'e.lastname as playerlast',
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast',
+        'e.firstname as playerFirst',
+        'e.lastname as playerLast',
         'e.nhl_id',
         'f.games_played',
         'f.goals',
@@ -143,10 +143,10 @@ const getRookies = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname as ownerfirst',
-        'd.lastname as ownerlast',
-        'e.firstname as playerfirst',
-        'e.lastname as playerlast',
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast',
+        'e.firstname as playerFirst',
+        'e.lastname as playerLast',
         'e.nhl_id',
         'f.games_played',
         'f.goals',
@@ -192,10 +192,10 @@ const getGoalies = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname as ownerfirst',
-        'd.lastname as ownerlast',
-        'e.firstname as playerfirst',
-        'e.lastname as playerlast',
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast',
+        'e.firstname as playerFirst',
+        'e.lastname as playerLast',
         'e.nhl_id',
         'f.games_played',
         'f.wins',
@@ -240,8 +240,8 @@ const getGm = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname',
-        'd.lastname'
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast'
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -274,8 +274,8 @@ const getSeason = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname',
-        'd.lastname',
+        'd.firstname as ownerFirst',
+        'd.lastname as ownerLast',
         'e.wins',
         'e.goals_for',
         'e.goals_against',
@@ -316,8 +316,8 @@ const getPlayerAwardsByPlayerId = (req, res, knex) => {
         'b.display_name',
         'c.nickname',
         'c.teamlogo',
-        'd.firstname',
-        'd.lastname',
+        'd.firstname as playerFirst',
+        'd.lastname as playerLast',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -348,8 +348,8 @@ const getGoalieAwardsByPlayerId = (req, res, knex) => {
         'b.display_name',
         'c.nickname',
         'c.teamlogo',
-        'd.firstname',
-        'd.lastname',
+        'd.firstname as playerFirst',
+        'd.lastname as goalieFirst',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -381,11 +381,11 @@ const getTeamAwardsByUserId = (req, res, knex) => {
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.firstname as playerfirst',
-        'd.lastname as playerlast',
+        'd.firstname as playerFirst',
+        'd.lastname as playerLast',
         'd.nhl_id',
-        'e.firstname as ownerfirst',
-        'e.lastname as ownerlast',
+        'e.firstname as ownerFirst',
+        'e.lastname as ownerLast',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -414,20 +414,20 @@ const getAllAwardWinners = (req, res, knex) => {
         'a.id',
         'a.display_season',
         'a.cha_season',
-        'b.id as awardtypeid',
+        'b.id as awardTypeId',
         'b.display_name',
-        'c.id as teamid',
+        'c.id as teamId',
         'c.city',
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.id as playerid',
-        'd.firstname as playerfirst',
-        'd.lastname as playerlast',
+        'd.id as playerId',
+        'd.firstname as playerFirst',
+        'd.lastname as playerLast',
         'd.nhl_id',
-        'e.id as ownerid',
-        'e.firstname as ownerfirst',
-        'e.lastname as ownerlast',
+        'e.id as ownerId',
+        'e.firstname as ownerFirst',
+        'e.lastname as ownerLast',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')
@@ -477,20 +477,20 @@ const getAwardWinnerById = (req, res, knex) => {
         'a.id',
         'a.display_season',
         'a.cha_season',
-        'b.id as awardtypeid',
+        'b.id as awardTypeId',
         'b.display_name',
-        'c.id as teamid',
+        'c.id as teamId',
         'c.city',
         'c.nickname',
         'c.teamlogo',
         'c.teamcolor',
-        'd.id as playerid',
-        'd.firstname as playerfirst',
-        'd.lastname as playerlast',
+        'd.id as playerId',
+        'd.firstname as playerFirst',
+        'd.lastname as playerLast',
         'd.nhl_id',
-        'e.id as ownerid',
-        'e.firstname as ownerfirst',
-        'e.lastname as ownerlast',
+        'e.id as ownerId',
+        'e.firstname as ownerFirst',
+        'e.lastname as ownerLast',
     )
     .from('awards_v2 as a')
     .leftJoin('award_type_v2 as b', 'b.id', 'a.award_type')

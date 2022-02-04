@@ -449,20 +449,20 @@ const getAllAwardWinners = (req, res, knex) => {
         this
         .on('f.player_id', '=', 'a.player_id')
         .on('f.playing_year', '=', 'a.cha_season')
+        .on('f.season_type', '=', 'Regular')
     })
     .leftJoin('team_stats_v2 as g', function() {
         this
         .on('g.team_id', '=', 'a.team_id')
         .on('g.playing_year', '=', 'a.cha_season')
+        .on('g.season_type', '=', 'Regular')
     })
     .leftJoin('goalies_stats_v2 as h', function() {
         this
         .on('h.player_id', '=', 'a.player_id')
         .on('h.playing_year', '=', 'a.cha_season')
+        .on('h.season_type', '=', 'Regular')
     })
-    .where('f.season_type', 'Regular')
-    .where('g.season_type', 'Regular')
-    .where('h.season_type', 'Regular')
     .orderBy('display_season', 'desc')
     .then(data => {
         if (data.length) {

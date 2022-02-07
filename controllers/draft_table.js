@@ -44,7 +44,6 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         .orderBy('c.points', 'asc')
         .then(data => {
             if (data.length) {
-                console.log(data);
 
                 const draftByStandings = getDraftByStandings(data);
 
@@ -55,7 +54,7 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
                 }
                 res.json(result);
             } else {
-                res.status(400).json('error getting pick stat')
+                res.status(400).json('error getting draft picks by standings')
             }
         }).catch(err => {
             console.log(err);

@@ -50,6 +50,8 @@ app.get('/', (req, res) => { res.send("it is working"); });
 
 app.get('/v2/league/divisions', (req, res) => {league.getDivisions(req, res, knex)});
 
+app.get('/v2/league/current-data', (req, res) => {league.getCurrentData(req, res, knex)});
+
 // ****************************************************************************************
 //                                       Users
 // ****************************************************************************************

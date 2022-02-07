@@ -29,7 +29,11 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         'b.shortname',
         'b.city',
         'b.nickname',
-        'b.teamlogo'
+        'b.teamlogo',
+        'c.points',
+        'c.goals_for',
+        'c.goals_against',
+        'c.wins'
         )
         .from('draft_order_v2 as a')
         .leftJoin('teams_v2 as b', 'b.id', 'a.team_id')
@@ -40,10 +44,14 @@ const getDraftTableByYearByStandings = (req, res, knex) => {
         .orderBy('c.points', 'asc')
         .then(data => {
             if (data.length) {
+                console.log(data);
+
+                const draftByStandings = getDraftByStandings(data);
+
                 const result = {
                     statusCode: 200,
                     message: 'Request Success',
-                    result: data
+                    result: draftByStandings
                 }
                 res.json(result);
             } else {
@@ -128,6 +136,24 @@ const updateDraftTableById = (req, res, knex) => {
                 res.status(400).json('Error!'); 
             }
         }).catch(err => res.status(400).json('Updating Draft Table Error'))
+}
+
+const getDraftByStandings = (data) => {
+    return data.sort((a,b) => {
+        if (b.points === a.points) {
+            if (b.wins === a.wins) {
+                if ((b.goals_for-b.goals_against) === (a.goals_for-a.goals_against)) {
+                    return b.goals_for - a.goals_for;
+                } else {
+                    return (b.goals_for - b.goals_against) - (a.goals_for - a.goals_against)
+                }
+            } else {
+                return b.wins - a.wins
+            }
+        } else {
+            return b.points - a.points;
+        }
+    }).reverse();
 }
 
 module.exports = {

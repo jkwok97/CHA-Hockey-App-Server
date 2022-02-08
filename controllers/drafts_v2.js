@@ -29,6 +29,7 @@ const getDraftedPlayersOrdered = (req, res, knex) => {
         'a.*',
         'b.firstname',
         'b.lastname',
+        'b.nhl_id',
         'c.city',
         'c.nickname',
         'c.teamlogo',

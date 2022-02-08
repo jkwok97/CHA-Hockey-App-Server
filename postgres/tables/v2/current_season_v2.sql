@@ -26,3 +26,7 @@ end;
 
 $$ language plpgsql;
 
+UPDATE current_season_v2
+SET
+current_season_type = 'Regular'
+WHERE id = '1';

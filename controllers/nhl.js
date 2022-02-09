@@ -98,6 +98,22 @@ const getAllNHLRookieStats = (req, res) => {
     });
 }
 
+const getAllNhlDefenseStats = (req, res) => {
+    request(`${nhlCOM}/${req.query.playerType}s/${req.query.statType}?cayenneExp=season=${req.query.season}%20and%20gameType=2%20and%20player.positionCode%20=%20%27D%27`,
+        (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                let leaders = JSON.parse(body);
+                let leadersArray = leaders.data;
+                res.send(leadersArray);
+            } else {
+                error => {
+                    console.log(error);
+                    res.send(error);
+                }
+            }
+    });
+}
+
 const getAllNHLRookieSummary = (req, res) => {
     request(`${nhlComSummary}/${req.query.playerType}/summary?isAggregate=false&isGame=false&sort=%5B%7B%22property%22:%22${req.query.statsType}%22,%22direction%22:%22${req.query.sort}%22%7D%5D&start=${req.query.start}&limit=${req.query.pageSize}&cayenneExp=gameTypeId=2%20and%20isRookie=%221%22%20and%20seasonId%3C=${req.query.season}%20and%20seasonId%3E=${req.query.season}`,
         (error, response, body) => {
@@ -284,5 +300,5 @@ const extractGoalieStats = (p, totals) => {
 
 module.exports = {
     getAllNHLPlayerStats, getAllNHLGoalieStats, getNHLPlayerSummary, getAllNHLRookieStats, getAllNHLRookieSummary,
-    getNhlPlayerStats, getOnPaceNhlPlayerStats, getCareerNHLPlayerStats, getNhlPlayerInfo
+    getNhlPlayerStats, getOnPaceNhlPlayerStats, getCareerNHLPlayerStats, getNhlPlayerInfo, getAllNhlDefenseStats
 };

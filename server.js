@@ -332,6 +332,8 @@ app.get('/nhl-leaders/summary', (req, res) => { nhl.getNHLPlayerSummary(req, res
 
 app.get('/nhl-rookie-leaders/', (req, res) => { nhl.getAllNHLRookieStats(req, res) });
 
+app.get('/nhl-defense-leaders/', (req, res) => { nhl.getAllNhlDefenseStats(req, res) });
+
 app.get('/nhl-rookie-leaders/summary', (req, res) => { nhl.getAllNHLRookieSummary(req, res) });
 
 app.get('/nhl-stats/player', (req, res) => {

@@ -229,6 +229,8 @@ const getCareerNHLPlayerStats = (req, res) => {
 };
 
 const getNHLStatsSportsNet = (req, res) => {
+  console.log(req.params.season);
+  console.log(req.params.season_type);
   request(
     `https://mobile-statsv2.sportsnet.ca/web_player_table?league=nhl&season=${req.params.season}&season_type=${req.params.season_type}`,
     (error, response) => {
@@ -238,7 +240,7 @@ const getNHLStatsSportsNet = (req, res) => {
         const result = {
           statusCode: 200,
           message: "Request Success",
-          result: response.data.player_stats,
+          result: response.data,
         };
 
         res.send(result);

@@ -241,7 +241,7 @@ const getNHLStatsSportsNet = (req, res) => {
           data: response.body["data"],
         };
 
-        res.send(result);
+        res.send(response.body);
       } else {
         (error) => {
           console.log(error);

@@ -229,11 +229,14 @@ const getCareerNHLPlayerStats = (req, res) => {
 };
 
 const getNHLStatsSportsNet = (req, res) => {
+  console.log(
+    `https://mobile-statsv2.sportsnet.ca/web_player_table?league=nhl&season=${req.query.season}&season_type=${req.query.season_type}`
+  );
   request(
     `https://mobile-statsv2.sportsnet.ca/web_player_table?league=nhl&season=${req.query.season}&season_type=${req.query.season_type}`,
     (error, response) => {
       if (!error && response.statusCode == 200) {
-        console.log(response.data);
+        console.log(response);
 
         const result = {
           statusCode: 200,

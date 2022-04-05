@@ -229,6 +229,7 @@ const getCareerNHLPlayerStats = (req, res) => {
 };
 
 const getNHLStatsSportsNet = (req, res) => {
+  console.log("requesrt:", req.query);
   console.log("request:", req.params);
   console.log(req.params.season);
   console.log(req.params.season_type);

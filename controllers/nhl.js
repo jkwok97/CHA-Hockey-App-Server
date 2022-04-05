@@ -239,7 +239,7 @@ const getNHLStatsSportsNet = (req, res) => {
         const result = {
           statusCode: 200,
           message: "Request Success",
-          result: response.body.data,
+          data: response.body.data,
         };
 
         res.send(result);

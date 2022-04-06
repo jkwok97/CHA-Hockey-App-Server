@@ -1221,15 +1221,35 @@ const getHitsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
-const getAllLeaders = (req, res, knex) => {
-  console.log("called");
-  const pointsLeaders = getPointLeaders(req, res, knex);
-  console.log(pointsLeaders);
+function hitsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.hits",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.hits", "desc")
+    .limit(10);
+}
 
+const getAllLeaders = (req, res, knex) => {
   const result = {
     statusCode: 200,
     message: "Request Success",
-    result: pointsLeaders,
+    result: {
+      hits: hitsLeaders(req, res, knex),
+    },
   };
 
   res.json(result);

@@ -182,7 +182,6 @@ app.get("/v2/players-stats/type/season/defense", (req, res) => {
 });
 
 app.get("/v2/players-stats/leaders/all-leaders", (req, res) => {
-  console.log("called");
   playersStats_v2.getAllLeaders(req, res, knex);
 });
 

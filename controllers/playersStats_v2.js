@@ -1221,6 +1221,28 @@ const getHitsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+function streakLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.current_points_streak",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.current_points_streak", "desc")
+    .limit(10);
+}
+
 function hitsLeaders(req, res, knex) {
   return knex
     .select(
@@ -1245,15 +1267,18 @@ function hitsLeaders(req, res, knex) {
 
 const getAllLeaders = (req, res, knex) => {
   hitsLeaders(req, res, knex).then((hitsLeaders) => {
-    const result = {
-      statusCode: 200,
-      message: "Request Success",
-      result: {
-        hits: hitsLeaders,
-      },
-    };
+    streakLeaders(req, res, knex).then((streakLeaders) => {
+      const result = {
+        statusCode: 200,
+        message: "Request Success",
+        result: {
+          hits: hitsLeaders,
+          streak: streakLeaders,
+        },
+      };
 
-    res.json(result);
+      res.json(result);
+    });
   });
 };
 

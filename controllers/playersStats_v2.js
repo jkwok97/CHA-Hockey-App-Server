@@ -1222,6 +1222,7 @@ const getHitsLeaders = (req, res, knex) => {
 };
 
 const getAllLeaders = (req, res, knex) => {
+  console.log("called");
   const pointsLeaders = getPointLeaders(req, res, knex);
   console.log(pointsLeaders);
 };

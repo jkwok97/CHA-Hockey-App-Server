@@ -181,6 +181,10 @@ app.get("/v2/players-stats/type/season/defense", (req, res) => {
   playersStats_v2.getDefenseStatsbyType(req, res, knex);
 });
 
+app.get("/v2/players-stats/leaders/all", (req, res) => {
+  playersStats_v2.getAllLeaders(req, res, knex);
+});
+
 app.get("/v2/players-stats/leaders/points", (req, res) => {
   playersStats_v2.getPointLeaders(req, res, knex);
 });

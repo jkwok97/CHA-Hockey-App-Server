@@ -1231,6 +1231,8 @@ const getAllLeaders = (req, res, knex) => {
     message: "Request Success",
     result: pointsLeaders,
   };
+
+  res.json(result);
 };
 
 module.exports = {

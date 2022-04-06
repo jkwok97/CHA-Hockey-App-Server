@@ -1244,15 +1244,17 @@ function hitsLeaders(req, res, knex) {
 }
 
 const getAllLeaders = (req, res, knex) => {
-  const result = {
-    statusCode: 200,
-    message: "Request Success",
-    result: {
-      hits: hitsLeaders(req, res, knex),
-    },
-  };
+  hitsLeaders(req, res, knex).then((hitsLeaders) => {
+    const result = {
+      statusCode: 200,
+      message: "Request Success",
+      result: {
+        hits: hitsLeaders,
+      },
+    };
 
-  res.json(result);
+    res.json(result);
+  });
 };
 
 module.exports = {

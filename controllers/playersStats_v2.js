@@ -1225,6 +1225,12 @@ const getAllLeaders = (req, res, knex) => {
   console.log("called");
   const pointsLeaders = getPointLeaders(req, res, knex);
   console.log(pointsLeaders);
+
+  const result = {
+    statusCode: 200,
+    message: "Request Success",
+    result: pointsLeaders,
+  };
 };
 
 module.exports = {

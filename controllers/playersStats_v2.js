@@ -647,6 +647,7 @@ const updatePlayersStatsById = (req, res, knex) => {
 
 // ================================= LEADERS ===========================================
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getPointLeaders = (req, res, knex) => {
   knex
     .select(
@@ -685,6 +686,7 @@ const getPointLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getDefenseLeaders = (req, res, knex) => {
   knex
     .select(
@@ -727,6 +729,7 @@ const getDefenseLeaders = (req, res, knex) => {
     });
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getRookieLeaders = (req, res, knex) => {
   knex
     .select(
@@ -766,6 +769,7 @@ const getRookieLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getAssistsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -801,6 +805,7 @@ const getAssistsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getGoalsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -836,6 +841,7 @@ const getGoalsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getPpGoalsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -871,6 +877,7 @@ const getPpGoalsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getShGoalsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -906,6 +913,7 @@ const getShGoalsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getBlockedShotsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -941,6 +949,7 @@ const getBlockedShotsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getShotsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -976,6 +985,7 @@ const getShotsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getPenaltyLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1011,6 +1021,7 @@ const getPenaltyLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getMinutesLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1046,6 +1057,7 @@ const getMinutesLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getPlusMinusLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1081,6 +1093,7 @@ const getPlusMinusLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getWorstPlusMinusLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1116,6 +1129,7 @@ const getWorstPlusMinusLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getLongStreakLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1151,6 +1165,7 @@ const getLongStreakLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getStreakLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1186,6 +1201,7 @@ const getStreakLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
+// TODO REMOVE WHEN NEW APP IS DONE
 const getHitsLeaders = (req, res, knex) => {
   knex
     .select(
@@ -1221,7 +1237,326 @@ const getHitsLeaders = (req, res, knex) => {
     .catch((err) => res.status(400).json("not found"));
 };
 
-function streakLeaders(req, res, knex) {
+function pointsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.games_played",
+      "a.goals",
+      "a.assists",
+      "a.points",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.points", "desc")
+    .limit(10);
+}
+
+function defenseLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.games_played",
+      "a.goals",
+      "a.assists",
+      "a.points",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .where("b.isdefense", "true")
+    .orderBy("a.points", "desc")
+    .limit(10);
+}
+
+function rookieLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.games_played",
+      "a.goals",
+      "a.assists",
+      "a.points",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .where("a.player_status", "Rookie")
+    .orderBy("a.points", "desc")
+    .limit(10);
+}
+
+function assistsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.assists",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.assists", "desc")
+    .limit(10);
+}
+
+function goalsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.goals",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.goals", "desc")
+    .limit(10);
+}
+
+function ppGoalsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.pp_goals",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.pp_goals", "desc")
+    .limit(10);
+}
+
+function shGoalsLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.sh_goals",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.sh_goals", "desc")
+    .limit(10);
+}
+
+function mostBlockedShots(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.blocked_shots",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.blocked_shots", "desc")
+    .limit(10);
+}
+
+function mostShots(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.shots",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.shots", "desc")
+    .limit(10);
+}
+
+function mostPenalties(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.penalty_minutes",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.penalty_minutes", "desc")
+    .limit(10);
+}
+
+function mostMinutes(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.minutes_played",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.minutes_played", "desc")
+    .limit(10);
+}
+
+function bestPlusMinus(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.plus_minus",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.plus_minus", "desc")
+    .limit(10);
+}
+
+function worstPlusMinus(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.plus_minus",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.plus_minus", "asc")
+    .limit(10);
+}
+
+function longStreakLeaders(req, res, knex) {
+  return knex
+    .select(
+      "a.player_id",
+      "a.longest_points_streak",
+      "b.firstname",
+      "b.lastname",
+      "b.isgoalie",
+      "b.nhl_id",
+      "c.city",
+      "c.nickname",
+      "c.teamlogo"
+    )
+    .from("players_stats_v2 as a")
+    .leftJoin("players_v2 as b", "b.id", "a.player_id")
+    .leftJoin("teams_v2 as c", "c.shortname", "a.team_name")
+    .where("a.playing_year", req.query.playing_year)
+    .where("a.season_type", req.query.season_type)
+    .orderBy("a.longest_points_streak", "desc")
+    .limit(10);
+}
+
+function currentStreakLeaders(req, res, knex) {
   return knex
     .select(
       "a.player_id",
@@ -1267,17 +1602,65 @@ function hitsLeaders(req, res, knex) {
 
 const getAllLeaders = (req, res, knex) => {
   hitsLeaders(req, res, knex).then((hitsLeaders) => {
-    streakLeaders(req, res, knex).then((streakLeaders) => {
-      const result = {
-        statusCode: 200,
-        message: "Request Success",
-        result: {
-          hits: hitsLeaders,
-          streak: streakLeaders,
-        },
-      };
+    currentStreakLeaders(req, res, knex).then((currStreakLeaders) => {
+      longStreakLeaders(req, res, knex).then((longStreak) => {
+        worstPlusMinus(req, res, knex).then((worstPlusMinus) => {
+          bestPlusMinus(req, res, knex).then((bestPlusMinus) => {
+            mostMinutes(req, res, knex).then((mostMinutes) => {
+              mostPenalties(req, res, knex).then((mostPenalties) => {
+                mostShots(req, res, knex).then((mostShots) => {
+                  mostBlockedShots(req, res, knex).then((mostBlockedShots) => {
+                    shGoalsLeaders(req, res, knex).then((mostShGoals) => {
+                      ppGoalsLeaders(req, res, knex).then((mostPpGoals) => {
+                        goalsLeaders(req, res, knex).then((mostGoals) => {
+                          assistsLeaders(req, res, knex).then((mostAssists) => {
+                            rookieLeaders(req, res, knex).then(
+                              (rookiesLeaders) => {
+                                defenseLeaders(req, res, knex).then(
+                                  (defenseLeaders) => {
+                                    pointsLeaders(req, res, knex).then(
+                                      (pointsLeaders) => {
+                                        const result = {
+                                          statusCode: 200,
+                                          message: "Request Success",
+                                          result: {
+                                            hits: hitsLeaders,
+                                            currStreak: currStreakLeaders,
+                                            longStreak: longStreak,
+                                            worstPlusMinus: worstPlusMinus,
+                                            bestPlusMinus: bestPlusMinus,
+                                            minutes: mostMinutes,
+                                            penalties: mostPenalties,
+                                            shots: mostShots,
+                                            blockedShots: mostBlockedShots,
+                                            shGoals: mostShGoals,
+                                            ppGoals: mostPpGoals,
+                                            goals: mostGoals,
+                                            assists: mostAssists,
+                                            rookies: rookiesLeaders,
+                                            defense: defenseLeaders,
+                                            points: pointsLeaders,
+                                          },
+                                        };
 
-      res.json(result);
+                                        res.json(result);
+                                      }
+                                    );
+                                  }
+                                );
+                              }
+                            );
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
     });
   });
 };

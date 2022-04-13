@@ -277,18 +277,26 @@ app.get("/v2/goalies-stats/type/season", (req, res) => {
   goaliesStats_v2.getGoalieStatsbyType(req, res, knex);
 });
 
+app.get("/v2/goalies-stats/leaders/all", (req, res) => {
+  goaliesStats_v2.getAllLeaders(req, res, knex);
+});
+
 app.get("/v2/goalies-stats/leaders/wins", (req, res) => {
   goaliesStats_v2.getWinsLeaders(req, res, knex);
 });
+
 app.get("/v2/goalies-stats/leaders/shutouts", (req, res) => {
   goaliesStats_v2.getShutoutLeaders(req, res, knex);
 });
+
 app.get("/v2/goalies-stats/leaders/savepct", (req, res) => {
   goaliesStats_v2.getSavePctLeaders(req, res, knex);
 });
+
 app.get("/v2/goalies-stats/leaders/gaa", (req, res) => {
   goaliesStats_v2.getGaaLeaders(req, res, knex);
 });
+
 app.get("/v2/goalies-stats/leaders/shots", (req, res) => {
   goaliesStats_v2.getShotsFacedLeaders(req, res, knex);
 });

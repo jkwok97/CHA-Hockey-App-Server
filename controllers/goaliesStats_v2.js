@@ -583,7 +583,7 @@ const getShotsFacedLeaders = (req, res, knex) => {
 };
 
 function winsLeaders(req, res, knex) {
-  knex
+  return knex
     .select(
       "a.player_id",
       "a.wins",
@@ -606,7 +606,7 @@ function winsLeaders(req, res, knex) {
 }
 
 function shutoutLeaders(req, res, knex) {
-  knex
+  return knex
     .select(
       "a.player_id",
       "a.shutouts",
@@ -629,7 +629,7 @@ function shutoutLeaders(req, res, knex) {
 }
 
 function savePctLeaders(req, res, knex) {
-  knex
+  return knex
     .select(
       "a.player_id",
       "a.save_pct",
@@ -653,7 +653,7 @@ function savePctLeaders(req, res, knex) {
 }
 
 function shotsFacedLeaders(req, res, knex) {
-  knex
+  return knex
     .select(
       "a.player_id",
       "a.shots_for",
@@ -676,7 +676,7 @@ function shotsFacedLeaders(req, res, knex) {
 }
 
 function gaaLeaders(req, res, knex) {
-  knex
+  return knex
     .select(
       "a.player_id",
       "a.goals_against_avg",
@@ -700,30 +700,29 @@ function gaaLeaders(req, res, knex) {
 }
 
 const getAllGoalieLeaders = (req, res, knex) => {
-  console.log(req.query);
-  // shotsFacedLeaders(req, res, knex).then((shotsFacedLeaders) => {
-  //   gaaLeaders(req, res, knex).then((gaaLeaders) => {
-  //     savePctLeaders(req, res, knex).then((savePctLeaders) => {
-  //       shutoutLeaders(req, res, knex).then((shutoutLeaders) => {
-  winsLeaders(req, res, knex).then((winsLeaders) => {
-    const result = {
-      statusCode: 200,
-      message: "Request Success",
-      result: {
-        // shotsFaced: shotsFacedLeaders,
-        // gaa: gaaLeaders,
-        // savePct: savePctLeaders,
-        // shutouts: shutoutLeaders,
-        wins: winsLeaders,
-      },
-    };
+  shotsFacedLeaders(req, res, knex).then((shotsFacedLeaders) => {
+    gaaLeaders(req, res, knex).then((gaaLeaders) => {
+      savePctLeaders(req, res, knex).then((savePctLeaders) => {
+        shutoutLeaders(req, res, knex).then((shutoutLeaders) => {
+          winsLeaders(req, res, knex).then((winsLeaders) => {
+            const result = {
+              statusCode: 200,
+              message: "Request Success",
+              result: {
+                shotsFaced: shotsFacedLeaders,
+                gaa: gaaLeaders,
+                savePct: savePctLeaders,
+                shutouts: shutoutLeaders,
+                wins: winsLeaders,
+              },
+            };
 
-    res.json(result);
+            res.json(result);
+          });
+        });
+      });
+    });
   });
-  //       });
-  //     });
-  //   });
-  // });
 };
 
 module.exports = {

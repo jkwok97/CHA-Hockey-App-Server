@@ -700,29 +700,29 @@ function gaaLeaders(req, res, knex) {
 }
 
 const getAllLeaders = (req, res, knex) => {
-  shotsFacedLeaders(req, res, knex).then((shotsFacedLeaders) => {
-    gaaLeaders(req, res, knex).then((gaaLeaders) => {
-      savePctLeaders(req, res, knex).then((savePctLeaders) => {
-        shutoutLeaders(req, res, knex).then((shutoutLeaders) => {
-          winsLeaders(req, res, knex).then((winsLeaders) => {
-            const result = {
-              statusCode: 200,
-              message: "Request Success",
-              result: {
-                shotsFaced: shotsFacedLeaders,
-                gaa: gaaLeaders,
-                savePct: savePctLeaders,
-                shutouts: shutoutLeaders,
-                wins: winsLeaders,
-              },
-            };
+  // shotsFacedLeaders(req, res, knex).then((shotsFacedLeaders) => {
+  gaaLeaders(req, res, knex).then((gaaLeaders) => {
+    savePctLeaders(req, res, knex).then((savePctLeaders) => {
+      shutoutLeaders(req, res, knex).then((shutoutLeaders) => {
+        winsLeaders(req, res, knex).then((winsLeaders) => {
+          const result = {
+            statusCode: 200,
+            message: "Request Success",
+            result: {
+              // shotsFaced: shotsFacedLeaders,
+              gaa: gaaLeaders,
+              savePct: savePctLeaders,
+              shutouts: shutoutLeaders,
+              wins: winsLeaders,
+            },
+          };
 
-            res.json(result);
-          });
+          res.json(result);
         });
       });
     });
   });
+  // });
 };
 
 module.exports = {

@@ -277,7 +277,7 @@ app.get("/v2/goalies-stats/type/season", (req, res) => {
   goaliesStats_v2.getGoalieStatsbyType(req, res, knex);
 });
 
-app.get("/v2/goalies-stats/leaders/all", (req, res) => {
+app.get("/v2/goalies-stats/leaders/all-leaders", (req, res) => {
   goaliesStats_v2.getAllLeaders(req, res, knex);
 });
 

@@ -700,6 +700,7 @@ function gaaLeaders(req, res, knex) {
 }
 
 const getAllGoalieLeaders = (req, res, knex) => {
+  console.log(req.query);
   shotsFacedLeaders(req, res, knex).then((shotsFacedLeaders) => {
     gaaLeaders(req, res, knex).then((gaaLeaders) => {
       savePctLeaders(req, res, knex).then((savePctLeaders) => {

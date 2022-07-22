@@ -39,5 +39,3 @@ SET
     season_type = tmp_x.season_type
 FROM   tmp_x
 WHERE  goalies_stats_v2.player_id = tmp_x.player_id AND goalies_stats_v2.playing_year = tmp_x.playing_year AND goalies_stats_v2.season_type = tmp_x.season_type;
-
-DROP TABLE tmp_x;
